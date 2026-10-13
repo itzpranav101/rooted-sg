@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-skin="glasshouse" data-mode="dark">
+<html lang="en" data-skin="glasshouse" data-mode="light">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>RootStake — Rooted SG</title>
@@ -12,7 +12,7 @@ nightsoil:'family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Space+Gro
 kopi:'family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Karla:wght@400;500;600&family=DM+Mono',
 monsoon:'family=Outfit:wght@200;300;400;500&family=DM+Mono',
 chalk:'family=Instrument+Serif:ital&family=Instrument+Sans:wght@400;500;600&family=Special+Elite'};
-try{var k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k&&F[k])d.dataset.skin=k;d.dataset.mode=m||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}
+try{var k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k&&F[k])d.dataset.skin=k;d.dataset.mode=m||'light'}catch(e){}
 window.__fonts=F;
 var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href='https://fonts.googleapis.com/css2?'+F[d.dataset.skin]+'&display=swap';document.head.appendChild(l)})();
 </script>
@@ -53,7 +53,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
     <div class="copy" data-reveal data-stagger>
       <span class="label"><b>The module</b></span>
       <h3 class="display d3">A little house for <em>the brain</em>.</h3>
-      <p class="p">The module is a small house that stands on its own: a gable roof carries two 70 mm solar panels over an ESP32-S3. There is no arm and no gooseneck. The soil probe and the stem electrode are separate parts that connect back to the house by a thin wire, and by the watering tube for the probe. No screws anywhere: parts press-fit, twist-lock or hot-glue.</p>
+      <p class="p">Together with the Rooted SG app, this module is <strong>Meco</strong> (<a class="tlink" href="https://heymeco.xyz" target="_blank" rel="noopener">heymeco.xyz</a>). The module is a small house that stands on its own: a gable roof carries two 70 mm solar panels over an ESP32-S3. There is no arm and no gooseneck. The soil probe and the stem electrode are separate parts that connect back to the house by a thin wire, and by the watering tube for the probe. No screws anywhere: parts press-fit, twist-lock or hot-glue.</p>
       <div class="chips"><span class="chip2">ESP32-S3</span><span class="chip2">2 × 70 mm solar</span><span class="chip2">Wire to each probe</span><span class="chip2">Tube to the soil probe</span><span class="chip2">Air-sensor chamber</span></div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-skin="glasshouse" data-mode="dark">
+<html lang="en" data-skin="glasshouse" data-mode="light">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>The system — Rooted SG</title>
@@ -12,7 +12,7 @@ nightsoil:'family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Space+Gro
 kopi:'family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Karla:wght@400;500;600&family=DM+Mono',
 monsoon:'family=Outfit:wght@200;300;400;500&family=DM+Mono',
 chalk:'family=Instrument+Serif:ital&family=Instrument+Sans:wght@400;500;600&family=Special+Elite'};
-try{var k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k&&F[k])d.dataset.skin=k;d.dataset.mode=m||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}
+try{var k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k&&F[k])d.dataset.skin=k;d.dataset.mode=m||'light'}catch(e){}
 window.__fonts=F;
 var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href='https://fonts.googleapis.com/css2?'+F[d.dataset.skin]+'&display=swap';document.head.appendChild(l)})();
 </script>

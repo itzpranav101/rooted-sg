@@ -460,3 +460,16 @@ section{position:relative}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin-top:18px;font-size:14.5px}
 .kv dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ter);padding-top:3px}
 .kv dd{color:var(--sec)}
+
+/* meco bundle */
+.meco-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(30px,6vw,100px);align-items:center}
+@media(max-width:900px){.meco-grid{grid-template-columns:1fr}}
+.meco-fig{padding:clamp(18px,3vw,36px);border-radius:calc(26px*var(--rad,1));background:var(--bg2);box-shadow:inset 0 0 0 1px var(--rule);color:var(--text)}
+.meco-fig svg{width:100%;height:auto}
+.meco-fig .m-dot{offset-path:path("M200 140C260 90 300 90 350 130");animation:mdot 2.6s linear infinite;color:var(--green)}
+@keyframes mdot{from{offset-distance:0}to{offset-distance:100%}}
+.meco-fig .m-house,.meco-fig .m-phone{stroke:var(--text)}.meco-fig .m-probe{stroke:var(--green)}.meco-fig .m-link{stroke:var(--warm);color:var(--warm)}
+.meco-cap{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:baseline;margin-top:18px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--sec)}
+.meco-cap b{font-weight:400;color:var(--ter)}.meco-cap .kw{color:var(--green);font-size:15px}
+.meco .copy .limit:first-of-type{margin-top:22px}
+@media(prefers-reduced-motion:reduce){.meco-fig .m-dot{animation:none}}

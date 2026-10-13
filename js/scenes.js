@@ -91,6 +91,31 @@ function glassPot(M, r = 1.15, h = 1.5) {
   return g;
 }
 
+
+// HOUSE module: gable roof, two solar panels, ESP32 body. Stands on its own; probes connect by wire and tube.
+function solarTex() { const c = document.createElement('canvas'); c.width = 256; c.height = 128; const x = c.getContext('2d'); x.fillStyle = '#16264a'; x.fillRect(0, 0, 256, 128); x.strokeStyle = 'rgba(190,210,255,.55)'; x.lineWidth = 2; for (let i = 0; i <= 8; i++) { x.beginPath(); x.moveTo(i * 32, 0); x.lineTo(i * 32, 128); x.stroke(); } for (let j = 0; j <= 4; j++) { x.beginPath(); x.moveTo(0, j * 32); x.lineTo(256, j * 32); x.stroke(); } const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; }
+function makeHouse(M) {
+  const g = new THREE.Group(), W = 1.7, D = 1.15, H = .8, R = .55;
+  const body = new THREE.Mesh(new THREE.BoxGeometry(W, H, D), M.white); body.position.y = H / 2; g.add(body);
+  const slant = Math.hypot(D / 2 + .08, R), ang = Math.atan2(R, D / 2 + .08);
+  const solar = new THREE.MeshStandardMaterial({ map: solarTex(), roughness: .25, metalness: .5 });
+  [-1, 1].forEach(sd => {
+    const slab = new THREE.Mesh(new THREE.BoxGeometry(W + .16, .05, slant), M.white); slab.position.set(0, H + R / 2, sd * (D / 4 + .04)); slab.rotation.x = sd * ang; g.add(slab);
+    const pan = new THREE.Mesh(new THREE.BoxGeometry(W - .14, .02, slant - .22), solar); pan.position.copy(slab.position); pan.rotation.copy(slab.rotation); pan.translateY(.035); g.add(pan);
+  });
+  const gable = new THREE.Shape(); gable.moveTo(-D / 2, 0); gable.lineTo(D / 2, 0); gable.lineTo(0, R); gable.closePath();
+  [-1, 1].forEach(sd => { const f = new THREE.Mesh(new THREE.ShapeGeometry(gable), M.white); f.rotation.y = sd * Math.PI / 2; f.position.set(sd * (W / 2 + .001), H, 0); g.add(f); });
+  const ridge = new THREE.Mesh(new THREE.CylinderGeometry(.035, .035, W + .2, 10), M.dark); ridge.rotation.z = Math.PI / 2; ridge.position.y = H + R + .02; g.add(ridge);
+  for (let i = 0; i < 4; i++) { const v = new THREE.Mesh(new THREE.BoxGeometry(.34, .03, .02), M.dark); v.position.set(-.5 + i * .33, H - .16, D / 2 + .011); g.add(v); }
+  const win = new THREE.Mesh(new THREE.BoxGeometry(.32, .22, .02), M.glass); win.position.set(.45, H * .48, D / 2 + .011); g.add(win);
+  const led = new THREE.Mesh(new THREE.SphereGeometry(.03, 10, 10), new THREE.MeshBasicMaterial({ color: 0x44ff88 })); led.position.set(-.55, H * .48, D / 2 + .02); g.add(led); g.userData.led = led;
+  [[.5, -.0], [.2, .0], [-.15, 0]].forEach(([x]) => { const port = new THREE.Mesh(new THREE.CylinderGeometry(.045, .045, .06, 12), M.dark); port.rotation.x = Math.PI / 2; port.position.set(x * 0 + (x > .3 ? .3 : x > 0 ? 0 : -.3), .12, -D / 2 - .02); g.add(port); });
+  g.userData.ports = [new V3(.3, .12, -D / 2 - .05), new V3(0, .12, -D / 2 - .05), new V3(-.3, .12, -D / 2 - .05)];
+  g.userData.top = new V3(0, H + R + .05, 0);
+  return g;
+}
+function cable(curve, mat, r = .02, seg = 60) { return new THREE.Mesh(new THREE.TubeGeometry(curve, seg, r, 8), mat); }
+
 const builders = {};
 
 // PROBE — modes: hero (pinned, off-centre start) · story (pinned) · loose (floating)
@@ -137,14 +162,34 @@ builders.probe = async (ctx) => {
 };
 
 builders.pod = async (ctx) => {
-  const { scene, camera } = ctx;
-  const geo = await loadSTL('assets/models/pod.stl');
-  const [gm] = prepCAD([geo], 3.8);
-  const mat = new THREE.MeshPhysicalMaterial({ color: palette().white, roughness: .4, clearcoat: .5, clearcoatRoughness: .4 });
-  ctx.onTheme(() => mat.color.setHex(palette().white));
-  const g = new THREE.Group(); g.add(new THREE.Mesh(gm, mat)); scene.add(g); scene.add(contactShadow(2, -1.95, .25));
-  camera.position.set(0, .2, 6.2);
-  return { update(t, p, ptr) { g.rotation.y = t * .28 + ptr.x * .6 + p * 2.4; g.rotation.x = ptr.y * .15; g.position.y = Math.sin(t) * .06; } };
+  const { scene, camera } = ctx, M = mats(); ctx.onTheme(() => M.refresh(scene));
+  const g = new THREE.Group(); scene.add(g); scene.add(contactShadow(3.2, -1.62, .22));
+  const house = makeHouse(M); house.position.set(-1.55, -.4, 0); house.scale.setScalar(1.15); g.add(house); house.updateMatrixWorld(true);
+  const P = house.userData.ports.map(p => p.clone().multiplyScalar(1.15).add(house.position));
+  // soil probe in a block of soil, tube + wire back to the house
+  const soil = new THREE.Mesh(new THREE.CylinderGeometry(1, .86, .6, 40), M.soil); soil.position.set(1.55, -1.3, .2); g.add(soil);
+  const probe = new THREE.Mesh(new THREE.BoxGeometry(.2, 1.7, .11), M.white); probe.position.set(1.55, -.45, .2); g.add(probe);
+  const nose = new THREE.Mesh(new THREE.ConeGeometry(.1, .3, 4), M.white); nose.rotation.y = Math.PI / 4; nose.scale.set(1, 1, .55); nose.position.set(1.55, -1.45, .2); g.add(nose);
+  const leaf = new THREE.Mesh(new THREE.SphereGeometry(.09, 12, 10), M.green); leaf.scale.set(.5, 1.1, .3); leaf.position.set(1.55, .42, .2); g.add(leaf);
+  // plant stem with the electrode clip
+  const stemM = new THREE.Mesh(new THREE.CylinderGeometry(.07, .09, 2.6, 16), M.green); stemM.position.set(2.5, -.1, -.3); g.add(stemM);
+  const clip = new THREE.Group(); clip.position.set(2.5, .3, -.3); g.add(clip);
+  [-1, 1].forEach(sg => { const j = new THREE.Mesh(new THREE.BoxGeometry(.2, .2, .26), M.dark); j.position.x = sg * .17; clip.add(j); const n = new THREE.Mesh(new THREE.ConeGeometry(.012, .2, 8), M.steel); n.rotation.z = -sg * Math.PI / 2; n.position.x = sg * .05; clip.add(n); });
+  const leafL = new THREE.Mesh(new THREE.SphereGeometry(.5, 20, 10), M.green); leafL.scale.set(1, .08, .45); leafL.position.set(2.95, 1.0, -.3); leafL.rotation.z = .5; g.add(leafL);
+  const wireM = new THREE.MeshStandardMaterial({ color: 0x23282a, roughness: .5 }), tubeM = new THREE.MeshPhysicalMaterial({ color: palette().glass, transparent: true, opacity: .45, roughness: .1, clearcoat: 1 });
+  const wireClip = new THREE.CatmullRomCurve3([P[2], P[2].clone().add(new V3(0, -.05, -.5)), new V3(.6, -.2, -.9), new V3(2.0, .55, -.7), new V3(2.34, .3, -.3)]);
+  const wireProbe = new THREE.CatmullRomCurve3([P[1], P[1].clone().add(new V3(0, -.1, -.5)), new V3(-.2, -.1, -.4), new V3(.6, 1.05, .1), new V3(1.5, .55, .2)]);
+  const tubeProbe = new THREE.CatmullRomCurve3([P[0], P[0].clone().add(new V3(.1, -.08, -.55)), new V3(.7, -.5, -.4), new V3(1.1, 1.1, .1), new V3(1.6, .9, .22), new V3(1.55, .45, .2)]);
+  g.add(cable(wireClip, wireM, .022), cable(wireProbe, wireM, .022), cable(tubeProbe, tubeM, .045));
+  const flow = new THREE.InstancedMesh(new THREE.SphereGeometry(.03, 8, 8), new THREE.MeshBasicMaterial({ color: 0x7fd0ff }), 30), tm = new THREE.Object3D();
+  g.add(flow); ctx.onTheme(() => { tubeM.color.setHex(palette().glass); });
+  camera.position.set(0, .8, 12.5);
+  return { update(t, p, ptr) {
+    g.rotation.y = Math.sin(t * .35) * .35 + ptr.x * .35; g.rotation.x = ptr.y * .12; g.position.y = Math.sin(t) * .04;
+    house.userData.led.material.color.setHex(Math.sin(t * 5) > 0 ? 0x44ff88 : 0x1d6b3f);
+    for (let i = 0; i < 30; i++) { tm.position.copy(tubeProbe.getPoint((i / 30 + t * .12) % 1)); tm.updateMatrix(); flow.setMatrixAt(i, tm.matrix); } flow.instanceMatrix.needsUpdate = true;
+    camera.lookAt(.3, -.2, 0);
+  } };
 };
 
 builders.field = async (ctx) => {
@@ -272,17 +317,15 @@ builders.system = async (ctx) => {
   [new THREE.Mesh(pg[0], M.white), new THREE.Mesh(pg[1], M.white), new THREE.Mesh(pg[2], M.green)].forEach(m => probe.add(m));
   probe.position.set(.72, .61, .32); probe.rotation.y = .5; root.add(probe);
   const probeTop = new V3(.72, 1.86, .32), nose = new V3(.72, -.64, .32), ecPt = new V3(.72, -.2, .5), winPt = new V3(.72, .62, .5);
-  // pod (real CAD) + antenna rings
-  const podGeo = await loadSTL('assets/models/pod.stl'); const [pgm] = prepCAD([podGeo], 2.9);
-  const podMat = new THREE.MeshPhysicalMaterial({ color: PP().white, roughness: .4, clearcoat: .5 });
-  const pod = new THREE.Mesh(pgm, podMat); pod.position.set(3.1, .5, 0); pod.rotation.y = -.5; root.add(pod);
-  const podTop = new V3(3.1, 1.95, 0);
-  // gooseneck cable → clip
+  // house module (separate from the probes) + antenna rings
+  const house = makeHouse(M); house.position.set(3.1, -.1, 0); house.scale.setScalar(1.05); house.rotation.y = -.5; root.add(house); house.updateMatrixWorld(true);
+  const podTop = new V3(3.1, 1.55, 0), podMat = M.white;
+  // thin wires from the house to the stem clip and to the probe (no arm, no gooseneck)
   const clipC = stemCurve.getPoint(.64).add(plant.position);
-  const neck = new THREE.CatmullRomCurve3([new V3(2.7, .75, .1), new V3(2.1, 1.7, .25), new V3(1.1, 2.7, .25), new V3(.55, 2.7, .1), new V3(clipC.x + .32, clipC.y, clipC.z + .05)]);
-  root.add(new THREE.Mesh(new THREE.TubeGeometry(neck, 60, .03, 8), M.dark));
-  const segs = new THREE.InstancedMesh(new THREE.SphereGeometry(.06, 12, 12), M.dark, 22), tm = new THREE.Object3D();
-  for (let i = 0; i < 22; i++) { tm.position.copy(neck.getPoint(i / 21)); tm.updateMatrix(); segs.setMatrixAt(i, tm.matrix); } root.add(segs);
+  const wMat = new THREE.MeshStandardMaterial({ color: 0x23282a, roughness: .5 });
+  const neck = new THREE.CatmullRomCurve3([new V3(2.55, .12, -.45), new V3(2.2, .2, -.6), new V3(1.2, 1.2, -.5), new V3(.55, 2.1, -.15), new V3(clipC.x + .32, clipC.y, clipC.z + .05)]);
+  root.add(cable(neck, wMat, .022));
+  root.add(cable(new THREE.CatmullRomCurve3([new V3(2.55, .0, -.35), new V3(2.0, -.3, -.5), new V3(1.2, .6, -.45), new V3(.72, 1.6, .2), new V3(.72, 1.9, .32)]), wMat, .022));
   const clip = new THREE.Group(); clip.position.copy(clipC); root.add(clip);
   [-1, 1].forEach(sg => { const j = new THREE.Mesh(new THREE.BoxGeometry(.22, .2, .3), M.dark); j.position.set(sg * .3, 0, 0); clip.add(j); const n = new THREE.Mesh(new THREE.ConeGeometry(.018, .3, 10), M.steel); n.rotation.z = -sg * Math.PI / 2; n.position.set(sg * .17, 0, 0); clip.add(n); });
   const NB = 30, NA = 3, arcM = new THREE.MeshBasicMaterial({ color: PP().accent, depthTest: false, transparent: true });
