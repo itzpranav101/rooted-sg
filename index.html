@@ -31,7 +31,18 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <header class="craft-hero">
   <div class="sky" aria-hidden="true">
   <svg width="0" height="0" style="position:absolute"><defs>
-    <filter id="cfilt" x="-25%" y="-25%" width="150%" height="150%"><feTurbulence type="fractalNoise" baseFrequency=".02 .03" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="15" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="1.1"/></filter>
+    <filter id="cfilt" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".02 .03" numOctaves="2" seed="7" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="15" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".011 .016" numOctaves="3" seed="11" result="billow"/>
+      <feColorMatrix in="billow" type="matrix" values="0 0 0 0 .74  0 0 0 0 .86  0 0 0 0 .95  0 0 0 -2.2 1.0" result="shade"/>
+      <feComposite in="shade" in2="shape" operator="in" result="shadeIn"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 .68  0 0 0 0 .82  0 0 0 0 .93  0 0 0 -9 3.7" result="spk"/>
+      <feComposite in="spk" in2="shape" operator="in" result="spkIn"/>
+      <feMerge><feMergeNode in="shape"/><feMergeNode in="shadeIn"/><feMergeNode in="spkIn"/></feMerge>
+      <feGaussianBlur stdDeviation=".5"/>
+    </filter>
     <pattern id="cdots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.5" fill="#9cc6e3"/></pattern>
     <linearGradient id="cfade" x1=".35" y1=".25" x2=".85" y2="1"><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#e3f1fb"/></linearGradient>
     <mask id="cmask"><rect x="-50" y="-50" width="520" height="360" fill="url(#cfade)"/></mask>
