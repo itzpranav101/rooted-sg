@@ -188,8 +188,9 @@ builders.probe = async (ctx) => {
     // specular sweep: a light travels across the part as you scroll (Apple-style highlight pass)
     L.sweep.intensity = mode === 'loose' ? 0 : 60 * Math.sin(clamp(p * 5 % 1) * Math.PI);
     L.sweep.position.set(lerp(-6, 6, (p * 5) % 1), 1.5, 4);
-    let base = mode === 'loose' ? spin + ptr.x * .5 : spin + sstep(0, .5, p) * 1.1 + sstep(.55, .8, p) * .9 + ptr.x * .35;
+    let base = mode === 'loose' ? (el.dataset.sway ? .5 + Math.sin(t * .55) * .55 + ptr.x * .5 : spin + ptr.x * .5) : spin + sstep(0, .5, p) * 1.1 + sstep(.55, .8, p) * .9 + ptr.x * .35;
     if (mode === 'story') { base = lerp(spin + sstep(0, .4, p) * 1.1, 1.0 + ptr.x * .12, asmRot) - sstep(.8, .95, p) * .85; }
+    if (mode === 'loose' && el.dataset.pad) cz *= +el.dataset.pad;
     if (camera.aspect < .9) cz *= 1.3;
     camera.position.z += (cz - camera.position.z) * Math.min(1, dt * 5);
     look.y += (ly - look.y) * Math.min(1, dt * 5); camera.lookAt(look);
