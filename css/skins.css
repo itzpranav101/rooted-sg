@@ -224,3 +224,19 @@ html[data-skin="nightsoil"] .top.scrolled{background:var(--bg);box-shadow:0 2px 
 html[data-skin="kopi"] .top.scrolled{background:var(--bg2)}
 
 html[data-skin="chalk"] .display em.hl{background:linear-gradient(transparent 70%,color-mix(in srgb,var(--green) 50%,transparent) 70% 94%,transparent 94%)}
+
+/* ===== texture: fine grain on cards and stages, halftone fades in a few places ===== */
+:root{--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .42  0 0 0 0 .48  0 0 0 -11 3.9'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");--dots:radial-gradient(circle,color-mix(in srgb,var(--text) 38%,transparent) 1.1px,transparent 1.5px)}
+[data-mode="dark"]{--grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n' x='0' y='0' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .85  0 0 0 0 .9  0 0 0 0 .95  0 0 0 -11 3.8'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>")}
+html .stagebox,html .pin-vis,html .bd-card,html .try-card,html .dose-card,html .pw-card,html .dcard,html .dots-card,html .igrid,html .meco-fig,html .cpanel,html .pc:not(.hi){background-image:var(--grain);background-size:220px 220px}
+html .pin-vis.stage-dark,html .pin-vis.mono,html .pin-vis.phonebox{background-image:var(--grain)}
+/* halftone dot fade at the top of page heroes and above the Next band */
+.page-hero{position:relative}
+.page-hero::before{content:"";position:absolute;left:0;right:0;top:0;height:40%;z-index:0;pointer-events:none;background:var(--dots) 0 0/9px 9px;opacity:.28;-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+.nextband{position:relative}
+.nextband::before{content:"";position:absolute;left:0;right:0;top:0;height:130px;pointer-events:none;background:var(--dots) 0 0/9px 9px;opacity:.25;-webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+.nextband>.wrap{position:relative}
+/* halftone corner on the Meco bundle card */
+.bd-meco{position:relative;overflow:hidden}
+.bd-meco::after{content:"";position:absolute;right:0;bottom:0;width:70%;height:60%;pointer-events:none;background:radial-gradient(circle,var(--green) 1.3px,transparent 1.8px) 0 0/8px 8px;opacity:.35;-webkit-mask-image:radial-gradient(120% 120% at 100% 100%,#000,transparent 70%);mask-image:radial-gradient(120% 120% at 100% 100%,#000,transparent 70%)}
+.bd-meco>*{position:relative;z-index:1}
