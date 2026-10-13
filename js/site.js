@@ -14,7 +14,7 @@ const SKINS = [
   ['monsoon', 'Monsoon', 'Rain, hairlines, glowing glass', ['#081A24', '#5CE1E6', '#FF8A7A']],
   ['chalk', 'Chalk', 'Hand-drawn notebook and marker', ['#1D211E', '#F6E27A', '#F4A6C0']]];
 function flash() { root.classList.add('theming'); clearTimeout(flash.t); flash.t = setTimeout(() => root.classList.remove('theming'), 520); }
-function setMode(m) { flash(); root.dataset.mode = m; try { localStorage.setItem('rs-mode', m); } catch (e) {} dispatchEvent(new Event('themechange')); }
+function setMode(m) { flash(); root.dataset.mode = m; try { localStorage.setItem('rs-mode2', m); } catch (e) {} dispatchEvent(new Event('themechange')); }
 function setSkin(k) {
   flash(); root.dataset.skin = k; try { localStorage.setItem('rs-skin', k); } catch (e) {}
   const F = window.__fonts, l = $('#skinfonts'); if (F && l && F[k]) l.href = 'https://fonts.googleapis.com/css2?' + F[k] + '&display=swap';
