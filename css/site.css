@@ -494,3 +494,6 @@ section{position:relative}
 @keyframes pwpkt{0%,86%{offset-distance:0;opacity:0}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
 .pw-hop{animation:pwdash 1.4s linear infinite}
 @media(prefers-reduced-motion:reduce){.pw-level,.pw-flow,.pw-sun .rays,.pw-pulses path,.pw-pkt,.pw-hop{animation:none}}
+
+.pin-vis.mono{background:var(--bg);border-radius:calc(28px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule)}
+.tissue .pin-vis{height:78vh}

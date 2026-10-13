@@ -292,8 +292,9 @@ builders.stem = async (ctx) => {
   g.add(new THREE.Mesh(new THREE.CylinderGeometry(.22, .22, 5.02, 24), new THREE.MeshStandardMaterial({ color: 0xc8f0d4, roughness: .6, emissive: 0x9be3b4, emissiveIntensity: .25 })));
   ctx.onTheme(() => stemMat.color.setHex(palette().leaf));
   for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI * 2; const s = new THREE.Mesh(new THREE.TorusGeometry(.07, .012, 6, 14), new THREE.MeshBasicMaterial({ color: 0x1d6b3f, transparent: true, opacity: .4 })); s.position.set(Math.cos(a) * .4, 0, Math.sin(a) * .4); s.lookAt(0, 0, 0); g.add(s); }
-  [-1, 1].forEach(s => { const j = new THREE.Mesh(new THREE.BoxGeometry(.4, .36, .62), M.dark); j.position.set(s * 1.15, 0, 0); g.add(j); const n = new THREE.Mesh(new THREE.ConeGeometry(.04, .9, 12), M.steel); n.rotation.z = -s * Math.PI / 2; n.position.set(s * .72, 0, 0); g.add(n); });
-  const arm = new THREE.Mesh(new THREE.TorusGeometry(1.35, .09, 10, 48, Math.PI), M.dark); arm.rotation.z = Math.PI; g.add(arm);
+  [-1, 1].forEach(s => { const j = new THREE.Mesh(new THREE.BoxGeometry(.4, .36, .62), M.dark); j.position.set(s * 1.15, 0, 0); g.add(j); const n = new THREE.Mesh(new THREE.ConeGeometry(.018, 1.0, 12), M.steel); n.rotation.z = -s * Math.PI / 2; n.position.set(s * .68, 0, 0); g.add(n); });
+  const bridge = new THREE.Mesh(new THREE.TorusGeometry(1.15, .06, 8, 40, Math.PI), M.dark); bridge.rotation.z = Math.PI; bridge.position.y = .05; bridge.scale.set(1, .55, 1); g.add(bridge);
+  g.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(1.3, 0, 0), new V3(2.1, -.4, .3), new V3(2.8, -1.4, .2), new V3(3.4, -2.4, 0)]), 40, .035, 8), new THREE.MeshStandardMaterial({ color: 0x23282a, roughness: .5 })));
   const N = 46, NA = 3, beads = new THREE.InstancedMesh(new THREE.SphereGeometry(.03, 10, 10), new THREE.MeshBasicMaterial({ color: palette().accent, depthTest: false, transparent: true }), N * NA); beads.renderOrder = 10; g.add(beads);
   const tmp = new THREE.Object3D(); camera.position.set(3.4, 1.6, 9.2);
   return { update(t, p, ptr) {
