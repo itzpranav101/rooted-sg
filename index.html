@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ROOTED SG — Count what we keep alive</title>
+<meta name="description" content="Rooted SG: a Singapore growing app, and RootStake, the sensor stake that proves your plant is still alive.">
+<script>try{var t=localStorage.getItem('rs-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body data-page="home">
+
+<!-- 01 HERO (Craft: clouds, H1, CTA, giant app frame) -->
+<header class="craft-hero">
+  <div class="sun"></div>
+  <div class="cloud" style="left:-8%;top:16vh;width:34vw;max-width:520px"><svg viewBox="0 0 400 160"><path d="M60 140a48 48 0 0 1 6-95 62 62 0 0 1 118-14 58 58 0 0 1 104 28 42 42 0 0 1 50 81z"/></svg></div>
+  <div class="cloud" style="right:-6%;top:34vh;width:30vw;max-width:460px"><svg viewBox="0 0 400 160"><path d="M60 140a48 48 0 0 1 6-95 62 62 0 0 1 118-14 58 58 0 0 1 104 28 42 42 0 0 1 50 81z"/></svg></div>
+  <div class="cloud" style="left:60%;top:12vh;width:14vw;max-width:220px;opacity:.7"><svg viewBox="0 0 400 160"><path d="M60 140a48 48 0 0 1 6-95 62 62 0 0 1 118-14 58 58 0 0 1 104 28 42 42 0 0 1 50 81z"/></svg></div>
+  <div class="wrap">
+    <span class="label" data-intro>Rooted SG · Singapore 2026</span>
+    <h1 class="display hero-h">Your space to grow, and proof it worked.</h1>
+    <p class="lede" data-intro>A growing app for Singapore homes, and a sensor stake that tells you whether your plant is still alive. Every number counts something that survived.</p>
+    <div class="cta" data-intro><a class="btn" href="app.html" data-t>Meet the app <i>→</i></a><a class="btn line" href="rootstake.html" data-t>See RootStake in 3D</a></div>
+    <p class="note label" data-intro style="margin-top:22px">Real footage · Real CAD · Real survey</p>
+    <div class="appframe" data-grow data-intro-cv>
+      <div class="bar"><b></b><b></b><b></b><span>Pandan · 194 plant-days · 12 verified check-ins</span></div>
+      <div class="body">
+        <canvas data-scene="probe" data-mode="loose"></canvas>
+        <div class="chip" style="left:5%;top:12%">Verified plant-days <b>314</b></div>
+        <div class="chip" style="left:9%;bottom:14%">Care streak <b>5</b></div>
+        <div class="phones" style="gap:0">
+          <div class="tilt" style="margin-right:-30px"><div class="ph" style="--w:250px;transform:translateY(60px) rotate(-3deg)"><div class="scr"><img src="media/app-pandan.jpg" alt="The garden: Pandan, kept alive for 194 verified plant-days"></div></div></div>
+          <div class="tilt"><div class="ph" style="--w:250px;transform:translateY(100px) rotate(3deg)"><div class="scr"><img src="media/app-market.jpg" alt="The market: offers from neighbours"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- 02 APPLE MOMENT: the probe, scrubbed -->
+<section class="pin" data-pin="5" id="seq">
+  <div class="pin-grid">
+    <div class="pin-vis stage-dark">
+      <canvas data-scene="probe" data-mode="hero"></canvas>
+      <div class="callouts"><svg><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/></svg><div class="call" data-anchor="top" data-show=".12-.34" data-dx="110" data-dy="0"><span>Two halves</span><b>PETG · no supports</b></div><div class="call" data-anchor="window" data-show=".30-.58" data-dx="-110" data-dy="-10"><span>Moisture window</span><b>Resistive board, bevelled</b></div><div class="call" data-anchor="ec" data-show=".34-.58" data-dx="110" data-dy="-20"><span>Copper EC turns</span><b>Soil conductivity</b></div><div class="call" data-anchor="tip" data-show=".36-.58" data-dx="110" data-dy="60"><span>Chisel point</span><b>40 mm · saw teeth, 4 mm pitch</b></div><div class="call" data-anchor="mark" data-show=".62-.86" data-dx="110" data-dy="-10"><span>Soil-line mark</span><b>Same depth, every reading</b></div><div class="call" data-anchor="bore" data-show=".66-.94" data-dx="-110" data-dy="40"><span>Fertigation bore</span><b>4.5 mm · exits at the nose</b></div></div>
+    </div>
+    <div class="pin-steps">
+      <div class="pin-step"><span class="label"><b>01</b> — The probe</span><h3 class="display d3">One part in the pot.</h3><p class="p">It carries every soil sensor, and, hidden down its back, the tube that waters the plant. Spade-shaped, so one hand can push it in.</p><div><span class="tag">26.4 × 15.9 mm</span><span class="tag">151 mm</span></div></div>
+      <div class="pin-step"><span class="label"><b>02</b> — Printed in two halves</span><h3 class="display d3">Split face-up. <em>No supports.</em></h3><p class="p">Fourteen iterations to get the point right. The halves part to show the channels, with the leaf crown riding above.</p></div>
+      <div class="pin-step"><span class="label"><b>03</b> — Push to the mark</span><h3 class="display d3">Every reading from the <em>same depth</em>.</h3><p class="p">A soil-line mark means a number today is comparable with a number last week.</p></div>
+      <div class="pin-step"><span class="label"><b>04</b> — The dose</span><h3 class="display d3">Water reaches the roots, <em>not the crust</em>.</h3><p class="p">Twin 5 V pumps merge at a Y-connector and run down the bore. It starts at the floor and stops at the target, so it can never chatter around one threshold.</p></div>
+    </div>
+  </div>
+  <div class="pin-count"><b>01 / 04</b><span class="rule"><i></i></span></div>
+</section>
+
+<!-- 03 "isn't just for one thing" -->
+<section class="intro-pills">
+  <div class="wrap">
+    <span class="label">One connected ecosystem</span>
+    <h2 class="display d3" data-split>Rooted isn't just for one thing, it's for your things.</h2>
+    <div class="pills" data-reveal data-stagger>
+      <span class="pill on" data-i="0">Garden</span><span class="pill" data-i="1">Market</span><span class="pill" data-i="2">Quests</span><span class="pill" data-i="3">BioDex</span><span class="pill" data-i="4">Profile</span>
+    </div>
+    <div class="pstage" id="pstage">
+      <div class="ph lg on tilt"><div class="scr"><img src="media/app-pandan.jpg" alt="Garden"></div></div>
+      <div class="ph lg"><div class="scr"><img src="media/app-market.jpg" alt="Market"></div></div>
+      <div class="ph lg"><div class="scr"><img src="media/app-index.jpg" alt="Index"></div></div>
+      <div class="ph lg"><div class="scr"><img src="media/app-biodex.jpg" alt="BioDex"></div></div>
+      <div class="ph lg"><div class="scr"><img src="media/app-profile.jpg" alt="Profile"></div></div>
+    </div>
+    <p class="label" id="pcap" style="margin-top:34px;max-width:40em;margin-inline:auto">Every pot, ordered so whatever needs you today is at the top.</p>
+  </div>
+</section>
+
+<!-- 04 How people use (cards marquee) -->
+<section style="padding:clamp(60px,8vw,120px) 0">
+  <div class="wrap" style="text-align:center"><h2 class="display d2" data-split>How people use <em>Rooted</em></h2></div>
+  <div class="marq" style="border:0;margin-top:40px"><div class="marq-t" style="gap:20px">
+    <article class="use"><img src="media/use-tomato.jpg" alt=""><div class="tx"><span class="label">The corridor rack</span><h4>Cherry tomatoes, free to a neighbour</h4><p>"Pick-up from my block on weekend mornings. Bring your own bag." 4 of 7 left.</p></div></article>
+    <article class="use"><img src="media/use-pandan.jpg" alt=""><div class="tx"><span class="label">The long keeper</span><h4>Pandan, 194 plant-days</h4><p>Sustained survival plus recovery from a struggling period, counted as verified days.</p></div></article>
+    <article class="use"><img src="media/use-chilli.jpg" alt=""><div class="tx"><span class="label">The swap</span><h4>Chilli padi, more than we can eat</h4><p>13 of 20 left, offered as a swap with a grower in the same neighbourhood.</p></div></article>
+    <article class="use"><img src="media/use-biodex.jpg" alt=""><div class="tx"><span class="label">The wildlife log</span><h4>Painted Jezebel butterfly</h4><p>Four of seventeen species recorded, each marked community-confirmed or AI-suggested.</p></div></article>
+  </div></div>
+</section>
+
+<!-- 05 Grow (Craft "Write") -->
+<section class="sec" style="padding-top:40px">
+  <div class="wrap feat">
+    <div class="copy" data-reveal data-stagger>
+      <span class="label"><b>Grow</b></span>
+      <h3 class="display d3">Every plant gets a history, <em>not a scan</em>.</h3>
+      <p class="p">Rooted counts verified plant-days: a day only counts when the plant was checked in and still alive. Survival, plus recovery from a struggling period, is what earns a Legacy Plant.</p>
+      <div class="chips"><span class="chip2">Check-ins</span><span class="chip2">Care streaks</span><span class="chip2">Growth stages</span><span class="chip2">Legacy plants</span></div>
+      <div><a class="tlink" href="app.html" data-t style="margin-top:30px">Explore the app →</a></div>
+      <div class="say"><p>"70.9% of the 3,043 people we surveyed want to grow at home."</p><span class="label">Rooted SG survey · n = 3,043</span></div>
+    </div>
+    <div class="tilt" style="display:grid;place-items:center;padding:30px 0"><div class="ph lg" data-rise="3"><div class="scr"><img src="media/app-pandan.jpg" alt="Pandan, Legacy Plant"></div></div></div>
+  </div>
+</section>
+
+<!-- 06 Measure (Craft "Imagine": visual + MCP/API grids) -->
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="feat rev">
+      <div class="stagebox" data-reveal><canvas data-scene="pod"></canvas><div class="over"><span class="chip2" style="background:color-mix(in srgb,var(--bg) 80%,transparent)">Your assembly STL</span></div></div>
+      <div class="copy" data-reveal data-stagger>
+        <span class="label"><b>Measure</b></span>
+        <h3 class="display d3">A stake that <em>answers</em>, not just reports.</h3>
+        <p class="p">A gable roof carries two 70 mm panels over an ESP32-S3. A jointed arm carries the stem clip. Designed in CAD, printed in PETG, joined without screws.</p>
+        <div class="chips"><span class="chip2">3D-printed</span><span class="chip2">Solar</span><span class="chip2">Bluetooth LE</span><span class="chip2">Fertigation</span></div>
+        <div><a class="tlink" href="rootstake.html" data-t style="margin-top:30px">Take it apart →</a></div>
+      </div>
+    </div>
+    <div class="grids2">
+      <div class="igrid" data-reveal><h5>On the stake</h5><div class="tiles">
+        <div class="tile"><em>BUILT</em><svg viewBox="0 0 32 32"><path d="M16 4c5 6 8 10 8 14a8 8 0 0 1-16 0c0-4 3-8 8-14z"/></svg>Moisture</div>
+        <div class="tile"><em>BUILT</em><svg viewBox="0 0 32 32"><path d="M8 20c3-6 5 6 8 0s5 6 8 0M8 12c3-6 5 6 8 0s5 6 8 0"/></svg>Soil EC</div>
+        <div class="tile"><em>BUILT</em><svg viewBox="0 0 32 32"><path d="M13 6a3 3 0 0 1 6 0v12a6 6 0 1 1-6 0z"/></svg>Temperature</div>
+        <div class="tile"><em>BUILT</em><svg viewBox="0 0 32 32"><path d="M6 20a8 8 0 0 1 16 0M10 26h14"/></svg>Humidity</div>
+        <div class="tile"><em>BUILT</em><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="5"/><path d="M16 4v3M16 25v3M4 16h3M25 16h3"/></svg>Light</div>
+        <div class="tile"><em>BUILT</em><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="10"/><path d="M16 16l5-5"/></svg>Pressure</div>
+        <div class="tile"><em class="p">PROTOTYPE</em><svg viewBox="0 0 32 32"><path d="M4 18c4 0 4-10 8-10s4 14 8 14 4-8 8-8"/></svg>Stem EIS</div>
+        <div class="tile"><em class="r">ROADMAP</em><svg viewBox="0 0 32 32" stroke-dasharray="3 3"><circle cx="16" cy="16" r="9"/></svg>Ion sensing</div>
+      </div></div>
+      <div class="igrid" data-reveal><h5>How it talks</h5><div class="tiles">
+        <div class="tile"><svg viewBox="0 0 32 32"><path d="M10 10l12 12-6 5V5l6 5L10 22"/></svg>Bluetooth LE</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><circle cx="8" cy="16" r="3"/><circle cx="24" cy="8" r="3"/><circle cx="24" cy="24" r="3"/><path d="M11 15l10-6M11 17l10 6"/></svg>Stake mesh</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><rect x="6" y="6" width="20" height="20" rx="4"/><path d="M12 14h8M12 18h5"/></svg>46-byte frame</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><path d="M8 16l5 5 11-11"/></svg>CRC-16</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><rect x="8" y="14" width="16" height="12" rx="3"/><path d="M12 14v-3a4 4 0 0 1 8 0v3"/></svg>k-anonymity</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><path d="M6 12h20M6 20h20M16 6v20"/></svg>Fleet API</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="4"/><path d="M4 16c4-8 20-8 24 0-4 8-20 8-24 0z"/></svg>On-device</div>
+        <div class="tile"><svg viewBox="0 0 32 32"><path d="M6 24c0-8 6-14 18-14 0 10-6 16-14 16"/></svg>Swift + Kotlin</div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 APPLE MOMENT: the stem, 1 kHz → 100 kHz -->
+<section class="pin" data-pin="3.2" id="stem">
+  <div class="pin-grid">
+    <div class="pin-vis stage-dark"><canvas data-scene="stem"></canvas></div>
+    <div class="pin-steps">
+      <div class="pin-step"><span class="label"><b>Prototype</b> — Stem electrode</span><h3 class="display d3">Ask the stem, <em>not the leaf</em>.</h3><p class="p">A sprung clip closes on the stem and drives two titanium needles through the outer tissue and into the conducting core. The jaws and gooseneck are printed.</p></div>
+      <div class="pin-step"><span class="label"><b>1 kHz</b> — around the cells</span><h3 class="display d3">Low frequency <em>goes around</em>.</h3><p class="p">A small alternating current is swept between the needles. At 1 kHz it can't cross a living membrane, so it threads the wet space between the cells.</p></div>
+      <div class="pin-step"><span class="label"><b>100 kHz</b> — through the cells</span><h3 class="display d3">High frequency <em>goes through</em>.</h3><p class="p">At 100 kHz it passes straight through the membranes. The ratio between the two is the measurement. On the bench we report a trend and its timing, never a calibrated figure.</p></div>
+    </div>
+  </div>
+  <div class="pin-count"><b>01 / 03</b><span class="rule"><i></i></span></div>
+</section>
+
+<!-- 08 Where it's going (Craft awards row) -->
+<section class="sec" style="padding-block:clamp(60px,8vw,120px)">
+  <div class="wrap">
+    <span class="label" data-reveal>Where this stands</span>
+    <div class="awards" style="margin-top:26px" data-reveal data-stagger>
+      <div class="award"><b>IYEC 2026</b><span>RootStake hardware entry</span></div>
+      <div class="award"><b>3,043</b><span>Singapore residents surveyed</span></div>
+      <div class="award"><b>14</b><span>print iterations on the probe</span></div>
+      <div class="award"><b>iOS</b><span>Native SwiftUI build, in testing</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 Organize (three colour panels with real phones) -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap center" style="text-align:center">
+    <h2 class="display d2" data-split style="max-width:12ch;margin:0 auto">Structure that adapts to how you grow.</h2>
+    <div class="panels3" style="text-align:left">
+      <div class="cpanel"><h5>Garden</h5><p>Every pot on one screen. Today's check-ins and your running count come first.</p><div class="ph sm"><div class="scr"><img src="media/app-pandan.jpg" alt=""></div></div></div>
+      <div class="cpanel"><h5>Market</h5><p>Offer produce, or ask a neighbour to grow it. Singapore grows under 10% of what it eats.</p><div class="ph sm"><div class="scr"><img src="media/app-market.jpg" alt=""></div></div></div>
+      <div class="cpanel"><h5>Profile</h5><p>Levels, milestones from First Plant to Veteran, and the lifetime plant-day count.</p><div class="ph sm"><div class="scr"><img src="media/app-profile.jpg" alt=""></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 Customize: the five real themes -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>Customise</b></span><h2 class="display d2" data-split>Make it unmistakably <em>yours</em>.</h2></div>
+    <div class="themes" data-reveal>
+      <div class="theme"><div class="sw"><i style="background:#0E2E1F"></i><i style="background:#A3E68B"></i><i style="background:#ED9D76"></i></div><b>Glasshouse</b><span>Deep planthouse green, or warm bone paper.</span></div>
+      <div class="theme"><div class="sw"><i style="background:#121211"></i><i style="background:#ADE983"></i><i style="background:#E8B36F"></i></div><b>Nightsoil</b><span>Almost black, or crisp paper white.</span></div>
+      <div class="theme"><div class="sw"><i style="background:#271911"></i><i style="background:#B4E092"></i><i style="background:#F1BA80"></i></div><b>Kopi</b><span>Roasted brown, or oat paper, after the kopitiam.</span></div>
+      <div class="theme"><div class="sw"><i style="background:#0B2128"></i><i style="background:#92E6C9"></i><i style="background:#EFB47E"></i></div><b>Monsoon</b><span>Storm teal, or rain-washed paper.</span></div>
+      <div class="theme"><div class="sw"><i style="background:#EEEDE9"></i><i style="background:#165C32"></i><i style="background:#8B4A1E"></i></div><b>Chalk</b><span>A light room by default, ink on chalk.</span></div>
+    </div>
+    <p class="p" style="margin-top:26px">This site has two of its own: use the half-moon at the top to switch.</p>
+  </div>
+</section>
+
+<!-- 11 Film -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>The film</b></span><h2 class="display d2" data-split>Three minutes, <em>no voiceover</em>.</h2></div>
+    <div class="film" data-cursor="Play"><video preload="metadata" playsinline poster="media/film-poster.jpg"><source src="media/film.mp4" type="video/mp4"></video>
+      <div class="bigplay"><span>Play</span></div><div class="ui"><span class="time">0:00</span><span>Rooted SG · RootStake</span></div><div class="prog"><i></i></div></div>
+    <div class="chapters">
+      <button data-t="0"><span class="label">0:00</span><b>The gap</b></button><button data-t="18"><span class="label">0:18</span><b>The probe</b></button><button data-t="60"><span class="label">1:00</span><b>The stem</b></button><button data-t="90"><span class="label">1:30</span><b>The tissue</b></button>
+      <button data-t="117"><span class="label">1:57</span><b>A whole block</b></button><button data-t="144"><span class="label">2:24</span><b>The pumps</b></button><button data-t="174"><span class="label">2:54</span><b>In the app</b></button><button data-t="198"><span class="label">3:18</span><b>The closed loop</b></button>
+    </div>
+  </div>
+</section>
+
+<!-- 12 Community cards -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap"><div class="sechead"><span class="label"><b>Neighbours</b></span><h2 class="display d2" data-split>Grow with your <em>block</em>.</h2></div>
+    <div class="comm" data-reveal data-stagger>
+      <a href="app.html#market" data-t><span class="label">01</span><b>The Exchange<span class="d">Offers, wanted, free, seeds.</span></b></a>
+      <a href="app.html#quests" data-t><span class="label">02</span><b>Quests<span class="d">Ten open at a time.</span></b></a>
+      <a href="app.html#biodex" data-t><span class="label">03</span><b>BioDex<span class="d">Seventeen species to find.</span></b></a>
+      <a href="how-it-works.html#mesh" data-t><span class="label">04</span><b>Stake mesh<span class="d">A block shares one weather.</span></b></a>
+    </div>
+  </div>
+</section>
+
+<!-- 13 Pricing → tiers -->
+<section class="sec" style="padding-top:20px">
+  <div class="wrap" style="text-align:center">
+    <span class="label" data-reveal>Our promise</span>
+    <h2 class="display d2" data-split style="margin-top:20px">Your pace, your <em>proof</em>.</h2>
+    <p class="lede" data-reveal style="margin:26px auto 0">Every metric is labelled with how real it is. We never show a prototype signal as a measurement.</p>
+    <div class="price3">
+      <div class="pc hi" data-reveal><span class="label">BUILT</span><div class="big">6 sensors</div><p class="tiny" style="opacity:.7">On the stake you can print</p><ul><li>Soil moisture and conductivity</li><li>Air temperature, humidity, pressure</li><li>Light and daily-light integral</li><li>Every dose logged with its volume</li></ul></div>
+      <div class="pc" data-reveal style="--d:.1s"><span class="label" style="color:var(--warm)">PROTOTYPE</span><div class="big">Stem EIS</div><p class="label" style="margin-top:6px">Trend and timing only</p><ul><li>Two titanium needles on a sprung clip</li><li>1 kHz to 100 kHz sweep</li><li>Never a calibrated figure</li><li>Raised only when soil and air agree</li></ul></div>
+      <div class="pc" data-reveal style="--d:.2s"><span class="label">ROADMAP</span><div class="big">Ions</div><p class="label" style="margin-top:6px">Not measured yet, and labelled</p><ul><li>Nitrate and phosphate sensing</li><li>Stem sap flow</li><li>Simulated values say so on screen</li><li>Electro-culture: off, an experiment</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 Team of five -->
+<section class="sec" style="padding-top:20px" id="team">
+  <div class="wrap"><div class="sechead"><span class="label"><b>The team</b></span><h2 class="display d2" data-split>Five people, <em>one garden</em>.</h2></div>
+    <div class="team" data-team></div></div>
+</section>
+
+<!-- 15 Closing -->
+<section class="closing"><div class="wrap closer">
+  <div class="ico" data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z"/><path d="M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z"/></svg></div>
+  <h2 class="display d1" data-split style="max-width:11ch;margin:0 auto">Let's get started.</h2>
+  <p class="lede" data-reveal style="margin:28px auto 0;text-align:center">Don't count what we plant. Count what we keep alive.</p>
+  <div class="cta" data-reveal><a class="btn" href="impact.html" data-t>Read the story <i>→</i></a><a class="btn line" href="app.html" data-t>Meet the app</a></div>
+</div></section>
+
+<script>
+// Craft-style tab pills driving the phone stage
+(() => { const pills = [...document.querySelectorAll('.pill')], phs = [...document.querySelectorAll('#pstage .ph')], cap = document.getElementById('pcap');
+  const caps = ['Every pot, ordered so whatever needs you today is at the top.','Offer produce, or ask a neighbour to grow it.','Ten quests open at a time, each a small real action.','Four of seventeen species recorded. Discover Singapore.','Level 6, 314 verified plant-days, milestones from First Plant to Veteran.'];
+  const set = i => { pills.forEach((p, k) => p.classList.toggle('on', k === i)); phs.forEach((p, k) => p.classList.toggle('on', k === i)); cap.textContent = caps[i]; };
+  pills.forEach((p, i) => { p.addEventListener('pointerenter', () => set(i)); p.addEventListener('click', () => set(i)); });
+  let i = 0, auto = setInterval(() => { i = (i + 1) % 5; set(i); }, 3400); pills.forEach(p => p.addEventListener('pointerenter', () => clearInterval(auto))); })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/team.js"></script>
+<script src="js/site.js"></script>
+<script type="module" src="js/scenes.js"></script>
+</body>
+</html>

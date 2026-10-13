@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>RootStake — Rooted SG</title>
+<meta name="description" content="The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.">
+<script>try{var t=localStorage.getItem('rs-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+</head>
+<body data-page="rootstake">
+<header class="page-hero">
+  <div class="sun"></div>
+  <div class="wrap" style="position:relative;z-index:3">
+    <span class="label" data-intro>RootStake · the hardware</span>
+    <h1 class="display hero-h">Sensing without watering is just a thermometer.</h1>
+    <p class="lede" data-intro>One printed probe carries every soil sensor and, hidden down its back, the tube that waters the plant. This is the real CAD. Scroll to take it apart.</p>
+  </div>
+</header>
+
+<section class="pin" data-pin="7" id="parts">
+  <div class="pin-grid">
+    <div class="pin-vis stage-dark"><canvas data-scene="probe" data-mode="story"></canvas><div class="callouts"><svg><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/><line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/></svg><div class="call" data-anchor="top" data-show=".12-.34" data-dx="110" data-dy="0"><span>Two halves</span><b>PETG · no supports</b></div><div class="call" data-anchor="window" data-show=".30-.58" data-dx="-110" data-dy="-10"><span>Moisture window</span><b>Resistive board, bevelled</b></div><div class="call" data-anchor="ec" data-show=".34-.58" data-dx="110" data-dy="-20"><span>Copper EC turns</span><b>Soil conductivity</b></div><div class="call" data-anchor="tip" data-show=".36-.58" data-dx="110" data-dy="60"><span>Chisel point</span><b>40 mm · saw teeth, 4 mm pitch</b></div><div class="call" data-anchor="mark" data-show=".62-.86" data-dx="110" data-dy="-10"><span>Soil-line mark</span><b>Same depth, every reading</b></div><div class="call" data-anchor="bore" data-show=".66-.94" data-dx="-110" data-dy="40"><span>Fertigation bore</span><b>4.5 mm · exits at the nose</b></div></div></div>
+    <div class="pin-steps">
+      <div class="pin-step"><span class="label"><b>01</b> — The probe</span><h3 class="display d3">One part in the pot.</h3><p class="p">It carries every soil sensor, and hidden down its back, the tube that waters the plant. Printed spade-shaped so one hand can push it in.</p><div><span class="tag">26.4 × 15.9 mm</span><span class="tag">151 mm long</span></div></div>
+      <div class="pin-step"><span class="label"><b>02</b> — Two halves</span><h3 class="display d3">Split face-up. <em>No supports.</em></h3><p class="p">The halves part to show the channels inside, with the green leaf crown riding above. Fourteen iterations to get the point right.</p><div><span class="tag">14 iterations</span><span class="tag">PETG · 0.2 mm layers</span></div></div>
+      <div class="pin-step"><span class="label"><b>03</b> — Chisel point</span><h3 class="display d3">Saw teeth bite <em>packed mix</em>.</h3><p class="p">A 40 mm toothed chisel on a 4 mm pitch, so it goes in by hand without bending. The 4.5 mm bore exits at the centre of the nose.</p><div><span class="tag">40 mm point</span><span class="tag">4 mm pitch</span><span class="tag">4.5 mm tube</span></div></div>
+      <div class="pin-step"><span class="label"><b>04</b> — Two readings</span><h3 class="display d3">Moisture prongs. <em>Copper turns.</em></h3><p class="p">A resistive board behind a bevelled window reads moisture. Two turns of bare copper read how well the soil conducts, and salts raise conductivity.</p></div>
+      <div class="pin-step"><span class="label"><b>05</b> — Soil-line mark</span><h3 class="display d3">Push to the mark.</h3><p class="p">Every reading after comes from the same depth, so a number today means the same as a number last week.</p></div>
+      <div class="pin-step"><span class="label"><b>06</b> — The dose</span><h3 class="display d3">Water reaches the <em>roots</em>.</h3><p class="p">Two small pumps feed one Y-connector into the probe's bore. The dose leaves at the nose, where the roots are. Every dose is logged with its volume.</p><div><span class="tag">Twin 5 V pumps</span></div></div>
+    </div>
+  </div>
+  <div class="pin-count"><b>01 / 06</b><span class="rule"><i></i></span></div>
+</section>
+
+<section class="sec">
+  <div class="wrap feat">
+    <div class="stagebox" data-reveal><canvas data-scene="pod"></canvas></div>
+    <div class="copy" data-reveal data-stagger>
+      <span class="label"><b>The module</b></span>
+      <h3 class="display d3">A roof, a brain, and a <em>gooseneck</em>.</h3>
+      <p class="p">A gable roof carries two 70 mm solar panels over an ESP32-S3. The jointed arm is a snap-together ball-and-socket chain that lets the stem clip reach any stem. No screws anywhere: parts press-fit, twist-lock or hot-glue.</p>
+      <div class="chips"><span class="chip2">ESP32-S3</span><span class="chip2">2 × 70 mm solar</span><span class="chip2">Rain-shedding vents</span><span class="chip2">Air-sensor chamber</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="pin" data-pin="3.2" id="stem">
+  <div class="pin-grid">
+    <div class="pin-vis stage-dark"><canvas data-scene="stem"></canvas></div>
+    <div class="pin-steps">
+      <div class="pin-step"><span class="label"><b>Prototype</b> — Stem electrode</span><h3 class="display d3">Ask the stem, <em>not the leaf</em>.</h3><p class="p">A sprung clip closes on the stem and drives two titanium needles through the outer tissue and into the conducting core.</p></div>
+      <div class="pin-step"><span class="label"><b>1 kHz</b></span><h3 class="display d3">Around <em>the cells</em>.</h3><p class="p">At 1 kHz the current can't cross a living membrane, so it threads the wet space between the cells. Watch the arc bow outward.</p></div>
+      <div class="pin-step"><span class="label"><b>100 kHz</b></span><h3 class="display d3">Straight <em>through</em>.</h3><p class="p">At 100 kHz it passes through the membranes. The ratio is the measurement. We never claim it senses a neighbour's plant or locates a fungus.</p></div>
+    </div>
+  </div>
+  <div class="pin-count"><b>01 / 03</b><span class="rule"><i></i></span></div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>Checked</b></span><h2 class="display d2" data-split>The numbers, <em>as printed</em>.</h2></div>
+    <div class="stat-big"><div><div class="num" data-count="14">0</div><span>print iterations to get the chisel point right</span></div><div><div class="num" data-count="46">0</div><span>bytes in every Bluetooth frame, CRC-16 checked</span></div><div><div class="num" data-count="4.5" data-suffix=" mm">0</div><span>fertigation tube hidden down the probe's back</span></div></div>
+  </div>
+</section>
+
+<section class="closing"><div class="wrap closer">
+  <h2 class="display d1" data-split style="max-width:12ch;margin:0 auto">Measure. Act. <em>Check it worked.</em></h2>
+  <div class="cta" data-reveal><a class="btn" href="how-it-works.html" data-t>See the closed loop <i>→</i></a><a class="btn line" href="app.html" data-t>Back to the app</a></div>
+</div></section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/team.js"></script>
+<script src="js/site.js"></script>
+<script type="module" src="js/scenes.js"></script>
+</body>
+</html>
