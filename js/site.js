@@ -115,7 +115,7 @@ function odometer(el) {
 }
 
 /* ---------- subtle magnetic snap connectors between sections ---------- */
-$$('main > section.sec, main > section.closing').forEach(sec => { const prev = sec.previousElementSibling; if (!prev || prev.tagName === 'HEADER' || prev.classList.contains('mag') || prev.classList.contains('ma-wrap')) return;
+$$('main > section.sec, main > section.closing, main > section.pin').forEach(sec => { const prev = sec.previousElementSibling; if (!prev || prev.tagName === 'HEADER' || prev.classList.contains('mag') || prev.classList.contains('ma-wrap')) return;
   sec.insertAdjacentHTML('beforebegin', '<div class="mag" aria-hidden="true"><i class="ln t"></i><i class="ln b"></i><i class="mg a"></i><i class="mg b"></i><span class="ring"></span></div>'); });
 
 /* ---------- scroll choreography ---------- */

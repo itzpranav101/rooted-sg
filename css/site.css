@@ -752,3 +752,36 @@ html{scroll-padding-top:80px}
 
 .page-hero h1.title-sm{font-size:clamp(32px,4.6vw,72px);max-width:18ch;line-height:1.02}
 .page-hero:has(h1.title-sm){padding-bottom:clamp(20px,3vw,40px)}
+
+/* hero: centred, as before. Mojo sits centred above the "what you'll see" strip */
+.craft-hero{padding-top:clamp(110px,14vh,150px)}
+.craft-hero h1{margin-top:22px}
+.craft-hero .lede{margin-top:28px}
+.craft-hero .cta{margin-top:40px}
+.hero-row{display:block;max-width:1040px;margin:clamp(30px,4.5vw,52px) auto 0;text-align:left}
+.hero-row .hprev{margin:0 auto;max-width:1040px}
+.hero-row .hprev>.label{text-align:center}
+.ma-row{display:flex;justify-content:center;margin:0 0 clamp(22px,3vw,34px)}
+.ma-row .mojo-aside{margin:0}
+/* Mojo's bubble: everything left-aligned, close button in the corner, actions under the text */
+.ma-bub{text-align:left;min-width:min(260px,100%)}
+.ma-bub p{margin:0 22px 0 0;text-align:left}
+.ma-wrap.center .ma-bub,.ma-row .ma-bub{text-align:left}
+.ma-sprout{display:inline-block;color:var(--green);margin-bottom:2px;transition:opacity .2s,transform .2s}
+.ma-sprout.out{opacity:0;transform:translateY(-4px) scale(.9)}
+.ma-sprout .sp{stroke-dasharray:1;stroke-dashoffset:1;animation:spgrow .45s var(--ease) forwards}
+.ma-sprout .g0{animation-delay:0s}.ma-sprout .g1{animation-delay:.12s}.ma-sprout .g2{animation-delay:.38s}.ma-sprout .g3{animation-delay:.52s}
+@keyframes spgrow{to{stroke-dashoffset:0}}
+.ma-sprout svg{display:block;overflow:visible}
+/* connectors: a little more present, and before pinned sections too */
+.mag{height:104px}
+.mag .mg{width:24px;height:10px;margin-left:-12px;border-radius:5px}
+.mag .mg.a{top:calc(50% - 10px - (1 - var(--e))*30px)}
+.mag .mg.b{margin-top:calc((1 - var(--e))*30px)}
+.mag .ln.t{height:calc(50% - 10px)}.mag .ln.b{height:calc(50% - 10px)}
+
+.ma-acts{transition:opacity .3s}
+.ma-bub.typing .ma-acts{opacity:0;pointer-events:none}
+
+.ma-acts{transition:opacity .3s}
+.ma-bub.typing .ma-acts{opacity:0;pointer-events:none}

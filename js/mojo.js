@@ -10,7 +10,7 @@ const to = u => () => { location.href = u; };
 // [target, where, mood, text, action?, centered?]
 const BEATS = {
   home: [
-    ['.hprev', 'before', 'happy', "Hi, I'm Mojo. Four things are coming up. Tap one if it catches your eye.", ['Why we built it', to('how-it-works.html#origin')], true],
+    ['.hero-row', 'prepend', 'happy', "Hi, I'm Mojo. Four things are coming up. Tap one if it catches your eye.", ['Why we built it', to('how-it-works.html#origin')], true],
     ['#mname', 'before', 'happy', 'Watch the words squeeze together as you scroll.'],
     ['.bundle', 'after', 'think', 'Two halves, one bundle. Curious about the measuring half first?', ['Open the module', to('rootstake.html')]],
     ['#seq', 'before', 'idle', "That's the probe. It goes in the soil. Keep scrolling and it comes apart."],
@@ -49,7 +49,7 @@ function build([sel, where, mood, text, action, center]) {
   if (t.hasAttribute('data-pin')) return buildStage(t, mood, text, action);
   const w = document.createElement('div'); w.className = 'wrap ma-wrap' + (center ? ' center' : '');
   w.innerHTML = `<aside class="mojo-aside" aria-label="A note from Mojo"><img class="ma-img" src="media/mojo/idle.gif" alt="" width="96" height="104"><div class="ma-bub"><p></p><div class="ma-acts"></div><button class="ma-x" type="button" aria-label="Hide Mojo">×</button></div></aside>`;
-  if (where === 'after') t.after(w); else t.before(w);
+  if (where === 'after') t.after(w); else if (where === 'prepend') { w.className = 'ma-row'; t.prepend(w); } else t.before(w);
   const a = $('.mojo-aside', w), img = $('.ma-img', w), p = $('p', w), acts = $('.ma-acts', w);
   p.textContent = text; p.style.minHeight = '1.4em';
   if (action) { const b = document.createElement('button'); b.type = 'button'; b.textContent = action[0]; b.addEventListener('click', action[1]); acts.appendChild(b); }
@@ -58,7 +58,7 @@ function build([sel, where, mood, text, action, center]) {
   new IntersectionObserver((es, o) => { if (!es[0].isIntersecting || done) return; done = true; o.disconnect();
     if (reduced) { a.classList.add('in'); img.src = `media/mojo/${mood}.gif`; return; }
     a.classList.add('run'); img.src = 'media/mojo/run.gif';
-    setTimeout(() => { a.classList.remove('run'); a.classList.add('in'); img.src = `media/mojo/${mood}.gif`; typeIn(p, text); }, 750); }, { threshold: .9, rootMargin: '-96px 0px -12% 0px' }).observe(a);
+    setTimeout(() => { a.classList.remove('run'); a.classList.add('in'); img.src = `media/mojo/${mood}.gif`; reveal(p, text); }, 750); }, { threshold: .55, rootMargin: '-96px 0px -3% 0px' }).observe(a);
 }
 /* pinned sections: Mojo rides inside the stage card for the first moments, then steps out of the way */
 function buildStage(pin, mood, text, action) {
@@ -71,11 +71,14 @@ function buildStage(pin, mood, text, action) {
   let on = false, played = false, inView = false;
   new IntersectionObserver(es => { inView = es[0].isIntersecting; }, { threshold: .2 }).observe(pin);
   const tick = () => { const pr = parseFloat(getComputedStyle(pin).getPropertyValue('--p')) || 0, want = inView && pr < .12 && (pin.getBoundingClientRect().top <= 8);
-    if (want && !on) { on = true; a.classList.add('in'); img.src = played ? `media/mojo/${mood}.gif` : 'media/mojo/run.gif'; if (!played) { played = true; setTimeout(() => { img.src = `media/mojo/${mood}.gif`; typeIn(p, text); }, reduced ? 0 : 700); if (reduced) p.textContent = text; } }
+    if (want && !on) { on = true; a.classList.add('in'); img.src = played ? `media/mojo/${mood}.gif` : 'media/mojo/run.gif'; if (!played) { played = true; setTimeout(() => { img.src = `media/mojo/${mood}.gif`; reveal(p, text); }, reduced ? 0 : 700); if (reduced) p.textContent = text; } }
     else if (!want && on) { on = false; a.classList.remove('in'); } };
   addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true }); tick();
 }
-function typeIn(p, text) { p.textContent = ''; let i = 0; const t = setInterval(() => { p.textContent = text.slice(0, ++i); if (i >= text.length) clearInterval(t); }, 16); }
+const SPROUT = '<svg viewBox="0 0 48 40" width="40" height="34" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="sp g0" pathLength="1" d="M5 36H43"/><path class="sp g1" pathLength="1" d="M24 36V14"/><path class="sp g2" pathLength="1" d="M24 26C15 26 11 20 11 13c8 0 13 5 13 13"/><path class="sp g3" pathLength="1" d="M24 20C32 20 36 14 36 8c-8 0-12 5-12 12"/></svg>';
+/* a little plant grows in the bubble, then the words type in */
+function reveal(p, text) { if (reduced) { p.textContent = text; return; } const bub = p.closest('.ma-bub'); p.textContent = ''; bub.classList.add('typing'); const s = document.createElement('span'); s.className = 'ma-sprout'; s.innerHTML = SPROUT; bub.insertBefore(s, p); setTimeout(() => { s.classList.add('out'); setTimeout(() => { s.remove(); typeIn(p, text); }, 220); }, 950); }
+function typeIn(p, text) { p.textContent = ''; let i = 0; const bub = p.closest('.ma-bub'); const t = setInterval(() => { p.textContent = text.slice(0, ++i); if (i >= text.length) { clearInterval(t); bub && bub.classList.remove('typing'); } }, 16); }
 if (!hidden) BEATS.forEach(build);
 
 /* next band: Mojo runs along the loop to the next stop, then says one line */
