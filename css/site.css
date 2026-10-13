@@ -865,3 +865,67 @@ html{scroll-padding-top:80px}
 .hero-trio li{font-size:clamp(14px,1.12vw,16px)}
 @media(min-width:1100px){.hero-trio{flex-wrap:nowrap}}
 @media(max-width:700px){.craft-hero h1{font-size:clamp(28px,8vw,52px)}.alive .sp{right:-.8em}}
+
+/* ===== fluid layer: sizes follow the space available, not one screen shape ===== */
+:root{--fs:clamp(15px,.3vw + 13.6px,19px);--gap:clamp(16px,2.2vw,40px);--sec-y:clamp(56px,7.4vw,130px)}
+body{font-size:var(--fs)}
+.wrap{container-type:inline-size;max-width:clamp(1100px,84vw,1760px)}
+h1,h2,h3,.display{text-wrap:balance}
+p,li{text-wrap:pretty}
+.sec{padding-block:var(--sec-y)}
+/* very wide screens: keep line lengths readable, let big visuals breathe */
+@media(min-aspect-ratio:21/9){.page-hero h1,.craft-hero h1{font-size:clamp(46px,5vw,110px)}.hero-stage{max-width:min(1500px,70vw)}}
+/* square-ish and portrait screens of any width: pinned sections stack (visual on top, text below) */
+@media(max-aspect-ratio:5/4){
+  .pin-grid{grid-template-columns:1fr;grid-template-rows:minmax(0,54%) minmax(0,1fr);gap:14px;padding-top:62px}
+  .pin-vis{height:100%}
+  .pin-steps{height:100%}
+  .pin-step .d3{font-size:clamp(22px,4.2vw,40px)}
+  .feat,.feat.rev,.sgwhy,.meco-grid,.dots-card,.try-grid,.power-grid{grid-template-columns:1fr}
+  .feat.rev .copy{order:0}
+  .hero-stage{height:clamp(300px,64vw,520px)}
+}
+/* landscape phones and other very short screens */
+@media(max-height:500px) and (min-aspect-ratio:3/2){
+  .craft-hero{padding-top:84px}
+  .craft-hero h1{font-size:clamp(28px,6vh,48px)}
+  .pin-grid{padding-top:50px}
+  .pin-step .d3{font-size:clamp(18px,5.5vh,28px)}
+  .pin-step .p{font-size:12.5px;line-height:1.4}
+  .pin-step .tag{display:none}
+}
+
+/* "what you'll see" and the numbers: equal columns, even spacing, room to breathe */
+.hook{padding-block:clamp(56px,8vw,120px) clamp(40px,6vw,90px)}
+.hook .hero-row{margin:0 auto clamp(56px,8vw,120px);max-width:none}
+.hook .hprev{max-width:none}
+.hook .hprev>.label,.hook .hs-label{display:block;text-align:center;margin-bottom:clamp(18px,2.4vw,30px)}
+.hook .hprev ol,.hook .hstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:0;max-width:none;border-top:1px var(--rs,solid) var(--rule)}
+.hook .hprev li,.hook .hstats>div{margin:0;padding:clamp(18px,2vw,30px) clamp(16px,2vw,30px);border:0;box-shadow:inset -1px 0 0 var(--rule)}
+.hook .hprev li:last-child,.hook .hstats>div:last-child{box-shadow:none}
+.hook .hprev li:first-child,.hook .hstats>div:first-child{padding-left:0}
+.hook .hprev li::before{left:0;right:0}
+.hook .hprev a{padding:0;gap:6px;align-content:start;height:100%}
+.hook .hprev b{font-size:clamp(18px,1.55vw,24px);line-height:1.15;min-height:2.3em;text-wrap:balance}
+.hook .hprev span{font-size:clamp(13px,1vw,15px)}
+.hook .hstats .num{font-size:clamp(34px,4.2vw,66px)}
+.hook .hstats>div>span{font-size:clamp(13px,1vw,15px);min-height:2.7em;max-width:none}
+@container (max-width:900px){
+  .hook .hprev ol,.hook .hstats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hook .hprev li,.hook .hstats>div{box-shadow:inset -1px 0 0 var(--rule),inset 0 -1px 0 var(--rule)}
+  .hook .hprev li:nth-child(2n),.hook .hstats>div:nth-child(2n){box-shadow:inset 0 -1px 0 var(--rule)}
+  .hook .hprev li:nth-child(2n+1),.hook .hstats>div:nth-child(2n+1){padding-left:0}
+  .hook .hprev li:nth-child(n+3),.hook .hstats>div:nth-child(n+3){box-shadow:inset -1px 0 0 var(--rule)}
+  .hook .hprev li:nth-child(4),.hook .hstats>div:nth-child(4){box-shadow:none}
+  .hook .hprev b{min-height:0}
+}
+@container (max-width:460px){
+  .hook .hprev ol,.hook .hstats{grid-template-columns:1fr}
+  .hook .hprev li,.hook .hstats>div,.hook .hprev li:nth-child(n),.hook .hstats>div:nth-child(n){box-shadow:inset 0 -1px 0 var(--rule);padding-left:0;padding-right:0}
+  .hook .hprev li:last-child,.hook .hstats>div:last-child{box-shadow:none}
+  .hook .hstats>div>span{min-height:0}
+}
+.grids2>*,.feat>*,.sgwhy>*,.try-grid>*,.power-grid>*,.bundle>*,.dots-card>*{min-width:0}
+.tiles{grid-template-columns:repeat(auto-fill,minmax(min(100%,92px),1fr))}
+.tile{font-size:clamp(11.5px,.95vw,13px);overflow-wrap:anywhere;hyphens:auto}
+@container (max-width:900px){.grids2{grid-template-columns:1fr}}
