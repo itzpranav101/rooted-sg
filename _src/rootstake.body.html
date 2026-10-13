@@ -16,7 +16,7 @@
       <div class="pin-step"><span class="label"><b>03</b> — Chisel point</span><h3 class="display d3">Saw teeth bite <em>packed mix</em>.</h3><p class="p">A 40 mm toothed chisel on a 4 mm pitch, so it goes in by hand without bending. The 4.5 mm bore exits at the centre of the nose.</p><div><span class="tag">40 mm point</span><span class="tag">4 mm pitch</span><span class="tag">4.5 mm tube</span></div></div>
       <div class="pin-step"><span class="label"><b>04</b> — Two readings</span><h3 class="display d3">Moisture prongs. <em>Copper turns.</em></h3><p class="p">A resistive board behind a bevelled window reads moisture. Two turns of bare copper read how well the soil conducts, and salts raise conductivity.</p></div>
       <div class="pin-step"><span class="label"><b>05</b> — The tube goes in</span><h3 class="display d3">Down the back, <em>to the nose</em>.</h3><p class="p">The 4.5 mm clear tube slides down its channel in the back half until it sits flush at the centre of the nose. The other end leaves the top and runs to the module's pumps.</p><div><span class="tag">4.5 mm clear tube</span><span class="tag">Press-fit, no glue</span></div></div>
-      <div class="pin-step"><span class="label"><b>06</b> — The moisture sensor</span><h3 class="display d3">The resistive probe <em>drops in over the tube</em>.</h3><p class="p">The resistive moisture board slides into the bevelled window directly over the tube. Its two exposed tines sit in the soil through the window; the board's wire leaves from the top and goes back to the house module.</p><div><span class="tag">Resistive</span><span class="tag">Two tines</span><span class="tag">Wire to the module</span></div></div>
+      <div class="pin-step"><span class="label"><b>06</b> — The moisture sensor</span><h3 class="display d3">The resistive probe <em>drops in over the tube</em>.</h3><p class="p">Only the fork-shaped probe of the resistive moisture sensor goes in: a black head with two long cream tines and silver pads. It slides into the bevelled window directly over the tube, so the tines read the soil through the window. Its wires leave from the top and go back to the house module.</p><div><span class="tag">Resistive</span><span class="tag">Fork probe only</span><span class="tag">Wire to the module</span></div></div>
       <div class="pin-step"><span class="label"><b>07</b> — The pH electrode</span><h3 class="display d3">It slots in <em>beside them</em>.</h3><p class="p">The pH electrode has its own channel, so it seats with its glass bulb at the same depth as the tines and never touches the tube. It fits with no gap; the halves then close over all three parts.</p><div><span class="tag">Own channel</span><span class="tag">Same depth as the tines</span></div></div>
       <div class="pin-step"><span class="label"><b>08</b> — Soil-line mark</span><h3 class="display d3">Push to the mark.</h3><p class="p">Every reading after comes from the same depth, so a number today means the same as a number last week.</p></div>
       <div class="pin-step"><span class="label"><b>09</b> — The dose</span><h3 class="display d3">Water reaches the <em>roots</em>.</h3><p class="p">Two small pumps feed one Y-connector into the probe's bore. The dose leaves at the nose, where the roots are. Every dose is logged with its volume.</p><div><span class="tag">Twin 5 V pumps</span></div></div>
@@ -25,7 +25,6 @@
   <div class="pin-count"><b>01 / 09</b><span class="rule"><i></i></span></div>
 </section>
 
-<div class="snap" data-a="Probe" data-b="Module"></div>
 <section class="sec">
   <div class="wrap feat">
     <div class="stagebox" data-reveal><canvas data-scene="pod"></canvas></div>
@@ -38,7 +37,6 @@
   </div>
 </section>
 
-<div class="snap" data-a="Module" data-b="Power"></div>
 <section class="sec power" id="power" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>Power and radio</b></span><h2 class="display d2" data-split>A battery, <em>stretched by the sun</em>. A radio that mostly sleeps.</h2></div>
@@ -78,7 +76,6 @@
   </div>
 </section>
 
-<div class="snap" data-a="Power" data-b="Electrode"></div>
 <section class="pin" data-pin="6.5" id="stem">
   <div class="pin-grid">
     <div class="pin-vis stage-dark"><canvas data-scene="stem"></canvas></div>
@@ -94,7 +91,6 @@
   <div class="pin-count"><b>01 / 06</b><span class="rule"><i></i></span></div>
 </section>
 
-<div class="snap" data-a="Electrode" data-b="Tissue"></div>
 <section class="pin tissue" data-pin="14" id="tissue">
   <div class="pin-grid">
     <div class="pin-vis mono"><canvas data-tissue></canvas></div>
@@ -114,7 +110,6 @@
   <div class="pin-count"><b>01 / 10</b><span class="rule"><i></i></span></div>
 </section>
 
-<div class="snap" data-a="Tissue" data-b="Numbers"></div>
 <section class="sec">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>Checked</b></span><h2 class="display d2" data-split>The numbers, <em>as printed</em>.</h2></div>
@@ -122,7 +117,6 @@
   </div>
 </section>
 
-<div class="snap" data-a="Numbers" data-b="Dose logic"></div>
 <section class="sec dose" id="dose" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>Try the logic</b></span><h2 class="display d2" data-split>It starts at the <em>floor</em>. It stops at the <em>target</em>.</h2></div>
@@ -143,7 +137,6 @@
   sim.addEventListener('click', () => { run = !run; sim.firstChild.textContent = run ? 'Stop the demo ' : 'Let the soil dry out '; if (run) tick(); else cancelAnimationFrame(raf); }); paint(); })();
 </script>
 
-<div class="snap" data-a="Dose logic" data-b="Loop"></div>
 <section class="closing"><div class="wrap closer">
   <h2 class="display d1" data-split style="max-width:12ch;margin:0 auto">Measure. Act. <em>Check it worked.</em></h2>
   <div class="cta" data-reveal><a class="btn" href="how-it-works.html" data-t>See the closed loop <i>→</i></a><a class="btn line" href="app.html" data-t>Back to the app</a></div>

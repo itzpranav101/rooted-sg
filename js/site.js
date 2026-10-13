@@ -123,13 +123,6 @@ function init() {
   $$('[data-count]').forEach(odometer);
   $$('.lrow').forEach(r => ScrollTrigger.create({ trigger: r, start: 'top 82%', once: true, onEnter: () => gsap.to(r, { '--s': 1, duration: 1.6, ease: 'expo.out' }) }));
   $$('.bytes').forEach(b => ScrollTrigger.create({ trigger: b, start: 'top 88%', once: true, onEnter: () => b.classList.add('go') }));
-  // snap-in connectors
-  $$('.snap').forEach(el => { const a = el.dataset.a || '', b = el.dataset.b || '';
-    el.innerHTML = `<i class="wire w1"></i><div class="plug"><b></b></div><div class="sock"><b></b></div><i class="wire w2"></i><span class="lbl">${a}</span><span class="led"></span><span class="st">…</span><span class="ring"></span>`;
-    const plug = $('.plug', el), stl = $('.st', el);
-    gsap.fromTo(plug, { y: -64 }, { y: 8, ease: 'power2.in', scrollTrigger: { trigger: el, start: 'top 85%', end: 'center 55%', scrub: .4, onUpdate: s => {
-      if (s.progress > .97 && !el.classList.contains('locked')) { el.classList.add('locked'); stl.textContent = b || 'linked'; gsap.fromTo(plug, { y: 0 }, { y: 8, duration: .6, ease: 'elastic.out(1,.35)' }); }
-      else if (s.progress < .9 && el.classList.contains('locked')) { el.classList.remove('locked'); stl.textContent = '…'; } } } }); });
   $$('.marq-t').forEach(t => { t.innerHTML += t.innerHTML; gsap.to(t, { xPercent: -50, repeat: -1, duration: 38, ease: 'none' }); });
   $$('.tilt').forEach(w => { const p = $('.ph', w) || w; const rx = gsap.quickTo(p, 'rotationX', { duration: .8, ease: 'power3' }), ry = gsap.quickTo(p, 'rotationY', { duration: .8, ease: 'power3' }); gsap.set(w, { perspective: 1200 });
     w.addEventListener('pointermove', e => { const r = w.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 16); rx(-((e.clientY - r.top) / r.height - .5) * 12); }); w.addEventListener('pointerleave', () => { rx(0); ry(0); }); });

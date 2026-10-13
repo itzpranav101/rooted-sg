@@ -70,7 +70,6 @@ body{counter-reset:sec}
 [data-skin="nightsoil"] .lrow,[data-skin="nightsoil"] .tt .r,[data-skin="nightsoil"] .limit,[data-skin="nightsoil"] .ledger,[data-skin="nightsoil"] .tt{border-color:var(--text)}
 [data-skin="nightsoil"] .tt .r:hover{background:var(--green);color:var(--on-accent);padding-left:20px}
 [data-skin="nightsoil"] .tt .r:hover p,[data-skin="nightsoil"] .tt .r:hover .k{color:var(--on-accent)}
-[data-skin="nightsoil"] .snap .plug,[data-skin="nightsoil"] .snap .sock{border-radius:0}
 [data-skin="nightsoil"] .foot{border-top:4px solid var(--text)}
 [data-skin="nightsoil"] .foot .big{color:var(--green)}
 [data-skin="nightsoil"] .member h4{text-transform:uppercase;font-size:20px;letter-spacing:-.02em}
@@ -145,7 +144,6 @@ body{counter-reset:sec}
 [data-skin="monsoon"] .index{background-image:linear-gradient(90deg,color-mix(in srgb,var(--green) 10%,transparent),transparent 30%);border-left:1px solid var(--green);box-shadow:-10px 0 60px -20px var(--green)}
 [data-skin="monsoon"] .index .list a .t{font-weight:200}
 [data-skin="monsoon"] .index .list a .t{letter-spacing:-.02em}
-[data-skin="monsoon"] .snap .wire::after{box-shadow:0 0 10px var(--green)}
 
 /* ============ 5 · CHALK — notebook, marker, tape ============ */
 [data-skin="chalk"] body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none}
@@ -185,7 +183,6 @@ body{counter-reset:sec}
 [data-skin="chalk"] .member:nth-child(odd) .ph-box{rotate:-2deg}[data-skin="chalk"] .member:nth-child(even) .ph-box{rotate:1.6deg}
 [data-skin="chalk"] .index{border-left:3px dashed var(--text);border-radius:0}
 [data-skin="chalk"] .index .list a .t{font-weight:400}
-[data-skin="chalk"] .snap .plug,[data-skin="chalk"] .snap .sock{border:2px solid var(--text);box-shadow:none}
 
 /* member numbering (all themes), theme previews */
 .member .ph-box .no{position:absolute;left:10px;top:8px;font-style:normal;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--ter)}
