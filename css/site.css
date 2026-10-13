@@ -668,22 +668,18 @@ html{scroll-padding-top:80px}
 .mojo-aside.stage.in .ma-img{animation:mjin .7s var(--ease)}
 .ma-wrap{scroll-margin-top:110px}
 
-/* blue sky behind the home hero */
+/* blue sky and soft halftone clouds behind the home hero */
 .craft-hero{isolation:isolate}
-.sky{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#6fb8f2 0%,#a9d6f8 38%,#d9edfc 68%,var(--bg) 100%);overflow:hidden}
+.sky{position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#86c8ee 0%,#a3d6f2 34%,#c6e6f7 62%,#e6f3fb 84%,var(--bg) 100%);overflow:hidden}
 [data-mode="dark"] .sky{background:linear-gradient(180deg,#0b2447 0%,#143a66 45%,#1c4a7a 75%,var(--bg) 100%)}
-.cl{position:absolute;display:block;border-radius:999px;background:#fff;filter:blur(1px);opacity:.92}
-.cl::before,.cl::after{content:"";position:absolute;background:#fff;border-radius:50%}
-.cl.c1{left:6%;top:20%;width:230px;height:52px;animation:cldrift 60s linear infinite alternate}
-.cl.c1::before{width:96px;height:96px;left:36px;top:-48px}.cl.c1::after{width:70px;height:70px;left:118px;top:-30px}
-.cl.c2{right:7%;top:34%;width:190px;height:44px;animation:cldrift 75s linear infinite alternate-reverse}
-.cl.c2::before{width:80px;height:80px;left:30px;top:-40px}.cl.c2::after{width:56px;height:56px;left:100px;top:-24px}
-.cl.c3{left:58%;top:12%;width:120px;height:30px;opacity:.75;animation:cldrift 90s linear infinite alternate}
-.cl.c3::before{width:52px;height:52px;left:20px;top:-26px}.cl.c3::after{width:38px;height:38px;left:64px;top:-16px}
-[data-mode="dark"] .cl{opacity:.16}
-@keyframes cldrift{to{transform:translateX(70px)}}
-@media(prefers-reduced-motion:reduce){.cl{animation:none}}
-@media(max-width:700px){.cl.c1{transform:scale(.7);left:-4%}.cl.c2{transform:scale(.7)}}
+.sky .cloud{position:absolute;display:block;height:auto;filter:drop-shadow(0 12px 18px rgba(80,140,190,.18));will-change:transform}
+.sky .cl1{left:-9%;top:16%;width:clamp(240px,30vw,470px);animation:cldrift 70s ease-in-out infinite alternate}
+.sky .cl2{right:-10%;top:5%;width:clamp(280px,36vw,560px);animation:cldrift 90s ease-in-out infinite alternate-reverse}
+.sky .cl3{left:46%;top:2%;width:clamp(120px,14vw,220px);opacity:.8;animation:cldrift 110s ease-in-out infinite alternate}
+[data-mode="dark"] .sky .cloud{opacity:.18;filter:none}
+@keyframes cldrift{to{transform:translateX(46px)}}
+@media(prefers-reduced-motion:reduce){.sky .cloud{animation:none}}
+@media(max-width:700px){.sky .cl1{left:-22%;top:20%}.sky .cl2{right:-26%}.sky .cl3{display:none}}
 /* subtle magnetic snap connector between sections */
 .mag{--k:0;--e:calc(var(--k)*var(--k));position:relative;height:96px;pointer-events:none}
 .mag .ln{position:absolute;left:50%;width:1px;margin-left:-.5px;background:var(--rule)}

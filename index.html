@@ -29,7 +29,15 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 
 <!-- 01 HERO (Craft: clouds, H1, CTA, giant app frame) -->
 <header class="craft-hero">
-  <div class="sky" aria-hidden="true"><i class="cl c1"></i><i class="cl c2"></i><i class="cl c3"></i></div>
+  <div class="sky" aria-hidden="true">
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <filter id="cfilt" x="-25%" y="-25%" width="150%" height="150%"><feTurbulence type="fractalNoise" baseFrequency=".02 .03" numOctaves="2" seed="7" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="15" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="1.1"/></filter>
+    <pattern id="cdots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.5" fill="#9cc6e3"/></pattern>
+    <linearGradient id="cfade" x1=".35" y1=".25" x2=".85" y2="1"><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient><linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#e3f1fb"/></linearGradient>
+    <mask id="cmask"><rect x="-50" y="-50" width="520" height="360" fill="url(#cfade)"/></mask>
+  </defs></svg>
+  <svg class="cloud cl1" viewBox="0 0 420 260" aria-hidden="true"><g filter="url(#cfilt)"><g fill="url(#cfill)"><circle cx="120" cy="160" r="74"/><circle cx="195" cy="118" r="86"/><circle cx="272" cy="150" r="70"/><circle cx="330" cy="185" r="52"/><circle cx="70" cy="188" r="50"/><circle cx="205" cy="188" r="74"/><circle cx="140" cy="200" r="58"/><circle cx="260" cy="200" r="56"/></g><g mask="url(#cmask)" fill="url(#cdots)"><circle cx="120" cy="160" r="74"/><circle cx="195" cy="118" r="86"/><circle cx="272" cy="150" r="70"/><circle cx="330" cy="185" r="52"/><circle cx="70" cy="188" r="50"/><circle cx="205" cy="188" r="74"/><circle cx="140" cy="200" r="58"/><circle cx="260" cy="200" r="56"/></g></g></svg><svg class="cloud cl2" viewBox="0 0 420 260" aria-hidden="true"><g filter="url(#cfilt)"><g fill="url(#cfill)"><circle cx="110" cy="150" r="60"/><circle cx="190" cy="105" r="78"/><circle cx="270" cy="138" r="66"/><circle cx="335" cy="172" r="48"/><circle cx="85" cy="182" r="44"/><circle cx="200" cy="180" r="66"/><circle cx="150" cy="196" r="50"/></g><g mask="url(#cmask)" fill="url(#cdots)"><circle cx="110" cy="150" r="60"/><circle cx="190" cy="105" r="78"/><circle cx="270" cy="138" r="66"/><circle cx="335" cy="172" r="48"/><circle cx="85" cy="182" r="44"/><circle cx="200" cy="180" r="66"/><circle cx="150" cy="196" r="50"/></g></g></svg><svg class="cloud cl3" viewBox="0 0 420 260" aria-hidden="true"><g filter="url(#cfilt)"><g fill="url(#cfill)"><circle cx="90" cy="150" r="50"/><circle cx="160" cy="112" r="62"/><circle cx="228" cy="142" r="54"/><circle cx="280" cy="176" r="40"/><circle cx="130" cy="184" r="50"/></g><g mask="url(#cmask)" fill="url(#cdots)"><circle cx="90" cy="150" r="50"/><circle cx="160" cy="112" r="62"/><circle cx="228" cy="142" r="54"/><circle cx="280" cy="176" r="40"/><circle cx="130" cy="184" r="50"/></g></g></svg>
+</div>
   <div class="wrap">
     <span class="label" data-intro style="display:block">A Singapore invention · IYEC 2026</span>
     <h1 class="display hero-h"><span class="hl">Don't count what we plant.</span> <em class="hl">Count what we keep alive.</em></h1>
