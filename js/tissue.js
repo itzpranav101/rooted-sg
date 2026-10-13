@@ -7,7 +7,7 @@ const g = cv.getContext('2d');
 const TAU = Math.PI * 2, clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x)), lerp = (a, b, t) => a + (b - a) * t;
 const sstep = (a, b, x) => { x = clamp((x - a) / (b - a)); return x * x * (3 - 2 * x); };
 const mk = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
-let W = 0, H = 0, D = 1, U = 1, C = {}, cache = null, ps = 0, vis = false, last = performance.now();
+let W = 0, H = 0, D = 1, U = 1, C = {}, ps = 0, vis = false, last = performance.now(), buildT = 0;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 function colors() { const cs = getComputedStyle(document.documentElement); C.fg = cs.getPropertyValue('--text').trim() || '#111'; C.gr = cs.getPropertyValue('--green').trim() || '#0a5c32'; C.mono = cs.getPropertyValue('--mono').trim() || 'monospace'; }
 
@@ -58,86 +58,94 @@ function buildHyphae() {
   cells.forEach(c => { for (const s of hyph) { if (Math.hypot(s.x1 - c.x, s.y1 - c.y) < c.r * .95) { c.dmg = Math.min(c.dmg, s.age); } } });
 }
 
-/* ---------------- cached static layers ---------------- */
-function drawFarm(c) {
-  c.lineWidth = .16; c.globalAlpha = .35; c.beginPath(); const a = fpos(0, 0), b = fpos(farm.cols - 1, 0), d = fpos(0, farm.rows - 1), e = fpos(farm.cols - 1, farm.rows - 1);
-  c.moveTo(a.x - 4, a.y - 3); c.lineTo(b.x + 4, b.y - 3); c.lineTo(e.x + 5, e.y + 4); c.lineTo(d.x - 5, d.y + 4); c.closePath(); c.stroke();
-  for (let j = 0; j < farm.rows; j++) { const p0 = fpos(0, j), p1 = fpos(farm.cols - 1, j); c.globalAlpha = .13; c.beginPath(); c.moveTo(p0.x - 3, p0.y + 1.2 * p0.k); c.lineTo(p1.x + 3, p1.y + 1.2 * p1.k); c.stroke(); }
-  const R = mk(3);
+/* ---------------- build helpers: everything draws itself ---------------- */
+const ease = x => 1 - Math.pow(1 - clamp(x), 3), sub = (b, a, z) => clamp((b - a) / (z - a));
+function dpath(c, k, len, fn) { if (k <= 0) return; c.save(); if (k < 1) c.setLineDash([Math.max(.001, len * k), len * 4]); c.beginPath(); fn(c); c.stroke(); c.restore(); }
+function poly(c, pts, k) { if (k <= 0 || pts.length < 2) return; const n = (pts.length - 1) * clamp(k), m = Math.floor(n); c.beginPath(); c.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i <= m; i++) c.lineTo(pts[i][0], pts[i][1]); if (m < pts.length - 1) { const f = n - m, A = pts[m], B = pts[m + 1]; c.lineTo(A[0] + (B[0] - A[0]) * f, A[1] + (B[1] - A[1]) * f); } c.stroke(); }
+function pop(c, x, y, k, fn) { if (k <= 0) return; c.save(); c.globalAlpha *= clamp(k * 1.6); c.translate(x, y); const s = .55 + .45 * ease(k); c.scale(s, s); c.translate(-x, -y); fn(c); c.restore(); }
+const SEC = (() => { const R = mk(31), cortex = [], pith = []; [31.6, 28.5, 25.4, 22.3].forEach((rr, ri) => { const n = Math.round(TAU * rr / 3.9); for (let k = 0; k < n; k++) cortex.push({ ri, k, n, rr, a: (k + R() * .2) / n * TAU, rx: 1.45 + R() * .2, dot: R() < .3 }); }); for (let k = 0; k < 22; k++) { const a = R() * TAU, rr = Math.sqrt(R()) * 11.5; pith.push({ x: Math.cos(a) * rr, y: Math.sin(a) * rr, r: 2.6 + R() * 1.6, dot: R() < .5, k }); } return { cortex, pith }; })();
+const ROOTS = (() => { const R = mk(21), out = []; for (let k = 0; k < 9; k++) { let x = 16, y = 32, a = Math.PI / 2 + (k - 4) * .28; const pts = [[x, y]]; for (let n = 0; n < 14; n++) { a += (R() - .5) * .5; x += Math.cos(a) * 1.3; y += Math.sin(a) * 1.3; pts.push([x, y]); } out.push(pts); } return out; })();
+const FARMR = (() => { const R = mk(3), o = []; for (let j = 0; j < farm.rows; j++) for (let i = 0; i < farm.cols; i++) o.push([R(), R(), R()]); return o; })();
+
+function drawFarm(c, b) {
+  const a = fpos(0, 0), bb = fpos(farm.cols - 1, 0), d = fpos(0, farm.rows - 1), e = fpos(farm.cols - 1, farm.rows - 1);
+  // horizon: hills and tree line
+  c.lineWidth = .16; c.globalAlpha = .45 * ease(sub(b, 0, .3)); dpath(c, ease(sub(b, 0, .35)), 150, c => { for (let x = -62; x <= 62; x += 2) c[x === -62 ? 'moveTo' : 'lineTo'](x, -33 - 2.4 * Math.sin(x * .09) - 1.4 * Math.sin(x * .23 + 1)); });
+  c.lineWidth = .14; for (let i = 0; i < 26; i++) { const x = -60 + i * 4.7 + (i * 7 % 3), y = -33 - 2.4 * Math.sin(x * .09) - 1.4 * Math.sin(x * .23 + 1), r = 1 + (i % 3) * .4, k = ease(sub(b, .12 + i * .008, .4 + i * .008)); if (k > 0) { c.beginPath(); c.arc(x, y - r * k, r * k, 0, TAU); c.stroke(); c.beginPath(); c.moveTo(x, y); c.lineTo(x, y - r * k * .6); c.stroke(); } }
+  c.globalAlpha = .4; c.lineWidth = .16; dpath(c, ease(sub(b, .04, .4)), 460, c => { c.moveTo(a.x - 4, a.y - 3); c.lineTo(bb.x + 4, bb.y - 3); c.lineTo(e.x + 5, e.y + 4); c.lineTo(d.x - 5, d.y + 4); c.closePath(); });
+  for (let j = 0; j < farm.rows; j++) { const p0 = fpos(0, j), p1 = fpos(farm.cols - 1, j); c.globalAlpha = .14; dpath(c, ease(sub(b, .1 + (farm.rows - j) * .012, .5 + (farm.rows - j) * .012)), 120, c => { c.moveTo(p0.x - 3, p0.y + 1.2 * p0.k); c.lineTo(p1.x + 3, p1.y + 1.2 * p1.k); }); }
+  // fence posts at the corners
+  c.globalAlpha = .5; c.lineWidth = .22; [[a.x - 4, a.y - 3], [bb.x + 4, bb.y - 3], [d.x - 5, d.y + 4], [e.x + 5, e.y + 4]].forEach(([x, y], i) => { const k = ease(sub(b, .3 + i * .03, .5 + i * .03)); c.beginPath(); c.moveTo(x, y); c.lineTo(x, y - 3 * k); c.stroke(); });
+  // plants sprout in a wave: near rows first, rippling out from the middle
+  c.lineCap = 'round';
   for (let j = 0; j < farm.rows; j++) for (let i = 0; i < farm.cols; i++) {
-    if (i === 11 && j === 8) continue; const p = fpos(i, j), s = p.k; c.globalAlpha = .5 + .3 * (j / farm.rows); c.lineWidth = .17 * s;
-    c.beginPath(); c.moveTo(p.x, p.y + 1 * s); c.lineTo(p.x, p.y - .2 * s); c.stroke();
-    for (let k = 0; k < 3; k++) { const an = -Math.PI / 2 + (k - 1) * (.8 + R() * .3); c.beginPath(); c.moveTo(p.x, p.y); c.quadraticCurveTo(p.x + Math.cos(an) * .9 * s, p.y + Math.sin(an) * .9 * s, p.x + Math.cos(an) * 1.5 * s, p.y + Math.sin(an) * 1.5 * s - .2 * s); c.stroke(); }
+    if (i === 11 && j === 8) continue; const p = fpos(i, j), s = p.k, pp = clamp(b * 1.9 - ((farm.rows - 1 - j) / farm.rows) * .62 - Math.abs(i - 11) / farm.cols * .35 - .12), R = FARMR[j * farm.cols + i]; if (pp <= 0) continue;
+    const g = ease(pp), lk = ease(pp * 1.5 - .45); c.globalAlpha = (.5 + .3 * (j / farm.rows)) * clamp(pp * 3); c.lineWidth = .17 * s;
+    c.beginPath(); c.moveTo(p.x, p.y + 1 * s); c.lineTo(p.x, p.y + 1 * s - 1.2 * s * g); c.stroke();
+    if (lk > 0) for (let k = 0; k < 3; k++) { const an = -Math.PI / 2 + (k - 1) * (.8 + R[k] * .3), L = lk * s; c.beginPath(); c.moveTo(p.x, p.y - .2 * s); c.quadraticCurveTo(p.x + Math.cos(an) * .9 * L, p.y - .2 * s + Math.sin(an) * .9 * L, p.x + Math.cos(an) * 1.5 * L, p.y - .2 * s + Math.sin(an) * 1.5 * L - .2 * s); c.stroke(); }
   }
   c.globalAlpha = 1;
 }
-function drawPlant(c) {
-  const sx = t => 16 + 3 * Math.sin(t * 5), sy = t => 32 - t * 62;
-  c.lineWidth = .3; c.beginPath(); c.moveTo(-50, 32); c.lineTo(50, 32); c.stroke();
-  c.lineWidth = .15; c.globalAlpha = .45; for (let x = -50; x < 50; x += 2.3) { c.beginPath(); c.moveTo(x, 32); c.lineTo(x - 1.4, 34.6 + ((x * 7) % 3) * .4); c.stroke(); } for (let x = -49; x < 50; x += 4.1) { c.beginPath(); c.arc(x, 38 + ((x * 3) % 4), .35, 0, TAU); c.stroke(); } c.globalAlpha = 1;
-  // roots
-  c.lineWidth = .22; const R = mk(21); for (let k = 0; k < 9; k++) { let x = 16, y = 32, a = Math.PI / 2 + (k - 4) * .28; c.beginPath(); c.moveTo(x, y); for (let n = 0; n < 12; n++) { a += (R() - .5) * .5; x += Math.cos(a) * 1.3; y += Math.sin(a) * 1.3; c.lineTo(x, y); if (n > 3 && R() < .25) { c.moveTo(x, y); c.lineTo(x + Math.cos(a + .9) * 2.4, y + Math.sin(a + .9) * 2.4); c.moveTo(x, y); } } c.stroke(); }
-  // stem (double line)
-  c.lineWidth = .32; for (const o of [-1.5, 1.5]) { c.beginPath(); for (let k = 0; k <= 40; k++) { const t = k / 40; c[k ? 'lineTo' : 'moveTo'](sx(t) + o * (1 - t * .45), sy(t)); } c.stroke(); }
-  // leaves
-  c.lineWidth = .28; [[.28, -.45, 20], [.4, Math.PI + .5, 19], [.55, -.4, 19], [.66, Math.PI + .45, 17], [.8, -.5, 15], [.9, Math.PI + .5, 12], [.99, -1.35, 10]].forEach(([t, a, l]) => leaf(c, sx(t), sy(t), l, a, .3));
-  // house module (stands on its own)
-  c.lineWidth = .34; c.strokeRect(-41, 15, 17, 15); c.beginPath(); c.moveTo(-43.5, 15); c.lineTo(-32.5, 6); c.lineTo(-21.5, 15); c.stroke();
-  c.lineWidth = .2; c.beginPath(); c.moveTo(-38.5, 12.6); c.lineTo(-32.5, 7.6); c.moveTo(-36, 13.8); c.lineTo(-30, 8.8); c.moveTo(-26.5, 12.6); c.lineTo(-32.5, 7.6); c.moveTo(-29, 13.8); c.lineTo(-35, 8.8); c.stroke(); c.strokeRect(-37, 20, 9, 5); c.beginPath(); c.arc(-26.5, 24, .6, 0, TAU); c.stroke();
-  // soil probe + tube
-  c.lineWidth = .32; c.strokeRect(-9.8, 20, 3.6, 18); c.beginPath(); c.moveTo(-9.8, 38); c.lineTo(-8, 40.4); c.lineTo(-6.2, 38); c.stroke();
-  c.lineWidth = .28; c.beginPath(); c.moveTo(-24, 27); c.bezierCurveTo(-18, 27, -12, 14, -8, 19.5); c.stroke();
-  // clip on the stem
-  const cy = sy(.5), cx = sx(.5); c.lineWidth = .35; c.strokeRect(cx - 4.2, cy - 1.4, 2.4, 2.8); c.strokeRect(cx + 1.8, cy - 1.4, 2.4, 2.8);
-  c.lineWidth = .2; c.beginPath(); c.moveTo(cx - 1.8, cy - .4); c.lineTo(cx - .3, cy - .4); c.moveTo(cx + 1.8, cy + .4); c.lineTo(cx + .3, cy + .4); c.stroke();
-  c.lineWidth = .24; c.beginPath(); c.moveTo(cx + 4.2, cy); c.bezierCurveTo(cx + 12, cy - 8, -2, -4, -24, 20); c.stroke();
-  plantClip = { x: cx, y: cy };
-}
 let plantClip = { x: 17.8, y: 1 };
-function drawStemSide(c) {
-  c.lineWidth = .4; for (const x of [-14, 14]) { c.beginPath(); c.moveTo(x, -52); c.lineTo(x, 52); c.stroke(); }
-  c.lineWidth = .16; c.globalAlpha = .55; for (const x of [-12.2, 12.2]) { c.beginPath(); c.moveTo(x, -52); c.lineTo(x, 52); c.stroke(); }
-  const R = mk(9); for (let y = -50; y < 50; y += 2.6) for (const x of [-13.1, 13.1]) { c.beginPath(); c.moveTo(x - .9, y + R() * .5); c.lineTo(x + .9, y + R() * .5); c.stroke(); }
-  c.globalAlpha = .8; c.lineWidth = .22; for (let k = 0; k < 7; k++) { const x = -7.5 + k * 2.5; c.beginPath(); for (let y = -52; y <= 52; y += 2) c[y === -52 ? 'moveTo' : 'lineTo'](x + Math.sin(y * .2 + k) * .25, y); c.stroke(); c.lineWidth = .12; for (let y = -50; y < 50; y += 3.2) { c.beginPath(); c.moveTo(x - .5, y); c.lineTo(x + .5, y); c.stroke(); } c.lineWidth = .22; }
-  c.globalAlpha = 1;
+const PBEZ = (cx, cy) => [[cx + 4.2, cy], [cx + 12, cy - 8], [-2, -4], [-24, 20]];
+function bez(P, u) { const m = 1 - u; return [m * m * m * P[0][0] + 3 * m * m * u * P[1][0] + 3 * m * u * u * P[2][0] + u * u * u * P[3][0], m * m * m * P[0][1] + 3 * m * m * u * P[1][1] + 3 * m * u * u * P[2][1] + u * u * u * P[3][1]]; }
+function drawPlant(c, b, tt = 0) {
+  const sx = t => 16 + 3 * Math.sin(t * 5), sy = t => 32 - t * 62;
+  c.lineWidth = .3; dpath(c, ease(sub(b, 0, .14)), 100, c => { c.moveTo(-50, 32); c.lineTo(50, 32); });
+  c.save(); c.globalAlpha = .45 * sub(b, .04, .2); c.lineWidth = .15; for (let x = -50; x < 50; x += 2.3) { c.beginPath(); c.moveTo(x, 32); c.lineTo(x - 1.4, 34.6 + ((x * 7) % 3) * .4); c.stroke(); } for (let x = -49; x < 50; x += 4.1) { c.beginPath(); c.arc(x, 38 + ((x * 3) % 4), .35, 0, TAU); c.stroke(); } c.restore();
+  c.lineWidth = .22; ROOTS.forEach((pts, k) => poly(c, pts, ease(sub(b, .06 + k * .018, .46))));
+  const tm = ease(sub(b, .14, .52)); c.lineWidth = .32;
+  for (const o of [-1.5, 1.5]) { if (tm <= 0) break; c.beginPath(); for (let k = 0; k <= 40 * tm; k++) { const t = k / 40; c[k ? 'lineTo' : 'moveTo'](sx(t) + o * (1 - t * .45), sy(t)); } c.stroke(); }
+  c.lineWidth = .28; [[.28, -.45, 20], [.4, Math.PI + .5, 19], [.55, -.4, 19], [.66, Math.PI + .45, 17], [.8, -.5, 15], [.9, Math.PI + .5, 12], [.99, -1.35, 10]].forEach(([t, a, l]) => { const lk = ease((tm - t) / .16 + (tm >= t ? 0 : -1)); if (lk <= 0) return; c.save(); c.globalAlpha *= lk; leaf(c, sx(t), sy(t), l * lk, a, .3); c.restore(); });
+  // the house module builds itself, piece by piece
+  const hb = sub(b, .48, .8); c.lineWidth = .34;
+  dpath(c, ease(sub(hb, 0, .3)), 70, c => { c.moveTo(-41, 30); c.lineTo(-41, 15); c.lineTo(-24, 15); c.lineTo(-24, 30); c.closePath(); });
+  dpath(c, ease(sub(hb, .25, .55)), 32, c => { c.moveTo(-43.5, 15); c.lineTo(-32.5, 6); c.lineTo(-21.5, 15); });
+  c.lineWidth = .2; dpath(c, ease(sub(hb, .5, .75)), 40, c => { c.moveTo(-38.5, 12.6); c.lineTo(-32.5, 7.6); c.moveTo(-36, 13.8); c.lineTo(-30, 8.8); c.moveTo(-26.5, 12.6); c.lineTo(-32.5, 7.6); c.moveTo(-29, 13.8); c.lineTo(-35, 8.8); });
+  dpath(c, ease(sub(hb, .6, .85)), 30, c => { c.rect(-37, 20, 9, 5); }); if (hb > .85) { c.beginPath(); c.arc(-26.5, 24, .6, 0, TAU); c.stroke(); }
+  // soil probe drops into the soil, tube follows
+  const pb = ease(sub(b, .6, .78)); if (pb > 0) { c.save(); c.globalAlpha *= clamp(pb * 3); c.translate(0, (1 - pb) * -22); c.lineWidth = .32; c.strokeRect(-9.8, 20, 3.6, 18); c.beginPath(); c.moveTo(-9.8, 38); c.lineTo(-8, 40.4); c.lineTo(-6.2, 38); c.stroke(); c.restore(); }
+  c.lineWidth = .28; dpath(c, ease(sub(b, .74, .88)), 40, c => { c.moveTo(-24, 27); c.bezierCurveTo(-18, 27, -12, 14, -8, 19.5); });
+  // clip clicks onto the stem, wire runs to the house
+  const cy = sy(.5), cx = sx(.5); plantClip = { x: cx, y: cy }; const ck = ease(sub(b, .78, .9));
+  if (ck > 0) { c.save(); c.globalAlpha *= clamp(ck * 2); c.translate(cx, cy); c.scale(.6 + .4 * ck, .6 + .4 * ck); c.translate(-cx, -cy); c.lineWidth = .35; c.strokeRect(cx - 4.2, cy - 1.4, 2.4, 2.8); c.strokeRect(cx + 1.8, cy - 1.4, 2.4, 2.8); c.lineWidth = .2; c.beginPath(); c.moveTo(cx - 1.8, cy - .4); c.lineTo(cx - .3, cy - .4); c.moveTo(cx + 1.8, cy + .4); c.lineTo(cx + .3, cy + .4); c.stroke(); c.restore(); }
+  c.lineWidth = .24; dpath(c, ease(sub(b, .84, 1)), 70, c => { c.moveTo(cx + 4.2, cy); c.bezierCurveTo(cx + 12, cy - 8, -2, -4, -24, 20); });
 }
-function drawSection(c) {
-  const R = mk(31);
-  // epidermis
-  c.lineWidth = .5; c.beginPath(); c.arc(0, 0, 36, 0, TAU); c.stroke(); c.lineWidth = .18; c.beginPath(); c.arc(0, 0, 33.8, 0, TAU); c.stroke();
-  c.lineWidth = .14; for (let k = 0; k < 96; k++) { const a = k / 96 * TAU; c.beginPath(); c.moveTo(Math.cos(a) * 33.8, Math.sin(a) * 33.8); c.lineTo(Math.cos(a) * 36, Math.sin(a) * 36); c.stroke(); }
-  // cortex cells
-  c.lineWidth = .17; c.globalAlpha = .6;
-  for (let rr = 31.6; rr > 21; rr -= 3.1) { const n = Math.round(TAU * rr / 3.9); for (let k = 0; k < n; k++) { const a = (k + R() * .2) / n * TAU, x = Math.cos(a) * rr, y = Math.sin(a) * rr; c.save(); c.translate(x, y); c.rotate(a); c.beginPath(); c.ellipse(0, 0, 1.45 + R() * .2, (TAU * rr / n) * .46, 0, 0, TAU); c.stroke(); if (R() < .3) { c.beginPath(); c.arc(.2, 0, .32, 0, TAU); c.stroke(); } c.restore(); } }
-  c.globalAlpha = 1;
-  // vascular bundles
-  for (let k = 0; k < 9; k++) { const a = k / 9 * TAU + .2; c.save(); c.rotate(a); c.translate(17.5, 0);
+function drawStemSide(c, b) {
+  const R = mk(9); c.lineWidth = .4; for (const x of [-14, 14]) dpath(c, ease(sub(b, 0, .5)), 110, c => { c.moveTo(x, -52); c.lineTo(x, 52); });
+  c.save(); c.lineWidth = .16; c.globalAlpha = .55; for (const x of [-12.2, 12.2]) dpath(c, ease(sub(b, .1, .6)), 110, c => { c.moveTo(x, -52); c.lineTo(x, 52); });
+  for (let y = -50, i = 0; y < 50; y += 2.6, i++) for (const x of [-13.1, 13.1]) { if (ease(sub(b, .2 + (i / 40) * .3, .5 + (i / 40) * .3)) <= 0) continue; c.beginPath(); c.moveTo(x - .9, y + R() * .5); c.lineTo(x + .9, y + R() * .5); c.stroke(); }
+  c.globalAlpha = .8; for (let k = 0; k < 7; k++) { const x = -7.5 + k * 2.5, kk = ease(sub(b, .3 + k * .06, .8 + k * .03)); c.lineWidth = .22; dpath(c, kk, 110, c => { for (let y = -52; y <= 52; y += 2) c[y === -52 ? 'moveTo' : 'lineTo'](x + Math.sin(y * .2 + k) * .25, y); }); c.lineWidth = .12; for (let y = -50; y < 50; y += 3.2) { if ((y + 52) / 104 > kk) break; c.beginPath(); c.moveTo(x - .5, y); c.lineTo(x + .5, y); c.stroke(); } }
+  c.restore();
+}
+function drawSection(c, b) {
+  c.lineWidth = .5; dpath(c, ease(sub(b, 0, .3)), 240, c => c.arc(0, 0, 36, -Math.PI / 2, -Math.PI / 2 + TAU)); c.lineWidth = .18; dpath(c, ease(sub(b, .05, .35)), 230, c => c.arc(0, 0, 33.8, -Math.PI / 2, -Math.PI / 2 + TAU));
+  c.lineWidth = .14; const tk = ease(sub(b, .05, .4)); for (let k = 0; k < 96 * tk; k++) { const a = k / 96 * TAU - Math.PI / 2; c.beginPath(); c.moveTo(Math.cos(a) * 33.8, Math.sin(a) * 33.8); c.lineTo(Math.cos(a) * 36, Math.sin(a) * 36); c.stroke(); }
+  c.lineWidth = .17; SEC.cortex.forEach(ce => { const k = sub(b, .22 + ce.ri * .09 + (ce.k / ce.n) * .12, .34 + ce.ri * .09 + (ce.k / ce.n) * .12); if (k <= 0) return; const x = Math.cos(ce.a) * ce.rr, y = Math.sin(ce.a) * ce.rr; c.save(); c.globalAlpha = .6 * clamp(k * 2); c.translate(x, y); c.rotate(ce.a); const sc = .5 + .5 * ease(k); c.scale(sc, sc); c.beginPath(); c.ellipse(0, 0, ce.rx, (TAU * ce.rr / ce.n) * .46, 0, 0, TAU); c.stroke(); if (ce.dot) { c.beginPath(); c.arc(.2, 0, .32, 0, TAU); c.stroke(); } c.restore(); });
+  for (let k = 0; k < 9; k++) { const kk = ease(sub(b, .55 + k * .035, .78 + k * .035)); if (kk <= 0) continue; const a = k / 9 * TAU + .2; c.save(); c.rotate(a); c.translate(17.5, 0); c.scale(kk, kk); c.globalAlpha *= clamp(kk * 2);
     c.lineWidth = .3; c.beginPath(); c.moveTo(-3.8, -3.2); c.bezierCurveTo(3, -5.4, 5.6, -2.4, 5.6, 0); c.bezierCurveTo(5.6, 2.4, 3, 5.4, -3.8, 3.2); c.bezierCurveTo(-4.8, 1.4, -4.8, -1.4, -3.8, -3.2); c.stroke();
     c.lineWidth = .22; [[-2.2, -1.5, 1.5], [-2.2, 1.5, 1.5], [-.2, 0, 1.9]].forEach(([x, y, r]) => { c.beginPath(); c.arc(x, y, r, 0, TAU); c.stroke(); c.lineWidth = .1; c.beginPath(); c.arc(x, y, r * .72, 0, TAU); c.stroke(); c.lineWidth = .22; });
     c.lineWidth = .16; for (let m = 0; m < 6; m++) { c.beginPath(); c.arc(3.2 + (m % 2) * .5, -2 + m * .8, .5, 0, TAU); c.stroke(); } c.setLineDash([.5, .5]); c.beginPath(); c.arc(0, 0, 4.2, -.9, .9); c.stroke(); c.setLineDash([]); c.restore(); }
-  // pith
-  c.lineWidth = .2; for (let k = 0; k < 22; k++) { const a = R() * TAU, rr = Math.sqrt(R()) * 11.5, x = Math.cos(a) * rr, y = Math.sin(a) * rr; c.beginPath(); c.arc(x, y, 2.6 + R() * 1.6, 0, TAU); c.stroke(); if (R() < .5) { c.beginPath(); c.arc(x + .4, y - .3, .5, 0, TAU); c.stroke(); } }
+  c.lineWidth = .2; SEC.pith.forEach(pc => { const k = sub(b, .74 + (pc.k / 22) * .16, .9 + (pc.k / 22) * .1); if (k <= 0) return; pop(c, pc.x, pc.y, k, c => { c.beginPath(); c.arc(pc.x, pc.y, pc.r, 0, TAU); c.stroke(); if (pc.dot) { c.beginPath(); c.arc(pc.x + .4, pc.y - .3, .5, 0, TAU); c.stroke(); } }); });
 }
-let cellBmp = null;
-function drawCells(c) {
-  cells.forEach(ce => {
-    c.lineWidth = .3; c.globalAlpha = .55; hex(c, ce.x, ce.y, ce.r, ce.rot, ce.j); c.stroke();
-    c.lineWidth = .13; c.globalAlpha = .3; hex(c, ce.x, ce.y, ce.r * .86, ce.rot, ce.j); c.stroke();
-    c.globalAlpha = .22; c.beginPath(); c.ellipse(ce.x - ce.nuc[0] * .5, ce.y - ce.nuc[1] * .5, ce.r * .5, ce.r * .44, ce.rot, 0, TAU); c.stroke();
-    c.globalAlpha = .6; c.lineWidth = .16; c.beginPath(); c.arc(ce.x + ce.nuc[0], ce.y + ce.nuc[1], 1.25, 0, TAU); c.stroke(); c.beginPath(); c.arc(ce.x + ce.nuc[0] + .2, ce.y + ce.nuc[1], .35, 0, TAU); c.fill();
-    c.globalAlpha = .38; for (let k = 0; k < 5; k++) { const a = ce.rot + k / 5 * TAU + ce.j[k]; c.beginPath(); c.ellipse(ce.x + Math.cos(a) * ce.r * .66, ce.y + Math.sin(a) * ce.r * .66, .6, .32, a, 0, TAU); c.fill(); }
-    c.globalAlpha = .7; for (let k = 0; k < 6; k += 2) { const a = ce.rot + (k + .5) / 6 * TAU; c.beginPath(); c.arc(ce.x + Math.cos(a) * ce.r * .87, ce.y + Math.sin(a) * ce.r * .87, .2, 0, TAU); c.fill(); }
-  }); c.globalAlpha = 1;
-  // xylem vessels
-  VES.forEach(([x, y], vi) => { c.lineWidth = .62; c.beginPath(); c.arc(x, y, 8.2, 0, TAU); c.stroke(); c.lineWidth = .2; c.beginPath(); c.arc(x, y, 6.6, 0, TAU); c.stroke(); c.lineWidth = .14;
-    for (let k = 0; k < 14; k++) { const a = k / 14 * TAU + vi; c.beginPath(); c.moveTo(x + Math.cos(a) * 6.6, y + Math.sin(a) * 6.6); c.lineTo(x + Math.cos(a) * 8.2, y + Math.sin(a) * 8.2); c.stroke(); }
-    c.globalAlpha = .35; c.lineWidth = .12; for (let k = 0; k < 3; k++) { c.beginPath(); c.arc(x, y, 5.6 - k * 1.4, .6 * k, TAU - .6 * k); c.stroke(); } c.globalAlpha = 1; });
-  // phloem: sieve tube + companion cells
-  PHL.forEach(([x, y, r]) => { c.lineWidth = .4; c.beginPath(); c.arc(x, y, r, 0, TAU); c.stroke(); c.lineWidth = .12; for (let k = -2; k <= 2; k++) { c.beginPath(); c.moveTo(x - r + 1, y + k * 1.4); c.lineTo(x + r - 1, y + k * 1.4); c.stroke(); }
-    [[r + 3.6, -3.2, 2.5], [r + 4.4, 2.4, 2.3], [-r - 3.6, 3, 2.5]].forEach(([dx, dy, rr]) => { c.lineWidth = .3; c.beginPath(); c.arc(x + dx, y + dy, rr, 0, TAU); c.stroke(); c.lineWidth = .1; for (let m = 0; m < 9; m++) { c.beginPath(); c.arc(x + dx + Math.cos(m * 2.4) * rr * .5 * (m % 3 ? .9 : .4), y + dy + Math.sin(m * 2.4) * rr * .5 * (m % 3 ? .9 : .4), .22, 0, TAU); c.stroke(); } }); });
+function drawCells(c, b) {
+  const NT = [[-33, 0], [33, 0]], dist = (x, y) => Math.min(Math.hypot(x - NT[0][0], y - NT[0][1]), Math.hypot(x - NT[1][0], y - NT[1][1]));
+  cells.forEach(ce => { const dl = clamp(dist(ce.x, ce.y) / 70) * .55, cp = clamp((b * 1.5 - dl) / .45); if (cp <= 0) return; const op = clamp((cp - .55) / .45); c.save(); c.translate(ce.x, ce.y); const sc = .5 + .5 * ease(cp); c.scale(sc, sc); c.translate(-ce.x, -ce.y);
+    c.lineWidth = .3; c.globalAlpha = .55 * clamp(cp * 2); hex(c, ce.x, ce.y, ce.r, ce.rot, ce.j); c.stroke();
+    c.lineWidth = .13; c.globalAlpha = .3 * clamp(cp * 2); hex(c, ce.x, ce.y, ce.r * .86, ce.rot, ce.j); c.stroke();
+    if (op > 0) { c.globalAlpha = .22 * op; c.beginPath(); c.ellipse(ce.x - ce.nuc[0] * .5, ce.y - ce.nuc[1] * .5, ce.r * .5 * op, ce.r * .44 * op, ce.rot, 0, TAU); c.stroke();
+      c.globalAlpha = .6 * op; c.lineWidth = .16; c.beginPath(); c.arc(ce.x + ce.nuc[0], ce.y + ce.nuc[1], 1.25 * op, 0, TAU); c.stroke(); c.beginPath(); c.arc(ce.x + ce.nuc[0] + .2, ce.y + ce.nuc[1], .35, 0, TAU); c.fill();
+      c.globalAlpha = .38 * op; for (let k = 0; k < 5; k++) { const a = ce.rot + k / 5 * TAU + ce.j[k]; c.beginPath(); c.ellipse(ce.x + Math.cos(a) * ce.r * .66, ce.y + Math.sin(a) * ce.r * .66, .6, .32, a, 0, TAU); c.fill(); }
+      c.globalAlpha = .7 * op; for (let k = 0; k < 6; k += 2) { const a = ce.rot + (k + .5) / 6 * TAU; c.beginPath(); c.arc(ce.x + Math.cos(a) * ce.r * .87, ce.y + Math.sin(a) * ce.r * .87, .2, 0, TAU); c.fill(); } }
+    c.restore(); });
+  c.globalAlpha = 1;
+  VES.forEach(([x, y], vi) => { const k = ease(sub(b, .3 + vi * .08, .75 + vi * .08)); if (k <= 0) return; c.lineWidth = .62; dpath(c, k, 55, c => c.arc(x, y, 8.2, -Math.PI / 2, -Math.PI / 2 + TAU)); c.lineWidth = .2; dpath(c, ease(k * 1.2 - .1), 44, c => c.arc(x, y, 6.6, -Math.PI / 2, -Math.PI / 2 + TAU)); if (k > .6) { c.lineWidth = .14; const n = Math.floor(14 * sub(k, .6, 1)); for (let q = 0; q < n; q++) { const a = q / 14 * TAU + vi; c.beginPath(); c.moveTo(x + Math.cos(a) * 6.6, y + Math.sin(a) * 6.6); c.lineTo(x + Math.cos(a) * 8.2, y + Math.sin(a) * 8.2); c.stroke(); } c.save(); c.globalAlpha = .35 * sub(k, .7, 1); c.lineWidth = .12; for (let q = 0; q < 3; q++) { c.beginPath(); c.arc(x, y, 5.6 - q * 1.4, .6 * q, TAU - .6 * q); c.stroke(); } c.restore(); } });
+  PHL.forEach(([x, y, r], pi) => { const k = ease(sub(b, .45 + pi * .1, .9)); if (k <= 0) return; c.lineWidth = .4; dpath(c, k, 34, c => c.arc(x, y, r, 0, TAU)); if (k > .5) { c.lineWidth = .12; for (let q = -2; q <= 2; q++) { c.beginPath(); c.moveTo(x - r + 1, y + q * 1.4); c.lineTo(x + r - 1, y + q * 1.4); c.stroke(); }
+    [[r + 3.6, -3.2, 2.5], [r + 4.4, 2.4, 2.3], [-r - 3.6, 3, 2.5]].forEach(([dx, dy, rr], ci) => { const ck = sub(k, .5 + ci * .12, 1); pop(c, x + dx, y + dy, ck, c => { c.lineWidth = .3; c.beginPath(); c.arc(x + dx, y + dy, rr, 0, TAU); c.stroke(); c.lineWidth = .1; for (let m = 0; m < 9; m++) { c.beginPath(); c.arc(x + dx + Math.cos(m * 2.4) * rr * .5 * (m % 3 ? .9 : .4), y + dy + Math.sin(m * 2.4) * rr * .5 * (m % 3 ? .9 : .4), .22, 0, TAU); c.stroke(); } }); }); } });
 }
-
-function build() { colors(); buildCells(); if (!hyph.length) buildHyphae(); cache = { farm: bmp(drawFarm), plant: bmp(drawPlant), side: bmp(drawStemSide), sect: bmp(drawSection), cells: bmp(drawCells) }; }
+const cacheF = {};
+function layer(key, b, fn) { if (b >= .999) { if (!cacheF[key]) cacheF[key] = bmp(c => fn(c, 1)); blit(cacheF[key]); } else if (b > 0) fn(g, b, 0); }
+function build() { colors(); buildCells(); if (!hyph.length) buildHyphae(); Object.keys(cacheF).forEach(k => delete cacheF[k]); }
 function blit(o) { g.drawImage(o, -W / 2 / U, -H / 2 / U, W / U, H / U); }
 
 /* ---------------- dynamic overlays ---------------- */
@@ -155,16 +163,17 @@ function roll(c, from, to, k, x, y, size, col) { // odometer between two values
 
 function render(now) {
   const dt = Math.min(.05, (now - last) / 1000); last = now; const tt = reduced ? 0 : now / 1000;
-  const target = parseFloat(cv.dataset.p || 0); ps += (target - ps) * Math.min(1, dt * 9); if (Math.abs(target - ps) < .0005) ps = target;
+  buildT = reduced ? 1 : Math.min(1, buildT + dt / 3.8); const target = parseFloat(cv.dataset.p || 0); ps += (target - ps) * Math.min(1, dt * 9); if (Math.abs(target - ps) < .0005) ps = target;
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, cv.width, cv.height); frame(g, D, U); g.strokeStyle = C.fg; g.fillStyle = C.fg;
   const fx = FARM_FP.x, fy = FARM_FP.y;
 
   // ----- 1 · FARM -----
-  const aF = Math.max(1 - T(.09, .17), T(.89, .96)), sF = ps > .5 ? lerp(2.4, 1, T(.89, .96)) : lerp(1, 4.6, T(.09, .17));
-  if (aF > .01) { g.save(); g.globalAlpha = aF; zoomAbout(g, sF, fx, fy); blit(cache.farm);
-    // the one plant with a module
-    g.lineWidth = .24; g.beginPath(); g.moveTo(fx, fy + 1.4); g.lineTo(fx, fy - 1.2); g.stroke(); for (let k = 0; k < 5; k++) { const an = -Math.PI / 2 + (k - 2) * .62; g.beginPath(); g.moveTo(fx, fy - .4); g.quadraticCurveTo(fx + Math.cos(an) * 1.6, fy - .4 + Math.sin(an) * 1.6, fx + Math.cos(an) * 2.5, fy - .4 + Math.sin(an) * 2.5); g.stroke(); }
-    g.lineWidth = .3; g.strokeRect(fx - 4.2, fy - .2, 1.8, 1.5); g.beginPath(); g.moveTo(fx - 4.7, fy - .2); g.lineTo(fx - 3.3, fy - 1.5); g.lineTo(fx - 1.9, fy - .2); g.stroke();
+  const bF = Math.max(buildT, ps > .5 ? 1 : T(0, .06)), aF = Math.max(1 - T(.09, .17), T(.89, .96)), sF = ps > .5 ? lerp(2.4, 1, T(.89, .96)) : lerp(1, 4.6, T(.09, .17));
+  if (aF > .01) { g.save(); g.globalAlpha = aF; zoomAbout(g, sF, fx, fy); layer('farm', bF, drawFarm);
+    // the one plant with a module: it grows, then its house goes up
+    { const gk = ease(sub(bF, .55, .8)), hk = ease(sub(bF, .78, .95)); g.lineWidth = .24; g.beginPath(); g.moveTo(fx, fy + 1.4); g.lineTo(fx, fy + 1.4 - 2.6 * gk); g.stroke();
+      for (let k = 0; k < 5; k++) { const an = -Math.PI / 2 + (k - 2) * .62, L = ease(gk * 1.4 - .4); if (L > 0) { g.beginPath(); g.moveTo(fx, fy - .4); g.quadraticCurveTo(fx + Math.cos(an) * 1.6 * L, fy - .4 + Math.sin(an) * 1.6 * L, fx + Math.cos(an) * 2.5 * L, fy - .4 + Math.sin(an) * 2.5 * L); g.stroke(); } }
+      if (hk > 0) { g.lineWidth = .3; dpath(g, hk, 12, c => { c.rect(fx - 4.2, fy - .2, 1.8, 1.5); }); dpath(g, ease(hk * 1.3 - .3), 6, c => { c.moveTo(fx - 4.7, fy - .2); c.lineTo(fx - 3.3, fy - 1.5); c.lineTo(fx - 1.9, fy - .2); }); } }
     const al = T(.9, .96); for (let k = 0; k < 3; k++) ring(g, fx, fy, ((tt * .5 + k / 3) % 1), 1.6, 8, 1);
     if (al > .01) { g.save(); g.globalAlpha *= al; g.strokeStyle = C.gr; g.lineWidth = .35; g.beginPath(); g.arc(fx, fy - .4, 5.2 + Math.sin(tt * 3) * .3, 0, TAU); g.stroke(); g.setLineDash([.9, .9]); g.beginPath(); g.arc(fx, fy - .4, 8.8, 0, TAU); g.stroke(); g.restore(); }
     g.restore(); }
@@ -174,8 +183,9 @@ function render(now) {
     if (a2 > .01) { g.save(); g.globalAlpha = a2; const bx = -48, by = 29; g.lineWidth = .3; g.strokeStyle = C.fg; g.beginPath(); g.roundRect(bx, by, 52, 15, 1.6); g.stroke(); txt(g, 'ROOTED SG APP · NOW', bx + 2.2, by + 3.2, { s: 1.7, a: .65 }); txt(g, 'Stem reading changed on this plant', bx + 2.2, by + 7.5, { s: 2.1, w: 500 }); txt(g, 'Check this plant. Neighbours: no change seen.', bx + 2.2, by + 11.4, { s: 1.7, col: C.gr }); g.restore(); } }
 
   // ----- 2 · PLANT + HOUSE MODULE -----
-  const aP = T(.1, .17) * (1 - T(.2, .27));
-  if (aP > .01) { g.save(); g.globalAlpha = aP; const s = ps < .18 ? lerp(.35, 1, T(.1, .17)) : lerp(1, 3.4, T(.2, .27)); zoomAbout(g, s, plantClip.x, plantClip.y); blit(cache.plant);
+  const bP = T(.1, .2), aP = T(.1, .17) * (1 - T(.2, .27));
+  if (aP > .01) { g.save(); g.globalAlpha = aP; const s = ps < .18 ? lerp(.35, 1, T(.1, .17)) : lerp(1, 3.4, T(.2, .27)); zoomAbout(g, s, plantClip.x, plantClip.y); layer('plant', bP, drawPlant);
+    if (bP > .995) { const P = PBEZ(plantClip.x, plantClip.y); g.fillStyle = C.gr; for (let n = 0; n < 4; n++) { const u = (tt * .35 + n / 4) % 1, q = bez(P, u); g.globalAlpha = aP * Math.sin(u * Math.PI); g.beginPath(); g.arc(q[0], q[1], .55, 0, TAU); g.fill(); } g.globalAlpha = aP; }
     g.restore(); g.save(); g.globalAlpha = aP; const s2 = ps < .18 ? lerp(.35, 1, T(.1, .17)) : lerp(1, 3.4, T(.2, .27)); const k = (x, y) => [(x - plantClip.x) * s2 + plantClip.x, (y - plantClip.y) * s2 + plantClip.y];
     const lab = (s, x, y, tx, ty, a) => { const p = k(x, y), q = k(tx, ty); tag(g, s, p[0], p[1], q[0], q[1], a * clamp(1 - T(.2, .24)), tx >= x ? 'left' : 'right'); };
     lab('HOUSE MODULE · ESP32-S3 · SOLAR', -32, 13, -46, -4, aP); lab('SOIL PROBE', -8, 30, -30, 43, aP); lab('STEM ELECTRODE', plantClip.x, plantClip.y, 38, -12, aP); lab('WIRE', -8, 20, -6, 8, aP * .8);
@@ -184,13 +194,13 @@ function render(now) {
   // ----- 3 · STEM (side) → CROSS-SECTION -----
   const aS = T(.2, .27) * (1 - T(.4, .46)), sS = ps < .3 ? lerp(.4, 1, T(.2, .27)) : lerp(1, 3.1, T(.4, .46));
   if (aS > .01) { const side = 1 - T(.3, .34), sect = T(.3, .34); g.save(); g.globalAlpha = aS; zoomAbout(g, sS, 0, 0);
-    if (side > .01) { g.save(); g.globalAlpha *= side; blit(cache.side); const ins = T(.22, .29), tipL = lerp(-18, -5, ins), tipR = lerp(18, 5, ins);
+    if (side > .01) { g.save(); g.globalAlpha *= side; layer('side', T(.205, .275), drawStemSide); const ins = T(.22, .29), tipL = lerp(-18, -5, ins), tipR = lerp(18, 5, ins);
       g.lineWidth = .4; g.strokeRect(-29, -7, 11, 14); g.strokeRect(18, -7, 11, 14); g.beginPath(); g.moveTo(-18, -4); g.lineTo(-18, 4); g.moveTo(18, -4); g.lineTo(18, 4); g.stroke();
       needle(g, -18, 0, tipL, 0, .5); needle(g, 18, 0, tipR, 0, .5);
       g.lineWidth = .3; g.beginPath(); g.moveTo(29, 0); g.bezierCurveTo(40, 0, 44, -16, 50, -30); g.moveTo(-29, 0); g.bezierCurveTo(-40, -6, -40, -20, -42, -34); g.stroke();
       tag(g, 'TITANIUM MICRO-NEEDLE', -17, -.3, -49, -17, side * (1 - T(.28, .31))); tag(g, 'OUTER SKIN', 14, 28, 24, 36, side * (1 - T(.28, .31)), 'left'); tag(g, 'CONDUCTING TISSUE', 2, 12, 20, 18, side * (1 - T(.28, .31)), 'left');
       g.restore(); }
-    if (sect > .01) { g.save(); g.globalAlpha *= sect; blit(cache.sect); const ins = 1;
+    if (sect > .01) { g.save(); g.globalAlpha *= sect; layer('sect', T(.3, .39), drawSection); const ins = 1;
       needle(g, -62, 0, -17.6, 0, .55); needle(g, 62, 0, 17.6, 0, .55);
       g.save(); g.strokeStyle = C.gr; g.lineWidth = .22; g.setLineDash([.8, .9]); g.lineDashOffset = -tt * 6; g.beginPath(); g.moveTo(-17.6, 0); g.bezierCurveTo(-8, -9, 8, -9, 17.6, 0); g.stroke(); g.restore();
       const a = sect * (1 - T(.39, .42));
@@ -200,7 +210,7 @@ function render(now) {
 
   // ----- 4 · CELLS -----
   const aC = T(.4, .47) * (1 - T(.79, .835));
-  if (aC > .01) { g.save(); g.globalAlpha = aC; zoomAbout(g, lerp(.35, 1, T(.4, .47)), 0, 0); blit(cache.cells);
+  if (aC > .01) { g.save(); g.globalAlpha = aC; zoomAbout(g, lerp(.35, 1, T(.4, .47)), 0, 0); layer('cells', T(.4, .5), drawCells);
     // needles
     needle(g, -62, 0, -33, 0, .55); needle(g, 62, 0, 33, 0, .55);
     // current (step 6)
@@ -262,7 +272,7 @@ function fit() { const r = cv.getBoundingClientRect(); const w = Math.round(r.wi
 new ResizeObserver(fit).observe(cv);
 new IntersectionObserver(es => { vis = es[0].isIntersecting; }, { rootMargin: '100px' }).observe(cv);
 addEventListener('themechange', () => { if (W) build(); });
-function loop(now) { if (vis && cache) render(now); requestAnimationFrame(loop); }
+function loop(now) { if (vis && W) render(now); requestAnimationFrame(loop); }
 fit(); document.fonts && document.fonts.ready.then(() => { if (W) build(); });
 requestAnimationFrame(loop);
 window.__tissue = { setP: v => { cv.dataset.p = v; ps = v; } };
