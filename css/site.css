@@ -523,3 +523,33 @@ section{position:relative}
 .dots{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(6px,1.2vw,12px);max-width:460px}
 .dots i{aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--rule);transition:background .45s var(--ease),box-shadow .45s,transform .5s var(--ease);transition-delay:calc(var(--i)*7ms)}
 .dots i.on{background:var(--green);box-shadow:none;transform:scale(1.04)}
+
+/* hero: statement, Meco badge, proof strip */
+.craft-hero{padding-top:clamp(120px,15vh,170px)}
+.craft-hero h1{max-width:15ch;font-size:clamp(46px,7.6vw,128px);margin-top:22px;line-height:.96}
+.hero-badge{display:inline-flex;align-items:center;gap:12px;padding:8px 8px 8px 14px;border-radius:var(--brad,99px);box-shadow:inset 0 0 0 1px var(--rule);font-size:13.5px;color:var(--sec);transition:box-shadow .3s,transform .4s var(--ease)}
+.hero-badge:hover{box-shadow:inset 0 0 0 1px var(--green);transform:translateY(-2px)}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px color-mix(in srgb,var(--green) 22%,transparent);animation:hbpulse 2.2s ease-in-out infinite}
+@keyframes hbpulse{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--green) 6%,transparent)}}
+.hero-badge b{font-weight:600;color:var(--green)}
+.hero-badge i{font-style:normal;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--btn);color:var(--btn-text)}
+@media(max-width:700px){.hero-badge span:not(.dot){display:none}.hero-badge b::after{content:" · the RootStake module + app";font-weight:400;color:var(--sec)}}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1040px;margin:clamp(40px,6vw,70px) auto 0;border-top:1px var(--rs,solid) var(--rule);text-align:left}
+.hstats>div{padding:22px 22px 8px 0;border-right:1px var(--rs,solid) var(--rule);margin-right:22px}
+.hstats>div:last-child{border:0;margin:0}
+.hstats .num{font-size:clamp(30px,3.6vw,54px);color:var(--text)}
+.hstats>div:nth-child(2) .num{color:var(--green)}
+.hstats span{display:block;margin-top:10px;font-size:13.5px;color:var(--sec);line-height:1.35;max-width:16em}
+@media(max-width:800px){.hstats{grid-template-columns:1fr 1fr}.hstats>div{border:0;margin:0;padding:18px 12px 8px 0}}
+.hero-rings{position:absolute;left:50%;top:38%;width:0;height:0;z-index:0;pointer-events:none}
+.hero-rings i{position:absolute;left:0;top:0;width:min(110vw,1500px);aspect-ratio:1;margin:calc(min(110vw,1500px)/-2) 0 0 calc(min(110vw,1500px)/-2);border-radius:50%;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--green) 22%,transparent);animation:hring 9s linear infinite;opacity:0;animation-delay:calc(var(--k,0)*2.25s)}
+.hero-rings i:nth-child(1){--k:0}.hero-rings i:nth-child(2){--k:1}.hero-rings i:nth-child(3){--k:2}.hero-rings i:nth-child(4){--k:3}
+@keyframes hring{0%{transform:scale(.12);opacity:.9}100%{transform:scale(1);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hero-rings i,.hero-badge .dot{animation:none}}
+
+.craft-hero h1{max-width:none;font-size:clamp(34px,6.1vw,104px)}
+.craft-hero h1 .hl{display:block}
+@media(max-width:700px){.craft-hero h1{font-size:clamp(34px,10.5vw,60px)}}
+.sws{display:inline-flex;align-items:center}
+.sws i{display:block;width:10px;height:10px;border-radius:50%;margin-right:-3px;box-shadow:0 0 0 1.5px var(--bg)}
+.sws i:last-child{margin-right:0}

@@ -26,15 +26,20 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <!-- 01 HERO (Craft: clouds, H1, CTA, giant app frame) -->
 <header class="craft-hero">
   <div class="sun"></div>
-  <div class="cloud" style="left:-8%;top:16vh;width:34vw;max-width:520px"><svg viewBox="0 0 400 160"><path d="M60 140a48 48 0 0 1 6-95 62 62 0 0 1 118-14 58 58 0 0 1 104 28 42 42 0 0 1 50 81z"/></svg></div>
-  <div class="cloud" style="right:-6%;top:34vh;width:30vw;max-width:460px"><svg viewBox="0 0 400 160"><path d="M60 140a48 48 0 0 1 6-95 62 62 0 0 1 118-14 58 58 0 0 1 104 28 42 42 0 0 1 50 81z"/></svg></div>
-  <div class="cloud" style="left:60%;top:12vh;width:14vw;max-width:220px;opacity:.7"><svg viewBox="0 0 400 160"><path d="M60 140a48 48 0 0 1 6-95 62 62 0 0 1 118-14 58 58 0 0 1 104 28 42 42 0 0 1 50 81z"/></svg></div>
+  <div class="hero-rings" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
-    <span class="label" data-intro>Rooted SG · Singapore 2026</span>
-    <h1 class="display hero-h">Your space to grow, and proof it worked.</h1>
-    <p class="lede" data-intro>A growing app for Singapore homes, and a sensor stake that tells you whether your plant is still alive. Every number counts something that survived.</p>
-    <div class="cta" data-intro><a class="btn" href="app.html" data-t>Meet the app <i>→</i></a><a class="btn line" href="rootstake.html" data-t>See RootStake in 3D</a></div>
-    <p class="note label" data-intro style="margin-top:22px">Real footage · Real CAD · Real survey</p>
+    <a class="hero-badge" data-intro href="#meco"><span class="dot"></span><b>Introducing Meco</b><span>the RootStake module + the Rooted SG app</span><i>→</i></a>
+    <span class="label" data-intro style="display:block;margin-top:26px">A Singapore invention · IYEC 2026</span>
+    <h1 class="display hero-h"><span class="hl">Don't count what we plant.</span> <em class="hl">Count what we keep alive.</em></h1>
+    <p class="lede" data-intro>Singapore has handed out hundreds of thousands of seed packets, and nobody records how many plants survive. Meco is a sensor stake and an app built to prove it, one plant at a time.</p>
+    <div class="cta" data-intro><a class="btn" href="#meco">Meet Meco <i>→</i></a><a class="btn line" href="how-it-works.html">See how it works</a></div>
+    <div class="hstats" data-intro>
+      <div><div class="num" data-count="860000">0</div><span>free seed packets handed out since 2020</span></div>
+      <div><div class="num" data-count="0">0</div><span>records of how many survived</span></div>
+      <div><div class="num" data-count="3043">0</div><span>Singapore residents we surveyed</span></div>
+      <div><div class="num" data-count="70.9" data-suffix="%">0</div><span>want to grow plants at home</span></div>
+    </div>
+    <p class="note label" data-intro style="margin-top:26px">Real footage · Real CAD · Real survey</p>
     <div class="appframe" data-grow data-intro-cv>
       <div class="bar"><b></b><b></b><b></b><span>Pandan · 194 plant-days · 12 verified check-ins</span></div>
       <div class="body">
@@ -129,7 +134,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <section class="sec" style="padding-top:0">
   <div class="wrap">
     <div class="feat rev">
-      <div class="stagebox" data-reveal><canvas data-scene="pod"></canvas><div class="over"><span class="chip2" style="background:color-mix(in srgb,var(--bg) 80%,transparent)">Your assembly STL</span></div></div>
+      <div class="stagebox" data-reveal><canvas data-scene="pod"></canvas></div>
       <div class="copy" data-reveal data-stagger>
         <span class="label"><b>Measure</b></span>
         <h3 class="display d3">A stake that <em>answers</em>, not just reports.</h3>
