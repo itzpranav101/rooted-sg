@@ -46,6 +46,7 @@ const hidden = (() => { try { return localStorage.getItem('rs-mojo-off') === '1'
 /* asides in the page flow */
 function build([sel, where, mood, text, action, center]) {
   const t = $(sel); if (!t) return;
+  if (t.hasAttribute('data-pin')) return buildStage(t, mood, text, action);
   const w = document.createElement('div'); w.className = 'wrap ma-wrap' + (center ? ' center' : '');
   w.innerHTML = `<aside class="mojo-aside" aria-label="A note from Mojo"><img class="ma-img" src="media/mojo/idle.gif" alt="" width="96" height="104"><div class="ma-bub"><p></p><div class="ma-acts"></div><button class="ma-x" type="button" aria-label="Hide Mojo">×</button></div></aside>`;
   if (where === 'after') t.after(w); else t.before(w);
@@ -57,7 +58,22 @@ function build([sel, where, mood, text, action, center]) {
   new IntersectionObserver((es, o) => { if (!es[0].isIntersecting || done) return; done = true; o.disconnect();
     if (reduced) { a.classList.add('in'); img.src = `media/mojo/${mood}.gif`; return; }
     a.classList.add('run'); img.src = 'media/mojo/run.gif';
-    setTimeout(() => { a.classList.remove('run'); a.classList.add('in'); img.src = `media/mojo/${mood}.gif`; typeIn(p, text); }, 750); }, { threshold: .9, rootMargin: '0px 0px -12% 0px' }).observe(a);
+    setTimeout(() => { a.classList.remove('run'); a.classList.add('in'); img.src = `media/mojo/${mood}.gif`; typeIn(p, text); }, 750); }, { threshold: .9, rootMargin: '-96px 0px -12% 0px' }).observe(a);
+}
+/* pinned sections: Mojo rides inside the stage card for the first moments, then steps out of the way */
+function buildStage(pin, mood, text, action) {
+  const vis = $('.pin-vis', pin); if (!vis) return;
+  const a = document.createElement('aside'); a.className = 'mojo-aside stage'; a.setAttribute('aria-label', 'A note from Mojo');
+  a.innerHTML = `<img class="ma-img" src="media/mojo/idle.gif" alt="" width="96" height="104"><div class="ma-bub"><p></p><div class="ma-acts"></div><button class="ma-x" type="button" aria-label="Hide Mojo">×</button></div>`;
+  vis.appendChild(a); const img = $('.ma-img', a), p = $('p', a), acts = $('.ma-acts', a); p.style.minHeight = '1.4em';
+  if (action) { const b = document.createElement('button'); b.type = 'button'; b.textContent = action[0]; b.addEventListener('click', action[1]); acts.appendChild(b); }
+  $('.ma-x', a).addEventListener('click', () => { $$('.ma-wrap,.mojo-aside').forEach(e => e.remove()); try { localStorage.setItem('rs-mojo-off', '1'); } catch (e) {} });
+  let on = false, played = false, inView = false;
+  new IntersectionObserver(es => { inView = es[0].isIntersecting; }, { threshold: .2 }).observe(pin);
+  const tick = () => { const pr = parseFloat(getComputedStyle(pin).getPropertyValue('--p')) || 0, want = inView && pr < .12 && (pin.getBoundingClientRect().top <= 8);
+    if (want && !on) { on = true; a.classList.add('in'); img.src = played ? `media/mojo/${mood}.gif` : 'media/mojo/run.gif'; if (!played) { played = true; setTimeout(() => { img.src = `media/mojo/${mood}.gif`; typeIn(p, text); }, reduced ? 0 : 700); if (reduced) p.textContent = text; } }
+    else if (!want && on) { on = false; a.classList.remove('in'); } };
+  addEventListener('scroll', () => requestAnimationFrame(tick), { passive: true }); tick();
 }
 function typeIn(p, text) { p.textContent = ''; let i = 0; const t = setInterval(() => { p.textContent = text.slice(0, ++i); if (i >= text.length) clearInterval(t); }, 16); }
 if (!hidden) BEATS.forEach(build);

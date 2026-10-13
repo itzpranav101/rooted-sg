@@ -114,6 +114,10 @@ function odometer(el) {
     gsap.to(col, { yPercent: -(10 + d) * 5, duration: 1.4 + (drums.length - i) * .22, delay: i * .06, ease: 'expo.out' })) });
 }
 
+/* ---------- subtle magnetic snap connectors between sections ---------- */
+$$('main > section.sec, main > section.closing').forEach(sec => { const prev = sec.previousElementSibling; if (!prev || prev.tagName === 'HEADER' || prev.classList.contains('mag') || prev.classList.contains('ma-wrap')) return;
+  sec.insertAdjacentHTML('beforebegin', '<div class="mag" aria-hidden="true"><i class="ln t"></i><i class="ln b"></i><i class="mg a"></i><i class="mg b"></i><span class="ring"></span></div>'); });
+
 /* ---------- scroll choreography ---------- */
 function init() {
   $$('[data-split]').forEach(h => { const ws = $$('.wm>span', h).length ? $$('.wm>span', h) : splitWords(h, 'wm').map(w => w.firstChild);
@@ -132,6 +136,7 @@ function init() {
   $$('.lrow').forEach(r => ScrollTrigger.create({ trigger: r, start: 'top 82%', once: true, onEnter: () => gsap.to(r, { '--s': 1, duration: 1.6, ease: 'expo.out' }) }));
   $$('.bytes').forEach(b => ScrollTrigger.create({ trigger: b, start: 'top 88%', once: true, onEnter: () => b.classList.add('go') }));
   $$('#mname').forEach(el => { if (reduced) { el.style.setProperty('--k', 1); return; } ScrollTrigger.create({ trigger: $('.mn-words', el), start: 'top 88%', end: 'top 30%', scrub: .4, onUpdate: s => el.style.setProperty('--k', s.progress.toFixed(3)) }); });
+  $$('.mag').forEach(m => { if (reduced) { m.style.setProperty('--k', 1); m.classList.add('snapped'); return; } ScrollTrigger.create({ trigger: m, start: 'top 85%', end: 'center 55%', scrub: .35, onUpdate: s => { m.style.setProperty('--k', s.progress.toFixed(3)); m.classList.toggle('snapped', s.progress > .97); } }); });
   $$('.marq-t').forEach(t => { t.innerHTML += t.innerHTML; gsap.to(t, { xPercent: -50, repeat: -1, duration: 38, ease: 'none' }); });
   $$('.tilt').forEach(w => { const p = $('.ph', w) || w; const rx = gsap.quickTo(p, 'rotationX', { duration: .8, ease: 'power3' }), ry = gsap.quickTo(p, 'rotationY', { duration: .8, ease: 'power3' }); gsap.set(w, { perspective: 1200 });
     w.addEventListener('pointermove', e => { const r = w.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 16); rx(-((e.clientY - r.top) / r.height - .5) * 12); }); w.addEventListener('pointerleave', () => { rx(0); ry(0); }); });
