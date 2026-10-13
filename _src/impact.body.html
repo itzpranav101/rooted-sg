@@ -1,5 +1,4 @@
 <header class="page-hero">
-  <div class="sun"></div>
   <div class="wrap" style="position:relative;z-index:3">
     <span class="label" data-intro>The story</span>
     <h1 class="display hero-h">Singapore counts what it plants.</h1>
@@ -11,9 +10,9 @@
   <div class="pin-grid">
     <div class="pin-vis stage-dark"><canvas data-scene="field" data-readout="alive"></canvas><div style="position:absolute;left:24px;top:22px;z-index:3" class="label">Still growing <b style="font-size:26px;font-family:var(--serif);letter-spacing:-.02em"><span id="alive">100</span>%</b></div></div>
     <div class="pin-steps">
-      <div class="pin-step"><span class="label"><b>01</b> — A field of seedlings</span><h3 class="display d3">Everyone starts <em>optimistic</em>.</h3><p class="p">70.9% of the 3,043 people we surveyed want to grow at home. They get a packet, a pot and a good intention.</p></div>
-      <div class="pin-step"><span class="label"><b>02</b> — Then, quietly</span><h3 class="display d3">Most of them <em>go out</em>.</h3><p class="p">23.6% tried to grow something and stopped. They didn't know what grows here, when to water, or whether the plant was even healthy.</p></div>
-      <div class="pin-step"><span class="label"><b>03</b> — The idea</span><h3 class="display d3">Count what we <em>keep alive</em>.</h3><p class="p">Rooted tracks plants over months. RootStake is how we measure it, so a number only grows while the plant is still alive.</p></div>
+      <div class="pin-step"><span class="label"><b>01</b> · A field of seedlings</span><h3 class="display d3">Everyone starts <em>optimistic</em>.</h3><p class="p">70.9% of the 3,043 people we surveyed want to grow at home.</p></div>
+      <div class="pin-step"><span class="label"><b>02</b> · Then, quietly</span><h3 class="display d3">Most of them <em>go out</em>.</h3><p class="p">23.6% tried, and stopped. Not sure when to water, or if the plant was healthy.</p></div>
+      <div class="pin-step"><span class="label"><b>03</b> · The idea</span><h3 class="display d3">Count what we <em>keep alive</em>.</h3><p class="p">A number that only grows while the plant is still alive.</p></div>
     </div>
   </div>
   <div class="pin-count"><b>01 / 03</b><span class="rule"><i></i></span></div>
@@ -39,7 +38,7 @@
 
 <section class="sec">
   <div class="wrap">
-    <p class="manifesto" data-words>Singapore imports about ninety percent of its food, from more than 180 countries and regions. What if the next step in its green journey did not start with more land, but with the spaces we already have?</p>
+    <p class="manifesto" data-words>Singapore imports about ninety percent of its food. What if the next step began with the spaces we already have?</p>
   </div>
 </section>
 
@@ -59,18 +58,21 @@
 <section class="sec" id="honest" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>What we don't claim</b></span><h2 class="display d2" data-split>We'd rather be <em>checked</em> than impressed.</h2></div>
-    <div class="limit"><h5>Rooted won't solve food security.</h5><p>It aims to raise participation, knowledge and local growing activity. Small household actions add up, but they aren't a farm.</p></div>
-    <div class="limit"><h5>Stem impedance is a prototype.</h5><p>It works on the bench. We report trend and timing, never a calibrated figure.</p></div>
-    <div class="limit"><h5>Ion sensing and sap flow aren't built.</h5><p>They sit on the roadmap and are labelled as simulated everywhere they appear.</p></div>
-    <div class="limit"><h5>One stake can't detect a neighbour's fungus.</h5><p>Block-level warnings come from shared weather, not from tissue sensing.</p></div>
-    <div class="limit" style="border-bottom:1px solid var(--rule)"><h5>Electro-culture isn't a claim.</h5><p>It ships off, logged per sample as an A/B experiment.</p></div>
+    <div class="dont" data-reveal data-stagger>
+      <button class="dcard" type="button" aria-expanded="false"><span class="dn">01</span><b>Won't solve food security.</b><i aria-hidden="true">+</i><p>It aims to raise participation, knowledge and local growing. Small actions add up, but they aren't a farm.</p></button>
+      <button class="dcard" type="button" aria-expanded="false"><span class="dn">02</span><b>Stem readings are a prototype.</b><i aria-hidden="true">+</i><p>Trend and timing on the bench, never a calibrated figure.</p></button>
+      <button class="dcard" type="button" aria-expanded="false"><span class="dn">03</span><b>Ion sensing isn't built.</b><i aria-hidden="true">+</i><p>Ion sensing and sap flow sit on the roadmap and are labelled as simulated wherever they appear.</p></button>
+      <button class="dcard" type="button" aria-expanded="false"><span class="dn">04</span><b>One stake sees one plant.</b><i aria-hidden="true">+</i><p>Block-level warnings come from shared weather, not from tissue sensing.</p></button>
+      <button class="dcard" type="button" aria-expanded="false"><span class="dn">05</span><b>Electro-culture isn't a claim.</b><i aria-hidden="true">+</i><p>It ships off, logged per sample as an A/B experiment.</p></button>
+    </div>
   </div>
 </section>
+<script>document.querySelectorAll('.dcard').forEach(c => c.addEventListener('click', () => { const o = c.getAttribute('aria-expanded') === 'true'; c.setAttribute('aria-expanded', !o); }));</script>
 
 <section class="sec" id="entries" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>Entry</b></span><h2 class="display d2" data-split>RootStake, <em>entered</em> in IYEC 2026.</h2></div>
-    <p class="p" style="max-width:40em">A printed sensor stake, a closed watering loop, and a tiered, honest account of what is measured. Together with the Rooted SG app, the RootStake module is <strong class="kw">Meco</strong>, short for <strong class="kw">Measure + Eco</strong>: the stake that proves it, and the app that counts it. <a class="tlink" href="index.html#meco" style="margin-left:6px">Meet Meco →</a></p>
+    <p class="p" style="max-width:34em">A printed stake, a closed watering loop, and an honest account of what is measured. With the Rooted SG app, it is the <strong class="kw">Meco bundle</strong> (Measure + Eco). <a class="tlink" href="how-it-works.html#origin" style="margin-left:6px">Why we built it →</a></p>
   </div>
 </section>
 

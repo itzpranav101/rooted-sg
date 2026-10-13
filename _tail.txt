@@ -4,6 +4,7 @@
 <script defer src="js/team.js"></script>
 <script defer src="js/site.js"></script>
 <script defer src="js/tissue.js"></script>
+<script defer src="js/mojo.js"></script>
 <script type="module" src="js/scenes.js"></script>
 </body>
 </html>

@@ -24,8 +24,8 @@ function markSkin() { $$('.sk,.theme[data-skin]').forEach(e => e.classList.toggl
 
 /* ---------- chrome ---------- */
 const leaf = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z"/><path d="M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z"/></svg>';
-const pages = [['index.html', 'Home', 'home'], ['app.html', 'The app', 'app'], ['rootstake.html', 'RootStake', 'rootstake'], ['how-it-works.html', 'The system', 'how'], ['impact.html', 'The story', 'impact']];
-const names = { home: 'Singapore', app: 'The app', rootstake: 'RootStake', how: 'The system', impact: 'The story' };
+const pages = [['index.html', 'Home', 'home'], ['app.html', 'The app', 'app'], ['rootstake.html', 'RootStake', 'rootstake'], ['how-it-works.html', 'How it works', 'how'], ['impact.html', 'The story', 'impact']];
+const names = { home: 'Singapore', app: 'The app', rootstake: 'RootStake', how: 'How it works', impact: 'The story' };
 document.body.insertAdjacentHTML('afterbegin', `
 <div class="sprog" id="sprog"><i></i></div>
 <header class="top" id="top"><a class="mark" href="index.html">${leaf}<span>Rooted SG</span><small>${names[page] || ''}</small></a>
@@ -34,14 +34,21 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="skins" id="skins"><div class="label" style="padding:4px 10px 10px">Five themes · each in light and dark</div>${SKINS.map(k => `<button class="sk" data-skin="${k[0]}"><span class="sw">${k[3].map(c => `<i style="background:${c}"></i>`).join('')}</span><span><b>${k[1]}</b><small>${k[2]}</small></span></button>`).join('')}</div>
 <div class="scrim" id="scrim"></div>
 <aside class="index" id="index" aria-hidden="true"><div class="ihead"><span class="label">Index</span><button class="pillbtn xbtn" id="xBtn">Close <span aria-hidden="true">✕</span></button></div>
-<nav class="list" aria-label="Pages">${pages.map((p, i) => `<a href="${p[0]}" class="${p[2] === page ? 'cur' : ''}"${p[2] === page ? ' aria-current="page"' : ''}><span class="n">0${i + 1}</span><span class="t">${p[1]}</span><span class="ar">→</span></a>`).join('')}<a href="index.html#meco" class="meco-link"><span class="n">★</span><span class="t">Meco</span><span class="ar">→</span></a></nav>
+<nav class="list" aria-label="Pages">${pages.map((p, i) => `<a href="${p[0]}" class="${p[2] === page ? 'cur' : ''}"${p[2] === page ? ' aria-current="page"' : ''}><span class="n">0${i + 1}</span><span class="t">${p[1]}</span><span class="ar">→</span></a>`).join('')}<a href="index.html#meco" class="meco-link"><span class="n">06</span><span class="t">Meco</span><span class="ar">→</span></a></nav>
 <div class="side"><p class="serif d4">Don't count what we plant.<br><em>Count what we keep alive.</em></p><p class="label" style="margin-top:20px">Rooted SG · Singapore 2026<br>Meco = Measure + Eco</p></div></aside>`);
 
-document.body.insertAdjacentHTML('beforeend', `
+const JOURNEY = [['index.html', 'Home', 'home', 'What Meco is.'], ['rootstake.html', 'The module', 'rootstake', 'The measuring half, taken apart.'], ['app.html', 'The app', 'app', 'The counting half, in real screens.'], ['how-it-works.html', 'How it works', 'how', 'Why we built it, and the loop that ties it together.'], ['impact.html', 'The story', 'impact', 'The gap we are closing, and the people behind it.']];
+const jIdx = Math.max(0, JOURNEY.findIndex(j => j[2] === page)), jNext = JOURNEY[(jIdx + 1) % JOURNEY.length], wraps = jIdx === JOURNEY.length - 1;
+const nextBand = `<section class="nextband" aria-label="Next stop"><div class="wrap">
+<div class="nb-track" style="--from:${jIdx * 25}%;--to:${(jIdx + 1) % 5 * 25}%"><i class="nb-line"></i>${JOURNEY.map((j, i) => `<a class="nb-dot ${i < jIdx ? 'done' : ''} ${i === jIdx ? 'cur' : ''}" href="${j[0]}" style="left:${i * 25}%" aria-label="${j[1]}"><span>${j[1]}</span></a>`).join('')}<img class="nb-mojo" src="media/mojo/idle.gif" alt="" width="96" height="104"></div>
+<span class="label">${wraps ? 'The loop closes' : 'Next stop'}</span>
+<a class="nb-link" href="${jNext[0]}"><span class="nb-t">${wraps ? 'Back to the start' : jNext[1]}</span><span class="nb-s">${wraps ? 'Home, where it all began.' : jNext[3]}</span><i>→</i></a>
+</div></section>`;
+document.body.insertAdjacentHTML('beforeend', nextBand + `
 <footer class="foot"><div class="wrap">
 <div class="cols"><div><p class="serif d4" style="max-width:15em">Don't count what we plant. <em>Count what we keep alive.</em></p></div>
 <div><div class="label" style="margin-bottom:12px">Pages</div>${pages.map(p => `<a href="${p[0]}">${p[1]}</a>`).join('')}</div>
-<div><div class="label" style="margin-bottom:12px">Inside</div><a href="index.html#meco">Meco · heymeco.xyz</a><a href="rootstake.html#parts">The probe</a><a href="rootstake.html#tissue">The tissue</a><a href="how-it-works.html#loop">The loop</a><a href="how-it-works.html#tiers">What is real</a></div>
+<div><div class="label" style="margin-bottom:12px">Inside</div><a href="index.html#meco">Meco · heymeco.xyz</a><a href="rootstake.html#parts">The probe</a><a href="rootstake.html#tissue">The tissue</a><a href="how-it-works.html#origin">Why we built it</a><a href="how-it-works.html#loop">The loop</a><a href="how-it-works.html#tiers">What is real</a></div>
 <div><div class="label" style="margin-bottom:12px">Entry</div><a href="impact.html#entries">IYEC 2026</a><a href="impact.html#team">The team</a></div></div>
 <div class="big" id="bigword" aria-hidden="true">${'Rooted SG'.split('').map(c => `<span>${c === ' ' ? '&nbsp;' : c}</span>`).join('')}</div>
 <div class="fine label"><span>© 2026 Rooted SG · Singapore · Meco = Measure + Eco</span><span>Every number here comes from our survey, our build, or a named source.</span></div></div></footer>`);
@@ -77,7 +84,7 @@ $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { if (a.getAttr
 /* ---------- top bar: hide on scroll down, scroll progress ---------- */
 const top = $('#top'), sp = $('#sprog i'); let lastY = 0, tick = false;
 addEventListener('scroll', () => { if (tick) return; tick = true; requestAnimationFrame(() => { tick = false; const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
-  top.classList.toggle('scrolled', y > 24); top.classList.toggle('hide', y > lastY + 4 && y > 500 && !idxOpen); if (y < lastY - 4 || y < 500) top.classList.remove('hide'); lastY = y; sp.style.transform = `scaleX(${max > 0 ? y / max : 0})`; }); }, { passive: true });
+  top.classList.toggle('scrolled', y > 24); root.classList.toggle('scrolled-page', y > 60); top.classList.toggle('hide', y > lastY + 4 && y > 500 && !idxOpen); if (y < lastY - 4 || y < 500) top.classList.remove('hide'); lastY = y; sp.style.transform = `scaleX(${max > 0 ? y / max : 0})`; }); }, { passive: true });
 
 /* ---------- text splitting ---------- */
 function splitWords(el, cls) {

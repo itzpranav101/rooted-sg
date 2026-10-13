@@ -12,11 +12,11 @@ def callouts(CALLS=CALLS):
     s+=''.join(f'<div class="call" data-anchor="{a}" data-show="{sh}" data-dx="{dx}" data-dy="{dy}"><span>{t}</span><b>{b}</b></div>' for a,t,b,sh,dx,dy in CALLS)
     return s+'</div>'
 # svg lines/circles order: render lines then circles separately => scenes.js maps lines[i]/dots[i]
-pages={'index':('home','Meco by Rooted SG — Measure + Eco. Count what we keep alive','Meco (Measure + Eco) is the RootStake sensor module and the Rooted SG app, built in Singapore to prove a plant is still alive. Don\'t count what we plant. Count what we keep alive.'),
-'app':('app','The app — Rooted SG','Garden, Market, Quests and BioDex. The Rooted SG iOS app, in real footage.'),
-'rootstake':('rootstake','RootStake — Rooted SG','The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.'),
-'how-it-works':('how','The system — Rooted SG','Follow one reading from the plant stem to the phone and back to the roots: electrode, probe, pod, Bluetooth, pumps and nutrition.'),
-'impact':('impact','The story — Rooted SG','Singapore counts what it plants, not what it keeps alive. The survey, the gap, and the team of five.')}
+pages={'index':('home','Meco by Rooted SG | Measure + Eco. Count what we keep alive','The Meco bundle (Measure + Eco) is the RootStake sensor module and the Rooted SG app, built in Singapore to prove a plant is still alive. Don\'t count what we plant. Count what we keep alive.'),
+'app':('app','The app | Rooted SG','Garden, Market, Quests and BioDex. The Rooted SG iOS app, in real footage.'),
+'rootstake':('rootstake','RootStake | Rooted SG','The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.'),
+'how-it-works':('how','How it works | Rooted SG','Why we built Meco after listening to our grandparents and their friends, and how one reading goes from the plant to the phone and back to the roots.'),
+'impact':('impact','The story | Rooted SG','Singapore counts what it plants, not what it keeps alive. The survey, the gap, and the team of five.')}
 for name,(pg,title,desc) in pages.items():
     try: body=open(f'_src/{name}.body.html').read()
     except FileNotFoundError: continue

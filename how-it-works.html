@@ -2,9 +2,9 @@
 <html lang="en" data-skin="glasshouse" data-mode="light">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>The system — Rooted SG</title>
-<meta name="description" content="Follow one reading from the plant stem to the phone and back to the roots: electrode, probe, pod, Bluetooth, pumps and nutrition.">
-<meta property="og:title" content="The system — Rooted SG"><meta property="og:description" content="Follow one reading from the plant stem to the phone and back to the roots: electrode, probe, pod, Bluetooth, pumps and nutrition."><meta property="og:type" content="website"><meta name="theme-color" content="#ffffff">
+<title>How it works | Rooted SG</title>
+<meta name="description" content="Why we built Meco after listening to our grandparents and their friends, and how one reading goes from the plant to the phone and back to the roots.">
+<meta property="og:title" content="How it works | Rooted SG"><meta property="og:description" content="Why we built Meco after listening to our grandparents and their friends, and how one reading goes from the plant to the phone and back to the roots."><meta property="og:type" content="website"><meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%270B5A32%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 21V11%27/%3E%3Cpath d=%27M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z%27/%3E%3Cpath d=%27M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z%27/%3E%3C/svg%3E">
 <script>
 /* theme + only the fonts of the active theme, before first paint */
@@ -27,35 +27,82 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <main id="main">
 
 <header class="page-hero">
-  <div class="sun"></div>
   <div class="wrap" style="position:relative;z-index:3">
-    <span class="label" data-intro>The system</span>
-    <h1 class="display hero-h">From the stem to the screen, and back to the roots.</h1>
-    <p class="lede" data-intro>The app and the stake aren't two products. They're one loop. Scroll once and follow a single reading all the way round.</p>
+    <span class="label" data-intro>How it works · and why</span>
+    <h1 class="display hero-h">It started at our <em>grandparents' tables</em>.</h1>
+    <p class="lede" data-intro>We watched, we listened, and we built what they were missing.</p>
   </div>
 </header>
 
-<section class="pin sys" data-pin="11" id="loop">
+<section class="pin" data-pin="9" id="origin">
   <div class="pin-grid">
-    <div class="pin-vis"><canvas data-scene="system"></canvas>
-      <div class="chapnav"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-      <div class="hud"><div>Moisture<b id="hud-moist">31%</b></div><div>Soil EC<b id="hud-ec">1.4 mS</b></div><div>Frame<b id="hud-frame">—</b></div><div>Pumps<b id="hud-pump">off</b></div></div>
+    <div class="pin-vis mono">
+      <svg class="story-svg" viewBox="0 0 640 560" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Pots on a table, three worries in speech bubbles, and what we built for each">
+        <g class="rv-out" style="--o:.22;--oo:.3">
+          <rect class="d" pathLength="1" x="214" y="84" width="212" height="250" rx="10" style="--a:0;--b:.1"/>
+          <path class="d" pathLength="1" d="M320 84V334M214 209H426" style="--a:.05;--b:.14"/>
+          <g class="rv" style="--a:.08;--b:.18"><circle cx="520" cy="130" r="30"/><path class="steam" d="M520 76V88M520 172V184M466 130H478M562 130H574M482 92l8 8M550 160l8 8M558 92l-8 8M490 160l-8 8"/></g>
+        </g>
+        <g class="sg-table">
+          <path class="d" pathLength="1" d="M30 492H610" style="--a:0;--b:.06"/>
+          <path class="d" pathLength="1" d="M70 492V540M570 492V540" style="--a:.03;--b:.08"/>
+          <g transform="translate(96 450)"><path class="d" pathLength="1" d="M-24 0H24L18 42H-18Z" style="--a:.04;--b:.12"/><path class="d" pathLength="1" d="M0 0V-34M0 -14C-16 -18 -20 -30 -24 -36M0 -22C14 -26 18 -38 22 -44" style="--a:.1;--b:.2"/></g>
+          <g transform="translate(224 450)"><path class="d" pathLength="1" d="M-24 0H24L18 42H-18Z" style="--a:.07;--b:.15"/><path class="d" pathLength="1" d="M0 0V-52M0 -20C-18 -26 -24 -40 -28 -48M0 -34C16 -40 22 -54 26 -62M0 -46C-8 -56 -6 -66 0 -72" style="--a:.13;--b:.24"/></g>
+          <g transform="translate(352 450)"><path class="d" pathLength="1" d="M-24 0H24L18 42H-18Z" style="--a:.1;--b:.18"/><path class="d" pathLength="1" d="M0 0V-26M0 -10C-12 -14 -16 -22 -18 -28M0 -16C10 -20 14 -28 16 -34" style="--a:.16;--b:.26"/></g>
+          <g transform="translate(480 450)"><path class="d" pathLength="1" d="M-24 0H24L18 42H-18Z" style="--a:.13;--b:.21"/><path class="d" pathLength="1" d="M0 0V-44M0 -16C-16 -22 -22 -34 -26 -42M0 -28C14 -34 20 -46 24 -54" style="--a:.19;--b:.29"/></g>
+          <g transform="translate(580 480)" class="rv" style="--a:.16;--b:.24"><path d="M-14 -6H8V8C8 12 4 14 -3 14S-14 12 -14 8Z"/><path d="M8 -2C16 -2 16 8 8 8"/><path class="steam" d="M-8 -14C-12 -20 -4 -22 -8 -30M0 -14C-4 -20 4 -22 0 -30"/></g>
+        </g>
+        <g class="sg-worries rv-out" style="--a:.28;--b:.36;--o:.78;--oo:.88">
+          <text class="lab" x="30" y="46" style="--a:.26;--b:.32">WHAT WORRIED THEM</text>
+          <g class="rv" style="--a:.28;--b:.36"><rect x="30" y="64" width="266" height="62" rx="18"/><path d="M60 126l-8 16 24 -16"/><text x="52" y="102">Have I watered too much?</text></g>
+          <g class="rv" style="--a:.34;--b:.42"><rect x="30" y="176" width="266" height="62" rx="18"/><path d="M60 238l-8 16 24 -16"/><text x="52" y="214">Is it actually healthy?</text></g>
+          <g class="rv" style="--a:.4;--b:.48"><rect x="30" y="288" width="266" height="62" rx="18"/><path d="M60 350l-8 16 24 -16"/><text x="52" y="326">Who can I share this with?</text></g>
+        </g>
+        <g class="sg-built rv-out" style="--a:.54;--b:.62;--o:.78;--oo:.88">
+          <text class="lab g" x="344" y="46" style="--a:.52;--b:.58">WHAT WE BUILT</text>
+          <path class="d" pathLength="1" d="M300 95H338M300 207H338M300 319H338M330 89L338 95L330 101M330 201L338 207L330 213M330 313L338 319L330 325" style="--a:.5;--b:.6"/>
+          <g class="rv" style="--a:.55;--b:.63"><rect class="gb" x="344" y="64" width="266" height="62" rx="18"/><text class="g" x="364" y="90">Waters only when needed</text><text class="s" x="364" y="110">moisture sensed, every dose logged</text></g>
+          <g class="rv" style="--a:.61;--b:.69"><rect class="gb" x="344" y="176" width="266" height="62" rx="18"/><text class="g" x="364" y="202">Proves it is alive</text><text class="s" x="364" y="222">stem + soil, counted as plant-days</text></g>
+          <g class="rv" style="--a:.67;--b:.75"><rect class="gb" x="344" y="288" width="266" height="62" rx="18"/><text class="g" x="364" y="314">Shares with your block</text><text class="s" x="364" y="334">the Exchange, in the app</text></g>
+        </g>
+        <g class="sg-meco rv" style="--a:.84;--b:.94">
+          <text class="big" x="320" y="236" text-anchor="middle">Meco</text>
+          <text class="lab g" x="320" y="276" text-anchor="middle">MEASURE + ECO</text>
+          <path class="d" pathLength="1" d="M252 300H388" style="--a:.9;--b:.97"/>
+        </g>
+      </svg>
     </div>
     <div class="pin-steps">
-<div class="pin-step"><span class="label"><b>01</b> — Overview</span><h3 class="display d3">One plant. One stake. <em>One phone.</em></h3><p class="p">The plant is measured twice, the pot is watered only when it needs it, and the app checks that it worked. Everything you are about to see is one connected loop.</p><dl class="kv"><dt>Plant</dt><dd>a potted herb</dd><dt>Stake</dt><dd>probe + pod + stem clip</dd><dt>Phone</dt><dd>the Rooted app</dd></dl><div><span class="tag">Closed loop</span></div></div>
-<div class="pin-step"><span class="label"><b>02</b> — 1 — The electrode</span><h3 class="display d3">Two needles in the <em>stem</em>.</h3><p class="p">A sprung clip closes on the stem and drives two titanium needles through the outer tissue into the conducting core. The clip is 3D-printed and has its own thin wire back to the house module. There is no arm.</p><dl class="kv"><dt>Sweep</dt><dd>1 kHz → 100 kHz</dd><dt>Low</dt><dd>current goes around the cells</dd><dt>High</dt><dd>current goes through them</dd></dl><div><span class="tag">Prototype</span></div></div>
-<div class="pin-step"><span class="label"><b>03</b> — 2 — The probe</span><h3 class="display d3">Moisture, and the <em>salts</em> in it.</h3><p class="p">In the pot, a resistive board behind a bevelled window reads moisture. Two turns of bare copper read how well the soil conducts; salts raise conductivity, so it's how we watch what the plant is being fed.</p><dl class="kv"><dt>Moisture</dt><dd>the reading everything is checked against</dd><dt>Soil EC</dt><dd>conductivity, mS</dd><dt>Depth</dt><dd>fixed by the soil-line mark</dd></dl><div><span class="tag">Built</span></div></div>
-<div class="pin-step"><span class="label"><b>04</b> — 3 — The pod</span><h3 class="display d3">A little house for <em>the brain</em>.</h3><p class="p">The module is a separate little house: an ESP32-S3 under a gable roof with two 70 mm solar panels. The soil probe and the stem clip connect to it by wire, and the tube runs to the probe. It samples soil, air, light and the electrode, stamps the time, and packs the result into one 46-byte frame with a CRC-16 on the end. A battery powers it, and the roof panels top it up so it can run for up to two months.</p><dl class="kv"><dt>Air</dt><dd>temperature, humidity, pressure</dd><dt>Light</dt><dd>daily-light integral</dd><dt>Absent sensor</dt><dd>a sentinel, never a fake zero</dd></dl><div><span class="tag">Built</span></div></div>
-<div class="pin-step"><span class="label"><b>05</b> — 4 — The link</span><h3 class="display d3">Forty-six bytes <em>through the air</em>.</h3><p class="p">The frame goes out over Bluetooth LE in one short burst, then the radio sleeps again: low energy, still quick. Stakes on one block form a mesh, so a block shares one weather. A block is only described when at least three stakes from two accounts have reported.</p><dl class="kv"><dt>Link</dt><dd>Bluetooth LE</dd><dt>Encoders</dt><dd>Swift and Kotlin, byte-identical</dd><dt>Privacy</dt><dd>k-anonymity, enforced twice</dd></dl><div><span class="tag">Built</span></div></div>
-<div class="pin-step"><span class="label"><b>06</b> — 5 — The decision</span><h3 class="display d3">A <em>verb</em>, not a dashboard.</h3><p class="p">The app compares the reading with that crop's own band and answers in words: Water it now, or Nothing to do today. The score is demoted to a small ring, as evidence. The command goes back down the same link.</p><dl class="kv"><dt>Starts</dt><dd>at the floor</dd><dt>Stops</dt><dd>at the target</dd><dt>Why two</dt><dd>so it never chatters around one number</dd></dl><div><span class="tag">Built</span></div></div>
-<div class="pin-step"><span class="label"><b>07</b> — 6 — The pumps</span><h3 class="display d3">A relay, two pumps, <em>one Y</em>.</h3><p class="p">The relay closes. Two 5 V pumps draw from the reservoir and the feed bottle and merge at a Y-connector into a single line. An eleven-second cycle, and every dose is logged with its volume.</p><dl class="kv"><dt>Pump A</dt><dd>water</dd><dt>Pump B</dt><dd>feed, for fertigation</dd><dt>Cycle</dt><dd>about eleven seconds</dd></dl><div><span class="tag">Prototype</span></div></div>
-<div class="pin-step"><span class="label"><b>08</b> — 7 — Delivery</span><h3 class="display d3">Down the bore, out of the <em>nose</em>.</h3><p class="p">The line runs into the top of the probe and down a hidden 4.5 mm bore, leaving at the centre of the nose so it reaches the root ball, not the dry crust. Moisture climbs and the roots brighten.</p><dl class="kv"><dt>Bore</dt><dd>4.5 mm, hidden down the back</dd><dt>Exit</dt><dd>centre of the nose</dd><dt>EC</dt><dd>rises with the feed, and is watched</dd></dl><div><span class="tag">Built</span></div></div>
-<div class="pin-step"><span class="label"><b>09</b> — 8 — Verify</span><h3 class="display d3">Did it <em>work</em>? Check.</h3><p class="p">The last step is what makes the rest honest. If moisture recovered, it counts as a verified plant-day. If it didn't, the app says so instead of dosing again.</p><dl class="kv"><dt>Result</dt><dd>moisture back in band</dd><dt>Counts</dt><dd>one verified plant-day</dd><dt>Otherwise</dt><dd>it tells you, and stops</dd></dl><div><span class="tag">Loop closed</span></div></div>
+      <div class="pin-step"><span class="label"><b>01</b> · We watched</span><h3 class="display d3">Our grandparents and <em>their friends</em>.</h3><p class="p">Seniors who have grown plants for years. We sat with them, and paid attention.</p></div>
+      <div class="pin-step"><span class="label"><b>02</b> · We listened</span><h3 class="display d3">Three worries <em>kept coming up</em>.</h3><p class="p">Too much water. A plant that struggles quietly. Nobody to share the harvest with.</p></div>
+      <div class="pin-step"><span class="label"><b>03</b> · We expanded</span><h3 class="display d3">Every worry became <em>an answer</em>.</h3><p class="p">What began at a kitchen table grew into a sensor, an app and a community.</p></div>
+      <div class="pin-step"><span class="label"><b>04</b> · We built</span><h3 class="display d3">So we made <em>Meco</em>.</h3><p class="p">Measure + Eco. For them first, then for everyone who wants to keep something alive.</p></div>
     </div>
   </div>
-  <div class="pin-count"><b>01 / 09</b><span class="rule"><i></i></span></div>
+  <div class="pin-count"><b>01 / 04</b><span class="rule"><i></i></span></div>
 </section>
 
+<section class="sec band" style="padding-block:clamp(40px,6vw,90px)">
+  <div class="wrap"><p class="manifesto" data-words>Built for our grandparents. Useful for everyone who has ever wondered if the plant was still alive.</p></div>
+</section>
+
+<section class="sec" id="loop" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>How it works</b></span><h2 class="display d2" data-split>One loop. <em>Five beats.</em></h2></div>
+    <div class="loopfig" data-reveal>
+      <svg id="loopsvg" viewBox="0 0 900 330" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-label="The loop: sense, send, decide, water, verify">
+        <ellipse cx="450" cy="165" rx="330" ry="100" stroke-dasharray="3 9" class="lp-track"/>
+        <circle class="lp-pkt" r="6" fill="var(--green)" stroke="none"/>
+        <g class="lp-node" data-i="0" tabindex="0" transform="translate(120 165)"><circle r="30"/><text class="n" y="6" text-anchor="middle">1</text><text class="t" x="0" y="58" text-anchor="middle">Sense</text></g>
+        <g class="lp-node" data-i="1" tabindex="0" transform="translate(348 66)"><circle r="30"/><text class="n" y="6" text-anchor="middle">2</text><text class="t" x="0" y="-44" text-anchor="middle">Send</text></g>
+        <g class="lp-node" data-i="2" tabindex="0" transform="translate(717 100)"><circle r="30"/><text class="n" y="6" text-anchor="middle">3</text><text class="t" x="0" y="-44" text-anchor="middle">Decide</text></g>
+        <g class="lp-node" data-i="3" tabindex="0" transform="translate(717 230)"><circle r="30"/><text class="n" y="6" text-anchor="middle">4</text><text class="t" x="0" y="62" text-anchor="middle">Water</text></g>
+        <g class="lp-node" data-i="4" tabindex="0" transform="translate(348 264)"><circle r="30"/><text class="n" y="6" text-anchor="middle">5</text><text class="t" x="0" y="62" text-anchor="middle">Verify</text></g>
+      </svg>
+      <p class="loopcap" id="loopcap" aria-live="polite">The stem electrode and soil probe read the plant.</p>
+    </div>
+  </div>
+</section>
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
@@ -69,21 +116,6 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
   </div>
 </section>
 
-
-<section class="sec" id="mesh" style="padding-top:0">
-  <div class="wrap feat rev">
-    <div class="stagebox" data-reveal><canvas data-scene="mesh"></canvas></div>
-    <div class="copy" data-reveal data-stagger>
-      <span class="label"><b>One stake, a whole block</b></span>
-      <h3 class="display d3">A fungus needs <em>weather</em>, not luck.</h3>
-      <p class="p">Hours of high humidity, a temperature band, a canopy that stays wet. Those conditions are shared across a block, so one well-placed station speaks for the plants around it. Several stakes turn a number into a map.</p>
-      <div class="limit" style="margin-top:26px"><h5>What it does not do</h5><p>The needles read the plant they are in. They don't sense a neighbour's tissue, and they can't name a fungus species. A block warning comes from shared weather, and is raised only when two kinds of evidence agree.</p></div>
-      <div class="limit"><h5>Privacy, enforced twice</h5><p>A block is only described when at least 3 stakes from at least 2 accounts have reported, checked in the API and again in the database view.</p></div>
-    </div>
-  </div>
-</section>
-
-
 <section class="sec" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>The 46-byte frame</b></span><h2 class="display d2" data-split>Small enough for Bluetooth. <em>Strict enough to trust.</em></h2></div>
@@ -92,6 +124,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
     <p class="label" style="margin-top:14px"><b>■</b> payload, bytes 0–43 &nbsp;&nbsp; <span style="color:var(--warm)">■</span> CRC-16, bytes 44–45</p>
   </div>
 </section>
+
 
 
 <section class="sec" id="tiers" style="padding-top:0">
@@ -107,11 +140,19 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 </section>
 
 <section class="closing"><div class="wrap closer">
-  <h2 class="display d1" data-split style="max-width:12ch;margin:0 auto">Why does this <em>matter</em>?</h2>
-  <div class="cta" data-reveal><a class="btn" href="impact.html" data-t>Read the story <i>→</i></a><a class="btn line" href="rootstake.html" data-t>The real CAD</a></div>
+  <h2 class="display d1" data-split style="max-width:13ch;margin:0 auto">For the people who taught us <em>to grow</em>.</h2>
+  <div class="cta" data-reveal><a class="btn" href="impact.html">Read the story <i>→</i></a><a class="btn line" href="rootstake.html">See RootStake</a></div>
 </div></section>
+
 <script>
 (() => { const b = document.getElementById('bytes'); for (let i = 0; i < 46; i++) { const e = document.createElement('i'); e.style.setProperty('--i', i); e.style.setProperty('--h', (30 + ((i * 37) % 60)) + '%'); if (i > 43) e.className = 'crc'; e.textContent = i % 8 === 0 ? i : ''; b.appendChild(e); } })();
+</script>
+<script>
+(() => { const nodes = [...document.querySelectorAll('.lp-node')], cap = document.getElementById('loopcap'), svg = document.getElementById('loopsvg');
+  const T = ['The stem electrode and soil probe read the plant.', 'One 46-byte frame over Bluetooth LE, then the radio goes back to sleep.', 'The app answers with a verb: water it now, or nothing to do today.', 'Two small pumps, one tube, a measured dose that reaches the roots.', 'If moisture recovered, it counts as a verified plant-day.'];
+  let cur = 0, hold = false; const set = i => { cur = i; nodes.forEach((n, k) => n.classList.toggle('on', k === i)); cap.textContent = T[i]; };
+  nodes.forEach((n, i) => { ['pointerenter', 'focus', 'click'].forEach(ev => n.addEventListener(ev, () => { hold = true; set(i); })); n.addEventListener('pointerleave', () => { hold = false; }); n.addEventListener('blur', () => { hold = false; }); });
+  set(0); setInterval(() => { if (!hold && !document.hidden) set((cur + 1) % 5); }, 2400); })();
 </script>
 </main>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -119,6 +160,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <script defer src="js/team.js"></script>
 <script defer src="js/site.js"></script>
 <script defer src="js/tissue.js"></script>
+<script defer src="js/mojo.js"></script>
 <script type="module" src="js/scenes.js"></script>
 </body>
 </html>
