@@ -218,8 +218,6 @@ body{counter-reset:sec}
 
 /* default theme: clean white and black, key words in green */
 [data-skin="glasshouse"] .display em{color:var(--green)}
-[data-skin="glasshouse"][data-mode="light"] .sun{background:radial-gradient(closest-side,color-mix(in srgb,var(--green) 9%,transparent),transparent 72%);opacity:.7}
-[data-skin="glasshouse"][data-mode="light"] .cloud{display:none}
 [data-skin="glasshouse"][data-mode="light"] body::before{background:none}
 html[data-skin] .index .xbtn{background:var(--text);color:var(--bg);box-shadow:none;rotate:none}
 html[data-skin="monsoon"] .index .xbtn{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}

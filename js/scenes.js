@@ -133,27 +133,26 @@ builders.probe = async (ctx) => {
   // ---- assembly parts (story mode): tube, resistive moisture board, pH electrode ----
   const asm = new THREE.Group(); inner.add(asm); const PA = { tube: new THREE.Group(), board: new THREE.Group(), ph: new THREE.Group() }; Object.values(PA).forEach(g => asm.add(g));
   const tubeMat = new THREE.MeshPhysicalMaterial({ color: 0xbfe3f2, transparent: true, opacity: .62, roughness: .08, clearcoat: 1 });
-  const tubeMesh = new THREE.Mesh(new THREE.CylinderGeometry(.055, .055, 5.6, 20), tubeMat); tubeMesh.position.set(0, .8, -.1); PA.tube.add(tubeMesh);
-  const core = new THREE.Mesh(new THREE.CylinderGeometry(.03, .03, 5.6, 14), new THREE.MeshBasicMaterial({ color: 0x7fd0ff, transparent: true, opacity: .75 })); core.position.copy(tubeMesh.position); PA.tube.add(core);
-  // resistive moisture probe (the fork part only): black head, two cream tines with silver pads
+  const tubeCurve = new THREE.CatmullRomCurve3([new V3(.2, 4.4, -.06), new V3(.2, 1.5, -.06), new V3(.2, -.9, -.06), new V3(.15, -1.25, -.06), new V3(.05, -1.5, -.06), new V3(0, -1.62, -.06)]);
+  const tubeMesh = new THREE.Mesh(new THREE.TubeGeometry(tubeCurve, 120, .055, 16), tubeMat); PA.tube.add(tubeMesh);
+  const core = new THREE.Mesh(new THREE.TubeGeometry(tubeCurve, 120, .03, 10), new THREE.MeshBasicMaterial({ color: 0x7fd0ff, transparent: true, opacity: .75 })); PA.tube.add(core);
   const pcb = new THREE.MeshStandardMaterial({ color: 0x15171a, roughness: .42 }), cream = new THREE.MeshStandardMaterial({ color: 0xefe6cf, roughness: .55 }), gold = new THREE.MeshStandardMaterial({ color: 0xc9ccd0, roughness: .22, metalness: .9 }), blk = new THREE.MeshStandardMaterial({ color: 0x0d0e10, roughness: .6 });
-  const head = new THREE.Mesh(new THREE.BoxGeometry(.36, .3, .024), pcb); head.position.set(.02, .62, .1); PA.board.add(head);
-  const headTop = new THREE.Mesh(new THREE.CylinderGeometry(.04, .04, .024, 16), pcb); headTop.rotation.x = Math.PI / 2; headTop.position.set(-.16, .77, .1); PA.board.add(headTop);
-  const hole = new THREE.Mesh(new THREE.CylinderGeometry(.022, .022, .03, 14), new THREE.MeshBasicMaterial({ color: 0xb8bcc2 })); hole.rotation.x = Math.PI / 2; hole.position.set(-.1, .57, .1); PA.board.add(hole);
-  const chipM = new THREE.Mesh(new THREE.BoxGeometry(.05, .06, .03), blk); chipM.position.set(.12, .66, .115); PA.board.add(chipM);
-  [-.1, .1].forEach(x => { const t = new THREE.Mesh(new THREE.BoxGeometry(.112, 1.15, .02), cream); t.position.set(.02 + x, -.1, .1); PA.board.add(t);
-    const tip = new THREE.Mesh(new THREE.CylinderGeometry(.056, .056, .02, 16), cream); tip.rotation.x = Math.PI / 2; tip.position.set(.02 + x, -.675, .1); PA.board.add(tip);
-    for (let k = 0; k < 7; k++) { const pad = new THREE.Mesh(new THREE.BoxGeometry(.07, .05, .026), gold); pad.position.set(.02 + x, .38 - k * .15, .1); PA.board.add(pad); const bar = new THREE.Mesh(new THREE.BoxGeometry(.03, .09, .025), gold); bar.position.set(.02 + x + (x > 0 ? -.03 : .03), .38 - k * .15 - .06, .1); PA.board.add(bar); } });
-  const hdr = new THREE.Mesh(new THREE.BoxGeometry(.1, .14, .08), blk); hdr.position.set(.14, .82, .1); PA.board.add(hdr);
+  const head = new THREE.Mesh(new THREE.BoxGeometry(.36, .3, .024), pcb); head.position.set(0, .62, .02); PA.board.add(head);
+  const headTop = new THREE.Mesh(new THREE.CylinderGeometry(.04, .04, .024, 16), pcb); headTop.rotation.x = Math.PI / 2; headTop.position.set(-.16, .77, .02); PA.board.add(headTop);
+  const hole = new THREE.Mesh(new THREE.CylinderGeometry(.022, .022, .03, 14), new THREE.MeshBasicMaterial({ color: 0xb8bcc2 })); hole.rotation.x = Math.PI / 2; hole.position.set(-.1, .57, .02); PA.board.add(hole);
+  const chipM = new THREE.Mesh(new THREE.BoxGeometry(.05, .06, .03), blk); chipM.position.set(.12, .66, .035); PA.board.add(chipM);
+  [-.1, .1].forEach(x => { const t = new THREE.Mesh(new THREE.BoxGeometry(.112, 1.15, .02), cream); t.position.set(x, -.1, .02); PA.board.add(t);
+    const tip = new THREE.Mesh(new THREE.CylinderGeometry(.056, .056, .02, 16), cream); tip.rotation.x = Math.PI / 2; tip.position.set(x, -.675, .02); PA.board.add(tip);
+    for (let k = 0; k < 7; k++) { const pad = new THREE.Mesh(new THREE.BoxGeometry(.07, .05, .026), gold); pad.position.set(x, .38 - k * .15, .02); PA.board.add(pad); const bar = new THREE.Mesh(new THREE.BoxGeometry(.03, .09, .025), gold); bar.position.set(x + (x > 0 ? -.03 : .03), .38 - k * .15 - .06, .02); PA.board.add(bar); } });
+  const hdr = new THREE.Mesh(new THREE.BoxGeometry(.1, .14, .08), blk); hdr.position.set(.14, .82, .02); PA.board.add(hdr);
   const phBody = new THREE.Mesh(new THREE.CylinderGeometry(.06, .06, 2.3, 20), new THREE.MeshStandardMaterial({ color: 0xe9e9e4, roughness: .3 })); phBody.position.set(-.2, .45, 0); PA.ph.add(phBody);
   const bulb = new THREE.Mesh(new THREE.SphereGeometry(.075, 20, 16), new THREE.MeshPhysicalMaterial({ color: 0xcfe9ff, transparent: true, opacity: .75, roughness: .05, clearcoat: 1 })); bulb.position.set(-.2, -.72, 0); bulb.scale.y = 1.35; PA.ph.add(bulb);
   const band = new THREE.Mesh(new THREE.CylinderGeometry(.064, .064, .12, 20), new THREE.MeshStandardMaterial({ color: 0x2a8a5e })); band.position.set(-.2, .95, 0); PA.ph.add(band);
   const wireM2 = new THREE.MeshStandardMaterial({ color: 0x23282a, roughness: .5 });
-  const wBoard = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(.14, .9, .1), new V3(.14, 1.5, .1), new V3(.3, 2.2, .1), new V3(.9, 2.5, .1)]), 30, .016, 6), new THREE.MeshStandardMaterial({ color: 0xe8861c, roughness: .45})); PA.board.add(wBoard);
-  const wPh = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(-.2, 1.6, 0), new V3(-.2, 2.1, 0), new V3(.1, 2.5, 0), new V3(.9, 2.65, 0)]), 30, .014, 6), wireM2); PA.ph.add(wPh);
-  const tubeBend = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(0, 3.55, -.1), new V3(0, 3.9, -.1), new V3(.5, 4.3, -.1), new V3(1.2, 4.4, -.1)]), 30, .055, 12), tubeMat); PA.tube.add(tubeBend);
+  const wBoard = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(.14, .9, .02), new V3(.1, 1.5, .02), new V3(.0, 2.2, .02), new V3(-.5, 2.7, .02)]), 30, .016, 6), new THREE.MeshStandardMaterial({ color: 0xe8861c, roughness: .45})); PA.board.add(wBoard);
+  const wPh = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(-.2, 1.6, 0), new V3(-.2, 2.1, 0), new V3(-.3, 2.6, 0), new V3(-.8, 3.0, 0)]), 30, .014, 6), wireM2); PA.ph.add(wPh);
   const lockRing = k => { const r = new THREE.Mesh(new THREE.RingGeometry(.1, .125, 40), new THREE.MeshBasicMaterial({ color: palette().accent, transparent: true, opacity: 0, side: THREE.DoubleSide, depthTest: false })); r.renderOrder = 9; asm.add(r); return r; };
-  const rings = { tube: lockRing(), board: lockRing(), ph: lockRing() }; rings.tube.position.set(0, -1.55, -.1); rings.board.position.set(.02, -.1, .13); rings.ph.position.set(-.2, -.7, .06);
+  const rings = { tube: lockRing(), board: lockRing(), ph: lockRing() }; rings.tube.position.set(.02, -1.58, -.06); rings.board.position.set(0, -.1, .06); rings.ph.position.set(-.2, -.7, .06);
   ctx.onTheme(() => Object.values(rings).forEach(r => r.material.color.setHex(palette().accent)));
   Object.values(PA).forEach(g => g.visible = false);
   const anchors = { tip: new V3(0, -1.84, 0), teeth: new V3(0, -1.35, .2), ec: new V3(0, -.85, .22), window: new V3(0, -.15, .24), ph: new V3(-.2, .1, .08), mark: new V3(0, .75, .2), bore: new V3(0, -1.6, -.15), top: new V3(0, 1.8, .1) };
@@ -190,7 +189,7 @@ builders.probe = async (ctx) => {
     L.sweep.intensity = mode === 'loose' ? 0 : 60 * Math.sin(clamp(p * 5 % 1) * Math.PI);
     L.sweep.position.set(lerp(-6, 6, (p * 5) % 1), 1.5, 4);
     let base = mode === 'loose' ? spin + ptr.x * .5 : spin + sstep(0, .5, p) * 1.1 + sstep(.55, .8, p) * .9 + ptr.x * .35;
-    if (mode === 'story') { base = lerp(spin + sstep(0, .4, p) * 1.1, 1.0 + ptr.x * .12, asmRot) + sstep(.8, .95, p) * 1.0; }
+    if (mode === 'story') { base = lerp(spin + sstep(0, .4, p) * 1.1, 1.0 + ptr.x * .12, asmRot) - sstep(.8, .95, p) * .85; }
     if (camera.aspect < .9) cz *= 1.3;
     camera.position.z += (cz - camera.position.z) * Math.min(1, dt * 5);
     look.y += (ly - look.y) * Math.min(1, dt * 5); camera.lookAt(look);
