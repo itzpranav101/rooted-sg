@@ -43,7 +43,26 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
   <div class="pin-count"><b>01 / 03</b><span class="rule"><i></i></span></div>
 </section>
 
-<div class="snap" data-a="The gap" data-b="The count"></div>
+<div class="snap" data-a="The gap" data-b="100 residents"></div>
+<section class="sec" id="hundred" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>If we asked 100 residents</b></span><h2 class="display d2" data-split>Each dot is <em>a person</em>.</h2></div>
+    <div class="dots-card" data-reveal>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+      <div class="dots-ui"><div class="tfilter"><button class="on" data-d="71" type="button">Want to grow at home</button><button data-d="24" type="button">Tried, then stopped</button></div>
+        <p class="num" id="dnum" style="font-size:clamp(64px,8vw,120px)">71</p><p class="p" id="dtxt">of every 100 residents in our survey said they want to grow plants at home (70.9%, n = 3,043).</p></div>
+    </div>
+  </div>
+</section>
+<script>
+(() => { const w = document.getElementById('dots'), num = document.getElementById('dnum'), tx = document.getElementById('dtxt'), bs = [...document.querySelectorAll('.dots-ui button')];
+  for (let i = 0; i < 100; i++) { const d = document.createElement('i'); d.style.setProperty('--i', i); w.appendChild(d); } const ds = [...w.children];
+  const T = { 71: 'of every 100 residents in our survey said they want to grow plants at home (70.9%, n = 3,043).', 24: 'of every 100 had already tried to grow something and stopped (23.6%). This is the gap Rooted SG is built for.' };
+  function set(n) { ds.forEach((d, i) => d.classList.toggle('on', i < n)); num.textContent = n; tx.textContent = T[n]; bs.forEach(b => b.classList.toggle('on', +b.dataset.d === n)); }
+  bs.forEach(b => b.addEventListener('click', () => set(+b.dataset.d))); set(71); })();
+</script>
+
+<div class="snap" data-a="100 residents" data-b="The count"></div>
 <section class="sec">
   <div class="wrap">
     <p class="manifesto" data-words>Singapore imports about ninety percent of its food, from more than 180 countries and regions. What if the next step in its green journey did not start with more land, but with the spaces we already have?</p>

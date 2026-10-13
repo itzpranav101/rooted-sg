@@ -122,7 +122,28 @@
   </div>
 </section>
 
-<div class="snap" data-a="Numbers" data-b="Loop"></div>
+<div class="snap" data-a="Numbers" data-b="Dose logic"></div>
+<section class="sec dose" id="dose" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>Try the logic</b></span><h2 class="display d2" data-split>It starts at the <em>floor</em>. It stops at the <em>target</em>.</h2></div>
+    <div class="dose-card" data-reveal>
+      <div class="dose-vis"><div class="dose-bar"><i class="band"></i><i class="mk f"><b>floor</b></i><i class="mk t"><b>target</b></i><i class="lvl" id="dlvl"></i><i class="knob" id="dknob"></i></div>
+        <div class="dose-state"><span class="label">Pump</span><b id="dstate">off</b><span class="label" id="dval">moisture 48%</span></div></div>
+      <input type="range" id="dslide" min="5" max="95" value="48" aria-label="Soil moisture">
+      <div class="dose-actions"><button class="btn line" id="dsim" type="button">Let the soil dry out <i>→</i></button><p class="label">Example band shown. Drag the slider, or let it run. Between the two lines, the pump keeps doing whatever it was doing, so it never chatters around one number.</p></div>
+      <div class="dose-drops" id="ddrops"></div>
+    </div>
+  </div>
+</section>
+<script>
+(() => { const s = document.getElementById('dslide'), L = document.getElementById('dlvl'), K = document.getElementById('dknob'), st = document.getElementById('dstate'), v = document.getElementById('dval'), sim = document.getElementById('dsim'), card = document.querySelector('.dose-card'); const FLOOR = 35, TARGET = 55; let on = false, run = false, val = 48, raf;
+  function paint() { L.style.width = val + '%'; K.style.left = val + '%'; s.value = val; v.textContent = 'moisture ' + Math.round(val) + '%'; if (val < FLOOR) on = true; if (val >= TARGET) on = false; st.textContent = on ? 'watering' : 'off'; card.classList.toggle('on', on); }
+  s.addEventListener('input', () => { val = +s.value; paint(); });
+  function tick() { if (!run) return; val += on ? .35 : -.09; val = Math.max(5, Math.min(95, val)); paint(); raf = requestAnimationFrame(tick); }
+  sim.addEventListener('click', () => { run = !run; sim.firstChild.textContent = run ? 'Stop the demo ' : 'Let the soil dry out '; if (run) tick(); else cancelAnimationFrame(raf); }); paint(); })();
+</script>
+
+<div class="snap" data-a="Dose logic" data-b="Loop"></div>
 <section class="closing"><div class="wrap closer">
   <h2 class="display d1" data-split style="max-width:12ch;margin:0 auto">Measure. Act. <em>Check it worked.</em></h2>
   <div class="cta" data-reveal><a class="btn" href="how-it-works.html" data-t>See the closed loop <i>→</i></a><a class="btn line" href="app.html" data-t>Back to the app</a></div>

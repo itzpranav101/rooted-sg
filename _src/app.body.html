@@ -68,6 +68,37 @@
   </div>
 </section>
 
+<div class="snap" data-a="BioDex" data-b="Try it"></div>
+<section class="sec try" id="try" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>Try it</b></span><h2 class="display d2" data-split>Tap once. <em>Count one day.</em></h2></div>
+    <div class="try-grid">
+      <div class="try-card" data-reveal>
+        <div class="try-ring"><svg viewBox="0 0 140 140"><circle cx="70" cy="70" r="58" class="bg"/><circle cx="70" cy="70" r="58" class="fg" id="tring" pathLength="100"/></svg>
+          <div class="try-num"><b id="tdays">194</b><span>verified plant-days</span></div></div>
+        <div class="try-side"><span class="label">Pandan · Legacy Plant</span>
+          <p class="p" id="tmsg">A day only counts when the plant was checked in and the sensor says it is still alive.</p>
+          <button class="btn" id="tbtn" type="button">Check in today <i>→</i></button>
+          <div class="try-log" id="tlog"></div></div>
+      </div>
+      <div class="flips" data-reveal data-stagger>
+        <button class="flip" type="button"><span class="f"><i>Butterfly</i><small>tap to flip</small></span><span class="b"><b class="kw">Community confirmed</b><small>Other growers agreed with the sighting.</small></span></button>
+        <button class="flip" type="button"><span class="f"><i>Bee</i><small>tap to flip</small></span><span class="b"><b class="kw">AI suggested</b><small>A model's best guess, labelled as a guess.</small></span></button>
+        <button class="flip" type="button"><span class="f"><i>Bird</i><small>tap to flip</small></span><span class="b"><b class="kw">Expert verified</b><small>Checked by someone who knows the species.</small></span></button>
+        <button class="flip" type="button"><span class="f"><i>Beetle</i><small>tap to flip</small></span><span class="b"><b class="kw">Community confirmed</b><small>Examples shown. Every species wears its confidence.</small></span></button>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => { const b = document.getElementById('tbtn'), d = document.getElementById('tdays'), r = document.getElementById('tring'), m = document.getElementById('tmsg'), log = document.getElementById('tlog'); let n = 194, busy = false;
+  const ring = () => { r.style.strokeDashoffset = 100 - (n % 30) / 30 * 100; }; r.style.strokeDasharray = 100; ring();
+  b.addEventListener('click', () => { if (busy) return; busy = true; b.firstChild.textContent = 'Reading the stake… '; m.textContent = 'Asking the sensor: is moisture in band, is the plant still alive?';
+    setTimeout(() => { n++; d.textContent = n; ring(); b.firstChild.textContent = 'Counted ✓ '; m.textContent = 'Moisture in band. Day ' + n + ' is verified.'; const li = document.createElement('div'); li.textContent = 'Day ' + n + ' · verified'; log.prepend(li); while (log.children.length > 3) log.lastChild.remove(); }, 900);
+    setTimeout(() => { b.firstChild.textContent = 'Check in today '; busy = false; }, 2600); });
+  document.querySelectorAll('.flip').forEach(f => f.addEventListener('click', () => f.classList.toggle('on'))); })();
+</script>
+
 <section class="sec" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>Customise</b></span><h2 class="display d2" data-split>Five themes, <em>each in light and dark</em>.</h2></div>

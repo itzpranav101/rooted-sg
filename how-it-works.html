@@ -97,7 +97,8 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <section class="sec" id="tiers" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>The tier rule</b></span><h2 class="display d2" data-split>Every metric says how <em>real</em> it is.</h2></div>
-    <div class="tt">
+    <div class="tfilter" role="group" aria-label="Filter by tier"><button class="on" data-f="all" type="button">All</button><button data-f="b" type="button">Built</button><button data-f="p" type="button">Prototype</button><button data-f="r2" type="button">Roadmap</button></div>
+    <div class="tt" id="tt">
       <div class="r"><span class="k b">BUILT</span><h4>You can trust the number</h4><p>Soil moisture and conductivity, air temperature, humidity and pressure, light. Printed, wired and logged.</p></div>
       <div class="r"><span class="k p">PROTOTYPE</span><h4>Read it as a direction</h4><p>Stem impedance and the twin-pump loop. They work on the bench; impedance is reported as trend and timing, never a calibrated figure, and never a stress the soil and air can't corroborate.</p></div>
       <div class="r"><span class="k r2">ROADMAP</span><h4>Simulated, and labelled</h4><p>Nitrate, phosphate, potassium and sap flow. The UI never shows these as measurements; they come from a simulator and say so. Electro-culture ships off, logged as an experiment.</p></div>

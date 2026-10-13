@@ -497,3 +497,53 @@ section{position:relative}
 
 .pin-vis.mono{background:var(--bg);border-radius:calc(28px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule)}
 .tissue .pin-vis{height:78vh}
+
+/* app: try-it + flip cards */
+.try-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+@media(max-width:900px){.try-grid{grid-template-columns:1fr}}
+.try-card{display:grid;grid-template-columns:auto 1fr;gap:clamp(20px,3vw,40px);align-items:center;padding:clamp(22px,3vw,40px);border-radius:calc(28px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule);background:var(--bg2)}
+@media(max-width:560px){.try-card{grid-template-columns:1fr;justify-items:center;text-align:center}}
+.try-ring{position:relative;width:min(190px,44vw);aspect-ratio:1}
+.try-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.try-ring circle{fill:none;stroke-width:6}.try-ring .bg{stroke:var(--rule)}.try-ring .fg{stroke:var(--green);stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease)}
+.try-num{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.try-num b{font-family:var(--serif);font-weight:var(--dw,300);font-size:clamp(40px,5vw,60px);letter-spacing:-.04em;line-height:1}
+.try-num span{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ter);margin-top:6px}
+.try-side{display:grid;gap:14px;justify-items:start}
+.try-log{display:grid;gap:4px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--green);min-height:3.6em}
+.flips{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.flip{position:relative;min-height:150px;perspective:700px;text-align:left}
+.flip .f,.flip .b{position:absolute;inset:0;padding:18px;border-radius:calc(22px*var(--rad,1));display:flex;flex-direction:column;justify-content:space-between;backface-visibility:hidden;transition:transform .7s var(--ease);box-shadow:inset 0 0 0 1px var(--rule)}
+.flip .f{background:var(--bg2)}.flip .b{background:var(--btn);color:var(--btn-text);transform:rotateY(180deg)}
+.flip.on .f{transform:rotateY(-180deg)}.flip.on .b{transform:none}
+.flip i{font-style:normal;font-family:var(--serif);font-weight:var(--dw,300);font-size:28px;letter-spacing:-.03em}
+.flip small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;opacity:.65}
+.flip .b b{font-family:var(--serif);font-size:22px;font-weight:var(--dw,400);letter-spacing:-.02em;color:inherit}
+.flip .b .kw{color:var(--green)}
+/* rootstake: dose logic */
+.dose-card{position:relative;padding:clamp(22px,3vw,40px);border-radius:calc(28px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule);background:var(--bg2);display:grid;gap:26px;overflow:hidden}
+.dose-vis{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+@media(max-width:700px){.dose-vis{grid-template-columns:1fr}}
+.dose-bar{position:relative;height:56px;border-radius:calc(14px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule);overflow:hidden}
+.dose-bar .band{position:absolute;left:35%;width:20%;top:0;bottom:0;background:color-mix(in srgb,var(--green) 14%,transparent)}
+.dose-bar .lvl{position:absolute;left:0;top:0;bottom:0;background:color-mix(in srgb,var(--green) 40%,transparent);transition:width .15s linear}
+.dose-bar .mk{position:absolute;top:0;bottom:0;width:2px;background:var(--text)}.dose-bar .mk.f{left:35%}.dose-bar .mk.t{left:55%}
+.dose-bar .mk b{position:absolute;top:4px;left:6px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:400;color:var(--sec)}
+.dose-bar .knob{position:absolute;top:8px;bottom:8px;width:6px;margin-left:-3px;border-radius:3px;background:var(--green)}
+.dose-state{display:grid;gap:4px;text-align:right;min-width:150px}
+.dose-state b{font-family:var(--serif);font-weight:var(--dw,300);font-size:clamp(34px,4vw,54px);letter-spacing:-.04em;line-height:1}
+.dose-card.on .dose-state b{color:var(--green)}
+#dslide{width:100%;accent-color:var(--green)}
+.dose-actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap}.dose-actions .label{max-width:46em}
+.dose-card::after{content:"";position:absolute;right:0;bottom:0;width:100%;height:4px;background:linear-gradient(90deg,transparent,var(--green));transform:scaleX(0);transform-origin:100% 50%;transition:transform .6s var(--ease)}
+.dose-card.on::after{transform:scaleX(1)}
+/* tier filter + survey dots */
+.tfilter{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.tfilter button{padding:9px 18px;border-radius:var(--brad,99px);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;box-shadow:inset 0 0 0 1px var(--rule);color:var(--sec);transition:all .3s var(--ease)}
+.tfilter button:hover{color:var(--text)}.tfilter button.on{background:var(--btn);color:var(--btn-text);box-shadow:none}
+.tt .r{transition:opacity .4s,background .4s,padding .5s var(--ease)}.tt .r.dim{opacity:.22}
+.dots-card{display:grid;grid-template-columns:minmax(260px,1fr) 1fr;gap:clamp(24px,5vw,80px);align-items:center;padding:clamp(22px,3vw,40px);border-radius:calc(28px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule);background:var(--bg2)}
+@media(max-width:800px){.dots-card{grid-template-columns:1fr}}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:clamp(6px,1.2vw,12px);max-width:460px}
+.dots i{aspect-ratio:1;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--rule);transition:background .45s var(--ease),box-shadow .45s,transform .5s var(--ease);transition-delay:calc(var(--i)*7ms)}
+.dots i.on{background:var(--green);box-shadow:none;transform:scale(1.04)}
