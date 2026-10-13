@@ -6,7 +6,8 @@ CALLS=[('top','Two halves','PETG · no supports','.12-.34','110','0'),
 ('tip','Chisel point','40 mm · saw teeth, 4 mm pitch','.36-.58','110','60'),
 ('mark','Soil-line mark','Same depth, every reading','.62-.86','110','-10'),
 ('bore','Fertigation bore','4.5 mm · exits at the nose','.66-.94','-110','40')]
-def callouts():
+CALLS2=[('top','Two halves','PETG · no supports','.11-.22','110','0'),('tip','Chisel point','40 mm · saw teeth, 4 mm pitch','.23-.43','110','60'),('window','Moisture window','Resistive board, bevelled','.31-.44','-110','-10'),('ec','Copper EC turns','Soil conductivity','.33-.44','110','-20'),('bore','Fertigation bore','4.5 mm · exits at the nose','.46-.56','110','40'),('window','Resistive board','Tines through the window','.58-.67','-110','-10'),('ph','pH electrode','Glass bulb, own channel','.69-.78','-110','-10'),('mark','Soil-line mark','Same depth, every reading','.79-.9','110','-10')]
+def callouts(CALLS=CALLS):
     s='<div class="callouts"><svg>'+''.join('<line x1="0" y1="0" x2="0" y2="0" style="opacity:0"/><circle r="3.5" style="opacity:0"/>' for _ in CALLS)+'</svg>'
     s+=''.join(f'<div class="call" data-anchor="{a}" data-show="{sh}" data-dx="{dx}" data-dy="{dy}"><span>{t}</span><b>{b}</b></div>' for a,t,b,sh,dx,dy in CALLS)
     return s+'</div>'
@@ -19,7 +20,7 @@ pages={'index':('home','ROOTED SG — Count what we keep alive','Rooted SG: a Si
 for name,(pg,title,desc) in pages.items():
     try: body=open(f'_src/{name}.body.html').read()
     except FileNotFoundError: continue
-    body=body.replace('{{CALLOUTS}}',callouts())
+    body=body.replace('{{CALLOUTS}}',callouts()).replace('{{CALLOUTS2}}',callouts(CALLS2))
     html=head.replace('{title}',title).replace('{desc}',desc).replace('{page}',pg)+body+tail
     open(f'{name}.html','w').write(html)
     print('built',name)

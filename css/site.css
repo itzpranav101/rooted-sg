@@ -473,3 +473,24 @@ section{position:relative}
 .meco-cap b{font-weight:400;color:var(--ter)}.meco-cap .kw{color:var(--green);font-size:15px}
 .meco .copy .limit:first-of-type{margin-top:22px}
 @media(prefers-reduced-motion:reduce){.meco-fig .m-dot{animation:none}}
+
+/* power + radio */
+.power-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:900px){.power-grid{grid-template-columns:1fr}}
+.pw-card{padding:clamp(22px,3vw,38px);border-radius:calc(26px*var(--rad,1));box-shadow:inset 0 0 0 1px var(--rule);background:var(--bg2);display:grid;gap:18px;align-content:start}
+.pw-card .label b{color:var(--green)}
+.pw-svg{width:100%;height:auto;color:var(--text)}
+.pw-t{font-family:var(--mono);font-size:11px;letter-spacing:.1em;fill:var(--ter);stroke:none;text-transform:uppercase}.pw-t.g{fill:var(--green)}
+.kw{color:var(--green);font-weight:600}
+.pw-level{transform-origin:250px 0;animation:pwlvl 9s ease-in-out infinite}
+@keyframes pwlvl{0%{transform:scaleX(.9)}45%{transform:scaleX(.62)}70%{transform:scaleX(.98)}100%{transform:scaleX(.9)}}
+.pw-flow{animation:pwdash 1.2s linear infinite}
+@keyframes pwdash{to{stroke-dashoffset:-12}}
+.pw-sun .rays{animation:pwray 2.4s ease-in-out infinite;transform-origin:70px 60px}
+@keyframes pwray{50%{opacity:.35;transform:scale(1.08)}}
+.pw-pulses path{animation:pwburst 4s ease-in-out infinite;transform-origin:50% 100%;transform-box:fill-box}
+@keyframes pwburst{0%,86%,100%{opacity:.25;transform:scaleY(.15)}90%,94%{opacity:1;transform:scaleY(1)}}
+.pw-pkt{offset-path:path("M70 70C170 10 300 10 420 62");animation:pwpkt 4s linear infinite;opacity:0}
+@keyframes pwpkt{0%,86%{offset-distance:0;opacity:0}88%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.pw-hop{animation:pwdash 1.4s linear infinite}
+@media(prefers-reduced-motion:reduce){.pw-level,.pw-flow,.pw-sun .rays,.pw-pulses path,.pw-pkt,.pw-hop{animation:none}}

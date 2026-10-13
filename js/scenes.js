@@ -130,13 +130,48 @@ builders.probe = async (ctx) => {
   const pot = glassPot(M, 1.25, 1.7); scene.add(pot); pot.visible = false;
   const shadow = contactShadow(2.3, -3.1, .32); scene.add(shadow);
   const drops = new Drops(scene, M.water, 70);
-  const anchors = { tip: new V3(0, -1.84, 0), teeth: new V3(0, -1.35, .2), ec: new V3(0, -.85, .22), window: new V3(0, -.15, .24), mark: new V3(0, .75, .2), bore: new V3(0, -1.6, -.15), top: new V3(0, 1.8, .1) };
+  // ---- assembly parts (story mode): tube, resistive moisture board, pH electrode ----
+  const asm = new THREE.Group(); inner.add(asm); const PA = { tube: new THREE.Group(), board: new THREE.Group(), ph: new THREE.Group() }; Object.values(PA).forEach(g => asm.add(g));
+  const tubeMat = new THREE.MeshPhysicalMaterial({ color: 0xbfe3f2, transparent: true, opacity: .62, roughness: .08, clearcoat: 1 });
+  const tubeMesh = new THREE.Mesh(new THREE.CylinderGeometry(.055, .055, 5.6, 20), tubeMat); tubeMesh.position.set(0, .8, -.1); PA.tube.add(tubeMesh);
+  const core = new THREE.Mesh(new THREE.CylinderGeometry(.03, .03, 5.6, 14), new THREE.MeshBasicMaterial({ color: 0x7fd0ff, transparent: true, opacity: .75 })); core.position.copy(tubeMesh.position); PA.tube.add(core);
+  const pcb = new THREE.MeshStandardMaterial({ color: 0x1b5e3f, roughness: .45 }), gold = new THREE.MeshStandardMaterial({ color: 0xd9b04a, roughness: .25, metalness: .9 }), blk = new THREE.MeshStandardMaterial({ color: 0x1b1f1d, roughness: .6 });
+  const board = new THREE.Mesh(new THREE.BoxGeometry(.3, 1.5, .022), pcb); board.position.set(.02, .65, .1); PA.board.add(board);
+  [-.085, .085].forEach(x => { const t = new THREE.Mesh(new THREE.BoxGeometry(.085, .8, .022), pcb); t.position.set(.02 + x, -.45, .1); PA.board.add(t); const tr = new THREE.Mesh(new THREE.BoxGeometry(.05, .74, .026), gold); tr.position.set(.02 + x, -.46, .1); PA.board.add(tr); });
+  const hdr = new THREE.Mesh(new THREE.BoxGeometry(.2, .1, .08), blk); hdr.position.set(.02, 1.3, .1); PA.board.add(hdr);
+  const chipM = new THREE.Mesh(new THREE.BoxGeometry(.12, .14, .03), blk); chipM.position.set(.02, .8, .115); PA.board.add(chipM);
+  const phBody = new THREE.Mesh(new THREE.CylinderGeometry(.06, .06, 2.3, 20), new THREE.MeshStandardMaterial({ color: 0xe9e9e4, roughness: .3 })); phBody.position.set(-.2, .45, 0); PA.ph.add(phBody);
+  const bulb = new THREE.Mesh(new THREE.SphereGeometry(.075, 20, 16), new THREE.MeshPhysicalMaterial({ color: 0xcfe9ff, transparent: true, opacity: .75, roughness: .05, clearcoat: 1 })); bulb.position.set(-.2, -.72, 0); bulb.scale.y = 1.35; PA.ph.add(bulb);
+  const band = new THREE.Mesh(new THREE.CylinderGeometry(.064, .064, .12, 20), new THREE.MeshStandardMaterial({ color: 0x2a8a5e })); band.position.set(-.2, .95, 0); PA.ph.add(band);
+  const wireM2 = new THREE.MeshStandardMaterial({ color: 0x23282a, roughness: .5 });
+  const wBoard = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(.02, 1.35, .1), new V3(.02, 1.9, .1), new V3(.3, 2.3, .1), new V3(.9, 2.5, .1)]), 30, .014, 6), wireM2); PA.board.add(wBoard);
+  const wPh = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(-.2, 1.6, 0), new V3(-.2, 2.1, 0), new V3(.1, 2.5, 0), new V3(.9, 2.65, 0)]), 30, .014, 6), wireM2); PA.ph.add(wPh);
+  const tubeBend = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new V3(0, 3.55, -.1), new V3(0, 3.9, -.1), new V3(.5, 4.3, -.1), new V3(1.2, 4.4, -.1)]), 30, .055, 12), tubeMat); PA.tube.add(tubeBend);
+  const lockRing = k => { const r = new THREE.Mesh(new THREE.RingGeometry(.1, .125, 40), new THREE.MeshBasicMaterial({ color: palette().accent, transparent: true, opacity: 0, side: THREE.DoubleSide, depthTest: false })); r.renderOrder = 9; asm.add(r); return r; };
+  const rings = { tube: lockRing(), board: lockRing(), ph: lockRing() }; rings.tube.position.set(0, -1.55, -.1); rings.board.position.set(.02, .65, .13); rings.ph.position.set(-.2, -.7, .06);
+  ctx.onTheme(() => Object.values(rings).forEach(r => r.material.color.setHex(palette().accent)));
+  Object.values(PA).forEach(g => g.visible = false);
+  const anchors = { tip: new V3(0, -1.84, 0), teeth: new V3(0, -1.35, .2), ec: new V3(0, -.85, .22), window: new V3(0, -.15, .24), ph: new V3(-.2, .1, .08), mark: new V3(0, .75, .2), bore: new V3(0, -1.6, -.15), top: new V3(0, 1.8, .1) };
   camera.position.set(0, .2, 8.6); const look = new V3(0, -.7, 0), tipL = new V3(0, -1.85, 0);
-  let spin = .6;
+  let spin = .6, asmRot = 0;
   return { anchors, group: outer, update(t, p, ptr, dt) {
     let ex = 0, y = 0, cz = 8.6, ly = -.4, dose = false, x = 0, ins = 0;
     if (mode === 'loose') { y = Math.sin(t) * .08; spin += dt * .5; }
-    else {
+    else if (mode === 'story') {
+      const asmK = sstep(.43, .5, p) * (1 - sstep(.78, .84, p));
+      ex = sstep(.11, .2, p) * (1 - sstep(.74, .8, p)) * lerp(1, .24, sstep(.43, .5, p)); 
+      const zoom = sstep(.24, .3, p) * (1 - sstep(.44, .5, p));
+      cz = lerp(8.6, 5.8, zoom); ly = lerp(-.4, -1.4, zoom);
+      cz = lerp(cz, 8.2, asmK); ly = lerp(ly, .55, asmK);
+      ins = sstep(.82, .9, p); y = lerp(0, -1.2, ins) + Math.sin(t * 1.1) * .05 * (1 - ins);
+      pot.visible = ins > .01; pot.position.y = -2.4; shadow.position.y = lerp(-3.1, -3.25, ins);
+      if (ins > 0) { cz = lerp(cz, 9.6, ins); ly = lerp(ly, -.9, ins); }
+      dose = p > .92; spin += dt * .12 * (1 - asmK);
+      const seg = (a, b, k) => { const u = sstep(a, b, p); const g = PA[k]; g.visible = p > a - .015 && true; g.position.y = (1 - u) * 4.4; g.position.z = (1 - u) * .5; g.userData.u = u; const pulse = clamp((p - b) / .03); rings[k].material.opacity = pulse > 0 && pulse < 1 ? (1 - pulse) * .9 : 0; rings[k].scale.setScalar(1 + pulse * 4); rings[k].lookAt(camera.position); };
+      seg(.455, .53, 'tube'); seg(.565, .64, 'board'); seg(.675, .75, 'ph');
+      tubeMat.opacity = .62;
+      asmRot = asmK;
+    } else {
       ex = sstep(.14, .3, p) * (1 - sstep(.52, .64, p));
       const zoom = sstep(.34, .44, p) * (1 - sstep(.5, .6, p));
       cz = lerp(8.6, 5.8, zoom); ly = lerp(-.4, -1.4, zoom);
@@ -149,7 +184,8 @@ builders.probe = async (ctx) => {
     // specular sweep: a light travels across the part as you scroll (Apple-style highlight pass)
     L.sweep.intensity = mode === 'loose' ? 0 : 60 * Math.sin(clamp(p * 5 % 1) * Math.PI);
     L.sweep.position.set(lerp(-6, 6, (p * 5) % 1), 1.5, 4);
-    const base = mode === 'loose' ? spin + ptr.x * .5 : spin + sstep(0, .5, p) * 1.1 + sstep(.55, .8, p) * .9 + ptr.x * .35;
+    let base = mode === 'loose' ? spin + ptr.x * .5 : spin + sstep(0, .5, p) * 1.1 + sstep(.55, .8, p) * .9 + ptr.x * .35;
+    if (mode === 'story') { base = lerp(spin + sstep(0, .4, p) * 1.1, 1.15 + ptr.x * .15, asmRot) + sstep(.8, .95, p) * 1.0; }
     if (camera.aspect < .9) cz *= 1.3;
     camera.position.z += (cz - camera.position.z) * Math.min(1, dt * 5);
     look.y += (ly - look.y) * Math.min(1, dt * 5); camera.lookAt(look);
