@@ -533,7 +533,7 @@ section{position:relative}
 @keyframes hbpulse{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--green) 6%,transparent)}}
 .hero-badge b{font-weight:600;color:var(--green)}
 .hero-badge i{font-style:normal;display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--btn);color:var(--btn-text)}
-@media(max-width:700px){.hero-badge span:not(.dot){display:none}.hero-badge b::after{content:" · the RootStake module + app";font-weight:400;color:var(--sec)}}
+@media(max-width:700px){.hero-badge span:not(.dot){display:none}.hero-badge b::after{content:" · Measure + Eco";font-weight:400;color:var(--sec)}}
 .hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1040px;margin:clamp(40px,6vw,70px) auto 0;border-top:1px var(--rs,solid) var(--rule);text-align:left}
 .hstats>div{padding:22px 22px 8px 0;border-right:1px var(--rs,solid) var(--rule);margin-right:22px}
 .hstats>div:last-child{border:0;margin:0}
@@ -576,3 +576,18 @@ html{scroll-padding-top:80px}
 .sun::before{content:"";position:absolute;inset:0;background:radial-gradient(34% 12% at 16% 24%,rgba(255,255,255,.7),transparent 72%),radial-gradient(30% 11% at 84% 18%,rgba(255,255,255,.6),transparent 72%),radial-gradient(26% 9% at 62% 36%,rgba(255,255,255,.45),transparent 72%);filter:blur(6px)}
 [data-mode="dark"] .sun{background:linear-gradient(180deg,color-mix(in srgb,var(--leaf3d) 26%,transparent) 0%,color-mix(in srgb,var(--leaf3d) 9%,transparent) 45%,transparent 88%);opacity:1}
 [data-mode="dark"] .sun::before{background:radial-gradient(34% 12% at 16% 24%,rgba(255,255,255,.07),transparent 72%),radial-gradient(30% 11% at 84% 18%,rgba(255,255,255,.06),transparent 72%)}
+
+/* Meco name: Measure + Eco merge into Meco as you scroll */
+.meco-name{--k:0;margin-bottom:clamp(50px,7vw,110px);text-align:center}
+.mn-words{display:flex;justify-content:center;align-items:baseline;font-family:var(--serif);font-weight:var(--dw,300);letter-spacing:var(--dls,-.04em);font-size:clamp(46px,12.5vw,210px);line-height:1;white-space:nowrap;text-transform:var(--dtt,none)}
+.mn-words b,.mn-words i{font-weight:inherit;font-style:normal}
+.mn-words b{color:color-mix(in srgb,var(--green) calc(var(--k)*100%),var(--text))}
+.mn-words i{display:inline-block;overflow:hidden;vertical-align:baseline;opacity:calc(1 - var(--k)*1.35);color:var(--sec)}
+.mn-a i{max-width:calc(3.2em*(1 - var(--k)))}.mn-b i{max-width:calc(.7em*(1 - var(--k)))}
+.mn-plus{display:inline-block;overflow:hidden;max-width:calc(1.3em*(1 - var(--k)));opacity:calc(1 - var(--k)*1.6);padding:0 calc(.18em*(1 - var(--k)));color:var(--green)}
+.mn-eq{margin-top:clamp(14px,2vw,26px);font-family:var(--mono);font-size:clamp(11px,1.2vw,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--sec);opacity:calc((var(--k) - .55)*3)}
+.mn-eq strong{color:var(--green);font-weight:400}
+.mn-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:clamp(34px,5vw,64px);border-top:1px var(--rs,solid) var(--rule);text-align:left}
+.mn-cols>div{padding:24px 24px 6px 0;border-right:1px var(--rs,solid) var(--rule);margin-right:24px}.mn-cols>div:last-child{border:0;margin:0}
+.mn-cols .label{display:block;margin-bottom:10px}.mn-cols .p{font-size:15.5px}
+@media(max-width:800px){.mn-cols{grid-template-columns:1fr}.mn-cols>div{border:0;margin:0;padding:18px 0 4px}}

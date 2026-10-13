@@ -35,7 +35,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="scrim" id="scrim"></div>
 <aside class="index" id="index" aria-hidden="true"><div class="ihead"><span class="label">Index</span><button class="pillbtn xbtn" id="xBtn">Close <span aria-hidden="true">✕</span></button></div>
 <nav class="list" aria-label="Pages">${pages.map((p, i) => `<a href="${p[0]}" class="${p[2] === page ? 'cur' : ''}"${p[2] === page ? ' aria-current="page"' : ''}><span class="n">0${i + 1}</span><span class="t">${p[1]}</span><span class="ar">→</span></a>`).join('')}<a href="index.html#meco" class="meco-link"><span class="n">★</span><span class="t">Meco</span><span class="ar">→</span></a></nav>
-<div class="side"><p class="serif d4">Don't count what we plant.<br><em>Count what we keep alive.</em></p><p class="label" style="margin-top:20px">Rooted SG · Singapore 2026</p></div></aside>`);
+<div class="side"><p class="serif d4">Don't count what we plant.<br><em>Count what we keep alive.</em></p><p class="label" style="margin-top:20px">Rooted SG · Singapore 2026<br>Meco = Measure + Eco</p></div></aside>`);
 
 document.body.insertAdjacentHTML('beforeend', `
 <footer class="foot"><div class="wrap">
@@ -44,7 +44,7 @@ document.body.insertAdjacentHTML('beforeend', `
 <div><div class="label" style="margin-bottom:12px">Inside</div><a href="index.html#meco">Meco · heymeco.xyz</a><a href="rootstake.html#parts">The probe</a><a href="rootstake.html#tissue">The tissue</a><a href="how-it-works.html#loop">The loop</a><a href="how-it-works.html#tiers">What is real</a></div>
 <div><div class="label" style="margin-bottom:12px">Entry</div><a href="impact.html#entries">IYEC 2026</a><a href="impact.html#team">The team</a></div></div>
 <div class="big" id="bigword" aria-hidden="true">${'Rooted SG'.split('').map(c => `<span>${c === ' ' ? '&nbsp;' : c}</span>`).join('')}</div>
-<div class="fine label"><span>© 2026 Rooted SG · Singapore</span><span>Every number here comes from our survey, our build, or a named source.</span></div></div></footer>`);
+<div class="fine label"><span>© 2026 Rooted SG · Singapore · Meco = Measure + Eco</span><span>Every number here comes from our survey, our build, or a named source.</span></div></div></footer>`);
 
 $('#themeBtn').addEventListener('click', () => setMode(root.dataset.mode === 'dark' ? 'light' : 'dark'));
 const skinsEl = $('#skins'), skinBtn = $('#skinBtn');
@@ -124,6 +124,7 @@ function init() {
   $$('[data-count]').forEach(odometer);
   $$('.lrow').forEach(r => ScrollTrigger.create({ trigger: r, start: 'top 82%', once: true, onEnter: () => gsap.to(r, { '--s': 1, duration: 1.6, ease: 'expo.out' }) }));
   $$('.bytes').forEach(b => ScrollTrigger.create({ trigger: b, start: 'top 88%', once: true, onEnter: () => b.classList.add('go') }));
+  $$('#mname').forEach(el => { if (reduced) { el.style.setProperty('--k', 1); return; } ScrollTrigger.create({ trigger: $('.mn-words', el), start: 'top 88%', end: 'top 30%', scrub: .4, onUpdate: s => el.style.setProperty('--k', s.progress.toFixed(3)) }); });
   $$('.marq-t').forEach(t => { t.innerHTML += t.innerHTML; gsap.to(t, { xPercent: -50, repeat: -1, duration: 38, ease: 'none' }); });
   $$('.tilt').forEach(w => { const p = $('.ph', w) || w; const rx = gsap.quickTo(p, 'rotationX', { duration: .8, ease: 'power3' }), ry = gsap.quickTo(p, 'rotationY', { duration: .8, ease: 'power3' }); gsap.set(w, { perspective: 1200 });
     w.addEventListener('pointermove', e => { const r = w.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 16); rx(-((e.clientY - r.top) / r.height - .5) * 12); }); w.addEventListener('pointerleave', () => { rx(0); ry(0); }); });
@@ -151,7 +152,8 @@ function init() {
     show(0);
   });
   $$('.cloud').forEach((c, i) => gsap.to(c, { y: -90 - i * 30, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: '+=900', scrub: true } }));
-  addEventListener('load', () => ScrollTrigger.refresh());
+  ScrollTrigger.sort(); ScrollTrigger.refresh();
+  addEventListener('load', () => { ScrollTrigger.sort(); ScrollTrigger.refresh(); });
 }
 if (window.TEAM) $$('[data-team]').forEach(w => { w.innerHTML = window.TEAM.map((m, i) => `<div class="member" data-reveal style="--k:${i}"><div class="ph-box"><span>${m.name.trim()[0]}</span><i class="no">0${i + 1}</i></div><h4>${m.name}</h4>${m.role ? `<span class="label">${m.role}</span>` : ''}</div>`).join(''); });
 $$('.hero-h').forEach(h => h.setAttribute('data-hero', ''));
