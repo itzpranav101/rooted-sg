@@ -572,9 +572,9 @@ html{scroll-padding-top:80px}
 .pill[role=button]{cursor:pointer}
 
 /* green sky behind every hero, in every theme */
-.sun{inset:0;left:0;top:0;width:100%;height:100%;transform:none;opacity:1;background:linear-gradient(180deg,color-mix(in srgb,var(--leaf3d) 38%,transparent) 0%,color-mix(in srgb,var(--leaf3d) 16%,transparent) 42%,transparent 88%)}
-.sun::before{content:"";position:absolute;inset:0;background:radial-gradient(34% 12% at 16% 24%,rgba(255,255,255,.7),transparent 72%),radial-gradient(30% 11% at 84% 18%,rgba(255,255,255,.6),transparent 72%),radial-gradient(26% 9% at 62% 36%,rgba(255,255,255,.45),transparent 72%);filter:blur(6px)}
-[data-mode="dark"] .sun{background:linear-gradient(180deg,color-mix(in srgb,var(--leaf3d) 26%,transparent) 0%,color-mix(in srgb,var(--leaf3d) 9%,transparent) 45%,transparent 88%);opacity:1}
+.sun{inset:0;left:0;top:0;width:100%;height:100%;transform:none;opacity:1;background:linear-gradient(180deg,color-mix(in srgb,var(--leaf3d) 20%,transparent) 0%,color-mix(in srgb,var(--leaf3d) 8%,transparent) 42%,transparent 85%)}
+.sun::before{content:"";position:absolute;inset:0;background:radial-gradient(34% 12% at 16% 24%,rgba(255,255,255,.5),transparent 72%),radial-gradient(30% 11% at 84% 18%,rgba(255,255,255,.4),transparent 72%),radial-gradient(26% 9% at 62% 36%,rgba(255,255,255,.45),transparent 72%);filter:blur(6px)}
+[data-mode="dark"] .sun{background:linear-gradient(180deg,color-mix(in srgb,var(--leaf3d) 14%,transparent) 0%,color-mix(in srgb,var(--leaf3d) 5%,transparent) 45%,transparent 85%);opacity:1}
 [data-mode="dark"] .sun::before{background:radial-gradient(34% 12% at 16% 24%,rgba(255,255,255,.07),transparent 72%),radial-gradient(30% 11% at 84% 18%,rgba(255,255,255,.06),transparent 72%)}
 
 /* Meco name: Measure + Eco merge into Meco as you scroll */
@@ -591,3 +591,6 @@ html{scroll-padding-top:80px}
 .mn-cols>div{padding:24px 24px 6px 0;border-right:1px var(--rs,solid) var(--rule);margin-right:24px}.mn-cols>div:last-child{border:0;margin:0}
 .mn-cols .label{display:block;margin-bottom:10px}.mn-cols .p{font-size:15.5px}
 @media(max-width:800px){.mn-cols{grid-template-columns:1fr}.mn-cols>div{border:0;margin:0;padding:18px 0 4px}}
+
+.kwchip{color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
+.mn-cols .p{font-size:15px}
