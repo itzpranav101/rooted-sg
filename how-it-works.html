@@ -1,46 +1,52 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-skin="glasshouse" data-mode="dark">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>How it works — Rooted SG</title>
-<meta name="description" content="Sense, decide, deliver, verify: the closed loop, the stake mesh and the rule for what counts as measured.">
-<script>try{var t=localStorage.getItem('rs-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}catch(e){}</script>
+<title>The system — Rooted SG</title>
+<meta name="description" content="Follow one reading from the plant stem to the phone and back to the roots: electrode, probe, pod, Bluetooth, pumps and nutrition.">
+<script>try{var d=document.documentElement,k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k)d.dataset.skin=k;d.dataset.mode=m||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=DM+Mono:wght@400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Outfit:wght@200;300;400&family=Space+Mono&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body data-page="how">
 <header class="page-hero">
   <div class="sun"></div>
   <div class="wrap" style="position:relative;z-index:3">
-    <span class="label" data-intro>How it works</span>
-    <h1 class="display hero-h">Measure. Act. Check it worked.</h1>
-    <p class="lede" data-intro>That last step is what makes the rest honest. If the moisture didn't recover, the app says so instead of dosing again.</p>
+    <span class="label" data-intro>The system</span>
+    <h1 class="display hero-h">From the stem to the screen, and back to the roots.</h1>
+    <p class="lede" data-intro>The app and the stake aren't two products. They're one loop. Scroll once and follow a single reading all the way round.</p>
   </div>
 </header>
 
-<section class="sec" id="loop" style="padding-top:0">
-  <div class="wrap feat">
-    <div class="stagebox" data-reveal><canvas data-scene="loop"></canvas></div>
-    <div class="copy" data-reveal data-stagger>
-      <span class="label"><b>The closed loop</b></span>
-      <h3 class="display d3">It starts at the floor. It stops at the <em>target</em>.</h3>
-      <p class="p">Two different numbers, so it can never chatter on and off around one threshold. An eleven-second cycle: the reading falls to the floor, both impellers spin up, the streams merge at the Y, water leaves at the nose, and the reading climbs back.</p>
-      <div style="margin-top:34px">
-        <div class="loopstep"><span class="label">01</span><div><h4>Sense</h4><p class="p">Moisture, conductivity, air and light, stamped with the time.</p></div></div>
-        <div class="loopstep"><span class="label">02</span><div><h4>Decide</h4><p class="p">Compare to the crop's own band, not a universal number.</p></div></div>
-        <div class="loopstep"><span class="label">03</span><div><h4>Deliver</h4><p class="p">Twin pumps, one Y, one bore to the nose. Every dose is an event with a volume.</p></div></div>
-        <div class="loopstep"><span class="label">04</span><div><h4>Verify</h4><p class="p">If moisture didn't recover, say so.</p></div></div>
-      </div>
+<section class="pin sys" data-pin="11" id="loop">
+  <div class="pin-grid">
+    <div class="pin-vis"><canvas data-scene="system"></canvas>
+      <div class="chapnav"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="hud"><div>Moisture<b id="hud-moist">31%</b></div><div>Soil EC<b id="hud-ec">1.4 mS</b></div><div>Frame<b id="hud-frame">—</b></div><div>Pumps<b id="hud-pump">off</b></div></div>
+    </div>
+    <div class="pin-steps">
+<div class="pin-step"><span class="label"><b>01</b> — Overview</span><h3 class="display d3">One plant. One stake. <em>One phone.</em></h3><p class="p">The plant is measured twice, the pot is watered only when it needs it, and the app checks that it worked. Everything you are about to see is one connected loop.</p><dl class="kv"><dt>Plant</dt><dd>a potted herb</dd><dt>Stake</dt><dd>probe + pod + stem clip</dd><dt>Phone</dt><dd>the Rooted app</dd></dl><div><span class="tag">Closed loop</span></div></div>
+<div class="pin-step"><span class="label"><b>02</b> — 1 — The electrode</span><h3 class="display d3">Two needles in the <em>stem</em>.</h3><p class="p">A sprung clip closes on the stem and drives two titanium needles through the outer tissue into the conducting core. The clip and its jointed arm are 3D-printed; the arm snaps together ball-in-socket.</p><dl class="kv"><dt>Sweep</dt><dd>1 kHz → 100 kHz</dd><dt>Low</dt><dd>current goes around the cells</dd><dt>High</dt><dd>current goes through them</dd></dl><div><span class="tag">Prototype</span></div></div>
+<div class="pin-step"><span class="label"><b>03</b> — 2 — The probe</span><h3 class="display d3">Moisture, and the <em>salts</em> in it.</h3><p class="p">In the pot, a resistive board behind a bevelled window reads moisture. Two turns of bare copper read how well the soil conducts; salts raise conductivity, so it's how we watch what the plant is being fed.</p><dl class="kv"><dt>Moisture</dt><dd>the reading everything is checked against</dd><dt>Soil EC</dt><dd>conductivity, mS</dd><dt>Depth</dt><dd>fixed by the soil-line mark</dd></dl><div><span class="tag">Built</span></div></div>
+<div class="pin-step"><span class="label"><b>04</b> — 3 — The pod</span><h3 class="display d3">A little brain on a <em>roof</em>.</h3><p class="p">An ESP32-S3 under a gable roof with two 70 mm solar panels. It samples soil, air, light and the electrode, stamps the time, and packs the result into one 46-byte frame with a CRC-16 on the end.</p><dl class="kv"><dt>Air</dt><dd>temperature, humidity, pressure</dd><dt>Light</dt><dd>daily-light integral</dd><dt>Absent sensor</dt><dd>a sentinel, never a fake zero</dd></dl><div><span class="tag">Built</span></div></div>
+<div class="pin-step"><span class="label"><b>05</b> — 4 — The link</span><h3 class="display d3">Forty-six bytes <em>through the air</em>.</h3><p class="p">The frame goes out over Bluetooth LE. Stakes on one block form a mesh, so a block shares one weather. A block is only described when at least three stakes from two accounts have reported.</p><dl class="kv"><dt>Link</dt><dd>Bluetooth LE</dd><dt>Encoders</dt><dd>Swift and Kotlin, byte-identical</dd><dt>Privacy</dt><dd>k-anonymity, enforced twice</dd></dl><div><span class="tag">Built</span></div></div>
+<div class="pin-step"><span class="label"><b>06</b> — 5 — The decision</span><h3 class="display d3">A <em>verb</em>, not a dashboard.</h3><p class="p">The app compares the reading with that crop's own band and answers in words: Water it now, or Nothing to do today. The score is demoted to a small ring, as evidence. The command goes back down the same link.</p><dl class="kv"><dt>Starts</dt><dd>at the floor</dd><dt>Stops</dt><dd>at the target</dd><dt>Why two</dt><dd>so it never chatters around one number</dd></dl><div><span class="tag">Built</span></div></div>
+<div class="pin-step"><span class="label"><b>07</b> — 6 — The pumps</span><h3 class="display d3">A relay, two pumps, <em>one Y</em>.</h3><p class="p">The relay closes. Two 5 V pumps draw from the reservoir and the feed bottle and merge at a Y-connector into a single line. An eleven-second cycle, and every dose is logged with its volume.</p><dl class="kv"><dt>Pump A</dt><dd>water</dd><dt>Pump B</dt><dd>feed, for fertigation</dd><dt>Cycle</dt><dd>about eleven seconds</dd></dl><div><span class="tag">Prototype</span></div></div>
+<div class="pin-step"><span class="label"><b>08</b> — 7 — Delivery</span><h3 class="display d3">Down the bore, out of the <em>nose</em>.</h3><p class="p">The line runs into the top of the probe and down a hidden 4.5 mm bore, leaving at the centre of the nose so it reaches the root ball, not the dry crust. Moisture climbs and the roots brighten.</p><dl class="kv"><dt>Bore</dt><dd>4.5 mm, hidden down the back</dd><dt>Exit</dt><dd>centre of the nose</dd><dt>EC</dt><dd>rises with the feed, and is watched</dd></dl><div><span class="tag">Built</span></div></div>
+<div class="pin-step"><span class="label"><b>09</b> — 8 — Verify</span><h3 class="display d3">Did it <em>work</em>? Check.</h3><p class="p">The last step is what makes the rest honest. If moisture recovered, it counts as a verified plant-day. If it didn't, the app says so instead of dosing again.</p><dl class="kv"><dt>Result</dt><dd>moisture back in band</dd><dt>Counts</dt><dd>one verified plant-day</dd><dt>Otherwise</dt><dd>it tells you, and stops</dd></dl><div><span class="tag">Loop closed</span></div></div>
     </div>
   </div>
+  <div class="pin-count"><b>01 / 09</b><span class="rule"><i></i></span></div>
 </section>
+
+<div class="snap" data-a="The loop" data-b="The film"></div>
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>The film</b></span><h2 class="display d2" data-split>Watch it <em>close the loop</em>.</h2></div>
-    <div class="film" data-cursor="Play"><video preload="metadata" playsinline poster="media/film-poster.jpg"><source src="media/film.mp4" type="video/mp4"></video>
+    <div class="film"><video preload="metadata" playsinline poster="media/film-poster.jpg"><source src="media/film.mp4" type="video/mp4"></video>
       <div class="bigplay"><span>Play</span></div><div class="ui"><span class="time">0:00</span><span>Rooted SG · RootStake</span></div><div class="prog"><i></i></div></div>
     <div class="chapters">
       <button data-t="0"><span class="label">0:00</span><b>The gap</b></button><button data-t="18"><span class="label">0:18</span><b>The probe</b></button><button data-t="60"><span class="label">1:00</span><b>The stem</b></button><button data-t="90"><span class="label">1:30</span><b>The tissue</b></button>
@@ -49,6 +55,8 @@
   </div>
 </section>
 
+<div class="snap" data-a="The film" data-b="The mesh"></div>
+
 <section class="sec" id="mesh" style="padding-top:0">
   <div class="wrap feat rev">
     <div class="stagebox" data-reveal><canvas data-scene="mesh"></canvas></div>
@@ -56,11 +64,13 @@
       <span class="label"><b>One stake, a whole block</b></span>
       <h3 class="display d3">A fungus needs <em>weather</em>, not luck.</h3>
       <p class="p">Hours of high humidity, a temperature band, a canopy that stays wet. Those conditions are shared across a block, so one well-placed station speaks for the plants around it. Several stakes turn a number into a map.</p>
-      <div class="limit" style="margin-top:28px"><h5>What it does not do</h5><p>The needles read the plant they are in. They don't sense a neighbour's tissue or locate a fungus. A block warning comes from shared weather, and is raised only when two kinds of evidence agree.</p></div>
+      <div class="limit" style="margin-top:26px"><h5>What it does not do</h5><p>The needles read the plant they are in. They don't sense a neighbour's tissue or locate a fungus. A block warning comes from shared weather, and is raised only when two kinds of evidence agree.</p></div>
       <div class="limit"><h5>Privacy, enforced twice</h5><p>A block is only described when at least 3 stakes from at least 2 accounts have reported, checked in the API and again in the database view.</p></div>
     </div>
   </div>
 </section>
+
+<div class="snap" data-a="The mesh" data-b="The frame"></div>
 
 <section class="sec" style="padding-top:0">
   <div class="wrap">
@@ -71,12 +81,14 @@
   </div>
 </section>
 
+<div class="snap" data-a="The frame" data-b="The tiers"></div>
+
 <section class="sec" id="tiers" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>The tier rule</b></span><h2 class="display d2" data-split>Every metric says how <em>real</em> it is.</h2></div>
     <div class="tt">
       <div class="r"><span class="k b">BUILT</span><h4>You can trust the number</h4><p>Soil moisture and conductivity, air temperature, humidity and pressure, light. Printed, wired and logged.</p></div>
-      <div class="r"><span class="k p">PROTOTYPE</span><h4>Read it as a direction</h4><p>Stem impedance. It works on the bench; we report trend and timing, never a calibrated figure, and never a stress the soil and air sensors can't corroborate.</p></div>
+      <div class="r"><span class="k p">PROTOTYPE</span><h4>Read it as a direction</h4><p>Stem impedance and the twin-pump loop. They work on the bench; impedance is reported as trend and timing, never a calibrated figure, and never a stress the soil and air can't corroborate.</p></div>
       <div class="r"><span class="k r2">ROADMAP</span><h4>Simulated, and labelled</h4><p>Nitrate, phosphate, potassium and sap flow. The UI never shows these as measurements; they come from a simulator and say so. Electro-culture ships off, logged as an experiment.</p></div>
     </div>
   </div>
@@ -84,7 +96,7 @@
 
 <section class="closing"><div class="wrap closer">
   <h2 class="display d1" data-split style="max-width:12ch;margin:0 auto">Why does this <em>matter</em>?</h2>
-  <div class="cta" data-reveal><a class="btn" href="impact.html" data-t>Read the story <i>→</i></a><a class="btn line" href="rootstake.html" data-t>Back to RootStake</a></div>
+  <div class="cta" data-reveal><a class="btn" href="impact.html" data-t>Read the story <i>→</i></a><a class="btn line" href="rootstake.html" data-t>The real CAD</a></div>
 </div></section>
 <script>
 (() => { const b = document.getElementById('bytes'); for (let i = 0; i < 46; i++) { const e = document.createElement('i'); e.style.setProperty('--i', i); e.style.setProperty('--h', (30 + ((i * 37) % 60)) + '%'); if (i > 43) e.className = 'crc'; e.textContent = i % 8 === 0 ? i : ''; b.appendChild(e); } })();

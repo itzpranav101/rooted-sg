@@ -14,7 +14,7 @@ def callouts():
 pages={'index':('home','ROOTED SG — Count what we keep alive','Rooted SG: a Singapore growing app, and RootStake, the sensor stake that proves your plant is still alive.'),
 'app':('app','The app — Rooted SG','Garden, Market, Quests and BioDex. The Rooted SG iOS app, in real footage.'),
 'rootstake':('rootstake','RootStake — Rooted SG','The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.'),
-'how-it-works':('how','How it works — Rooted SG','Sense, decide, deliver, verify: the closed loop, the stake mesh and the rule for what counts as measured.'),
+'how-it-works':('how','The system — Rooted SG','Follow one reading from the plant stem to the phone and back to the roots: electrode, probe, pod, Bluetooth, pumps and nutrition.'),
 'impact':('impact','The story — Rooted SG','Singapore counts what it plants, not what it keeps alive. The survey, the gap, and the team of five.')}
 for name,(pg,title,desc) in pages.items():
     try: body=open(f'_src/{name}.body.html').read()

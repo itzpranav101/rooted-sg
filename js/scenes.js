@@ -8,7 +8,9 @@ const V3 = THREE.Vector3;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 const sstep = (a, b, x) => { x = clamp((x - a) / (b - a)); return x * x * (3 - 2 * x); };
 const lerp = (a, b, t) => a + (b - a) * t;
-const isDark = () => document.documentElement.dataset.theme === 'dark';
+const isDark = () => document.documentElement.dataset.mode === 'dark';
+const cvar = (n, fb) => { const v = getComputedStyle(document.documentElement).getPropertyValue(n).trim(); return v || fb; };
+const hx = (n, fb) => new THREE.Color(cvar(n, fb)).getHex();
 
 const stlCache = {};
 const loader = new STLLoader();
@@ -17,10 +19,10 @@ const loadSTL = url => stlCache[url] ||= new Promise((res, rej) => loader.load(u
 function palette() {
   const d = isDark();
   return {
-    white: d ? 0xf3efe6 : 0xe9e4d6, leaf: d ? 0x74d68f : 0x1b7a45, soil: d ? 0x5a3d2b : 0x6b4a33,
+    white: hx('--white3d', '#eee'), leaf: hx('--leaf3d', '#4a9'), soil: hx('--soil3d', '#654'),
     glass: d ? 0xcfeedd : 0xdfeee4, steel: 0xcfd6d2, dark: d ? 0x2a3a31 : 0x25302a,
-    ground: d ? 0x0a2418 : 0xece7da, building: d ? 0x1c4a34 : 0xf1ece0, win: d ? 0x2c6a4b : 0xd9d3c3,
-    node: d ? 0xa3e68b : 0x0b5a32, env: d ? .8 : 1.0,
+    ground: hx('--ground3d', '#ddd'), building: hx('--bld3d', '#ccc'), win: hx('--win3d', '#aaa'),
+    node: hx('--accent3d', '#3a6'), accent: hx('--warm3d', '#e96'), env: d ? .8 : 1.0,
   };
 }
 function mats() {
@@ -191,7 +193,7 @@ builders.mesh = async (ctx) => {
     const a = nodes[i].n.position, b = nodes[j].n.position; if (a.distanceTo(b) > 3.6) continue;
     const mid = a.clone().add(b).multiplyScalar(.5); mid.y += .5; const curve = new THREE.QuadraticBezierCurve3(a, mid, b);
     scene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(30)), lm));
-    const pk = new THREE.Mesh(new THREE.SphereGeometry(.05, 10, 10), new THREE.MeshBasicMaterial({ color: 0xed9d76 })); scene.add(pk); links.push({ curve, pk, off: Math.random() });
+    const pk = new THREE.Mesh(new THREE.SphereGeometry(.05, 10, 10), new THREE.MeshBasicMaterial({ color: palette().accent })); scene.add(pk); links.push({ curve, pk, off: Math.random() });
   }
   camera.position.set(0, 5, 13);
   return { update(t, p, ptr) {
@@ -211,7 +213,7 @@ builders.stem = async (ctx) => {
   for (let i = 0; i < 18; i++) { const a = i / 18 * Math.PI * 2; const s = new THREE.Mesh(new THREE.TorusGeometry(.07, .012, 6, 14), new THREE.MeshBasicMaterial({ color: 0x1d6b3f, transparent: true, opacity: .4 })); s.position.set(Math.cos(a) * .4, 0, Math.sin(a) * .4); s.lookAt(0, 0, 0); g.add(s); }
   [-1, 1].forEach(s => { const j = new THREE.Mesh(new THREE.BoxGeometry(.4, .36, .62), M.dark); j.position.set(s * 1.15, 0, 0); g.add(j); const n = new THREE.Mesh(new THREE.ConeGeometry(.04, .9, 12), M.steel); n.rotation.z = -s * Math.PI / 2; n.position.set(s * .72, 0, 0); g.add(n); });
   const arm = new THREE.Mesh(new THREE.TorusGeometry(1.35, .09, 10, 48, Math.PI), M.dark); arm.rotation.z = Math.PI; g.add(arm);
-  const N = 46, NA = 3, beads = new THREE.InstancedMesh(new THREE.SphereGeometry(.03, 10, 10), new THREE.MeshBasicMaterial({ color: 0xed7a3a, depthTest: false, transparent: true }), N * NA); beads.renderOrder = 10; g.add(beads);
+  const N = 46, NA = 3, beads = new THREE.InstancedMesh(new THREE.SphereGeometry(.03, 10, 10), new THREE.MeshBasicMaterial({ color: palette().accent, depthTest: false, transparent: true }), N * NA); beads.renderOrder = 10; g.add(beads);
   const tmp = new THREE.Object3D(); camera.position.set(3.4, 1.6, 9.2);
   return { update(t, p, ptr) {
     const f = sstep(.12, .88, p), bow = lerp(.62, 0, f), freq = lerp(2, 20, f);
@@ -229,16 +231,141 @@ builders.loop = async (ctx) => {
   const g = new THREE.Group(); scene.add(g); g.rotation.x = -.95;
   const ringM = new THREE.MeshPhysicalMaterial({ color: isDark() ? 0xf3efe6 : 0x121a15, roughness: .3, clearcoat: 1 }); ctx.onTheme(() => ringM.color.setHex(isDark() ? 0xf3efe6 : 0x121a15));
   g.add(new THREE.Mesh(new THREE.TorusGeometry(2.2, .05, 16, 128), ringM));
-  const cols = [0x74d68f, 0xed9d76, 0x7fd0ff, 0xc9b6f2], pads = [];
+  const cols = [0x74d68f, palette().accent, 0x7fd0ff, 0xc9b6f2], pads = [];
   cols.forEach((c, i) => { const a = i / 4 * Math.PI * 2 + Math.PI / 4; const m = new THREE.Mesh(new THREE.CylinderGeometry(.5, .5, .24, 48), new THREE.MeshPhysicalMaterial({ color: c, roughness: .35, clearcoat: .8 })); m.rotation.x = Math.PI / 2; m.position.set(Math.cos(a) * 2.2, Math.sin(a) * 2.2, 0); g.add(m); pads.push(m); });
-  const pulse = new THREE.Mesh(new THREE.SphereGeometry(.15, 20, 20), new THREE.MeshBasicMaterial({ color: 0xed9d76 })); g.add(pulse);
-  const trail = Array.from({ length: 16 }, (_, i) => { const m = new THREE.Mesh(new THREE.SphereGeometry(.12 * (1 - i / 18), 12, 12), new THREE.MeshBasicMaterial({ color: 0xed9d76, transparent: true, opacity: .5 * (1 - i / 16) })); g.add(m); return m; });
+  const pulse = new THREE.Mesh(new THREE.SphereGeometry(.15, 20, 20), new THREE.MeshBasicMaterial({ color: palette().accent })); g.add(pulse);
+  const trail = Array.from({ length: 16 }, (_, i) => { const m = new THREE.Mesh(new THREE.SphereGeometry(.12 * (1 - i / 18), 12, 12), new THREE.MeshBasicMaterial({ color: palette().accent, transparent: true, opacity: .5 * (1 - i / 16) })); g.add(m); return m; });
   scene.add(contactShadow(3.2, -1.8, .22)); camera.position.set(0, 2.2, 10.2);
   return { update(t, p, ptr) {
     const s = (t * .22) % 1, a = s * Math.PI * 2 + Math.PI / 4; pulse.position.set(Math.cos(a) * 2.2, Math.sin(a) * 2.2, .1);
     trail.forEach((m, i) => { const aa = a - i * .07; m.position.set(Math.cos(aa) * 2.2, Math.sin(aa) * 2.2, .1); });
     pads.forEach((m, i) => { const d = Math.abs((s * 4 - i - .25 + 6) % 4), k = Math.max(0, 1 - Math.min(d, 4 - d)); m.scale.setScalar(1 + k * .25); m.position.z = k * .3; });
     g.rotation.z = t * .05; g.rotation.y = ptr.x * .35; g.rotation.x = -.95 + ptr.y * .2; camera.lookAt(0, 0, 0);
+  } };
+};
+
+
+// SYSTEM — the whole rig: electrode → probe → pod → BLE → phone → relay → pumps → bore → roots → verify
+builders.system = async (ctx) => {
+  const { scene, camera, el } = ctx, M = mats(), PP = palette, tex = new THREE.TextureLoader();
+  const root = new THREE.Group(); scene.add(root);
+  const hud = el.closest('[data-pin]'), H = id => hud && hud.querySelector('#' + id);
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(44, 64), new THREE.MeshStandardMaterial({ color: PP().ground, roughness: 1 })); ground.rotation.x = -Math.PI / 2; ground.position.y = -.96; root.add(ground);
+  root.add(contactShadow(2.6, -.95, .3));
+  const pot = glassPot(M, 1.3, 1.9); root.add(pot);
+  const soilTop = pot.children[2];
+  // plant
+  const plant = new THREE.Group(); plant.position.set(0, .608, 0); root.add(plant);
+  const stemCurve = new THREE.CatmullRomCurve3([new V3(0, 0, 0), new V3(.03, 1, .02), new V3(-.02, 1.9, -.02), new V3(.04, 2.9, .02)]);
+  const stemMat = new THREE.MeshStandardMaterial({ color: PP().leaf, roughness: .55 });
+  plant.add(new THREE.Mesh(new THREE.TubeGeometry(stemCurve, 48, .115, 12), stemMat));
+  const lg = new THREE.SphereGeometry(1, 28, 16); lg.scale(.8, .07, .34); lg.translate(.8, 0, 0);
+  const leafMat = new THREE.MeshPhysicalMaterial({ color: PP().leaf, roughness: .45, clearcoat: .3, side: THREE.DoubleSide });
+  const leaves = []; for (let i = 0; i < 10; i++) { const u = .22 + i / 10 * .74, m = new THREE.Mesh(lg, leafMat); m.position.copy(stemCurve.getPoint(u)); m.rotation.y = i * 2.4; m.rotation.z = .55 - u * .5; m.scale.setScalar(1.15 - u * .5); m.userData = { u, i, z: m.rotation.z }; plant.add(m); leaves.push(m); }
+  // roots
+  const roots = new THREE.Group(); root.add(roots); const rootMat = new THREE.LineBasicMaterial({ color: 0xfff3d6, transparent: true, opacity: .5 });
+  for (let i = 0; i < 16; i++) { const a = i / 16 * Math.PI * 2, pts = [new V3(0, .55, 0)]; let x = 0, y = .55, z = 0; for (let k = 1; k < 7; k++) { x += Math.cos(a) * .15 + (Math.random() - .5) * .09; z += Math.sin(a) * .15 + (Math.random() - .5) * .09; y -= .15 + Math.random() * .06; pts.push(new V3(x, y, z)); } roots.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(new THREE.CatmullRomCurve3(pts).getPoints(26)), rootMat)); }
+  const glow = new THREE.Mesh(new THREE.SphereGeometry(1, 24, 24), new THREE.MeshBasicMaterial({ color: PP().accent, transparent: true, opacity: 0, depthWrite: false })); glow.position.set(.7, -.45, .3); glow.scale.set(.7, .55, .7); root.add(glow);
+  // probe (real CAD)
+  const [pb, pf, pl] = await Promise.all(['back', 'front', 'leaf'].map(n => loadSTL(`assets/models/probe-${n}.stl`)));
+  const pg = prepCAD([pb, pf, pl], 2.5), probe = new THREE.Group();
+  [new THREE.Mesh(pg[0], M.white), new THREE.Mesh(pg[1], M.white), new THREE.Mesh(pg[2], M.green)].forEach(m => probe.add(m));
+  probe.position.set(.72, .61, .32); probe.rotation.y = .5; root.add(probe);
+  const probeTop = new V3(.72, 1.86, .32), nose = new V3(.72, -.64, .32), ecPt = new V3(.72, -.2, .5), winPt = new V3(.72, .62, .5);
+  // pod (real CAD) + antenna rings
+  const podGeo = await loadSTL('assets/models/pod.stl'); const [pgm] = prepCAD([podGeo], 2.9);
+  const podMat = new THREE.MeshPhysicalMaterial({ color: PP().white, roughness: .4, clearcoat: .5 });
+  const pod = new THREE.Mesh(pgm, podMat); pod.position.set(3.1, .5, 0); pod.rotation.y = -.5; root.add(pod);
+  const podTop = new V3(3.1, 1.95, 0);
+  // gooseneck cable → clip
+  const clipC = stemCurve.getPoint(.64).add(plant.position);
+  const neck = new THREE.CatmullRomCurve3([new V3(2.7, .75, .1), new V3(2.1, 1.7, .25), new V3(1.1, 2.7, .25), new V3(.55, 2.7, .1), new V3(clipC.x + .32, clipC.y, clipC.z + .05)]);
+  root.add(new THREE.Mesh(new THREE.TubeGeometry(neck, 60, .03, 8), M.dark));
+  const segs = new THREE.InstancedMesh(new THREE.SphereGeometry(.06, 12, 12), M.dark, 22), tm = new THREE.Object3D();
+  for (let i = 0; i < 22; i++) { tm.position.copy(neck.getPoint(i / 21)); tm.updateMatrix(); segs.setMatrixAt(i, tm.matrix); } root.add(segs);
+  const clip = new THREE.Group(); clip.position.copy(clipC); root.add(clip);
+  [-1, 1].forEach(sg => { const j = new THREE.Mesh(new THREE.BoxGeometry(.22, .2, .3), M.dark); j.position.set(sg * .3, 0, 0); clip.add(j); const n = new THREE.Mesh(new THREE.ConeGeometry(.018, .3, 10), M.steel); n.rotation.z = -sg * Math.PI / 2; n.position.set(sg * .17, 0, 0); clip.add(n); });
+  const NB = 30, NA = 3, arcM = new THREE.MeshBasicMaterial({ color: PP().accent, depthTest: false, transparent: true });
+  const beads = new THREE.InstancedMesh(new THREE.SphereGeometry(.011, 8, 8), arcM, NB * NA); beads.renderOrder = 10; clip.add(beads);
+  // reservoir + feed bottle + pumps + relay
+  const tankMat = M.glass, tank = new THREE.Mesh(new THREE.CylinderGeometry(.85, .85, 2.2, 40, 1, true), tankMat); tank.position.set(-3.5, .15, .45); root.add(tank);
+  const waterMat = new THREE.MeshPhysicalMaterial({ color: 0x7fd0ff, transparent: true, opacity: .6, roughness: .1 }); const water = new THREE.Mesh(new THREE.CylinderGeometry(.8, .8, 2.1, 40), waterMat); water.position.set(-3.5, .15, .45); root.add(water);
+  const bot = new THREE.Mesh(new THREE.CylinderGeometry(.36, .36, 1.1, 32, 1, true), tankMat); bot.position.set(-3.5, -.4, -.95); root.add(bot);
+  const feedMat = new THREE.MeshPhysicalMaterial({ color: PP().accent, transparent: true, opacity: .7, roughness: .15 }); const feed = new THREE.Mesh(new THREE.CylinderGeometry(.32, .32, 1.0, 32), feedMat); feed.position.set(-3.5, -.4, -.95); root.add(feed);
+  const pumpG = new THREE.CylinderGeometry(.24, .24, .55, 28), pumps = [[-2.1, -.55, .5, 0x7fd0ff], [-2.1, -.55, -.7, PP().accent]].map(([x, y, z, c]) => { const g = new THREE.Group(); g.position.set(x, y, z); const b = new THREE.Mesh(pumpG, M.dark); b.rotation.x = Math.PI / 2; g.add(b); const imp = new THREE.Mesh(new THREE.CylinderGeometry(.16, .16, .05, 6), new THREE.MeshStandardMaterial({ color: c, emissive: c, emissiveIntensity: .25 })); imp.rotation.x = Math.PI / 2; imp.position.z = .3; g.add(imp); root.add(g); return { g, imp, c }; });
+  const relay = new THREE.Group(); relay.position.set(-1.65, .1, .0); root.add(relay);
+  relay.add(new THREE.Mesh(new THREE.BoxGeometry(.7, .12, .5), new THREE.MeshStandardMaterial({ color: 0x1f6d49, roughness: .5 })));
+  const rcoil = new THREE.Mesh(new THREE.CylinderGeometry(.14, .14, .3, 18), new THREE.MeshStandardMaterial({ color: 0x2c5fa8, roughness: .5 })); rcoil.position.set(-.1, .2, 0); relay.add(rcoil);
+  const rled = new THREE.Mesh(new THREE.SphereGeometry(.05, 12, 12), new THREE.MeshBasicMaterial({ color: 0x444444 })); rled.position.set(.25, .1, .15); relay.add(rled);
+  // tubing
+  const brA = new THREE.CatmullRomCurve3([new V3(-2.62, -.55, .5), new V3(-2.1, -.55, .5), new V3(-1.7, -.55, .32), new V3(-1.3, -.55, -.05)]);
+  const brB = new THREE.CatmullRomCurve3([new V3(-3.16, -.55, -.9), new V3(-2.1, -.55, -.7), new V3(-1.7, -.55, -.4), new V3(-1.3, -.55, -.05)]);
+  const main = new THREE.CatmullRomCurve3([new V3(-1.3, -.55, -.05), new V3(-.95, .3, -.08), new V3(-.4, 1.7, -.05), new V3(.15, 2.65, .25), new V3(.72, 2.45, .32), probeTop, new V3(.72, .6, .32), nose]);
+  const tubeM = new THREE.MeshPhysicalMaterial({ color: PP().glass, transparent: true, opacity: .4, roughness: .1, clearcoat: 1 });
+  [[brA, 30], [brB, 30], [new THREE.CatmullRomCurve3(main.getPoints(40).slice(0, 29)), 60]].forEach(([c, n]) => root.add(new THREE.Mesh(new THREE.TubeGeometry(c, n, .035, 8), tubeM)));
+  const yj = new THREE.Mesh(new THREE.SphereGeometry(.09, 14, 14), M.dark); yj.position.set(-1.3, -.55, -.05); root.add(yj);
+  // flow beads
+  const NF = 64, flowW = new THREE.InstancedMesh(new THREE.SphereGeometry(.04, 10, 10), new THREE.MeshBasicMaterial({ color: 0x7fd0ff, depthTest: false, transparent: true }), NF), flowF = new THREE.InstancedMesh(new THREE.SphereGeometry(.04, 10, 10), new THREE.MeshBasicMaterial({ color: PP().accent, depthTest: false, transparent: true }), NF);
+  flowW.renderOrder = flowF.renderOrder = 8; root.add(flowW, flowF);
+  const drops = new Drops(scene, M.water, 50);
+  // phone
+  const phone = new THREE.Group(); phone.position.set(4.7, 2.2, .3); phone.rotation.y = -.5; root.add(phone);
+  phone.add(new THREE.Mesh(new THREE.BoxGeometry(1.25, 2.6, .09), new THREE.MeshStandardMaterial({ color: 0x0b0f0c, roughness: .35, metalness: .4 })));
+  const imgs = ['pandan', 'market', 'profile'].map(n => { const t = tex.load(`media/app-${n}.jpg`); t.colorSpace = THREE.SRGBColorSpace; return t; });
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(1.17, 2.54), new THREE.MeshBasicMaterial({ map: imgs[0] })); scr.position.z = .05; phone.add(scr);
+  // BLE
+  const cells = new THREE.InstancedMesh(new THREE.BoxGeometry(.05, .05, .05), new THREE.MeshBasicMaterial({ color: PP().node }), 46); root.add(cells);
+  const crcM = new THREE.MeshBasicMaterial({ color: PP().accent }); const cmd = new THREE.Mesh(new THREE.SphereGeometry(.07, 12, 12), crcM); cmd.visible = false; root.add(cmd);
+  const bleC = new THREE.CatmullRomCurve3([podTop.clone().add(new V3(0, .1, 0)), new V3(3.6, 3.0, .3), new V3(4.2, 2.8, .3), new V3(4.55, 2.5, .4)]);
+  const rings = [0, 1, 2].map(() => { const r = new THREE.Mesh(new THREE.RingGeometry(.1, .115, 48), new THREE.MeshBasicMaterial({ color: PP().node, transparent: true, opacity: 0, side: THREE.DoubleSide, depthTest: false })); r.position.copy(podTop); r.renderOrder = 9; root.add(r); return r; });
+  // sensor pulses on the probe
+  const pulses = [ecPt, winPt].map(p => { const r = new THREE.Mesh(new THREE.RingGeometry(.08, .1, 32), new THREE.MeshBasicMaterial({ color: PP().accent, transparent: true, opacity: 0, side: THREE.DoubleSide, depthTest: false })); r.position.copy(p); r.renderOrder = 9; root.add(r); return r; });
+  // recolor on theme
+  const recolor = () => { const Q = PP(); ground.material.color.setHex(Q.ground); stemMat.color.setHex(Q.leaf); leafMat.color.setHex(Q.leaf); podMat.color.setHex(Q.white); arcM.color.setHex(Q.accent); feedMat.color.setHex(Q.accent); flowF.material.color.setHex(Q.accent); crcM.color.setHex(Q.accent); cells.material.color.setHex(Q.node); rings.forEach(r => r.material.color.setHex(Q.node)); pulses.forEach(r => r.material.color.setHex(Q.accent)); glow.material.color.setHex(Q.accent); tubeM.color.setHex(Q.glass); pumps[1].imp.material.color.setHex(Q.accent); pumps[1].imp.material.emissive.setHex(Q.accent); M.refresh(scene); };
+  ctx.onTheme(recolor);
+  // camera path
+  const K = [[[.6, 2.4, 15.5], [.4, .9, 0]], [[1.5, 2.9, 3.7], [0, 2.4, 0]], [[3.3, 1.3, 5.2], [.7, .35, .3]], [[3.7, 1.5, 5.8], [3.1, .7, 0]], [[3.6, 2.6, 9.5], [3.9, 1.9, 0]], [[5.1, 2.4, 4.5], [4.6, 2.2, .3]], [[-.9, .9, 6.4], [-2.2, -.2, 0]], [[1.0, 1.4, 6.0], [.4, .9, .3]], [[.6, 2.4, 15.5], [.4, .9, 0]]];
+  const cpos = new THREE.CatmullRomCurve3(K.map(k => new V3(...k[0])), false, 'centripetal'), clook = new THREE.CatmullRomCurve3(K.map(k => new V3(...k[1])), false, 'centripetal');
+  const cp = new V3(), cl = new V3(), curLook = new V3(0, .9, 0); camera.position.set(.6, 2.4, 15.5);
+  const tmpM = new THREE.Object3D(), tmpE = {}; let tw = 0, last = {};
+  const set = (id, v, hot) => { const e = H(id); if (e && last[id] !== v) { e.textContent = v; last[id] = v; } if (e) e.classList.toggle('hot', !!hot); };
+  return { anchors: {}, group: root, update(t, p, ptr, dt) {
+    const camT = clamp((p - .055) / .89); cpos.getPoint(camT, cp); clook.getPoint(camT, cl);
+    cp.x += ptr.x * .35; cp.y -= ptr.y * .2; camera.position.lerp(cp, Math.min(1, dt * 6)); curLook.lerp(cl, Math.min(1, dt * 6)); camera.lookAt(curLook);
+    root.rotation.y = 0;
+    // plant breath
+    leaves.forEach(l => { l.rotation.z = l.userData.z + Math.sin(t * 1.3 + l.userData.i) * .03; });
+    // electrode sweep (chapter 1-2): 1 kHz → 100 kHz
+    const f = sstep(.12, .22, p), bow = lerp(.14, 0, f), fq = lerp(2, 18, f), on = sstep(.07, .11, p);
+    for (let i = 0; i < NA; i++) { const sd = i - 1; for (let k = 0; k < NB; k++) { const u = k / (NB - 1), x = lerp(-.12, .12, u), ar = Math.sin(u * Math.PI) * bow * (sd === 0 ? 1 : 1 + sd * .4), wob = Math.sin(u * fq * 2 - t * (3 + i)) * .008;
+      tmpM.position.set(x, wob + sd * .015, f > .9 ? sd * .01 : ar * (i === 1 ? -1 : 1)); tmpM.scale.setScalar(on * (.6 + .5 * Math.sin(u * 12 - t * 6 * (1 + f * 3))) * 1.4); tmpM.updateMatrix(); beads.setMatrixAt(i * NB + k, tmpM.matrix); } }
+    beads.instanceMatrix.needsUpdate = true;
+    // probe pulses (chapter 2)
+    pulses.forEach((r, i) => { const a = sstep(.21, .24, p) * (1 - sstep(.33, .36, p)), k = (t * .8 + i * .5) % 1; r.scale.setScalar(1 + k * 5); r.material.opacity = a * (1 - k) * .8; r.lookAt(camera.position); });
+    // BLE rings + packet (chapter 3-4)
+    rings.forEach((r, i) => { const a = sstep(.33, .36, p) * (1 - sstep(.54, .58, p)), k = (t * .6 + i / 3) % 1; r.scale.setScalar(1 + k * 6); r.material.opacity = a * (1 - k) * .7; r.lookAt(camera.position); });
+    const form = sstep(.33, .42, p), travel = sstep(.44, .54, p);
+    for (let i = 0; i < 46; i++) { const u = lerp(0, 1.1, travel) - i * .013; if (travel < .001) { const a = i / 46 * Math.PI * 2; tmpM.position.set(podTop.x + Math.cos(a) * .3 * form, podTop.y + .35 + Math.sin(a) * .3 * form, podTop.z); tmpM.scale.setScalar(form); } else if (u > 0 && u < 1) { tmpM.position.copy(bleC.getPoint(u)); tmpM.scale.setScalar(1); } else tmpM.scale.setScalar(0); tmpM.updateMatrix(); cells.setMatrixAt(i, tmpM.matrix); }
+    cells.instanceMatrix.needsUpdate = true;
+    // phone screen
+    scr.material.map = p > .86 ? imgs[2] : p > .54 ? imgs[0] : imgs[0]; phone.position.y = 2.2 + Math.sin(t * .9) * .05;
+    // command back (chapter 5-6)
+    const cu = sstep(.6, .67, p); cmd.visible = cu > .001 && cu < .999; if (cmd.visible) cmd.position.copy(bleC.getPoint(1 - cu));
+    // relay + pumps (chapter 6-7)
+    const pw = sstep(.66, .69, p) * (1 - sstep(.88, .9, p)), fd = sstep(.76, .79, p) * (1 - sstep(.88, .9, p));
+    rled.material.color.setHex(pw > .5 ? 0x44ff88 : 0x444444); rcoil.material.emissive = new THREE.Color(pw > .5 ? 0x2255ff : 0); rcoil.material.emissiveIntensity = .4;
+    pumps.forEach((pu, i) => { pu.imp.rotation.y += dt * 14 * (i ? fd : pw); }); tw += dt;
+    const lvl = 1 - .18 * sstep(.66, .9, p); water.scale.y = lvl; water.position.y = .15 - (1 - lvl) * 1.05;
+    const flow = (inst, br, amt, off) => { for (let i = 0; i < NF; i++) { const s = ((tw * .16 * Math.max(amt, .0) + i / NF + off) % 1); const pt = s < .28 ? br.getPoint(s / .28) : main.getPoint((s - .28) / .72); tmpM.position.copy(pt); tmpM.scale.setScalar(amt > .02 ? amt : 0); tmpM.updateMatrix(); inst.setMatrixAt(i, tmpM.matrix); } inst.instanceMatrix.needsUpdate = true; };
+    flow(flowW, brA, pw, 0); flow(flowF, brB, fd, .5 / NF);
+    drops.update(dt, pw > .6, nose.clone(), -.9);
+    // soil + roots (chapter 7-8)
+    const wet = sstep(.78, .9, p); soilTop.material.color.setHex(PP().soil).lerp(new THREE.Color(0x2a1a10), wet * .6); rootMat.opacity = .45 + .5 * wet + Math.sin(t * 3) * .05 * wet; glow.material.opacity = .22 * fd + .1 * wet * (1 - fd);
+    // HUD
+    const moist = Math.round(lerp(31, 58, sstep(.78, .9, p))), ec = (lerp(1.4, 1.9, sstep(.8, .9, p))).toFixed(1);
+    set('hud-moist', moist + '%', moist < 40); set('hud-ec', ec + ' mS', false);
+    set('hud-frame', p < .33 ? '—' : p < .44 ? '46 B · CRC ok' : p < .58 ? 'sending' : 'received', false);
+    set('hud-pump', pw > .5 ? (fd > .5 ? 'A + B on' : 'A on') : 'off', pw > .5);
   } };
 };
 

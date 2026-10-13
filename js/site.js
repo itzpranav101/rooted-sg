@@ -6,24 +6,33 @@ const root = document.documentElement, page = document.body.dataset.page;
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
 gsap.registerPlugin(ScrollTrigger);
 
-/* ---------- theme ---------- */
-function setTheme(t, x, y) {
-  const apply = () => { root.dataset.theme = t; try { localStorage.setItem('rs-theme', t); } catch (e) {} dispatchEvent(new Event('themechange')); };
+/* ---------- theme: 5 skins x light/dark ---------- */
+const SKINS = [
+  ['glasshouse', 'Glasshouse', 'Deep planthouse green', ['#0E2E1F', '#A3E68B', '#ED9D76']],
+  ['nightsoil', 'Nightsoil', 'Black, with lime', ['#0F0F0E', '#C6FF3D', '#FF7A2E']],
+  ['kopi', 'Kopi', 'Roasted brown, burnt orange', ['#2A1A10', '#FF9A5C', '#E8C28A']],
+  ['monsoon', 'Monsoon', 'Storm teal and rain', ['#081A24', '#5CE1E6', '#FF8A7A']],
+  ['chalk', 'Chalk', 'Chalk on charcoal', ['#1D211E', '#F6E27A', '#F4A6C0']]];
+function reveal(apply, x, y) {
   if (!document.startViewTransition || reduced || x == null) return apply();
   const tr = document.startViewTransition(apply);
   tr.ready.then(() => { const r = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
     root.animate({ clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${r}px at ${x}px ${y}px)`] }, { duration: 1000, easing: 'cubic-bezier(.22,.8,.2,1)', pseudoElement: '::view-transition-new(root)' }); }).catch(() => {});
 }
+function setMode(m, x, y) { reveal(() => { root.dataset.mode = m; try { localStorage.setItem('rs-mode', m); } catch (e) {} dispatchEvent(new Event('themechange')); }, x, y); }
+function setSkin(k, x, y) { reveal(() => { root.dataset.skin = k; try { localStorage.setItem('rs-skin', k); } catch (e) {} markSkin(); dispatchEvent(new Event('themechange')); }, x, y); }
+function markSkin() { $$('.sk,.theme[data-skin]').forEach(e => e.classList.toggle('on', e.dataset.skin === root.dataset.skin)); }
 
 /* ---------- chrome ---------- */
 const leaf = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z"/><path d="M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z"/></svg>';
-const pages = [['index.html', 'Home', 'home'], ['app.html', 'The app', 'app'], ['rootstake.html', 'RootStake', 'rootstake'], ['how-it-works.html', 'How it works', 'how'], ['impact.html', 'The story', 'impact']];
-const names = { home: 'Singapore', app: 'The app', rootstake: 'RootStake', how: 'How it works', impact: 'The story' };
+const pages = [['index.html', 'Home', 'home'], ['app.html', 'The app', 'app'], ['rootstake.html', 'RootStake', 'rootstake'], ['how-it-works.html', 'The system', 'how'], ['impact.html', 'The story', 'impact']];
+const names = { home: 'Singapore', app: 'The app', rootstake: 'RootStake', how: 'The system', impact: 'The story' };
 document.body.insertAdjacentHTML('afterbegin', `
 <div class="grain"></div>
 <header class="top" id="top"><a class="mark" href="index.html" data-t>${leaf}<span>Rooted SG</span><small>${names[page] || ''}</small></a>
-<div class="tools"><button class="pillbtn sq" id="themeBtn" aria-label="Toggle light and dark"><i class="themeic"></i></button>
+<div class="tools"><button class="pillbtn" id="skinBtn" aria-label="Choose a theme"><span class="sws"></span><span>Theme</span></button><button class="pillbtn sq" id="themeBtn" aria-label="Toggle light and dark"><i class="themeic"></i></button>
 <button class="pillbtn" id="menuBtn"><span class="burger"><i></i><i></i></span><span>Menu</span></button></div></header>
+<div class="skins" id="skins"><div class="label" style="padding:4px 10px 10px">Five themes · each in light and dark</div>${SKINS.map(k => `<button class="sk" data-skin="${k[0]}"><span class="sw">${k[3].map(c => `<i style="background:${c}"></i>`).join('')}</span><span><b>${k[1]}</b><small>${k[2]}</small></span></button>`).join('')}</div>
 <div class="index" id="index"><button class="pillbtn xbtn" id="xBtn">Close</button>
 <nav class="list"><div class="label" style="margin-bottom:16px">Index</div>${pages.map((p, i) => `<a href="${p[0]}" data-t class="${p[2] === page ? 'cur' : ''}"><span class="n">0${i + 1}</span><span class="t">${p[1]}</span></a>`).join('')}</nav>
 <div class="side"><p class="serif d4">Don't count what we plant.<br><em>Count what we keep alive.</em></p><p class="label" style="margin-top:20px">Rooted SG · Singapore 2026</p></div></div>
@@ -39,7 +48,13 @@ document.body.insertAdjacentHTML('beforeend', `
 <div class="big" id="bigword" aria-hidden="true">${'Rooted SG'.split('').map(c => `<span>${c === ' ' ? '&nbsp;' : c}</span>`).join('')}</div>
 <div class="fine label"><span>© 2026 Rooted SG · Singapore</span><span>Every number here comes from our survey, our build, or a named source.</span></div></div></footer>`);
 
-$('#themeBtn').addEventListener('click', e => { const r = e.currentTarget.getBoundingClientRect(); setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark', r.left + r.width / 2, r.top + r.height / 2); });
+$('#themeBtn').addEventListener('click', e => { const r = e.currentTarget.getBoundingClientRect(); setMode(root.dataset.mode === 'dark' ? 'light' : 'dark', r.left + r.width / 2, r.top + r.height / 2); });
+const skinsEl = $('#skins');
+$('#skinBtn').addEventListener('click', e => { e.stopPropagation(); skinsEl.classList.toggle('open'); });
+document.addEventListener('click', e => { if (!e.target.closest('#skins,#skinBtn')) skinsEl.classList.remove('open'); });
+document.addEventListener('click', e => { const t = e.target.closest('.sk,.theme[data-skin]'); if (!t) return; setSkin(t.dataset.skin, e.clientX, e.clientY); });
+markSkin();
+{ const sw = $('.sws'); const upd = () => { const k = SKINS.find(x => x[0] === root.dataset.skin) || SKINS[0]; sw.innerHTML = k[3].map(c => `<i style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${c};margin-right:-3px;box-shadow:0 0 0 1.5px var(--bg)"></i>`).join(''); }; upd(); addEventListener('themechange', upd); }
 
 /* ---------- smooth scroll ---------- */
 let lenis = null;
@@ -92,21 +107,6 @@ if (!seenPre && !fromNav && !reduced) {
   gsap.to(curtain, { yPercent: -100, duration: .95, ease: 'expo.inOut', delay: .25, onStart: () => setTimeout(boot, 350) });
 } else setTimeout(boot, 80);
 
-/* ---------- cursor + magnetic ---------- */
-if (matchMedia('(hover:hover) and (pointer:fine)').matches && !reduced) {
-  document.body.classList.add('has-cursor');
-  const cur = $('#cur'), ring = $('#curR'), mx = gsap.quickTo(cur, 'x', { duration: .08 }), my = gsap.quickTo(cur, 'y', { duration: .08 }), rx = gsap.quickTo(ring, 'x', { duration: .5, ease: 'power3' }), ry = gsap.quickTo(ring, 'y', { duration: .5, ease: 'power3' });
-  addEventListener('pointermove', e => { mx(e.clientX); my(e.clientY); rx(e.clientX); ry(e.clientY); });
-  document.addEventListener('pointerover', e => {
-    const t = e.target.closest('a,button,[data-cursor]'); const label = t && t.dataset.cursor;
-    gsap.to(ring, { scale: t ? (label ? 2.2 : 1.6) : 1, duration: .5, ease: 'power3' }); gsap.to(cur, { scale: t ? 0 : 1, duration: .3 });
-    ring.classList.toggle('big', !!label); ring.textContent = label || '';
-  });
-  $$('.btn,.pillbtn,[data-mag]').forEach(b => { const s = b.classList.contains('btn') ? .28 : .2;
-    b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * s, y: (e.clientY - r.top - r.height / 2) * s, duration: .5, ease: 'power3' }); });
-    b.addEventListener('pointerleave', () => gsap.to(b, { x: 0, y: 0, duration: .9, ease: 'elastic.out(1,.4)' })); });
-}
-
 /* ---------- top bar hide ---------- */
 const top = $('#top'); let lastY = 0;
 (lenis || { on: (n, f) => addEventListener('scroll', () => f({ scroll: scrollY })) }).on('scroll', ({ scroll }) => { top.classList.toggle('hide', scroll > lastY && scroll > 500 && !idxOpen); lastY = scroll; });
@@ -148,6 +148,11 @@ function init() {
   $$('.lrow').forEach(r => ScrollTrigger.create({ trigger: r, start: 'top 80%', once: true, onEnter: () => gsap.to(r, { '--s': 1, duration: 1.8, ease: 'expo.out' }) }));
   // bytes
   $$('.bytes').forEach(b => ScrollTrigger.create({ trigger: b, start: 'top 85%', once: true, onEnter: () => b.classList.add('go') }));
+  // snap-in connectors
+  $$('.snap').forEach(el => { const a = el.dataset.a || '', b = el.dataset.b || '';
+    el.innerHTML = `<i class="wire w1"></i><div class="plug"><b></b></div><div class="sock"><b></b></div><i class="wire w2"></i><span class="lbl">${a}</span><span class="led"></span><span class="st">${b}</span><span class="ring"></span>`;
+    const plug = $('.plug', el), st = $('.st', el); st.textContent = '…';
+    gsap.fromTo(plug, { y: -64 }, { y: 8, ease: 'power2.in', scrollTrigger: { trigger: el, start: 'top 85%', end: 'center 55%', scrub: .5, onUpdate: s => { if (s.progress > .97 && !el.classList.contains('locked')) { el.classList.add('locked'); st.textContent = el.dataset.b || 'linked'; gsap.fromTo(plug, { y: 0 }, { y: 8, duration: .6, ease: 'elastic.out(1,.35)' }); } else if (s.progress < .9 && el.classList.contains('locked')) { el.classList.remove('locked'); st.textContent = '…'; } } } }); });
   // marquee, velocity-linked
   $$('.marq-t').forEach(t => { t.innerHTML += t.innerHTML; const tw = gsap.to(t, { xPercent: -50, repeat: -1, duration: 38, ease: 'none' });
     lenis && lenis.on('scroll', ({ velocity }) => { gsap.to(tw, { timeScale: 1 + Math.min(Math.abs(velocity) * .6, 5), duration: .3, overwrite: true }); gsap.to(tw, { timeScale: 1, duration: 1.2, delay: .3, overwrite: false }); }); });
@@ -173,6 +178,7 @@ function init() {
     const show = i => { if (i === cur) return; const old = steps[cur], nw = steps[i]; cur = i;
       if (old) gsap.to(old, { opacity: 0, y: -34, duration: .45, ease: 'power2.in', onComplete: () => { if (steps[cur] !== old) old.style.visibility = 'hidden'; } });
       if (nw) { nw.style.visibility = 'visible'; gsap.fromTo(nw, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: .9, delay: .25, ease: 'expo.out' }); const hs = $$('.d3,.d4', nw); }
+      $$('.chapnav i', pin).forEach((x, k) => x.classList.toggle('on', k === i));
       $$('.pscr', pin).forEach((x, k) => x.classList.toggle('on', k === i));
       if (cnt) cnt.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(steps.length).padStart(2, '0'); };
     if (steps.length) { steps.forEach(s => { s.style.opacity = 0; s.style.visibility = 'hidden'; }); }

@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-skin="glasshouse" data-mode="dark">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<script>try{{var t=localStorage.getItem('rs-theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.dataset.theme=t}}catch(e){{}}</script>
+<script>try{{var d=document.documentElement,k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k)d.dataset.skin=k;d.dataset.mode=m||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}}catch(e){{}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400&family=Hanken+Grotesk:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/site.css">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=DM+Mono:wght@400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Outfit:wght@200;300;400&family=Space+Mono&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css">
 <script type="importmap">{{"imports":{{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}}}</script>
 </head>
 <body data-page="{page}">
