@@ -380,7 +380,7 @@ async function mount(canvas) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' }); }
   catch (e) { canvas.parentElement.classList.add('nogl'); return; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.outputColorSpace = THREE.SRGBColorSpace;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(30, 1, .1, 100);
   const L = lights(scene, renderer);
@@ -426,6 +426,9 @@ function tick(now) {
   }
   requestAnimationFrame(tick);
 }
-document.querySelectorAll('canvas[data-scene]').forEach(mount);
+// mount each scene only when it is about to be seen, one at a time (keeps first load and page changes light)
+let chain = Promise.resolve();
+const lazy = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; lazy.unobserve(e.target); chain = chain.then(() => mount(e.target)).catch(() => {}); }), { rootMargin: '400px' });
+document.querySelectorAll('canvas[data-scene]').forEach(c => lazy.observe(c));
 requestAnimationFrame(tick);
 window.__scenes = live;

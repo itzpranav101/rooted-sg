@@ -4,13 +4,24 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>RootStake — Rooted SG</title>
 <meta name="description" content="The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.">
-<script>try{var d=document.documentElement,k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k)d.dataset.skin=k;d.dataset.mode=m||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<script>
+/* theme + only the fonts of the active theme, before first paint */
+(function(){var d=document.documentElement,F={
+glasshouse:'family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Hanken+Grotesk:wght@300;400;500;600&family=DM+Mono',
+nightsoil:'family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Space+Grotesk:wght@400;500;600&family=Space+Mono:wght@400;700',
+kopi:'family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..700,0..100,0..1;1,9..144,400..700,0..100,0..1&family=Karla:wght@400;500;600&family=DM+Mono',
+monsoon:'family=Outfit:wght@200;300;400;500&family=DM+Mono',
+chalk:'family=Instrument+Serif:ital&family=Instrument+Sans:wght@400;500;600&family=Special+Elite'};
+try{var k=localStorage.getItem('rs-skin'),m=localStorage.getItem('rs-mode');if(k&&F[k])d.dataset.skin=k;d.dataset.mode=m||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}
+window.__fonts=F;
+var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href='https://fonts.googleapis.com/css2?'+F[d.dataset.skin]+'&display=swap';document.head.appendChild(l)})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=DM+Mono:wght@400&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..700,0..100,0..1;1,9..144,300..700,0..100,0..1&family=Hanken+Grotesk:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Outfit:wght@200;300;400&family=Space+Mono&family=Special+Elite&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css">
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 </head>
 <body data-page="rootstake">
+
 <header class="page-hero">
   <div class="sun"></div>
   <div class="wrap" style="position:relative;z-index:3">
@@ -41,9 +52,9 @@
     <div class="stagebox" data-reveal><canvas data-scene="pod"></canvas></div>
     <div class="copy" data-reveal data-stagger>
       <span class="label"><b>The module</b></span>
-      <h3 class="display d3">A roof, a brain, and a <em>gooseneck</em>.</h3>
-      <p class="p">A gable roof carries two 70 mm solar panels over an ESP32-S3. The jointed arm is a snap-together ball-and-socket chain that lets the stem clip reach any stem. No screws anywhere: parts press-fit, twist-lock or hot-glue.</p>
-      <div class="chips"><span class="chip2">ESP32-S3</span><span class="chip2">2 × 70 mm solar</span><span class="chip2">Rain-shedding vents</span><span class="chip2">Air-sensor chamber</span></div>
+      <h3 class="display d3">A little house for <em>the brain</em>.</h3>
+      <p class="p">The module is a small house that stands on its own: a gable roof carries two 70 mm solar panels over an ESP32-S3. There is no arm and no gooseneck. The soil probe and the stem electrode are separate parts that connect back to the house by a thin wire, and by the watering tube for the probe. No screws anywhere: parts press-fit, twist-lock or hot-glue.</p>
+      <div class="chips"><span class="chip2">ESP32-S3</span><span class="chip2">2 × 70 mm solar</span><span class="chip2">Wire to each probe</span><span class="chip2">Tube to the soil probe</span><span class="chip2">Air-sensor chamber</span></div>
     </div>
   </div>
 </section>
@@ -74,12 +85,11 @@
   <h2 class="display d1" data-split style="max-width:12ch;margin:0 auto">Measure. Act. <em>Check it worked.</em></h2>
   <div class="cta" data-reveal><a class="btn" href="how-it-works.html" data-t>See the closed loop <i>→</i></a><a class="btn line" href="app.html" data-t>Back to the app</a></div>
 </div></section>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="js/team.js"></script>
-<script src="js/site.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="js/team.js"></script>
+<script defer src="js/site.js"></script>
+<script defer src="js/tissue.js"></script>
 <script type="module" src="js/scenes.js"></script>
 </body>
 </html>

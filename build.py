@@ -20,6 +20,6 @@ for name,(pg,title,desc) in pages.items():
     try: body=open(f'_src/{name}.body.html').read()
     except FileNotFoundError: continue
     body=body.replace('{{CALLOUTS}}',callouts())
-    html=head.format(title=title,desc=desc,page=pg)+body+tail
+    html=head.replace('{title}',title).replace('{desc}',desc).replace('{page}',pg)+body+tail
     open(f'{name}.html','w').write(html)
     print('built',name)
