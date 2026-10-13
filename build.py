@@ -12,7 +12,7 @@ def callouts(CALLS=CALLS):
     s+=''.join(f'<div class="call" data-anchor="{a}" data-show="{sh}" data-dx="{dx}" data-dy="{dy}"><span>{t}</span><b>{b}</b></div>' for a,t,b,sh,dx,dy in CALLS)
     return s+'</div>'
 # svg lines/circles order: render lines then circles separately => scenes.js maps lines[i]/dots[i]
-pages={'index':('home','ROOTED SG — Count what we keep alive','Rooted SG: a Singapore growing app, and RootStake, the sensor stake that proves your plant is still alive.'),
+pages={'index':('home','ROOTED SG — Count what we keep alive','Meco is the RootStake sensor module and the Rooted SG app, built in Singapore to prove a plant is still alive. Don\'t count what we plant. Count what we keep alive.'),
 'app':('app','The app — Rooted SG','Garden, Market, Quests and BioDex. The Rooted SG iOS app, in real footage.'),
 'rootstake':('rootstake','RootStake — Rooted SG','The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.'),
 'how-it-works':('how','The system — Rooted SG','Follow one reading from the plant stem to the phone and back to the roots: electrode, probe, pod, Bluetooth, pumps and nutrition.'),

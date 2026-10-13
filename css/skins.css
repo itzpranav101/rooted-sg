@@ -224,3 +224,8 @@ body{counter-reset:sec}
 html[data-skin] .index .xbtn{background:var(--text);color:var(--bg);box-shadow:none;rotate:none}
 html[data-skin="monsoon"] .index .xbtn{background:transparent;color:var(--green);box-shadow:inset 0 0 0 1px var(--green)}
 html[data-skin="chalk"] .index .xbtn{background:var(--text);color:var(--bg)}
+
+html[data-skin="nightsoil"] .top.scrolled{background:var(--bg);box-shadow:0 2px 0 var(--text)}
+html[data-skin="kopi"] .top.scrolled{background:var(--bg2)}
+
+html[data-skin="chalk"] .display em.hl{background:linear-gradient(transparent 70%,color-mix(in srgb,var(--green) 50%,transparent) 70% 94%,transparent 94%)}

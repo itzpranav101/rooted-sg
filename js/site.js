@@ -34,7 +34,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 <div class="skins" id="skins"><div class="label" style="padding:4px 10px 10px">Five themes · each in light and dark</div>${SKINS.map(k => `<button class="sk" data-skin="${k[0]}"><span class="sw">${k[3].map(c => `<i style="background:${c}"></i>`).join('')}</span><span><b>${k[1]}</b><small>${k[2]}</small></span></button>`).join('')}</div>
 <div class="scrim" id="scrim"></div>
 <aside class="index" id="index" aria-hidden="true"><div class="ihead"><span class="label">Index</span><button class="pillbtn xbtn" id="xBtn">Close <span aria-hidden="true">✕</span></button></div>
-<nav class="list">${pages.map((p, i) => `<a href="${p[0]}" class="${p[2] === page ? 'cur' : ''}"><span class="n">0${i + 1}</span><span class="t">${p[1]}</span><span class="ar">→</span></a>`).join('')}</nav>
+<nav class="list" aria-label="Pages">${pages.map((p, i) => `<a href="${p[0]}" class="${p[2] === page ? 'cur' : ''}"${p[2] === page ? ' aria-current="page"' : ''}><span class="n">0${i + 1}</span><span class="t">${p[1]}</span><span class="ar">→</span></a>`).join('')}<a href="index.html#meco" class="meco-link"><span class="n">★</span><span class="t">Meco</span><span class="ar">→</span></a></nav>
 <div class="side"><p class="serif d4">Don't count what we plant.<br><em>Count what we keep alive.</em></p><p class="label" style="margin-top:20px">Rooted SG · Singapore 2026</p></div></aside>`);
 
 document.body.insertAdjacentHTML('beforeend', `
@@ -52,6 +52,7 @@ const skinOpen = o => { skinsEl.classList.toggle('open', o); skinBtn.setAttribut
 skinBtn.addEventListener('click', e => { e.stopPropagation(); skinOpen(!skinsEl.classList.contains('open')); });
 document.addEventListener('click', e => { if (!e.target.closest('#skins,#skinBtn')) skinOpen(false); });
 document.addEventListener('click', e => { const t = e.target.closest('.sk,.theme[data-skin]'); if (!t) return; setSkin(t.dataset.skin); });
+$$('.theme[data-skin]').forEach(t => { t.tabIndex = 0; t.setAttribute('role', 'button'); t.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSkin(t.dataset.skin); } }); });
 markSkin();
 { const sw = $('.sws'); const upd = () => { const k = SKINS.find(x => x[0] === root.dataset.skin) || SKINS[0]; sw.innerHTML = k[3].map(c => `<i style="background:${c}"></i>`).join(''); }; upd(); addEventListener('themechange', upd); }
 
@@ -71,12 +72,12 @@ const pre = new Set();
 function prefetch(a) { try { const u = new URL(a.href, location.href); if (u.origin !== location.origin || pre.has(u.pathname) || u.pathname === location.pathname) return; pre.add(u.pathname); const l = document.createElement('link'); l.rel = 'prefetch'; l.href = u.pathname; document.head.appendChild(l); } catch (e) {} }
 document.addEventListener('pointerover', e => { const a = e.target.closest('a[href$=".html"],a[href*=".html#"]'); if (a) prefetch(a); }, { passive: true });
 document.addEventListener('touchstart', e => { const a = e.target.closest('a[href$=".html"],a[href*=".html#"]'); if (a) prefetch(a); }, { passive: true });
-$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const t = $(a.getAttribute('href')); if (!t) return; e.preventDefault(); t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); }));
+$$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { if (a.getAttribute('href') === '#') return; const t = $(a.getAttribute('href')); if (!t) return; e.preventDefault(); t.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); }));
 
 /* ---------- top bar: hide on scroll down, scroll progress ---------- */
 const top = $('#top'), sp = $('#sprog i'); let lastY = 0, tick = false;
 addEventListener('scroll', () => { if (tick) return; tick = true; requestAnimationFrame(() => { tick = false; const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
-  top.classList.toggle('hide', y > lastY + 4 && y > 500 && !idxOpen); if (y < lastY - 4 || y < 500) top.classList.remove('hide'); lastY = y; sp.style.transform = `scaleX(${max > 0 ? y / max : 0})`; }); }, { passive: true });
+  top.classList.toggle('scrolled', y > 24); top.classList.toggle('hide', y > lastY + 4 && y > 500 && !idxOpen); if (y < lastY - 4 || y < 500) top.classList.remove('hide'); lastY = y; sp.style.transform = `scaleX(${max > 0 ? y / max : 0})`; }); }, { passive: true });
 
 /* ---------- text splitting ---------- */
 function splitWords(el, cls) {

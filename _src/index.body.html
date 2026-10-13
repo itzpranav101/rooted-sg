@@ -78,7 +78,7 @@
     <span class="label">One connected ecosystem</span>
     <h2 class="display d3" data-split>Rooted isn't just for one thing, it's for your things.</h2>
     <div class="pills" data-reveal data-stagger>
-      <span class="pill on" data-i="0">Garden</span><span class="pill" data-i="1">Market</span><span class="pill" data-i="2">Quests</span><span class="pill" data-i="3">BioDex</span><span class="pill" data-i="4">Profile</span>
+      <span class="pill on" data-i="0" role="button" tabindex="0">Garden</span><span class="pill" data-i="1" role="button" tabindex="0">Market</span><span class="pill" data-i="2" role="button" tabindex="0">Quests</span><span class="pill" data-i="3" role="button" tabindex="0">BioDex</span><span class="pill" data-i="4" role="button" tabindex="0">Profile</span>
     </div>
     <div class="pstage" id="pstage">
       <div class="ph lg on tilt"><div class="scr"><img src="media/app-pandan.jpg" alt="Garden"></div></div>
@@ -269,6 +269,6 @@
 (() => { const pills = [...document.querySelectorAll('.pill')], phs = [...document.querySelectorAll('#pstage .ph')], cap = document.getElementById('pcap');
   const caps = ['Every pot, ordered so whatever needs you today is at the top.','Offer produce, or ask a neighbour to grow it.','Ten quests open at a time, each a small real action.','Four of seventeen species recorded. Discover Singapore.','Level 6, 314 verified plant-days, milestones from First Plant to Veteran.'];
   const set = i => { pills.forEach((p, k) => p.classList.toggle('on', k === i)); phs.forEach((p, k) => p.classList.toggle('on', k === i)); cap.textContent = caps[i]; };
-  pills.forEach((p, i) => { p.addEventListener('pointerenter', () => set(i)); p.addEventListener('click', () => set(i)); });
+  pills.forEach((p, i) => { p.addEventListener('pointerenter', () => set(i)); p.addEventListener('click', () => set(i)); p.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); set(i); } }); });
   let i = 0, auto = setInterval(() => { i = (i + 1) % 5; set(i); }, 3400); pills.forEach(p => p.addEventListener('pointerenter', () => clearInterval(auto))); })();
 </script>
