@@ -681,20 +681,6 @@ html{scroll-padding-top:80px}
 @media(prefers-reduced-motion:reduce){.sky .cloud{animation:none}}
 @media(max-width:700px){.sky .cl1{left:-24%}.sky .cl2{right:-28%}.sky .cl3{display:none}}
 /* subtle magnetic snap connector between sections */
-.mag{--k:0;--e:calc(var(--k)*var(--k));position:relative;height:96px;pointer-events:none}
-.mag .ln{position:absolute;left:50%;width:1px;margin-left:-.5px;background:var(--rule)}
-.mag .ln.t{top:0;height:calc(50% - 8px)}.mag .ln.b{bottom:0;height:calc(50% - 8px)}
-.mag .mg{position:absolute;left:50%;width:18px;height:8px;margin-left:-9px;border-radius:4px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--ter);transition:box-shadow .3s,background .3s}
-.mag .mg.a{top:calc(50% - 8px - (1 - var(--e))*26px)}
-.mag .mg.b{top:50%;margin-top:calc((1 - var(--e))*26px)}
-.mag.snapped .mg{box-shadow:inset 0 0 0 1px var(--green)}
-.mag.snapped .mg.a{background:var(--green)}
-.mag.snapped .ln{background:var(--green);opacity:.6}
-.mag .ring{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--green);opacity:0}
-.mag.snapped .ring{animation:magring .9s var(--ease)}
-@keyframes magring{0%{opacity:.8;transform:scale(.4)}100%{opacity:0;transform:scale(2.6)}}
-.mag.snapped .mg.a{animation:magclick .5s var(--ease)}
-@keyframes magclick{40%{transform:translateY(2px)}}
 /* Meco name: Measure + Eco merge into Meco as you scroll */
 .meco-name{--k:0;margin-bottom:clamp(50px,7vw,110px);text-align:center}
 .mn-words{display:flex;justify-content:center;align-items:baseline;font-family:var(--serif);font-weight:var(--dw,300);letter-spacing:var(--dls,-.04em);font-size:clamp(46px,12.5vw,210px);line-height:1;white-space:nowrap;text-transform:var(--dtt,none)}
@@ -774,11 +760,6 @@ html{scroll-padding-top:80px}
 @keyframes spgrow{to{stroke-dashoffset:0}}
 .ma-sprout svg{display:block;overflow:visible}
 /* connectors: a little more present, and before pinned sections too */
-.mag{height:104px}
-.mag .mg{width:24px;height:10px;margin-left:-12px;border-radius:5px}
-.mag .mg.a{top:calc(50% - 10px - (1 - var(--e))*30px)}
-.mag .mg.b{margin-top:calc((1 - var(--e))*30px)}
-.mag .ln.t{height:calc(50% - 10px)}.mag .ln.b{height:calc(50% - 10px)}
 
 .ma-acts{transition:opacity .3s}
 .ma-bub.typing .ma-acts{opacity:0;pointer-events:none}
@@ -807,3 +788,33 @@ html{scroll-padding-top:80px}
   .hprev li a{padding-top:12px}
 }
 .feat .ph.lg{--w:min(290px,34vh + 90px)}
+
+/* scroll cue: appears only when someone pauses inside a scroll-driven animation */
+.scrollhint{position:fixed;left:50%;bottom:22px;z-index:65;display:flex;align-items:center;gap:10px;padding:9px 16px 9px 18px;border-radius:var(--brad,99px);background:var(--panel);color:var(--text);box-shadow:inset 0 0 0 1px var(--rule),var(--shadow);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .45s var(--ease),transform .45s var(--ease)}
+.scrollhint.on{opacity:1;transform:translate(-50%,0)}
+.scrollhint i{width:7px;height:7px;border-right:1.6px solid var(--green);border-bottom:1.6px solid var(--green);transform:rotate(45deg) translate(-1px,-1px);animation:hintbob 1.3s ease-in-out infinite}
+@keyframes hintbob{50%{transform:rotate(45deg) translate(3px,3px)}}
+.menu-open .scrollhint{opacity:0}
+@media(prefers-reduced-motion:reduce){.scrollhint i{animation:none}}
+@media(max-width:700px){.scrollhint{bottom:16px;font-size:10px;padding:8px 14px}}
+/* why Singapore first, then beyond */
+.sgwhy{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,80px);align-items:center}
+@media(max-width:900px){.sgwhy{grid-template-columns:1fr}}
+.sgw-list{display:grid;gap:0;border-top:1px var(--rs,solid) var(--rule)}
+.sgw-item{display:grid;grid-template-columns:44px 1fr;gap:6px 14px;padding:20px 0;border-bottom:1px var(--rs,solid) var(--rule)}
+.sgw-item .n{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--green);padding-top:.5em}
+.sgw-item b{font-family:var(--serif);font-weight:var(--dw,300);font-size:clamp(21px,2vw,28px);letter-spacing:-.02em;line-height:1.1}
+.sgw-item p{grid-column:2;color:var(--sec);font-size:15px;max-width:30em}
+.sgfig{position:relative;aspect-ratio:1;max-width:520px;width:100%;margin-inline:auto;color:var(--text)}
+.sgfig svg{width:100%;height:100%;overflow:visible}
+.sgfig .ring{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:2 7}
+.sgfig .core{fill:var(--green)}
+.sgfig .pulse{fill:none;stroke:var(--green);stroke-width:1.4;vector-effect:non-scaling-stroke;transform-origin:50% 50%;transform-box:fill-box;animation:sgpulse 4.2s ease-out infinite}
+.sgfig .pulse.p2{animation-delay:1.4s}.sgfig .pulse.p3{animation-delay:2.8s}
+@keyframes sgpulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(22);opacity:0}}
+.sgfig .city{fill:var(--bg);stroke:var(--ter);stroke-width:1.6;opacity:0;animation:sgcity 9s ease-in-out infinite}
+.sgfig .city:nth-of-type(1){animation-delay:1.2s}.sgfig .city:nth-of-type(2){animation-delay:2.2s}.sgfig .city:nth-of-type(3){animation-delay:3.2s}.sgfig .city:nth-of-type(4){animation-delay:4.2s}.sgfig .city:nth-of-type(5){animation-delay:5.2s}
+@keyframes sgcity{0%,8%{opacity:0;transform:scale(.3)}16%,80%{opacity:1;transform:none}100%{opacity:0}}
+.sgfig text{fill:currentColor;stroke:none;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.sgfig .tg{fill:var(--green)}
+@media(prefers-reduced-motion:reduce){.sgfig .pulse,.sgfig .city{animation:none;opacity:1}}

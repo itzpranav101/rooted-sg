@@ -114,10 +114,6 @@ function odometer(el) {
     gsap.to(col, { yPercent: -(10 + d) * 5, duration: 1.4 + (drums.length - i) * .22, delay: i * .06, ease: 'expo.out' })) });
 }
 
-/* ---------- subtle magnetic snap connectors between sections ---------- */
-$$('main > section.sec, main > section.closing, main > section.pin').forEach(sec => { const prev = sec.previousElementSibling; if (!prev || prev.tagName === 'HEADER' || prev.classList.contains('mag') || prev.classList.contains('ma-wrap')) return;
-  sec.insertAdjacentHTML('beforebegin', '<div class="mag" aria-hidden="true"><i class="ln t"></i><i class="ln b"></i><i class="mg a"></i><i class="mg b"></i><span class="ring"></span></div>'); });
-
 /* ---------- scroll choreography ---------- */
 function init() {
   $$('[data-split]').forEach(h => { const ws = $$('.wm>span', h).length ? $$('.wm>span', h) : splitWords(h, 'wm').map(w => w.firstChild);
@@ -136,7 +132,6 @@ function init() {
   $$('.lrow').forEach(r => ScrollTrigger.create({ trigger: r, start: 'top 82%', once: true, onEnter: () => gsap.to(r, { '--s': 1, duration: 1.6, ease: 'expo.out' }) }));
   $$('.bytes').forEach(b => ScrollTrigger.create({ trigger: b, start: 'top 88%', once: true, onEnter: () => b.classList.add('go') }));
   $$('#mname').forEach(el => { if (reduced) { el.style.setProperty('--k', 1); return; } ScrollTrigger.create({ trigger: $('.mn-words', el), start: 'top 88%', end: 'top 30%', scrub: .4, onUpdate: s => el.style.setProperty('--k', s.progress.toFixed(3)) }); });
-  $$('.mag').forEach(m => { if (reduced) { m.style.setProperty('--k', 1); m.classList.add('snapped'); return; } ScrollTrigger.create({ trigger: m, start: 'top 85%', end: 'center 55%', scrub: .35, onUpdate: s => { m.style.setProperty('--k', s.progress.toFixed(3)); m.classList.toggle('snapped', s.progress > .97); } }); });
   $$('.marq-t').forEach(t => { t.innerHTML += t.innerHTML; gsap.to(t, { xPercent: -50, repeat: -1, duration: 38, ease: 'none' }); });
   $$('.tilt').forEach(w => { const p = $('.ph', w) || w; const rx = gsap.quickTo(p, 'rotationX', { duration: .8, ease: 'power3' }), ry = gsap.quickTo(p, 'rotationY', { duration: .8, ease: 'power3' }); gsap.set(w, { perspective: 1200 });
     w.addEventListener('pointermove', e => { const r = w.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 16); rx(-((e.clientY - r.top) / r.height - .5) * 12); }); w.addEventListener('pointerleave', () => { rx(0); ry(0); }); });
@@ -146,6 +141,11 @@ function init() {
   $$('.hs').forEach(hs => { const tr = $('.hs-track', hs), bar = $('.hs-bar .rule i', hs), dist = () => tr.scrollWidth - innerWidth;
     if (matchMedia('(max-width:900px)').matches) { hs.style.height = 'auto'; tr.style.cssText = 'flex-direction:column;height:auto'; $$('.hs-panel', hs).forEach(p => p.style.height = 'auto'); return; }
     gsap.to(tr, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: hs, pin: true, scrub: .6, start: 'top top', end: () => '+=' + dist() * 1.1, invalidateOnRefresh: true, anticipatePin: 1, onUpdate: s => bar && gsap.set(bar, { scaleX: s.progress }) } }); });
+  // a gentle cue for anyone who stops inside a scroll-driven animation and wonders if the page froze
+  const hint = document.createElement('div'); hint.className = 'scrollhint'; hint.setAttribute('aria-hidden', 'true'); hint.innerHTML = '<span>Keep scrolling</span><i></i>'; document.body.appendChild(hint);
+  const pinState = new Map(); let hintT = 0;
+  const nudge = () => { hint.classList.remove('on'); clearTimeout(hintT); hintT = setTimeout(() => { const live = [...pinState.values()].find(s => s.active && s.p < .985); if (live && !idxOpen && !document.hidden) hint.classList.add('on'); }, 1500); };
+  addEventListener('scroll', nudge, { passive: true }); addEventListener('wheel', nudge, { passive: true }); addEventListener('touchmove', nudge, { passive: true }); addEventListener('keydown', nudge);
   // pinned scrubbed sequences
   $$('[data-pin]').forEach(pin => {
     const len = parseFloat(pin.dataset.pin) || 4, steps = $$('.pin-step,.cap', pin), cv = $$('canvas[data-scene],canvas[data-tissue]', pin), cnt = $('.pin-count b', pin), bar = $('.pin-count .rule i', pin);
@@ -157,8 +157,9 @@ function init() {
       $$('.pscr', pin).forEach((x, k) => x.classList.toggle('on', k === i));
       if (cnt) cnt.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(steps.length).padStart(2, '0'); };
     steps.forEach(s => { s.style.opacity = 0; s.style.visibility = 'hidden'; });
-    ScrollTrigger.create({ trigger: pin, pin: true, start: 'top top', end: '+=' + len * 100 + '%', scrub: true, anticipatePin: 1,
-      onUpdate: s => { const p = s.progress; cv.forEach(c => c.dataset.p = p.toFixed(4)); if (bar) bar.style.transform = `scaleX(${p})`;
+    const st = { active: false, p: 0 }; pinState.set(pin, st);
+    ScrollTrigger.create({ trigger: pin, pin: true, start: 'top top', end: '+=' + len * 100 + '%', scrub: true, anticipatePin: 1, onToggle: s => { st.active = s.isActive; if (s.isActive) nudge(); },
+      onUpdate: s => { const p = s.progress; st.p = p; cv.forEach(c => c.dataset.p = p.toFixed(4)); if (bar) bar.style.transform = `scaleX(${p})`;
         if (steps.length) show(Math.min(steps.length - 1, Math.floor(p * steps.length * .9999)));
         pin.style.setProperty('--p', p); } });
     show(0);
