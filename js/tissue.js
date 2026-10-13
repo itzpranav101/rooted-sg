@@ -180,7 +180,7 @@ function render(now) {
   // farm captions (screen space, not zoomed)
   { const a1 = (1 - T(.05, .09)) * 1, a2 = T(.9, .95);
     tag(g, 'ONE MODULE · ONE PLANT', fx, fy - 4, 18, -31, a1 * aF, 'left'); tag(g, 'every other plant: no module', 21, 8, 30, 20, a1 * aF * .9, 'left');
-    if (a2 > .01) { g.save(); g.globalAlpha = a2; const bx = -48, by = 29; g.lineWidth = .3; g.strokeStyle = C.fg; g.beginPath(); g.roundRect(bx, by, 52, 15, 1.6); g.stroke(); txt(g, 'ROOTED SG APP · NOW', bx + 2.2, by + 3.2, { s: 1.7, a: .65 }); txt(g, 'Stem reading changed on this plant', bx + 2.2, by + 7.5, { s: 2.1, w: 500 }); txt(g, 'Check this plant. Neighbours: no change seen.', bx + 2.2, by + 11.4, { s: 1.7, col: C.gr }); g.restore(); } }
+    if (a2 > .01) { g.save(); g.globalAlpha = a2; const bx = -48, by = 29; g.lineWidth = .3; g.strokeStyle = C.fg; g.beginPath(); g.roundRect(bx, by, 52, 15, 1.6); g.stroke(); txt(g, 'ROOTED SG APP · NOW', bx + 2.2, by + 3.2, { s: 1.7, a: .65 }); txt(g, 'Stem reading changed on this plant', bx + 2.2, by + 7.5, { s: 2.1, w: 500 }); txt(g, 'Act early, before it spreads to the crop.', bx + 2.2, by + 11.4, { s: 1.7, col: C.gr }); g.restore(); } }
 
   // ----- 2 · PLANT + HOUSE MODULE -----
   const bP = T(.1, .2), aP = T(.1, .17) * (1 - T(.2, .27));
