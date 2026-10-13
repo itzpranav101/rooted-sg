@@ -749,3 +749,6 @@ html{scroll-padding-top:80px}
 .dcard p{color:var(--sec);font-size:15px;max-height:0;overflow:hidden;opacity:0;transition:max-height .5s var(--ease),opacity .4s}
 .dcard[aria-expanded="true"] p{max-height:9em;opacity:1}
 .dcard[aria-expanded="true"] i{transform:rotate(45deg);background:var(--green);color:var(--on-accent);box-shadow:none}
+
+.page-hero h1.title-sm{font-size:clamp(32px,4.6vw,72px);max-width:18ch;line-height:1.02}
+.page-hero:has(h1.title-sm){padding-bottom:clamp(20px,3vw,40px)}
