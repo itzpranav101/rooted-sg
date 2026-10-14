@@ -79,6 +79,31 @@
   </div>
 </section>
 
+<section class="sec" id="nine" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>The time it took</b></span><h2 class="display d2" data-split>Nine months of evenings and weekends, <em>on top of everything else</em>.</h2></div>
+    <div class="nine" data-reveal>
+      <div class="nine-top">
+        <div class="nine-big"><div class="num" data-count="9">0</div><span>months, still going</span></div>
+        <p class="nine-line">Nobody did all of it. <em>Everybody did a part.</em></p>
+      </div>
+      <div class="nine-grid" id="ninegrid" aria-hidden="true"></div>
+      <p class="label nine-key"><i class="k wk"></i> weekday evening <i class="k we"></i> weekend <i class="k off"></i> a day we couldn't <span style="margin-left:auto">An illustration of the effort, not a log</span></p>
+      <div class="nine-cols">
+        <div><span class="label"><b>01</b> · When</span><b>Evenings and weekends</b><p>Everything here was built after class and on days off.</p></div>
+        <div><span class="label"><b>02</b> · Alongside</span><b>School and exams</b><p>We studied and built at the same time, including through exam periods.</p></div>
+        <div><span class="label"><b>03</b> · How</span><b>Five people, five parts</b><p>Each of us carried a part, so the work moved on whoever was busy that week.</p></div>
+        <div><span class="label"><b>04</b> · The cost</span><b>Free time we gave up</b><p>Holidays, hangouts and sleep went to deadlines. A change that matters costs something.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+(() => { const g = document.getElementById('ninegrid'); if (!g) return; const MONTHS = 9, WEEKS = 4; let n = 0;
+  for (let m = 0; m < MONTHS; m++) { const col = document.createElement('div'); col.className = 'nm'; for (let w = 0; w < WEEKS; w++) for (let d = 0; d < 7; d++) { const i = document.createElement('i'); const wk = d >= 5, off = !wk && ((m * 7 + w * 3 + d * 5) % 9 === 0) || (wk && (m * 5 + w * 2 + d) % 11 === 0); i.className = off ? 'off' : wk ? 'we' : 'wk'; i.style.setProperty('--d', (n++ * 9) + 'ms'); col.appendChild(i); } g.appendChild(col); }
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { g.classList.add('go'); o.disconnect(); } }, { threshold: .35 }).observe(g); })();
+</script>
+
 <section class="sec" id="honest" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>What we don't claim</b></span><h2 class="display d2" data-split>We'd rather be <em>checked</em> than impressed.</h2></div>
