@@ -6,7 +6,7 @@ const root = document.documentElement, page = document.body.dataset.page;
 const hasGsap = !!window.gsap;
 /* phones and data-saver: take the decorative and heavy parts out of the DOM altogether (not just hidden) */
 if (root.classList.contains('lite')) {
-  $$('.sky, .hero-stage .cloud, .hero-stage .hs-chip, .hero-stage .hs-phones .tilt:nth-child(2), .hero-rings, .scrollcue2, .callouts, .marq, .cloud').forEach(e => e.remove());
+  $$('.sky, .hero-stage .cloud, .hero-stage .hs-chip, .hero-stage .hs-phones .tilt:nth-child(2), .hero-rings, .callouts, .marq, .cloud').forEach(e => e.remove());
   $$('canvas[data-mode="loose"]').forEach(c => c.remove());
   $$('.hero-stage').forEach(s => s.classList.add('nocv'));
 }
@@ -55,7 +55,7 @@ document.body.insertAdjacentHTML('beforeend', nextBand + `
 <div class="cols"><div><p class="serif d4" style="max-width:15em">Don't count what we plant. <em>Count what we keep alive.</em></p></div>
 <div><div class="label" style="margin-bottom:12px">Pages</div>${pages.map(p => `<a href="${p[0]}">${p[1]}</a>`).join('')}</div>
 <div><div class="label" style="margin-bottom:12px">Inside</div><a href="index.html#meco">Meco · heymeco.xyz</a><a href="rootstake.html#parts">The probe</a><a href="rootstake.html#tissue">The tissue</a><a href="how-it-works.html#origin">Why we built it</a><a href="how-it-works.html#loop">The loop</a><a href="how-it-works.html#tiers">What is real</a></div>
-<div><div class="label" style="margin-bottom:12px">Entry</div><a href="impact.html#entries">IYEC 2026</a><a href="impact.html#team">The team</a></div></div>
+<div><div class="label" style="margin-bottom:12px">Movement</div><a href="impact.html#movement">Who is building it</a><a href="impact.html#team">The team</a></div></div>
 <div class="big" id="bigword" aria-hidden="true">${'Rooted SG'.split('').map(c => `<span>${c === ' ' ? '&nbsp;' : c}</span>`).join('')}</div>
 <div class="fine label"><span>© 2026 Rooted SG · Singapore · Meco = Measure + Eco</span><span>Every number here comes from our survey, our build, or a named source.</span></div></div></footer>`);
 
