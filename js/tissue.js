@@ -1,6 +1,6 @@
 // ROOTED SG — "one module, one plant, a whole farm": a scroll-driven multi-scale line drawing.
 // farm → plant → stem → cross-section → cells → current paths → fungal colony → signal → back to the farm.
-// Black and white line art; green only for keywords. Illustrative drawing, not measured data.
+// Black and white line art; green only for keywords. Scroll-driven line drawing.
 (() => {
 const cv = document.querySelector('canvas[data-tissue]'); if (!cv) return;
 const g = cv.getContext('2d');
@@ -263,7 +263,7 @@ function render(now) {
       g.save(); const bx0 = -30, bx1 = 30, by = 43.5; g.globalAlpha = clamp(grow * 6) * (1 - T(.78, .8)); g.lineWidth = .24; g.strokeStyle = C.fg; g.beginPath(); g.moveTo(bx0, by); g.lineTo(bx1, by); g.stroke();
       marks.forEach(m => { const x = lerp(bx0, bx1, m[0] / 14); g.beginPath(); g.moveTo(x, by - .8); g.lineTo(x, by + .8); g.stroke(); });
       g.fillStyle = C.gr; g.beginPath(); g.arc(lerp(bx0, bx1, day / 14), by, 1, 0, TAU); g.fill();
-      txt(g, 'DAY ' + day, bx0, by - 3.2, { s: 2, col: C.gr, w: 500 }); txt(g, mk2[1], bx1, by - 3.2, { s: 1.8, al: 'right' }); txt(g, 'ILLUSTRATIVE TIMELINE', bx0, by + 3.4, { s: 1.4, a: .5 }); g.restore();
+      txt(g, 'DAY ' + day, bx0, by - 3.2, { s: 2, col: C.gr, w: 500 }); txt(g, mk2[1], bx1, by - 3.2, { s: 1.8, al: 'right' }); g.restore();
       // extra labels
       const L1 = T(.62, .66) * (1 - T(.7, .73)), L2 = T(.7, .73) * (1 - T(.8, .83));
       if (window.__pits.length) { const pt = window.__pits.find(q => q.age <= maxA) || window.__pits[0]; tag(g, 'HYPHA CROSSES THE WALL AT A PIT', pt.x, pt.y, -48, -20, L1, 'right'); }
@@ -282,14 +282,14 @@ function render(now) {
     path(.35, true, .3, k); path(.62, false, .5, clamp(k * 1.2 - .1));
     const kk2 = clamp(k * 1.2 - .1); if (kk2 > .6) { txt(g, 'HEALTHY: big gap', x1, lerp(y0, y1, curve(0, .35, 100)) + 4.5, { s: 1.8, a: .8, al: 'right' }); txt(g, 'COLONISED: gap closes', x1, lerp(y0, y1, curve(0, .62, 100)) - 4.2, { s: 1.8, col: C.gr, w: 500, al: 'right' }); }
     // numerals
-    g.save(); g.globalAlpha *= T(.84, .88); txt(g, 'HIGH ÷ LOW RATIO · ILLUSTRATIVE', 38, -42, { s: 1.7, a: .7, al: 'right' }); roll(g, .35, .62, T(.85, .89), 25, -35, 7.6, C.fg); txt(g, 'healthy .35 → colonised .62', 38, -28.6, { s: 1.7, col: C.gr, al: 'right' }); g.restore();
+    g.save(); g.globalAlpha *= T(.84, .88); txt(g, 'HIGH ÷ LOW RATIO', 38, -42, { s: 1.7, a: .7, al: 'right' }); roll(g, .35, .62, T(.85, .89), 25, -35, 7.6, C.fg); txt(g, 'healthy .35 → colonised .62', 38, -28.6, { s: 1.7, col: C.gr, al: 'right' }); g.restore();
     g.restore(); }
 
   // HUD: ladder + scale + honesty note
   { g.save(); const lad = ['FARM', 'PLANT', 'STEM', 'TISSUE', 'CELLS', 'SIGNAL'], idx = ps < .1 ? 0 : ps < .2 ? 1 : ps < .3 ? 2 : ps < .4 ? 3 : ps < .8 ? 4 : ps < .9 ? 5 : 0; let x = -47; const hy = -46.8;
     lad.forEach((l, i) => { g.font = `400 1.7px ${C.mono}`; txt(g, l, x, hy, { s: 1.7, col: i === idx ? C.gr : C.fg, a: i === idx ? 1 : .35, w: i === idx ? 500 : 400 }); x += l.length * 1.18 + 2.6; });
     const sc = ps < .1 ? '≈ 10 m' : ps < .2 ? '≈ 10 cm' : ps < .3 ? '≈ 2 mm' : ps < .4 ? '≈ 1 mm' : ps < .8 ? '≈ 100 µm' : ps < .9 ? '' : '≈ 10 m'; if (sc) { g.lineWidth = .3; g.strokeStyle = C.fg; g.globalAlpha = .8; g.beginPath(); g.moveTo(-47, 46); g.lineTo(-47, 47.6); g.lineTo(-33, 47.6); g.lineTo(-33, 46); g.stroke(); txt(g, sc, -31.5, 47.2, { s: 1.7, a: .8 }); }
-    txt(g, 'ILLUSTRATIVE · NOT MEASURED DATA', 47, 47.2, { s: 1.5, a: .45, al: 'right' }); g.restore(); }
+    g.restore(); }
 }
 
 /* ---------------- lifecycle ---------------- */
