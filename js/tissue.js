@@ -268,7 +268,7 @@ function render(now) {
 }
 
 /* ---------------- lifecycle ---------------- */
-function fit() { const r = cv.getBoundingClientRect(); const w = Math.round(r.width), h = Math.round(r.height); if (!w || !h) return; D = Math.min(devicePixelRatio || 1, 1.75); W = w; H = h; U = Math.min(W, H) / 100; cv.width = Math.round(W * D); cv.height = Math.round(H * D); build(); }
+function fit() { const r = cv.getBoundingClientRect(); const w = Math.round(r.width), h = Math.round(r.height); if (!w || !h) return; D = document.documentElement.classList.contains('lite') ? 1 : Math.min(devicePixelRatio || 1, 1.75); W = w; H = h; U = Math.min(W, H) / 100; cv.width = Math.round(W * D); cv.height = Math.round(H * D); build(); }
 new ResizeObserver(fit).observe(cv);
 new IntersectionObserver(es => { vis = es[0].isIntersecting; }, { rootMargin: '100px' }).observe(cv);
 addEventListener('themechange', () => { if (W) build(); });

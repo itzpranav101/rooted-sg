@@ -462,10 +462,11 @@ addEventListener('themechange', () => themeCbs.forEach(f => f()));
 
 async function mount(canvas) {
   const kind = canvas.dataset.scene; if (!builders[kind]) return;
+  if (document.documentElement.classList.contains('lite') && !canvas.closest('[data-pin]')) return;
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' }); }
   catch (e) { canvas.parentElement.classList.add('nogl'); return; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  renderer.setPixelRatio(document.documentElement.classList.contains('lite') ? 1 : Math.min(devicePixelRatio, 1.5));
   renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; renderer.outputColorSpace = THREE.SRGBColorSpace;
   const scene = new THREE.Scene(), camera = new THREE.PerspectiveCamera(30, 1, .1, 100);
   const L = lights(scene, renderer);

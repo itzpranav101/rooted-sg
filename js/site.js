@@ -4,6 +4,12 @@ const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [..
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root = document.documentElement, page = document.body.dataset.page;
 const hasGsap = !!window.gsap;
+/* phones and data-saver: take the decorative and heavy parts out of the DOM altogether (not just hidden) */
+if (root.classList.contains('lite')) {
+  $$('.sky, .hero-stage .cloud, .hero-stage .hs-chip, .hero-stage .hs-phones .tilt:nth-child(2), .hero-rings, .scrollcue2, .callouts, .marq, .cloud').forEach(e => e.remove());
+  $$('canvas[data-mode="loose"]').forEach(c => c.remove());
+  $$('.hero-stage').forEach(s => s.classList.add('nocv'));
+}
 if (hasGsap) { gsap.registerPlugin(ScrollTrigger); ScrollTrigger.config({ ignoreMobileResize: true }); }
 
 /* ---------- theme: 5 skins x light/dark ---------- */
