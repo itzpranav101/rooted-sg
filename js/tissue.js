@@ -139,7 +139,7 @@ function drawCells(c, b) {
       c.globalAlpha = .7 * op; for (let k = 0; k < 6; k += 2) { const a = ce.rot + (k + .5) / 6 * TAU; c.beginPath(); c.arc(ce.x + Math.cos(a) * ce.r * .87, ce.y + Math.sin(a) * ce.r * .87, .2, 0, TAU); c.fill(); } }
     c.restore(); });
   c.globalAlpha = 1;
-  VES.forEach(([x, y], vi) => { const k = ease(sub(b, .3 + vi * .08, .75 + vi * .08)); if (k <= 0) return; c.lineWidth = .62; dpath(c, k, 55, c => c.arc(x, y, 8.2, -Math.PI / 2, -Math.PI / 2 + TAU)); c.lineWidth = .2; dpath(c, ease(k * 1.2 - .1), 44, c => c.arc(x, y, 6.6, -Math.PI / 2, -Math.PI / 2 + TAU)); if (k > .6) { c.lineWidth = .14; const n = Math.floor(14 * sub(k, .6, 1)); for (let q = 0; q < n; q++) { const a = q / 14 * TAU + vi; c.beginPath(); c.moveTo(x + Math.cos(a) * 6.6, y + Math.sin(a) * 6.6); c.lineTo(x + Math.cos(a) * 8.2, y + Math.sin(a) * 8.2); c.stroke(); } c.save(); c.globalAlpha = .35 * sub(k, .7, 1); c.lineWidth = .12; for (let q = 0; q < 3; q++) { c.beginPath(); c.arc(x, y, 5.6 - q * 1.4, .6 * q, TAU - .6 * q); c.stroke(); } c.restore(); } });
+  VES.forEach(([x, y], vi) => { const k = ease(sub(b, .3 + vi * .08, .75 + vi * .08)); if (k <= 0) return; c.lineWidth = .62; dpath(c, k, 55, c => c.arc(x, y, 8.2, -Math.PI / 2, -Math.PI / 2 + TAU)); if (k > .7) { c.save(); c.lineWidth = .12; c.setLineDash([.45,.8]); c.globalAlpha = .55; c.beginPath(); c.arc(x, y, 7.45, 0, TAU); c.stroke(); c.restore(); } c.lineWidth = .2; dpath(c, ease(k * 1.2 - .1), 44, c => c.arc(x, y, 6.6, -Math.PI / 2, -Math.PI / 2 + TAU)); if (k > .6) { c.lineWidth = .14; const n = Math.floor(14 * sub(k, .6, 1)); for (let q = 0; q < n; q++) { const a = q / 14 * TAU + vi; c.beginPath(); c.moveTo(x + Math.cos(a) * 6.6, y + Math.sin(a) * 6.6); c.lineTo(x + Math.cos(a) * 8.2, y + Math.sin(a) * 8.2); c.stroke(); } c.save(); c.globalAlpha = .35 * sub(k, .7, 1); c.lineWidth = .12; for (let q = 0; q < 3; q++) { c.beginPath(); c.arc(x, y, 5.6 - q * 1.4, .6 * q, TAU - .6 * q); c.stroke(); } c.restore(); } });
   PHL.forEach(([x, y, r], pi) => { const k = ease(sub(b, .45 + pi * .1, .9)); if (k <= 0) return; c.lineWidth = .4; dpath(c, k, 34, c => c.arc(x, y, r, 0, TAU)); if (k > .5) { c.lineWidth = .12; for (let q = -2; q <= 2; q++) { c.beginPath(); c.moveTo(x - r + 1, y + q * 1.4); c.lineTo(x + r - 1, y + q * 1.4); c.stroke(); }
     [[r + 3.6, -3.2, 2.5], [r + 4.4, 2.4, 2.3], [-r - 3.6, 3, 2.5]].forEach(([dx, dy, rr], ci) => { const ck = sub(k, .5 + ci * .12, 1); pop(c, x + dx, y + dy, ck, c => { c.lineWidth = .3; c.beginPath(); c.arc(x + dx, y + dy, rr, 0, TAU); c.stroke(); c.lineWidth = .1; for (let m = 0; m < 9; m++) { c.beginPath(); c.arc(x + dx + Math.cos(m * 2.4) * rr * .5 * (m % 3 ? .9 : .4), y + dy + Math.sin(m * 2.4) * rr * .5 * (m % 3 ? .9 : .4), .22, 0, TAU); c.stroke(); } }); }); } });
 }
@@ -243,8 +243,33 @@ function render(now) {
       if (spo > .01) { g.globalAlpha = spo; g.lineWidth = .18; spores.forEach(sp => { if (sp.age > maxA + 5) return; g.save(); g.translate(sp.x, sp.y); g.rotate(sp.a); g.beginPath(); g.ellipse(1.2, 0, 1.15, .6, 0, 0, TAU); g.stroke(); g.beginPath(); g.ellipse(3.2, .3, .9, .5, 0, 0, TAU); g.stroke(); g.restore(); }); }
       g.restore();
       const t1 = T(.6, .64) * (1 - T(.69, .72)), t2 = T(.72, .76) * (1 - T(.79, .82));
-      tag(g, 'FUNGAL HYPHAE (septate)', hyph[Math.max(0, Math.min(n - 1, 300))].x1, hyph[Math.max(0, Math.min(n - 1, 300))].y1, -44, 46, t1, 'right'); tag(g, 'ENTERING THE XYLEM', VES[0][0], VES[0][1] + 3, 22, 40, t1, 'left');
-      tag(g, 'MEMBRANES LEAK', cells.find(c => c.dmg < 60)?.x ?? 0, cells.find(c => c.dmg < 60)?.y ?? 0, -46, -34, t2, 'right'); tag(g, 'VESSEL CLOGGED', VES[0][0], VES[0][1], 24, -36, t2, 'left'); tag(g, 'SPORES FORM', spores[3]?.x ?? 0, spores[3]?.y ?? 0, 30, 38, t2, 'left'); }
+      tag(g, 'FUNGAL HYPHAE (septate)', hyph[Math.max(0, Math.min(n - 1, 300))].x1, hyph[Math.max(0, Math.min(n - 1, 300))].y1, -44, 35, t1, 'right'); tag(g, 'ENTERING THE XYLEM', VES[0][0], VES[0][1] + 3, 22, 33, t1, 'left');
+      tag(g, 'MEMBRANES LEAK', cells.find(c => c.dmg < 60)?.x ?? 0, cells.find(c => c.dmg < 60)?.y ?? 0, -46, -34, t2, 'right'); tag(g, 'VESSEL CLOGGED', VES[0][0], VES[0][1], 24, -36, t2, 'left'); tag(g, 'SPORES FORM', spores[3]?.x ?? 0, spores[3]?.y ?? 0, 30, 32, t2, 'left'); }
+
+    // ---- the finer detail: pit crossings, spores in the sap, the plant's own plugs, browning, and a day-by-day timeline ----
+    if (grow > .08) {
+      // pits: where a hypha pushes through a vessel wall
+      if (!window.__pits) { window.__pits = []; hyph.forEach(sg => VES.forEach(v => { const d0 = Math.hypot(sg.x0 - v[0], sg.y0 - v[1]), d1 = Math.hypot(sg.x1 - v[0], sg.y1 - v[1]); if ((d0 - 8.2) * (d1 - 8.2) < 0) window.__pits.push({ x: (sg.x0 + sg.x1) / 2, y: (sg.y0 + sg.y1) / 2, age: sg.age, a: Math.atan2(sg.y1 - sg.y0, sg.x1 - sg.x0) }); })); }
+      g.save(); g.strokeStyle = C.gr; g.lineWidth = .24; window.__pits.forEach(pt => { if (pt.age > maxA) return; const k = clamp((maxA - pt.age) / 6); g.globalAlpha = k; g.beginPath(); g.arc(pt.x, pt.y, .9 + (1 - k) * 1.6, 0, TAU); g.stroke(); }); g.restore();
+      // spores (conidia) swirling in the sap of the first vessel
+      const sv = VES[0]; g.save(); g.lineWidth = .16; for (let i = 0; i < 11; i++) { const born = .22 + i * .045; if (grow < born) continue; const a = tt * (.5 + (i % 4) * .13) * (i % 2 ? 1 : -1) + i * 1.9, r = 1.4 + (i * 2.3) % 4.4; g.save(); g.translate(sv[0] + Math.cos(a) * r, sv[1] + Math.sin(a) * r); g.rotate(a * 2); g.globalAlpha = clamp((grow - born) * 8); g.beginPath(); g.ellipse(0, 0, .95, .45, 0, 0, TAU); g.stroke(); g.restore(); } g.restore();
+      // tyloses: the plant bulges its own plugs into the second vessel
+      const ty = clamp((dmg - .05) * 1.6); if (ty > 0) { const v2 = VES[1]; g.save(); g.lineWidth = .22; g.globalAlpha = ty; for (let i = 0; i < 6; i++) { const a = i / 6 * TAU + .4, r0 = 7.1, rr = (1.1 + (i % 3) * .5) * ty; g.beginPath(); g.arc(v2[0] + Math.cos(a) * (r0 - rr * .6), v2[1] + Math.sin(a) * (r0 - rr * .6), rr, 0, TAU); g.stroke(); } g.restore(); }
+      // browning: a halo of dots round the vessels the fungus has reached
+      VES.forEach((v, vi) => { const k = dmg * clamp((maxA - 40 - vi * 8) / 30); if (k < .05) return; g.save(); g.fillStyle = C.fg; g.globalAlpha = k * .55; const R = mk(70 + vi); for (let n2 = 0; n2 < 46; n2++) { const a = n2 / 46 * TAU + R(), r = 9 + R() * 2.2; g.beginPath(); g.arc(v[0] + Math.cos(a) * r, v[1] + Math.sin(a) * r, .2 + R() * .22, 0, TAU); g.fill(); } g.restore(); });
+      // timeline readout: illustrative days since the spores arrived
+      const prog = clamp((grow * .6 + dmg * .4 + spo * .15)), day = Math.round(prog * 14), marks = [[0, 'Spores reach the root'], [4, 'Hyphae enter the xylem'], [9, 'Vessels clog, membranes leak'], [12, 'Leaves still look fine']];
+      let mk2 = marks[0]; marks.forEach(m => { if (day >= m[0]) mk2 = m; });
+      g.save(); const bx0 = -30, bx1 = 30, by = 43.5; g.globalAlpha = clamp(grow * 6) * (1 - T(.78, .8)); g.lineWidth = .24; g.strokeStyle = C.fg; g.beginPath(); g.moveTo(bx0, by); g.lineTo(bx1, by); g.stroke();
+      marks.forEach(m => { const x = lerp(bx0, bx1, m[0] / 14); g.beginPath(); g.moveTo(x, by - .8); g.lineTo(x, by + .8); g.stroke(); });
+      g.fillStyle = C.gr; g.beginPath(); g.arc(lerp(bx0, bx1, day / 14), by, 1, 0, TAU); g.fill();
+      txt(g, 'DAY ' + day, bx0, by - 3.2, { s: 2, col: C.gr, w: 500 }); txt(g, mk2[1], bx1, by - 3.2, { s: 1.8, al: 'right' }); txt(g, 'ILLUSTRATIVE TIMELINE', bx0, by + 3.4, { s: 1.4, a: .5 }); g.restore();
+      // extra labels
+      const L1 = T(.62, .66) * (1 - T(.7, .73)), L2 = T(.7, .73) * (1 - T(.8, .83));
+      if (window.__pits.length) { const pt = window.__pits.find(q => q.age <= maxA) || window.__pits[0]; tag(g, 'HYPHA CROSSES THE WALL AT A PIT', pt.x, pt.y, -48, -20, L1, 'right'); }
+      tag(g, 'SPORES RIDE THE SAP', sv[0] + 2, sv[1] + 1, -48, 30, L2, 'right');
+      tag(g, 'THE PLANT PLUGS ITS OWN PIPE (TYLOSES)', VES[1][0] - 5, VES[1][1] + 4, 12, -44, L2, 'left');
+    }
     g.restore(); }
 
   // ----- 5 · THE SIGNAL (impedance spectrum) -----
