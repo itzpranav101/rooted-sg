@@ -977,3 +977,13 @@ p,li{text-wrap:pretty}
 .mv-line{margin-top:26px;font-family:var(--serif);font-weight:var(--dw,300);font-size:clamp(24px,3vw,44px);letter-spacing:-.025em;line-height:1.05}
 .mv-line em{color:var(--green)}
 @media(prefers-reduced-motion:reduce){.mv-g circle{transition:none}}
+
+.mv-big{display:flex;align-items:baseline;gap:14px;margin-top:22px;flex-wrap:wrap}
+.mv-big .num{font-size:clamp(54px,7vw,104px);color:var(--green)}
+.mv-big>span{color:var(--sec);font-size:15px;max-width:12em;line-height:1.3}
+.mv-do{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;margin-top:clamp(40px,6vw,80px);border-top:1px var(--rs,solid) var(--rule)}
+.mv-do>div{padding:clamp(18px,2vw,28px) clamp(16px,2vw,28px);box-shadow:inset -1px 0 0 var(--rule);display:grid;gap:8px;align-content:start}
+.mv-do>div:first-child{padding-left:0}.mv-do>div:last-child{box-shadow:none}
+.mv-do>div>b{font-family:var(--serif);font-weight:var(--dw,300);font-size:clamp(21px,2vw,28px);letter-spacing:-.02em;line-height:1.1}
+.mv-do p{color:var(--sec);font-size:15px}
+@media(max-width:700px){.mv-do>div{box-shadow:inset 0 -1px 0 var(--rule);padding-left:0}.mv-do>div:last-child{box-shadow:none}}
