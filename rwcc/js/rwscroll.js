@@ -8,6 +8,8 @@ const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, t) => a + (b - a) * t;
 const ease = t => t * t * (3 - 2 * t);
 if (reduced) document.documentElement.classList.add('rs-static');
+if (/[?&]review\b/.test(location.search)) document.documentElement.classList.add('review');
+$$('.mc-val').forEach(v => new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { v.classList.add('in'); o.disconnect(); } }, { threshold: .25 }).observe(v));
 
 /* ---- play looping vignettes only while visible ---- */
 $$('.dl-card,.stk-card').forEach(c => new IntersectionObserver(es => c.classList.toggle('in', es[0].isIntersecting), { threshold: .25 }).observe(c));
