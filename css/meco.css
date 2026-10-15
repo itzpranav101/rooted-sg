@@ -113,3 +113,23 @@
 .mr-vid::after{content:"";position:absolute;left:0;right:0;bottom:0;height:62%;z-index:-1;background:linear-gradient(to top,rgba(8,22,15,.94) 8%,rgba(8,22,15,.7) 45%,transparent)}
 .mv-bg{z-index:-2}
 .mv-mojo{right:7%;top:12%}
+
+/* ---------- film boxes, second pass: more polish, a bigger watch button, clearly an MP4 ---------- */
+.mr-vid{min-height:clamp(380px,42vw,540px);box-shadow:0 30px 60px -28px rgba(8,22,15,.55),inset 0 0 0 1px rgba(163,230,139,.18)}
+.mr-vid .mv-sheen{position:absolute;inset:0;z-index:-1}
+.mr-vid::before{background:radial-gradient(120% 90% at 85% 0%,rgba(163,230,139,.28),transparent 55%),radial-gradient(90% 80% at 0% 100%,rgba(237,157,118,.16),transparent 60%),conic-gradient(from 210deg at 80% 10%,transparent,rgba(163,230,139,.12),transparent 30%)}
+.mr-vid .mv-tag{background:rgba(163,230,139,.14);box-shadow:inset 0 0 0 1px rgba(163,230,139,.4);color:#CFF3C2}
+.mv-play{width:clamp(88px,10vw,128px);box-shadow:0 0 0 10px rgba(163,230,139,.16),0 0 0 0 rgba(163,230,139,.5)}
+.mv-copy{padding:clamp(14px,1.8vw,22px);margin:0 calc(-1*clamp(6px,1vw,12px)) calc(-1*clamp(6px,1vw,12px));border-radius:calc(20px*var(--rad,1));background:rgba(8,22,15,.55);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);max-width:none}
+.mv-copy b{font-size:clamp(28px,3.2vw,46px)}
+.mv-copy .mv-cta b{font-size:11px}
+.mv-cta{margin-top:10px;justify-self:start;gap:12px;padding:16px 26px 16px 20px;border-radius:999px;background:#A3E68B;color:#081B13;font-size:13px;font-weight:600;letter-spacing:.1em;box-shadow:0 14px 30px -12px rgba(163,230,139,.7);transition:transform .35s var(--ease),box-shadow .35s}
+.mv-cta svg{width:18px;height:18px;fill:currentColor;flex:none}
+.mv-cta .mp4{font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.14em;padding:4px 9px;border-radius:7px;background:#081B13;color:#A3E68B}
+.mv-cta em{font-style:normal}
+.mv-cta i{font-size:18px}
+.mr-vid:hover .mv-cta{transform:translateY(-3px);box-shadow:0 20px 36px -12px rgba(163,230,139,.85)}
+.mr-vid.soon .mv-cta{background:rgba(255,255,255,.14);color:#EAF4EA;box-shadow:none}
+.mr-vid.soon .mv-cta .mp4{background:rgba(255,255,255,.2);color:#EAF4EA}
+.mr-vid.soon .mv-cta svg{display:none}
+@media(max-width:560px){.mv-cta{width:100%;justify-content:center;padding:16px 18px;font-size:12px}}

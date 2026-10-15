@@ -44,6 +44,6 @@ $$('.mr-file[data-src]').forEach(f => { const btn = $('[data-read]', f); let box
     box = document.createElement('div'); box.className = 'mr-embed'; box.innerHTML = `<iframe src="${url}#view=FitH" title="${$('b', f).textContent}"></iframe>`; f.appendChild(box); btn.firstChild.textContent = 'Hide '; }); });
 
 /* ---- the two film boxes: they open the link in js/meco-resources.js ---- */
-$$('.mr-vid').forEach(a => { const u = (window.MECO_RES || {})[a.dataset.key]; if (u) a.href = u; else { a.classList.add('soon'); a.removeAttribute('target'); a.setAttribute('aria-disabled', 'true'); a.addEventListener('click', e => e.preventDefault()); $('.mv-cta em', a).textContent = 'Link coming soon'; $('.mv-cta i', a).textContent = ''; } });
+$$('.mr-vid').forEach(a => { const u = (window.MECO_RES || {})[a.dataset.key]; if (u) a.href = u; else { a.classList.add('soon'); a.removeAttribute('target'); a.setAttribute('aria-disabled', 'true'); a.addEventListener('click', e => e.preventDefault()); $('.mv-cta em', a).textContent = 'MP4 link coming soon'; $('.mv-cta i', a).textContent = ''; } });
 if (hasGsap) { ScrollTrigger.sort(); ScrollTrigger.refresh(); addEventListener('load', () => ScrollTrigger.refresh()); }
 })();
