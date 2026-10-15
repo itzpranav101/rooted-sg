@@ -21,7 +21,7 @@ pages={'index':('home','Meco by Rooted SG | Measure + Eco. Count what we keep al
 for name,(pg,title,desc) in pages.items():
     try: body=open(f'_src/{name}.body.html').read()
     except FileNotFoundError: continue
-    body=body.replace('{{CALLOUTS}}',callouts()).replace('{{CALLOUTS2}}',callouts(CALLS2))
+    body=body.replace('{{RESOURCES}}',open('_src/_resources.html').read()).replace('{{CALLOUTS}}',callouts()).replace('{{CALLOUTS2}}',callouts(CALLS2))
     html=head.replace('{title}',title).replace('{desc}',desc).replace('{page}',pg)+body+tail
     open(f'{name}.html','w').write(html)
     print('built',name)

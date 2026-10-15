@@ -1,6 +1,6 @@
 // MECO resources page: poster viewer, the scroll-through pitch deck, in-place PDF readers, essay and films.
 (() => {
-if (document.body.dataset.page !== 'meco') return;
+if (!document.querySelector('#deck')) return;
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const lite = document.documentElement.classList.contains('lite'), reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, coarse = matchMedia('(pointer:coarse)').matches;
 const hasGsap = !!(window.gsap && window.ScrollTrigger);

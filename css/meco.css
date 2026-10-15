@@ -76,3 +76,7 @@
 .mr-lb.open img{transform:none}
 @media(max-width:760px){.mr-posters{grid-template-columns:1fr}.mr-poster{rotate:0!important;margin-top:0!important}.mr-films{grid-template-columns:1fr}.dk-nav{width:38px;height:38px}.mr-row{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){.dk-s{transition:none}.mr-poster{rotate:0!important}}
+
+.mr-below{display:flex;flex-direction:column;align-items:center;gap:10px;padding:clamp(40px,6vw,90px) 0 clamp(20px,3vw,40px);text-align:center}
+.mr-below i{width:1px;height:46px;background:var(--green);transform-origin:50% 0;animation:rsdrop 1.8s var(--ease) infinite}
+.meco-res{position:relative;z-index:1;background:var(--bg)}
