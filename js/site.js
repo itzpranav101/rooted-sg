@@ -30,8 +30,8 @@ function markSkin() { $$('.sk,.theme[data-skin]').forEach(e => e.classList.toggl
 
 /* ---------- chrome ---------- */
 const leaf = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z"/><path d="M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z"/></svg>';
-const pages = [['index.html', 'Home', 'home'], ['app.html', 'The app', 'app'], ['rootstake.html', 'RootStake', 'rootstake'], ['how-it-works.html', 'How it works', 'how'], ['impact.html', 'The story', 'impact']];
-const names = { home: 'Singapore', app: 'The app', rootstake: 'RootStake', how: 'How it works', impact: 'The story' };
+const pages = [['index.html', 'Home', 'home'], ['app.html', 'The app', 'app'], ['rootstake.html', 'RootStake', 'rootstake'], ['how-it-works.html', 'How it works', 'how'], ['impact.html', 'The story', 'impact'], ['meco.html', 'MECO', 'meco']];
+const names = { home: 'Singapore', app: 'The app', rootstake: 'RootStake', how: 'How it works', impact: 'The story', meco: 'Resources' };
 document.body.insertAdjacentHTML('afterbegin', `
 <div class="sprog" id="sprog"><i></i></div>
 <header class="top" id="top"><a class="mark" href="index.html">${leaf}<span>Rooted SG</span><small>${names[page] || ''}</small></a>
@@ -50,7 +50,7 @@ const nextBand = `<section class="nextband" aria-label="Next stop"><div class="w
 <span class="label">${wraps ? 'The loop closes' : 'Next stop'}</span>
 <a class="nb-link" href="${jNext[0]}"><span class="nb-t">${wraps ? 'Back to the start' : jNext[1]}</span><span class="nb-s">${wraps ? 'Home, where it all began.' : jNext[3]}</span><i>→</i></a>
 </div></section>`;
-document.body.insertAdjacentHTML('beforeend', nextBand + `
+document.body.insertAdjacentHTML('beforeend', (page === 'meco' ? '' : nextBand) + `
 <footer class="foot"><div class="wrap">
 <div class="cols"><div><p class="serif d4" style="max-width:15em">Don't count what we plant. <em>Count what we keep alive.</em></p></div>
 <div><div class="label" style="margin-bottom:12px">Pages</div>${pages.map(p => `<a href="${p[0]}">${p[1]}</a>`).join('')}</div>

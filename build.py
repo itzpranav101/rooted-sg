@@ -16,6 +16,7 @@ pages={'index':('home','Meco by Rooted SG | Measure + Eco. Count what we keep al
 'app':('app','The app | Rooted SG','Garden, Market, Quests and BioDex. The Rooted SG iOS app, in real footage.'),
 'rootstake':('rootstake','RootStake | Rooted SG','The real CAD of RootStake, in 3D: a printed probe that reads the soil and waters the roots.'),
 'how-it-works':('how','How it works | Rooted SG','Why we built Meco after listening to our grandparents and their friends, and how one reading goes from the plant to the phone and back to the roots.'),
+'meco':('meco','MECO | Posters, pitch deck and resources','Everything Rooted SG made, in one place: the posters and the pitch deck to read here or download as PDFs.'),
 'impact':('impact','The story | Rooted SG','Singapore counts what it plants, not what it keeps alive. The survey, the gap, and the team of five.')}
 for name,(pg,title,desc) in pages.items():
     try: body=open(f'_src/{name}.body.html').read()

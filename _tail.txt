@@ -5,6 +5,8 @@
 <script defer src="js/site.js"></script>
 <script defer src="js/tissue.js"></script>
 <script defer src="js/mojo.js"></script>
+<script defer src="js/meco-resources.js"></script>
+<script defer src="js/meco.js"></script>
 <script type="module" src="js/scenes.js"></script>
 </body>
 </html>

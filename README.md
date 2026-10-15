@@ -17,3 +17,6 @@ A separate, app-only version for the RWCC competition: only Rooted SG, with no R
 - Own engine and storage keys (`rwcc/js/site.js`, `rwcc/js/mojo.js`, `rwcc/js/rwcc.js`), same five themes in `rwcc/css/`.
 - Real app screens, the two mascots and the two background photos came from the competition slide deck (`rwcc/media/`).
 - Served at `/rwcc/` on the same domain.
+
+## MECO resources page (`meco.html`)
+Posters, the pitch deck (scroll-through viewer) and every PDF, to read in place or download. Files live in `media/meco/`; deck slide images are in `media/meco/deck/`. Add the essay and the films in `js/meco-resources.js` and they appear on the page automatically.
