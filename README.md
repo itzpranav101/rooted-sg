@@ -10,3 +10,10 @@ Five pages (Home, The app, RootStake, How it works, The story), five themes × l
 - 3D scenes (three.js): `js/scenes.js` — probe assembly (tube, moisture board, pH electrode), house module, stem electrode, system walkthrough.
 - Farm → plant → stem → cells → fungal colony → signal animation: `js/tissue.js` (2D canvas, scroll-driven, illustrative).
 - Preview locally: `./start.command` (needs a server; ES modules and STL files don't load from `file://`).
+
+## RWCC edition (`rwcc/`)
+A separate, app-only version for the RWCC competition: only Rooted SG, with no RootStake, no Meco and no hardware.
+- Pages: Home, The problem, The app, Impact and pilot, Our story. Edit copy in `rwcc/_src/*.body.html`, then run `python3 build.py` inside `rwcc/`.
+- Own engine and storage keys (`rwcc/js/site.js`, `rwcc/js/mojo.js`, `rwcc/js/rwcc.js`), same five themes in `rwcc/css/`.
+- Real app screens, the two mascots and the two background photos came from the competition slide deck (`rwcc/media/`).
+- Served at `/rwcc/` on the same domain.
