@@ -138,3 +138,28 @@
 .mr-vid:hover .mv-shot{transform:scale(1.07)}
 .mr-vid.motion .mv-tag{background:rgba(8,22,15,.55);backdrop-filter:blur(8px)}
 .mr-vid.motion .mv-bg i{display:none}
+
+/* MECO in Motion: the film's own title frame as the whole background (a light card) */
+.mr-vid.motion{background:#F4F7F4;color:#0E2A1C}
+.mr-vid.motion::before{background:none}
+.mr-vid.motion::after{height:68%;background:linear-gradient(to top,rgba(244,247,244,.98) 14%,rgba(244,247,244,.86) 46%,rgba(244,247,244,0))}
+.mr-vid.motion .mv-shot{inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:1}
+.mr-vid.motion .mv-tag{background:rgba(255,255,255,.8);color:#0B5A32;box-shadow:inset 0 0 0 1px rgba(11,90,50,.3)}
+.mr-vid.motion .mv-play{background:#0B5A32;color:#fff;box-shadow:0 0 0 10px rgba(11,90,50,.14),0 0 0 0 rgba(11,90,50,.4);animation-name:mvpulse2}
+@keyframes mvpulse2{0%{box-shadow:0 0 0 10px rgba(11,90,50,.14),0 0 0 0 rgba(11,90,50,.4)}70%,100%{box-shadow:0 0 0 10px rgba(11,90,50,.14),0 0 0 30px rgba(11,90,50,0)}}
+.mr-vid.motion .mv-copy{background:rgba(255,255,255,.72);box-shadow:inset 0 0 0 1px rgba(11,90,50,.14);color:#0E2A1C}
+.mr-vid.motion .mv-copy p{color:#34503f}
+.mr-vid.motion .mv-cta{background:#0B5A32;color:#fff;box-shadow:0 16px 30px -14px rgba(11,90,50,.8)}
+.mr-vid.motion .mv-cta .mp4{background:#fff;color:#0B5A32}
+.mr-vid.motion:hover .mv-cta{box-shadow:0 22px 36px -14px rgba(11,90,50,.9)}
+/* second look: show the whole title frame, uncropped, and tuck the play button into its corner */
+.mr-vid.motion{background:#F7F9F7}
+.mr-vid.motion .mv-shot{inset:0 0 auto 0;width:100%;height:auto;aspect-ratio:2600/1453;object-fit:cover;object-position:center}
+.mr-vid.motion::after{height:58%}
+.mr-vid.motion .mv-play{position:absolute;right:7%;top:clamp(120px,15vw,200px);width:clamp(70px,7vw,92px);place-self:auto}
+.mr-vid.motion .mv-tag{position:relative;z-index:2}
+@media(max-width:820px){.mr-vid.motion .mv-play{top:120px}}
+.mr-vid.motion .mv-copy{grid-row:3;align-self:end}
+.mr-vid.motion .mv-cta{padding:14px 22px 14px 18px}
+.mr-vid.motion::after{display:none}
+.mr-vid.motion .mv-play{top:clamp(18px,2vw,28px);right:clamp(18px,2.4vw,32px);width:clamp(60px,6vw,76px);animation:none;box-shadow:0 12px 24px -10px rgba(11,90,50,.7)}
