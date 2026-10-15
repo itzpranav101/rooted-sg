@@ -43,14 +43,7 @@ $$('.mr-file[data-src]').forEach(f => { const btn = $('[data-read]', f); let box
     if (box) { box.remove(); box = null; btn.firstChild.textContent = 'Read here '; return; }
     box = document.createElement('div'); box.className = 'mr-embed'; box.innerHTML = `<iframe src="${url}#view=FitH" title="${$('b', f).textContent}"></iframe>`; f.appendChild(box); btn.firstChild.textContent = 'Hide '; }); });
 
-/* ---- essay and films, shown only once they are added in js/meco-resources.js ---- */
-(() => {
-  const R = window.MECO_RES || {}, sec = $('#films'), box = $('#mrfilms'); if (!sec) return;
-  const items = []; if (R.essay && R.essay.url) items.push(`<article><div class="fr" style="display:grid;place-items:center;padding:24px;text-align:center"><div><b>${R.essay.title || 'Our essay'}</b><br><br><a class="btn" href="${R.essay.url}" target="_blank" rel="noopener">Read it <i>→</i></a></div></div><div><span>${R.essay.note || 'Essay'}</span></div></article>`);
-  (R.videos || []).forEach(v => { if (!v.url) return; const yt = v.url.match(/(?:youtu\.be\/|v=)([\w-]{11})/), vm = v.url.match(/vimeo\.com\/(\d+)/);
-    const media = yt ? `<iframe src="https://www.youtube-nocookie.com/embed/${yt[1]}" title="${v.title}" loading="lazy" allowfullscreen allow="picture-in-picture"></iframe>` : vm ? `<iframe src="https://player.vimeo.com/video/${vm[1]}" title="${v.title}" loading="lazy" allowfullscreen></iframe>` : `<video src="${v.url}" controls preload="metadata" playsinline></video>`;
-    items.push(`<article><div class="fr">${media}</div><div><b>${v.title}</b><br><span>${v.note || 'Film'}</span></div></article>`); });
-  if (items.length) { box.innerHTML = items.join(''); sec.hidden = false; }
-})();
+/* ---- the two film boxes: they open the link in js/meco-resources.js ---- */
+$$('.mr-vid').forEach(a => { const u = (window.MECO_RES || {})[a.dataset.key]; if (u) a.href = u; else { a.classList.add('soon'); a.removeAttribute('target'); a.setAttribute('aria-disabled', 'true'); a.addEventListener('click', e => e.preventDefault()); $('.mv-cta em', a).textContent = 'Link coming soon'; $('.mv-cta i', a).textContent = ''; } });
 if (hasGsap) { ScrollTrigger.sort(); ScrollTrigger.refresh(); addEventListener('load', () => ScrollTrigger.refresh()); }
 })();
