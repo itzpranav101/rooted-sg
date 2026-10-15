@@ -20,7 +20,7 @@ try{var sm=matchMedia('(max-width:700px)').matches||matchMedia('(max-width:900px
 var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href='https://fonts.googleapis.com/css2?'+F[d.dataset.skin]+'&display=swap';document.head.appendChild(l)})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css"><link rel="stylesheet" href="css/rwcc.css">
+<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css"><link rel="stylesheet" href="css/rwcc.css"><link rel="stylesheet" href="css/rwscroll.css">
 </head>
 <body data-page="problem">
 <a class="skip" href="#main">Skip to content</a>
@@ -33,6 +33,21 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
     <p class="lede" data-intro>We asked 466 people across Singapore why.</p>
   </div>
 </header>
+
+<section class="rs-pin fu" id="funnel" aria-label="Out of every 100 sprouts">
+  <div class="rs-in">
+    <div class="rs-top"><span class="label"><b>The say-do gap</b></span><h2 class="display">Out of every <em>100 people</em>.</h2></div>
+    <div class="fu-body">
+      <div class="fu-grid" id="fugrid" aria-hidden="true"></div>
+      <div class="fu-side">
+        <div class="fu-big"><b id="fun">0</b><span id="fulab">&nbsp;</span></div>
+        <p class="fu-txt" id="futxt"></p>
+        <div class="fu-keys"><span class="a" data-k="0"><i></i>want to</span><span class="b" data-k="1"><i></i>tried, gave up</span><span class="c" data-k="2"><i></i>kept one alive</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="rs-hint" aria-hidden="true"><span>Scroll</span><i></i></div>
+</section>
 
 <section class="sec" id="dots" style="padding-top:0">
   <div class="wrap">
@@ -152,6 +167,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <script defer src="js/team.js"></script>
 <script defer src="js/site.js"></script>
 <script defer src="js/rwcc.js"></script>
+<script defer src="js/rwscroll.js"></script>
 <script defer src="js/mojo.js"></script>
 </body>
 </html>

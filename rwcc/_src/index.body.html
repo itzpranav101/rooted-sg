@@ -30,6 +30,8 @@
   </div>
 </section>
 
+<div class="rs-tick" aria-hidden="true"><div id="rstick"><span>Verified</span><span>Living</span><span>Counted</span><span>Local</span><span>Verified</span><span>Living</span><span>Counted</span><span>Local</span><span>Verified</span><span>Living</span><span>Counted</span><span>Local</span></div></div>
+
 <section class="sec" id="plantday" style="padding-top:clamp(20px,3vw,50px)">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>The one number</b></span><h2 class="display d2" data-split>The verified <em>Plant-Day</em>.</h2></div>
@@ -43,6 +45,49 @@
       <p class="pd-line">Only living plants count. It cannot be bought, back-dated or faked.</p>
     </div>
   </div>
+</section>
+
+<section class="rs-pin fn" id="fortnight" aria-label="Fourteen days with one plant">
+  <div class="rs-in">
+    <div class="rs-top"><span class="label"><b>A fortnight</b></span><h2 class="display">Fourteen days with <em>one plant</em>.</h2></div>
+    <div class="fn-stage">
+      <svg class="fn-scene" id="fnsvg" viewBox="0 0 640 370" aria-hidden="true">
+        <rect class="wall" x="0" y="0" width="640" height="370" rx="14"/>
+        <rect class="fr" x="70" y="22" width="500" height="308" rx="6"/><path class="fr" d="M320 22V330M70 176H570"/>
+        <g id="fnsun"><circle class="sun" cx="0" cy="0" r="17"/><g class="sunr"><line x1="0" y1="-27" x2="0" y2="-22"/><line x1="0" y1="22" x2="0" y2="27"/><line x1="-27" y1="0" x2="-22" y2="0"/><line x1="22" y1="0" x2="27" y2="0"/><line x1="-19" y1="-19" x2="-16" y2="-16"/><line x1="16" y1="16" x2="19" y2="19"/><line x1="-19" y1="19" x2="-16" y2="16"/><line x1="16" y1="-16" x2="19" y2="-19"/></g></g>
+        <rect class="sill" x="40" y="330" width="560" height="14" rx="3"/>
+        <g class="zz" id="fnzz" opacity="0"><text x="420" y="150">z</text><text x="438" y="130">z</text><text x="458" y="108">Z</text></g>
+        <path class="stem" id="fnstem" pathLength="1" d="M320 262V112"/>
+        <path class="lf" id="fnL1" d="M320 225C292 208 256 208 234 230C262 248 298 248 320 225Z"/>
+        <path class="lf" id="fnR1" d="M320 215C348 198 384 198 406 220C378 238 342 238 320 215Z"/>
+        <path class="lf" id="fnL2" d="M320 175C298 162 270 162 252 178C274 192 300 192 320 175Z"/>
+        <path class="lf" id="fnR2" d="M320 165C342 152 370 152 388 168C366 182 340 182 320 165Z"/>
+        <path class="lf" id="fnT" d="M320 115C306 96 308 78 320 64C332 78 334 96 320 115Z"/>
+        <g id="fnflower" opacity="0"><circle class="pet" cx="320" cy="48" r="9"/><circle class="pet" cx="333" cy="58" r="9"/><circle class="pet" cx="328" cy="73" r="9"/><circle class="pet" cx="312" cy="73" r="9"/><circle class="pet" cx="307" cy="58" r="9"/><circle class="ctr" cx="320" cy="62" r="7"/></g>
+        <path class="potb" d="M266 266L276 328H364L374 266Z"/><rect class="potb" x="260" y="256" width="120" height="14" rx="4"/>
+        <ellipse class="soil" id="fnsoil" cx="320" cy="258" rx="54" ry="5"/>
+        <g class="tag" id="fntag" opacity="0"><rect x="376" y="286" width="100" height="26" rx="13"/><text x="426" y="303" text-anchor="middle">PANDAN</text></g>
+        <g id="fncan" opacity="0"><path class="can" d="M0 0h58l-4 38H4zM58 12L92 -4M92 -4l5 6-6 2M4 8c-22 0-22 24 0 24"/></g>
+        <g id="fndrops"><circle class="drop" cx="0" cy="0" r="3.2" opacity="0"/><circle class="drop" cx="0" cy="0" r="3.2" opacity="0"/><circle class="drop" cx="0" cy="0" r="3.2" opacity="0"/><circle class="drop" cx="0" cy="0" r="3.2" opacity="0"/></g>
+        <rect class="flash" id="fnflash" x="0" y="0" width="640" height="370" rx="14" opacity="0"/>
+      </svg>
+      <div class="fn-phone" aria-hidden="true"><div class="fn-ph-in">
+        <div class="fn-c on" data-c="name"><span>Name a real plant</span><i class="fn-name" id="fnname">&nbsp;</i></div>
+        <div class="fn-c" data-c="check"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8.5 7l1.5-3h4l1.5 3"/></svg><b>Check in</b><span>Fresh photo, right time</span></div>
+        <div class="fn-c" data-c="ok"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7.5 12.5l3 3 6-6.5"/></svg><b>Verified</b><span>+1 Plant-Day</span></div>
+        <div class="fn-c" data-c="nudge"><img src="media/mojo.png" alt="" width="70" height="86"><b>Mojo</b><span>Pandan needs you first</span></div>
+        <div class="fn-c" data-c="doc"><b>Plant Doctor</b><ul><li>Dry soil</li><li>Leaves drooping</li></ul><span>You make the call</span></div>
+        <div class="fn-c" data-c="done"><span>Day 14</span><i class="big" id="fnbig">11</i><b>verified Plant-Days</b></div>
+      </div></div>
+    </div>
+    <div class="fn-foot">
+      <div class="fn-day"><b id="fnday">01</b><span>Day</span></div>
+      <div class="fn-cap" id="fncap"><b></b><p></p></div>
+      <div class="fn-score"><b id="fnscore">0</b><span>Verified Plant-Days</span></div>
+      <div class="fn-ticks" id="fnticks"></div>
+    </div>
+  </div>
+  <div class="rs-hint" aria-hidden="true"><span>Scroll</span><i></i></div>
 </section>
 
 <section class="sec" id="phones" style="padding-top:0">

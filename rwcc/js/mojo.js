@@ -3,7 +3,7 @@
 (() => {
 const page = document.body.dataset.page, $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const NEXT = { home: ['problem.html', 'The problem'], problem: ['app.html', 'The app'], app: ['impact.html', 'Impact and pilot'], impact: ['story.html', 'Our story'], story: ['index.html', 'Home'] };
+const NEXT = { home: ['problem.html', 'The problem'], problem: ['app.html', 'The app'], app: ['impact.html', 'Impact and pilot'], impact: ['story.html', 'About us'], story: ['index.html', 'Home'] };
 const SAYS = { home: 'Next, why people really lose their plants.', problem: 'Now the app we built from those answers.', app: 'Next, what it could change, and how we will know.', impact: 'One last stop: the people behind it.', story: 'And back to the start. The loop closes.' };
 const click = sel => () => { const e = $(sel); if (e) e.click(); };
 const to = u => () => { location.href = u; };

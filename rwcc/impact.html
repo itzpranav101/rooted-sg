@@ -20,7 +20,7 @@ try{var sm=matchMedia('(max-width:700px)').matches||matchMedia('(max-width:900px
 var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href='https://fonts.googleapis.com/css2?'+F[d.dataset.skin]+'&display=swap';document.head.appendChild(l)})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css"><link rel="stylesheet" href="css/rwcc.css">
+<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css"><link rel="stylesheet" href="css/rwcc.css"><link rel="stylesheet" href="css/rwscroll.css">
 </head>
 <body data-page="impact">
 <a class="skip" href="#main">Skip to content</a>
@@ -33,6 +33,25 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
     <p class="lede" data-intro>What it changes, how many plants it could keep alive, and how we will know.</p>
   </div>
 </header>
+
+<section class="rs-pin sc" id="scale" aria-label="One school to sixty schools">
+  <div class="rs-in">
+    <div class="rs-top"><span class="label"><b>One class to one island</b></span><h2 class="display">Start with one school. <em>Then sixty.</em></h2></div>
+    <div class="sc-body">
+      <div class="sc-stage" id="scstage" aria-hidden="true"><div class="sc-world" id="scworld"></div></div>
+      <div class="sc-side">
+        <div class="sc-cnt">
+          <div class="sc-row"><span>Schools</span><b id="sc-s">1</b></div>
+          <div class="sc-row"><span>Students</span><b id="sc-st">120</b></div>
+          <div class="sc-row hot"><span>More plants alive at 12 months</span><b id="sc-p">0</b></div>
+        </div>
+        <div class="sc-cap" id="sccap"><b></b><p></p></div>
+        <div class="sc-form" id="scform">60 schools × 120 students × 2.1 plants × 12 points = 1,814</div>
+      </div>
+    </div>
+  </div>
+  <div class="rs-hint" aria-hidden="true"><span>Scroll</span><i></i></div>
+</section>
 
 <section class="sec" id="levels" style="padding-top:0">
   <div class="wrap">
@@ -179,6 +198,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <script defer src="js/team.js"></script>
 <script defer src="js/site.js"></script>
 <script defer src="js/rwcc.js"></script>
+<script defer src="js/rwscroll.js"></script>
 <script defer src="js/mojo.js"></script>
 </body>
 </html>

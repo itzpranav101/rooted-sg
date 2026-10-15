@@ -30,8 +30,8 @@ function markSkin() { $$('.sk,.theme[data-skin]').forEach(e => e.classList.toggl
 
 /* ---------- chrome ---------- */
 const leaf = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V11"/><path d="M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z"/><path d="M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z"/></svg>';
-const pages = [['index.html', 'Home', 'home'], ['problem.html', 'The problem', 'problem'], ['app.html', 'The app', 'app'], ['impact.html', 'Impact and pilot', 'impact'], ['story.html', 'Our story', 'story']];
-const names = { home: 'Singapore', problem: 'The problem', app: 'The app', impact: 'Impact and pilot', story: 'Our story' };
+const pages = [['index.html', 'Home', 'home'], ['problem.html', 'The problem', 'problem'], ['app.html', 'The app', 'app'], ['impact.html', 'Impact and pilot', 'impact'], ['story.html', 'About us', 'story']];
+const names = { home: 'Singapore', problem: 'The problem', app: 'The app', impact: 'Impact and pilot', story: 'About us' };
 document.body.insertAdjacentHTML('afterbegin', `
 <div class="sprog" id="sprog"><i></i></div>
 <header class="top" id="top"><a class="mark" href="index.html">${leaf}<span>Rooted SG</span><small>${names[page] || ''}</small></a>
@@ -43,7 +43,7 @@ document.body.insertAdjacentHTML('afterbegin', `
 <nav class="list" aria-label="Pages">${pages.map((p, i) => `<a href="${p[0]}" class="${p[2] === page ? 'cur' : ''}"${p[2] === page ? ' aria-current="page"' : ''}><span class="n">0${i + 1}</span><span class="t">${p[1]}</span><span class="ar">→</span></a>`).join('')}</nav>
 <div class="side"><p class="serif d4">Don't count what we plant.<br><em>Count what we keep alive.</em></p><p class="label" style="margin-top:20px">Rooted SG · Singapore 2026</p></div></aside>`);
 
-const JOURNEY = [['index.html', 'Home', 'home', 'Count what we keep alive.'], ['problem.html', 'The problem', 'problem', 'What 466 people told us, and why plants really die.'], ['app.html', 'The app', 'app', 'Verified Plant-Days, Mojo, the Plant Doctor and Roots.'], ['impact.html', 'Impact and pilot', 'impact', 'The arithmetic, the pilot and how we would know it worked.'], ['story.html', 'Our story', 'story', 'Where it started, and who is building it.']];
+const JOURNEY = [['index.html', 'Home', 'home', 'Count what we keep alive.'], ['problem.html', 'The problem', 'problem', 'What 466 people told us, and why plants really die.'], ['app.html', 'The app', 'app', 'Verified Plant-Days, Mojo, the Plant Doctor and Roots.'], ['impact.html', 'Impact and pilot', 'impact', 'The arithmetic, the pilot and how we would know it worked.'], ['story.html', 'About us', 'story', 'Where it started, and who is building it.']];
 const jIdx = Math.max(0, JOURNEY.findIndex(j => j[2] === page)), jNext = JOURNEY[(jIdx + 1) % JOURNEY.length], wraps = jIdx === JOURNEY.length - 1;
 const nextBand = `<section class="nextband" aria-label="Next stop"><div class="wrap">
 <div class="nb-track" style="--from:${jIdx * 25}%;--to:${(jIdx + 1) % 5 * 25}%"><i class="nb-line"></i>${JOURNEY.map((j, i) => `<a class="nb-dot ${i < jIdx ? 'done' : ''} ${i === jIdx ? 'cur' : ''}" href="${j[0]}" style="left:${i * 25}%" aria-label="${j[1]}"><span>${j[1]}</span></a>`).join('')}<img class="nb-mojo" src="media/mojo/idle.gif" alt="" width="96" height="104"></div>

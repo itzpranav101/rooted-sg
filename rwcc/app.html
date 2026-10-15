@@ -20,7 +20,7 @@ try{var sm=matchMedia('(max-width:700px)').matches||matchMedia('(max-width:900px
 var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href='https://fonts.googleapis.com/css2?'+F[d.dataset.skin]+'&display=swap';document.head.appendChild(l)})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css"><link rel="stylesheet" href="css/rwcc.css">
+<link rel="stylesheet" href="css/site.css"><link rel="stylesheet" href="css/skins.css"><link rel="stylesheet" href="css/rwcc.css"><link rel="stylesheet" href="css/rwscroll.css">
 </head>
 <body data-page="app">
 <a class="skip" href="#main">Skip to content</a>
@@ -50,6 +50,21 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
     </div>
   </div>
   <div class="pin-count"><b>01 / 07</b><span class="rule"><i></i></span></div>
+</section>
+
+<section class="rs-pin dl" id="dayinlife" aria-label="A day with Rooted SG">
+  <div class="rs-in">
+    <div class="rs-top"><span class="label"><b>An example day</b></span><h2 class="display">One plant, <em>five small moments</em>.</h2></div>
+    <div class="dl-view"><div class="dl-track" id="dltrack">
+      <article class="dl-card"><div class="dl-time"><b>01</b> Morning<i></i></div><div class="vg v-nudge"><div class="vphone"><div class="vban"><img src="media/mojo.png" alt="" width="30" height="37"><span><b>Mojo</b>Pandan needs you first</span></div></div><i class="vring"></i><i class="vring"></i></div><h3>Mojo tells you <em>who needs you</em>.</h3><p>A gentle nudge before a plant is lost, not a guilt trip after.</p></article>
+      <article class="dl-card"><div class="dl-time"><b>02</b> A spare minute<i></i></div><div class="vg v-check"><div class="vfind"><i></i><i></i><i></i><i></i><svg viewBox="0 0 24 24"><path d="M12 21V11"/><path d="M12 15c-5 0-8-3-8-8 5 0 8 3 8 8z"/><path d="M12 12c4 0 7-2.500 7-7-4 0-7 2.500-7 7z"/></svg></div><div class="vflash"></div><div class="vok"><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></div><span class="vplus">+1 Plant-Day</span></div><h3>A photo, <em>and the day counts</em>.</h3><p>A real plant, a fresh photo, a valid time. No real plant, no Plant-Day.</p></article>
+      <article class="dl-card"><div class="dl-time"><b>03</b> Something looks off<i></i></div><div class="vg v-doc"><svg viewBox="0 0 100 120"><path class="lf" d="M50 112C14 92 10 44 50 8c40 36 36 84 0 104z"/><path d="M50 108V28" stroke="#fff" stroke-width="2" fill="none" opacity=".6"/><circle class="sp" cx="36" cy="52" r="5"/><circle class="sp" cx="62" cy="72" r="6"/><circle class="sp" cx="44" cy="86" r="4"/></svg><ul class="vchips"><li>Yellow edges</li><li>Dry soil</li><li>Low light</li></ul><div class="vdec">You decide</div><ol class="vplan"><li>Water slowly</li><li>Brighter spot</li><li>Check in tomorrow</li></ol></div><h3>The AI finds clues. <em>You make the call.</em></h3><p>A human stays in the loop, and the fix becomes a step-by-step plan.</p></article>
+      <article class="dl-card"><div class="dl-time"><b>04</b> The weekend<i></i></div><div class="vg v-guard"><div class="vq">Which sign points to overwatering?</div><div class="vopt"><span>Crispy brown tips</span><span class="ans">Yellow, soft leaves<i>✓</i></span><span>Curling at the edges</span></div><img src="media/mojo.png" alt="" width="40" height="49"></div><h3>Real plant science, <em>one card at a time</em>.</h3><p>The Guardian Path teaches by doing, with Mojo reacting to every answer.</p></article>
+      <article class="dl-card"><div class="dl-time"><b>05</b> Next door<i></i></div><div class="vg v-roots"><div class="vit me"><b>Pandan cutting</b><span>Verified grower · 421 Plant-Days</span><em>Verified</em></div><div class="vit ghost"><b>Chilli seedlings</b><span>Verified grower</span></div><div class="vit ghost"><b>Basil, two pots</b><span>Verified grower</span></div></div><h3>Neighbours share <em>what they grow</em>.</h3><p>Every listing carries the grower's record, so you know who to ask.</p></article>
+    </div></div>
+    <div class="dl-bar" aria-hidden="true"><i id="dlbar"></i></div>
+  </div>
+  <div class="rs-hint" aria-hidden="true"><span>Scroll</span><i></i></div>
 </section>
 
 <section class="sec" id="loop" style="padding-top:clamp(40px,6vw,90px)">
@@ -146,6 +161,22 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
   </div>
 </section>
 
+<section class="sec" id="who" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>Who it helps</b></span><h2 class="display d2" data-split>Four homes, <em>one habit</em>.</h2></div>
+    <div class="stk" id="whostk">
+      <article class="stk-card" style="--i:0"><div><span class="tag"><b>01</b> · A student</span><h3>One plant in a <em>hostel room</em>.</h3><p>A nudge between lectures and a ten-second photo keep a single pothos going. The record grows even in a busy week.</p></div>
+        <div class="stk-scene"><svg class="w-st" viewBox="0 0 320 220" aria-hidden="true"><rect class="fr" x="70" y="20" width="180" height="120" rx="6"/><path class="fr" d="M160 20V140"/><g transform="translate(160 66)"><circle class="sun" cx="0" cy="0" r="12"/></g><path class="st" d="M160 190V150"/><path class="lf" d="M160 168c-18-4-28-16-28-30 18 2 28 14 28 30z"/><path class="lf r" d="M160 160c18-4 28-16 28-30-18 2-28 14-28 30z"/><path class="pt" d="M138 186h44l-6 24h-32z"/><g class="dots"><circle cx="82" cy="206" r="4" style="--k:0"/><circle cx="98" cy="206" r="4" style="--k:1"/><circle cx="114" cy="206" r="4" style="--k:2"/><circle cx="206" cy="206" r="4" style="--k:3"/><circle cx="222" cy="206" r="4" style="--k:4"/><circle cx="238" cy="206" r="4" style="--k:5"/></g></svg></div></article>
+      <article class="stk-card" style="--i:1"><div><span class="tag"><b>02</b> · A family</span><h3>Herb pots on the <em>balcony</em>.</h3><p>Everyone at home can look after the same plants, and every verified day goes on the plant's record.</p></div>
+        <div class="stk-scene"><div class="w-fam"><div class="pots"><div class="pot"><svg viewBox="0 0 40 52"><path class="g" d="M20 30C8 28 6 18 8 10c10 2 14 10 12 20zM20 30c12-2 14-12 12-20-10 2-14 10-12 20z"/><path d="M12 36h16l-3 14H15z"/><path d="M20 36V26"/></svg><em><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></em></div><div class="pot"><svg viewBox="0 0 40 52"><path class="g" d="M20 30C8 28 6 18 8 10c10 2 14 10 12 20zM20 30c12-2 14-12 12-20-10 2-14 10-12 20z"/><path d="M12 36h16l-3 14H15z"/><path d="M20 36V26"/></svg><em><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></em></div><div class="pot"><svg viewBox="0 0 40 52"><path class="g" d="M20 30C8 28 6 18 8 10c10 2 14 10 12 20zM20 30c12-2 14-12 12-20-10 2-14 10-12 20z"/><path d="M12 36h16l-3 14H15z"/><path d="M20 36V26"/></svg><em><svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg></em></div></div><div class="heads"><i></i><i></i><i></i><i></i></div><span class="cap">Everyone, one record</span></div></div></article>
+      <article class="stk-card" style="--i:2"><div><span class="tag"><b>03</b> · A grandparent</span><h3>One big button, <em>nothing to learn</em>.</h3><p>Plant care already lives in their hands. A clear check-in and a friendly companion keep the habit simple.</p></div>
+        <div class="stk-scene"><div class="w-sen"><img src="media/mojo.png" alt="" width="70" height="86"><div class="bt">Check in</div><span class="say">Pandan looks happy today.</span></div></div></article>
+      <article class="stk-card" style="--i:3"><div><span class="tag"><b>04</b> · A class</span><h3>A garden the whole <em>class grows</em>.</h3><p>Teachers can see living plants add up across a class, instead of guessing which ones survived the holidays.</p></div>
+        <div class="stk-scene"><div class="w-cls"><div class="gr" id="clsgr"></div><div class="bar"><i></i></div><span class="cap">Living plants add up</span></div></div></article>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="platforms" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>Built for both</b></span><h2 class="display d2" data-split>iPhone <em>and</em> Android.</h2></div>
@@ -161,6 +192,7 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <script defer src="js/team.js"></script>
 <script defer src="js/site.js"></script>
 <script defer src="js/rwcc.js"></script>
+<script defer src="js/rwscroll.js"></script>
 <script defer src="js/mojo.js"></script>
 </body>
 </html>
