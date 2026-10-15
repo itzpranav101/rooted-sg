@@ -179,3 +179,14 @@
 .me-copy{position:relative;z-index:2;padding-left:clamp(0px,4vw,64px)}
 .me-fan{max-width:330px;margin-left:clamp(0px,2vw,24px)}
 @media(max-width:820px){.me-copy{padding-left:0}.me-fan{margin:0 auto 30px}}
+
+/* the side cue: the videos are further down */
+#essay{position:relative}
+.me-videos{position:absolute;right:clamp(10px,1.8vw,28px);top:50%;translate:0 -50%;z-index:3;display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 11px;border-radius:999px;background:var(--btn);color:var(--btn-text);font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;box-shadow:0 14px 30px -14px rgba(8,22,15,.6);transition:transform .35s var(--ease)}
+.me-videos span{writing-mode:vertical-rl;white-space:nowrap}
+.me-videos i{font-style:normal;font-size:16px;color:#A3E68B;animation:mebounce 1.6s var(--ease) infinite}
+.me-videos:hover{transform:translateY(4px)}
+@keyframes mebounce{0%,100%{transform:translateY(-2px)}50%{transform:translateY(5px)}}
+@media(max-width:1500px){#essay .wrap{padding-right:calc(var(--pad) + 44px)}}
+@media(max-width:820px){.me-videos{position:static;translate:none;flex-direction:row;justify-self:center;width:max-content;margin:0 auto 18px;padding:11px 18px}.me-videos span{writing-mode:horizontal-tb}#essay .wrap{padding-right:var(--pad)}}
+@media(prefers-reduced-motion:reduce){.me-videos i{animation:none}}
