@@ -57,3 +57,13 @@ const fl = $('#mcflow'); if (fl && !matchMedia('(prefers-reduced-motion: reduce)
   if (reduced) { draw(L.length); pipe.forEach(p => p.classList.add('on')); return; }
   new IntersectionObserver(es => { clearInterval(t); if (es[0].isIntersecting) { let n = 0; draw(0); t = setInterval(() => { n++; if (n > L.length + 4) n = 0; draw(Math.min(n, L.length)); }, 700); } }, { threshold: .3 }).observe(term.parentElement);
 })();
+
+/* ---- out of 100 runs ---- */
+(() => {
+  const box = document.getElementById('mc100'), grid = document.getElementById('mc100g'); if (!box || !window.RWSIM) return;
+  const R = window.RWSIM, fail = Math.round((1 - R.p_pilot_clears) * 100), under = Math.round((1 - R.p_extra_ge_1000) * 100) - fail, mid = Math.round((R.p_extra_ge_1000 - R.p_extra_ge_1814) * 100), top = 100 - fail - under - mid;
+  const seq = [['fail', fail], ['low', under], ['mid', mid], ['top', top]], N = { fail, low: under, mid, top };
+  let i = 0; seq.forEach(([k, n]) => { for (let j = 0; j < n; j++) { const d = document.createElement('i'); d.className = 'd-' + k; d.style.setProperty('--i', i++); grid.appendChild(d); } });
+  new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { o.disconnect(); box.classList.add('go'); [...box.querySelectorAll('[data-n]')].forEach(b => { const to = N[b.dataset.n], t0 = performance.now(); (function tick(t) { const k = Math.min(1, (t - t0) / 1400); b.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(t0); }); } }, { threshold: .35 }).observe(box);
+  const rg = document.getElementById('mcrgs'); if (rg) new IntersectionObserver((es, o) => { if (es[0].isIntersecting) { rg.classList.add('go'); o.disconnect(); } }, { threshold: .3 }).observe(rg);
+})();

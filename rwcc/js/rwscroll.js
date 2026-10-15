@@ -227,5 +227,22 @@ const drive = (el, scrolls, tl) => { if (reduced) { tl.progress(1); return; } pi
   gsap.to('.rw-mascots .m2', { y: -60, rotation: 8, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
 })();
 
+/* ---- magnetic snap: when scrolling settles near the top of a section, it pulls into place ---- */
+(() => {
+  if (reduced || lite || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const heads = () => $$('main > section:not(.rs-pin):not([data-pin]), main > header, main > .rs-tick');
+  let t = 0, busy = false, dragging = false;
+  addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
+  const settle = () => {
+    if (busy || dragging || document.hidden) return;
+    if (ScrollTrigger.getAll().some(s => s.pin && s.isActive)) return;   // never fight a pinned scene
+    const vh = innerHeight; let best = null;
+    heads().forEach(el => { const top = el.getBoundingClientRect().top; if (Math.abs(top) < vh * .16 && Math.abs(top) > 3 && (!best || Math.abs(top) < Math.abs(best.top))) best = { el, top }; });
+    if (!best) return;
+    busy = true; scrollTo({ top: scrollY + best.top, behavior: 'smooth' }); setTimeout(() => { busy = false; }, 800);
+  };
+  addEventListener('scroll', () => { if (busy) return; clearTimeout(t); t = setTimeout(settle, 140); }, { passive: true });
+})();
+
 ScrollTrigger.sort(); ScrollTrigger.refresh(); addEventListener('load', () => { ScrollTrigger.sort(); ScrollTrigger.refresh(); });
 })();
