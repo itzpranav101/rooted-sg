@@ -85,6 +85,59 @@
   </div>
 </section>
 
+<section class="sec" id="simulation" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>The simulation</b></span><h2 class="display d2" data-split>We ran year three <em>100,000 times</em>.</h2></div>
+    <p class="mc-lede" data-reveal>One forecast number hides how unsure we are. So we gave every input an honest range, drew a value for each at random, played the pilot and the scale-up out, and counted the plants. Then we did it again, 100,000 times.</p>
+    <div class="mc-res" data-reveal data-stagger>
+      <div><div class="num"><span data-count="1460">0</span></div><p>more plants alive at twelve months, in the middle of 100,000 runs</p><span class="src">Median, year three</span></div>
+      <div><div class="num mc-rng"><span data-count="15">0</span><small>to</small><span data-count="3110">0</span></div><p>where 9 in 10 runs landed</p><span class="src">5th to 95th percentile</span></div>
+      <div><div class="num"><span data-count="72" data-suffix="%">0</span></div><p>of runs keep at least 1,000 extra plants alive</p><span class="src">Chance of 1,000 or more</span></div>
+      <div class="hot"><div class="num"><span data-count="86" data-suffix="%">0</span></div><p>of runs clear the +5 point bar in the twelve-week pilot</p><span class="src">Chance the pilot clears</span></div>
+    </div>
+    <div class="mc-chart" id="mcchart" data-reveal>
+      <svg id="mcsvg" viewBox="0 0 700 330" role="img" aria-label="Histogram of 100,000 simulated outcomes: extra plants alive at twelve months in year three"></svg>
+      <div class="mc-bar"><p class="label" id="mcnote">100,000 simulated outcomes of year three · extra plants alive at 12 months · a forecast, not an outcome</p><button class="btn line" id="mcrun" type="button">Run 5,000 more in your browser <i>→</i></button></div>
+      <p class="mc-live" id="mclive" aria-live="polite"></p>
+    </div>
+    <div class="mc-read" data-reveal data-stagger>
+      <div class="box"><span class="label"><b>01</b> · What is most likely</span><p>About <b class="num">1,460</b> more plants alive. Most runs beat 1,000 (72%), but only about 1 in 3 (35%) reach our base case of 1,814. <b>We treat 1,814 as a target, not a promise.</b></p></div>
+      <div class="box"><span class="label"><b>02</b> · What decides it</span><p>The twelve-week pilot. In about 14 of every 100 runs it misses +5 points, so we stay at two schools and redesign. In the other 86, we scale to 20 schools, then more.</p></div>
+      <div class="box"><span class="label"><b>03</b> · What we will do</span><p>Run the pilot first: two schools, 240 students. Measure uptake in week one and survival at twelve weeks, and publish the result either way.</p></div>
+    </div>
+    <div class="mc-flow" id="mcflow" data-reveal>
+      <ol>
+        <li><i>1</i><b>Give every input a range</b><span>Low, most likely, high. Each one is named below.</span></li>
+        <li><i>2</i><b>Draw one value for each</b><span>At random, weighted toward the most likely.</span></li>
+        <li><i>3</i><b>Check the gate</b><span>Under +5 points in the pilot? Then we stay at two schools.</span></li>
+        <li><i>4</i><b>Count the plants</b><span>Households × plants × uplift. Repeat 100,000 times.</span></li>
+      </ol>
+    </div>
+    <div class="sechead mc-sub"><span class="label"><b>The inputs</b></span><h3 class="display d3" data-split>Every range, <em>and where it comes from</em>.</h3></div>
+    <div class="mc-tbl" data-reveal>
+      <div class="mr head"><span>Input</span><span>Low</span><span>Likely</span><span>High</span><span>Where it comes from</span></div>
+      <div class="mr"><span>Schools running it, year 3</span><span>20</span><span>60</span><span>120</span><span>MOE: about 330 mainstream schools, so 60 is 18% of them. 20 and 120 are the range in our forecast.</span></div>
+      <div class="mr"><span>Students per school each year</span><span>90</span><span>120</span><span>150</span><span>Assumption: about four classes. The range is ours.</span></div>
+      <div class="mr"><span>Plants per household</span><span>1.5</span><span>2.1</span><span>3.0</span><span>Assumption, tested in the pilot. The range is ours.</span></div>
+      <div class="mr"><span>Survival uplift, in points</span><span>0</span><span>+12</span><span>+15</span><span>Survey baseline 18% (n = 466); +12 reaches the 30% bar. +15 is our forecast's upper case; 0 is our pessimistic bound.</span></div>
+      <div class="mr gate"><span>The gate</span><span></span><span>+5</span><span></span><span>Our own falsification test: under +5 points in the pilot, the base case is wrong.</span></div>
+    </div>
+    <div class="sechead mc-sub"><span class="label"><b>The evidence</b></span><h3 class="display d3" data-split>The demand we <em>can actually count</em>.</h3></div>
+    <div class="mc-ev" data-reveal data-stagger>
+      <div><b class="num"><span data-count="83.9" data-suffix="%" data-dec="1">0</span></b><p>of 466 people we surveyed want to grow plants at home</p><span class="src">Rooted SG survey, 2026. A convenience sample: we use it to rank barriers, not to count Singapore.</span></div>
+      <div><b class="num"><span data-count="48000">0</span></b><p>gardeners already in 2,000+ Community in Bloom groups</p><span class="src">NParks</span></div>
+      <div><b class="num"><span data-count="860000">0</span></b><p>free seed packets handed out since 2020</p><span class="src">NParks</span></div>
+      <div><b class="num"><span data-count="330" data-suffix="~">0</span></b><p>mainstream schools to build upward from</p><span class="src">MOE</span></div>
+      <div><b class="num"><span data-count="0.5" data-suffix="%" data-dec="1">0</span></b><p>of all households is the 7,200 in our base case</p><span class="src">SingStat, 2024</span></div>
+      <div><b class="num"><span data-count="3" data-suffix="%">0</span></b><p>of the vegetables we ate in 2024 were grown here; over 90% is imported</p><span class="src">Singapore Food Agency</span></div>
+    </div>
+    <p class="mc-xc" data-reveal>The cross-check: across the 100,000 runs, the middle number of households reached is <b>7,230</b>. The bottom-up count and the top-down share land in the same place, which is the reason to build upward from schools and not from a population percentage.</p>
+    <div class="sechead mc-sub"><span class="label"><b>What moves the result</b></span><h3 class="display d3" data-split>Two inputs <em>drive almost everything</em>.</h3></div>
+    <div class="mc-tor" id="mctor" data-reveal></div>
+    <p class="mc-lim" data-reveal><b>What this does not claim.</b> It is a forecast, not an outcome, and the pilot has not run yet. Ranges marked as ours are judgement calls, not measurements. The model leaves out seasonality and people who stop. When the pilot reports, we replace the assumed ranges with measured ones and run it again. The code and the results are in the repository, so anyone can re-run it.</p>
+  </div>
+</section>
+
 <section class="sec" id="forecast" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>The forecast</b></span><h2 class="display d2" data-split>Three scenarios, <em>and what would prove it wrong</em>.</h2></div>

@@ -148,6 +148,26 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
   </div>
 </section>
 
+<section class="sec" id="stack" style="padding-top:0">
+  <div class="wrap">
+    <div class="sechead"><span class="label"><b>Under the hood</b></span><h2 class="display d2" data-split>The tech stack <em>behind the check</em>.</h2></div>
+    <div class="tx-top" data-reveal>
+      <pre class="tx-term" id="txterm" aria-label="What runs when a check-in is made"><code></code></pre>
+      <ol class="tx-pipe" id="txpipe" aria-hidden="true">
+        <li>Photo</li><li>Timestamp</li><li>Perceptual hash</li><li>Vegetation coverage</li><li>Clues</li><li>Confidence gate</li><li>Result</li>
+      </ol>
+    </div>
+    <div class="tx-grid" data-reveal data-stagger>
+      <article><span class="label"><b>01</b> · Apps</span><h3>Two native apps, one data model</h3><ul class="tx-chips"><li>SwiftUI</li><li>Jetpack Compose</li><li>Feature parity</li></ul><p>iPhone and Android do the same thing the same way. 43 iOS and 46 Android automated tests keep them level.</p></article>
+      <article><span class="label"><b>02</b> · Computer vision</span><h3>Image processing on the phone</h3><ul class="tx-chips"><li>OpenCV</li><li>Vegetation coverage</li><li>Perceptual hashing</li><li>Colour · fullness · light</li></ul><p>Each photo is checked for living plant cover and compared with the last one, so an old or repeated photo cannot earn a day.</p></article>
+      <article><span class="label"><b>03</b> · Models</span><h3>Open models, with a human in the loop</h3><ul class="tx-chips"><li>Hugging Face</li><li>On-device inference</li><li>Confidence thresholds</li><li>"AI suggested" labels</li></ul><p>Low-confidence results ask for a retake. Species suggestions stay labelled until someone confirms them.</p></article>
+      <article><span class="label"><b>04</b> · Backend and privacy</span><h3>Minimal by design</h3><ul class="tx-chips"><li>Backend API</li><li>Opt-in cloud AI</li><li>PDPA by design</li><li>Resized photos only</li></ul><p>Cloud AI is off by default. Only a resized photo is ever sent. Locations stay at neighbourhood level. 70 backend tests pass.</p></article>
+      <article><span class="label"><b>05</b> · Statistics and simulation</span><h3>Python for the numbers</h3><ul class="tx-chips"><li>Monte Carlo</li><li>Triangular sampling</li><li>Spearman rank correlation</li><li>Wilson score interval</li><li>Pareto analysis</li></ul><p>The 100,000-run forecast above is a Python script in the repository. Survey results carry confidence intervals, and the survival rate comes with a Wilson interval.</p></article>
+      <article class="tx-next"><span class="label"><b>06</b> · How we make it better</span><h3>What the pilot feeds back in</h3><ul class="tx-list"><li>Replace every assumed range with a measured one, then re-run the simulation.</li><li>Use consented pilot photos to tune the confidence threshold, so fewer honest check-ins ask for a retake.</li><li>Watch the retake rate and how often people overrule the Plant Doctor.</li><li>Keep a weekly control chart on survival and publish the result either way.</li></ul></article>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="household" style="padding-top:0">
   <div class="wrap">
     <div class="sechead"><span class="label"><b>For one household</b></span><h2 class="display d2" data-split>What <em>changes</em>.</h2></div>
@@ -195,6 +215,8 @@ var l=document.createElement('link');l.rel='stylesheet';l.id='skinfonts';l.href=
 <script defer src="js/rwcc.js"></script>
 <script defer src="js/leafview.js"></script>
 <script defer src="js/rwscroll.js"></script>
+<script defer src="js/simdata.js"></script>
+<script defer src="js/rwsim.js"></script>
 <script defer src="js/mojo.js"></script>
 </body>
 </html>

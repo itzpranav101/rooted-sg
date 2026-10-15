@@ -6,6 +6,8 @@
 <script defer src="js/rwcc.js"></script>
 <script defer src="js/leafview.js"></script>
 <script defer src="js/rwscroll.js"></script>
+<script defer src="js/simdata.js"></script>
+<script defer src="js/rwsim.js"></script>
 <script defer src="js/mojo.js"></script>
 </body>
 </html>
