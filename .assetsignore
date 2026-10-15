@@ -1,0 +1,18 @@
+# Cloudflare uploads the whole folder as the site. Keep the git history and the build sources out of it
+# (the git pack file alone is over the 25 MiB per-file limit and was making every deploy fail).
+.git
+.gitignore
+.assetsignore
+node_modules
+wrangler.jsonc
+_src
+_head.txt
+_tail.txt
+build.py
+start.command
+README.md
+rwcc/_src
+rwcc/_head.txt
+rwcc/_tail.txt
+rwcc/build.py
+rwcc/sim
