@@ -10,7 +10,7 @@ const to = u => () => { location.href = u; };
 // [target, where, mood, text, action?, centered?]
 const BEATS = {
   home: [
-    ['.rw-hero .cta', 'after', 'happy', "Hi, I'm Mojo. Scroll down and I'll point things out.", null, true],
+    ['#rwproof', 'before', 'happy', "Hi, I'm Mojo. Scroll down and I'll point things out.", null, true],
     ['#plantday', 'before', 'think', 'One number runs the whole app. Only living plants add to it.'],
     ['.rw-tabs', 'before', 'happy', 'Tap through the real screens.'],
     ['#vision', 'before', 'idle', 'And this is the bigger picture.'],

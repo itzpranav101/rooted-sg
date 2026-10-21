@@ -122,3 +122,9 @@ html.lite .rw-leaves,html.lite .cv-rays,html.lite .cv-halo{display:none}
 @media(max-width:700px){.ph-vine{display:none}}
 @media(max-height:820px){.cv-chip.c1,.cv-chip.c3{display:none}.cv-stage .rw-mascots img{width:clamp(54px,5.5vw,80px)}}
 .cv-side{right:clamp(46px,4.4vw,76px)}
+/* short screens: the cover must always fit, with the phones peeking above the facts strip */
+.cv-stage{min-height:clamp(110px,20vh,360px)}
+.rw-hero-in .ma-wrap,.rw-cover .ma-wrap{display:none}
+@media(max-height:760px){.rw-cover .rw-lede{display:none}.rw-cover{padding-top:clamp(70px,9vh,90px)}.rw-title{font-size:min(12.6vw,18vh)}}
+@media(max-height:620px){.rw-cover .hero-eyebrow{display:none}.rw-cover .rw-tag{font-size:clamp(18px,2.4vw,30px)}.cv-chip{display:none}}
+@media(max-height:520px){.cv-top{display:none}.rw-cover .cta{margin-top:10px}}
