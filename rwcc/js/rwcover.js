@@ -4,13 +4,24 @@ const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [..
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches, lite = document.documentElement.classList.contains('lite');
 const page = document.body.dataset.page;
 
+/* ---- the big next button at the end of every page ---- */
+(() => {
+  const N = { home: ['problem.html', 'The problem', 'What 466 people told us, and why plants really die.'], problem: ['app.html', 'The app', 'Only living plants count. Every screen is from the real build.'], app: ['impact.html', 'Impact and pilot', 'The arithmetic, the forecast, and how we will know it worked.'], impact: ['story.html', 'About us', 'It started at our grandparents\' tables.'], story: ['index.html', 'Back to the start', 'Home, where it all began.'] };
+  const order = ['home', 'problem', 'app', 'impact', 'story'], n = N[page]; if (!n) return;
+  const at = $('.nextband') || $('.foot'); if (!at) return;
+  const sec = document.createElement('section'); sec.className = 'rw-nextsec'; sec.setAttribute('aria-label', 'Next page');
+  sec.innerHTML = `<div class="wrap"><a class="rw-next" href="${n[0]}"><div><span class="nx-l">${page === 'story' ? 'The end' : 'Next'} · ${order.indexOf(page) + 1} of 5</span><b>${n[1]}</b><p>${n[2]}</p><div class="rw-nxdots">${order.map((o, i) => `<i class="${i <= order.indexOf(page) ? 'on' : ''}"></i>`).join('')}</div></div><span class="nx-go" aria-hidden="true">→</span></a></div>`;
+  at.insertAdjacentElement('beforebegin', sec);
+})();
+
 /* ---- the cover ---- */
 const cover = $('.rw-cover');
 if (cover) {
   // the chip counts up once it has floated in
   const n = $('.cv-n', cover); if (n) { const to = +n.dataset.to; if (reduced) n.textContent = to; else setTimeout(() => { const t0 = performance.now(); (function tick(t) { const k = Math.min(1, (t - t0) / 1800); n.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(t0); }, 2100); }
-  // pointer depth on the phones and chips
+  // pointer depth on the phones; the fan opens as you scroll away
   const stage = $('.cv-stage', cover);
+  if (stage && !reduced && window.ScrollTrigger) { ScrollTrigger.create({ trigger: cover, start: 'top top', end: 'bottom 20%', scrub: true, onUpdate: s => stage.style.setProperty('--sp', s.progress.toFixed(3)) }); gsap.to('.rw-cover .rw-hero-in', { y: -50, opacity: .2, ease: 'none', scrollTrigger: { trigger: cover, start: 'top top', end: 'bottom 30%', scrub: true } }); }
   if (stage && !reduced && !lite && matchMedia('(hover:hover) and (pointer:fine)').matches) cover.addEventListener('pointermove', e => { const r = cover.getBoundingClientRect(); stage.style.setProperty('--px', ((e.clientX - r.left) / r.width - .5).toFixed(3)); stage.style.setProperty('--py', ((e.clientY - r.top) / r.height - .5).toFixed(3)); }, { passive: true });
   // leaves and pollen drift up the cover
   const cv = $('.rw-leaves', cover);

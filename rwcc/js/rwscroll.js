@@ -216,16 +216,7 @@ const drive = (el, scrolls, tl) => { if (reduced) { tl.progress(1); return; } pi
   pinned(root, 3.4, render);
 })();
 
-/* =========================================================
-   HOME: the hero lets go as you scroll
-   ========================================================= */
-(() => {
-  const hero = $('.rw-hero'); if (!hero || reduced) return;
-  gsap.to('.rw-hero-in > *:not(.rw-mascots):not(.rw-sprouts)', { y: -70, opacity: .1, ease: 'none', stagger: .02, scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom 25%', scrub: true } });
-  gsap.to('.rw-sprouts', { y: -30, scaleY: 1.12, transformOrigin: '50% 100%', ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('.rw-mascots .m1', { y: -120, rotation: -10, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('.rw-mascots .m2', { y: -60, rotation: 8, ease: 'none', scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true } });
-})();
+
 
 /* ---- magnetic snap: when scrolling settles near the top of a section, it pulls into place ---- */
 (() => {
