@@ -1,0 +1,9 @@
+# used when rwcc/ is deployed on its own (Cloudflare root directory = rwcc): keep build sources out of the site
+.assetsignore
+wrangler.jsonc
+_src
+_head.txt
+_tail.txt
+build.py
+sim
+vercel.json
