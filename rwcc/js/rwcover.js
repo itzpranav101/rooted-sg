@@ -18,6 +18,7 @@ const page = document.body.dataset.page;
 const cover = $('.rw-cover');
 if (cover) {
   // the chip counts up once it has floated in
+  $$('.cv-fact b', cover).forEach((b, i) => { const to = +b.dataset.to, dec = +(b.dataset.dec || 0), suf = b.dataset.suf || ''; const put = v => { b.textContent = v.toFixed(dec) + suf; }; if (reduced) { put(to); return; } setTimeout(() => { const t0 = performance.now(); (function tick(t) { const k = Math.min(1, (t - t0) / 1800); put(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(t0); }, 2600 + i * 250); });
   const n = $('.cv-n', cover); if (n) { const to = +n.dataset.to; if (reduced) n.textContent = to; else setTimeout(() => { const t0 = performance.now(); (function tick(t) { const k = Math.min(1, (t - t0) / 1800); n.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); })(t0); }, 2100); }
   // pointer depth on the phones; the fan opens as you scroll away
   const stage = $('.cv-stage', cover);
@@ -31,7 +32,7 @@ if (cover) {
     let col = css();
     const fit = () => { dpr = Math.min(devicePixelRatio || 1, 1.5); W = cover.clientWidth; H = cover.clientHeight; cv.width = W * dpr; cv.height = H * dpr; };
     const mk = (init) => ({ x: Math.random() * W, y: init ? Math.random() * H : H + 30, s: 5 + Math.random() * 11, v: .18 + Math.random() * .42, a: Math.random() * 6.28, w: .006 + Math.random() * .014, r: Math.random() * 6.28, dr: (Math.random() - .5) * .012, o: .12 + Math.random() * .32, leaf: Math.random() < .55 });
-    fit(); for (let i = 0; i < 38; i++) P.push(mk(true));
+    fit(); for (let i = 0, n = Math.round(Math.min(90, Math.max(34, W * H / 26000))); i < n; i++) P.push(mk(true));
     addEventListener('resize', fit); addEventListener('themechange', () => { col = css(); });
     new IntersectionObserver(es => { vis = es[0].isIntersecting; }, { threshold: 0 }).observe(cover);
     const draw = () => { requestAnimationFrame(draw); if (!vis || document.hidden) return; g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H); g.fillStyle = col; g.strokeStyle = col;

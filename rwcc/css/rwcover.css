@@ -128,3 +128,31 @@ html.lite .rw-leaves,html.lite .cv-rays,html.lite .cv-halo{display:none}
 @media(max-height:760px){.rw-cover .rw-lede{display:none}.rw-cover{padding-top:clamp(70px,9vh,90px)}.rw-title{font-size:min(12.6vw,18vh)}}
 @media(max-height:620px){.rw-cover .hero-eyebrow{display:none}.rw-cover .rw-tag{font-size:clamp(18px,2.4vw,30px)}.cv-chip{display:none}}
 @media(max-height:520px){.cv-top{display:none}.rw-cover .cta{margin-top:10px}}
+
+/* the title: never clip the top of the letters */
+.cv-line{padding:.16em .06em .18em;margin:-.1em 0 -.12em}
+.cv-l{padding-block:.14em;margin-block:-.14em}
+.cv-l>span{line-height:1.02}
+/* a fuller background, especially on big screens */
+.cv-rings{position:absolute;left:50%;bottom:-30%;width:min(120vw,1500px);aspect-ratio:1;margin-left:calc(min(120vw,1500px)/-2);z-index:-1;pointer-events:none}
+.cv-rings i{position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--green) 26%,transparent);animation:cvring 9s ease-out infinite;opacity:0}
+.cv-rings i:nth-child(2){animation-delay:3s}.cv-rings i:nth-child(3){animation-delay:6s}
+@keyframes cvring{0%{transform:scale(.35);opacity:.9}100%{transform:scale(1);opacity:0}}
+.cv-garden{position:absolute;bottom:54px;width:min(27vw,470px);height:auto;color:var(--green);opacity:.5;z-index:1;pointer-events:none}
+.cv-garden.l{left:0}.cv-garden.r{right:0}
+.cv-garden path{stroke-dasharray:1;stroke-dashoffset:1;animation:spdraw 1.4s var(--ease) forwards}
+.cv-garden .sp{transform-box:fill-box;transform-origin:50% 100%;animation:cvsway 6s ease-in-out infinite}
+.cv-garden .sp:nth-child(odd){animation-delay:-2s}.cv-garden .sp:nth-child(3n){animation-delay:-4s}
+.cv-garden .sp:nth-child(2) path{animation-delay:1.2s}.cv-garden .sp:nth-child(3) path{animation-delay:1.45s}.cv-garden .sp:nth-child(4) path{animation-delay:1.7s}.cv-garden .sp:nth-child(5) path{animation-delay:1.95s}.cv-garden .sp:nth-child(6) path{animation-delay:2.2s}.cv-garden .sp:nth-child(7) path{animation-delay:2.45s}.cv-garden .sp:nth-child(8) path{animation-delay:2.7s}
+.cv-garden .sp path{animation-delay:1s}
+@keyframes cvsway{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}}
+.cv-fact{position:absolute;z-index:4;top:44%;max-width:220px;padding:18px 20px;border-radius:calc(20px*var(--rad,1));text-align:left;background:color-mix(in srgb,var(--bg) 60%,transparent);backdrop-filter:blur(14px);box-shadow:inset 0 0 0 1px var(--rule),0 24px 40px -24px rgba(0,0,0,.6);opacity:0;animation:cvchip 1s var(--ease) 2.4s forwards}
+.cv-fact.fl{left:clamp(24px,4vw,90px)}.cv-fact.fr{right:clamp(90px,8vw,170px)}
+.cv-fact b{display:block;font-family:var(--serif);font-weight:var(--dw,300);font-size:clamp(40px,3.6vw,64px);line-height:.95;letter-spacing:var(--dls);color:var(--green);font-variant-numeric:tabular-nums}
+.cv-fact span{display:block;margin-top:8px;font-size:12.5px;line-height:1.4;color:var(--sec)}
+@media(max-width:1500px){.cv-fact{display:none}}
+@media(max-width:1300px){.cv-garden{display:none}}
+@media(max-height:760px){.cv-fact{display:none}}
+@media(min-width:1700px){.cv-stage .ph.cv-phone{--w:clamp(180px,17vw,380px)}.rw-title{font-size:min(12.2vw,21vh)}.cv-garden{width:min(24vw,560px)}}
+html.lite .cv-rings,html.lite .cv-garden{display:none}
+@media(prefers-reduced-motion:reduce){.cv-rings i,.cv-garden .sp,.cv-fact{animation:none!important}.cv-fact{opacity:1}.cv-garden path{animation:none;stroke-dashoffset:0}}
