@@ -50,16 +50,20 @@ S.ready = { chrome: false, reset() { gsap.set('.ready-mark', { autoAlpha: 1 }); 
   $('#impMap').innerHTML = s + '</g>' + dots + `</g><g id="impSG"><circle cx="${c}" cy="${c}" r="70" fill="#0B5A32" opacity=".12" class="sgp"/><circle cx="${c}" cy="${c}" r="26" fill="#0B5A32"/><text x="${c}" y="${c + 72}" text-anchor="middle" font-family="DM Mono, monospace" font-size="26" letter-spacing="3" fill="#0B5A32" font-weight="500">SINGAPORE</text></g>`; })();
 S.cold = {
   chrome: false,
-  reset() { hide('#news', '#supply', '#imp', $$('#news > *'), '.sup-l', '#supply .src', $$('#imp .ib'), '#imp .src', '#impSG'); gsap.set('#segMy', { y: 0, rotation: 0, autoAlpha: 1 }); gsap.set($$('#supply .seg'), { scaleX: 1 }); gsap.set($$('#impLines path'), { strokeDasharray: 1, strokeDashoffset: 1 }); gsap.set($$('#impDots circle'), { scale: 0, transformOrigin: '50% 50%' }); zero('#s-cold'); },
+  reset() { hide('#imp .ie', '#ib1', '#ib2', $$('#trans > div'), '#imp .src', '#impSG', $$('#shock span')); gsap.set('#imp', { autoAlpha: 1 }); gsap.set('#ib1', { y: 0 }); gsap.set('#trans', { autoAlpha: 1, y: 0 });
+    gsap.set($$('#impLines path'), { strokeDasharray: 1, strokeDashoffset: 1, stroke: '#0B5A32', opacity: 1 }); gsap.set($$('#impDots circle'), { scale: 0, transformOrigin: '50% 50%', fill: '#0A0A0A' }); gsap.set('#impSG circle', { fill: '#0B5A32' }); zero('#s-cold'); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.set('#news', { autoAlpha: 1 }, 0); tl.fromTo($$('#news > *'), { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E, stagger: .25 }, .1);
-      const t = W(i, 'Overnight,'); tl.set('#supply', { autoAlpha: 1 }, t - 1.4); tl.add(rise('#supply .eyebrow', { y: 14 }), t - 1.4); tl.fromTo($$('#supply .seg'), { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, duration: 1, ease: E2, stagger: .2 }, t - 1.2);
-      tl.to('#segMy', { y: 260, rotation: -8, autoAlpha: 0, duration: 1.3, ease: 'power3.in' }, t + .6); tl.add(rise('.sup-l', { y: 20 }), t + 1.4); tl.add(rise('#supply .src', { y: 10 }), t + 1.8); return tl; },
-    i => { const tl = gsap.timeline(); tl.to(['#news', '#supply'], { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, 0); tl.set('#imp', { autoAlpha: 1 }, .4);
-      tl.fromTo('#impSG', { autoAlpha: 0, scale: 0, transformOrigin: '450px 450px' }, { autoAlpha: 1, scale: 1, duration: .8, ease: 'back.out(2)' }, .5);
-      const t = W(i, 'more than'); tl.add(rise('#ib1'), t - .6); tl.add(count($('#ib1 [data-n]'), 90, 1.4), t - .4);
-      const t2 = W(i, 'from one'); tl.to($$('#impDots circle'), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: { each: .012, from: 'random' } }, t2 - 1); tl.to($$('#impLines path'), { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: { each: .012, from: 'random' } }, t2 - .4);
-      tl.add(rise('#ib2'), t2); tl.add(count($('#ib2 [data-n]'), 187, 2.2), t2 + .2); tl.add(rise('#imp .src', { y: 10 }), t2 + 1); tl.to('#impSG .sgp', { scale: 1.6, opacity: 0, transformOrigin: '450px 450px', duration: 1.4, repeat: 2 }, t2 + 1.5); return tl; }
+    i => { const tl = gsap.timeline(); tl.add(rise('#imp .ie', { y: 16 }), .1); tl.fromTo('#impSG', { autoAlpha: 0, scale: 0, transformOrigin: '450px 450px' }, { autoAlpha: 1, scale: 1, duration: .9, ease: 'back.out(2)' }, .3);
+      const t = W(i, 'More than'); tl.add(rise('#ib1', { y: 50 }), t - .5); tl.add(count($('#ib1 [data-n]'), 90, 1.6), t - .2);
+      const T = $$('#trans > div'); ['ship,', 'truck', 'plane.'].forEach((w, k) => tl.fromTo(T[k], { autoAlpha: 0, x: -80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, w) - .1));
+      const P = $$('#impLines path'), D = $$('#impDots circle'); tl.to(D.slice(0, 40), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: .03 }, W(i, 'arrives') - .4); tl.to(P.slice(0, 40), { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: .03 }, W(i, 'arrives')); return tl; },
+    i => { const tl = gsap.timeline(), P = $$('#impLines path'), D = $$('#impDots circle'); tl.to('#trans', { autoAlpha: 0, y: 20, duration: .5 }, 0); tl.to('#ib1', { y: -10, duration: .5 }, 0); tl.to('#ib1', { autoAlpha: 0, duration: .5 }, .2);
+      tl.add(rise('#ib2', { y: 50 }), .5); tl.add(count($('#ib2 [data-n]'), 187, 2.4), .7); tl.to(D.slice(40), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: { each: .009, from: 'random' } }, .5); tl.to(P.slice(40), { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', stagger: { each: .009, from: 'random' } }, .8);
+      tl.add(rise('#imp .src', { y: 10 }), 1.6);
+      const cut = P.filter((_, k) => k % 6 === 0), cutD = D.filter((_, k) => k % 6 === 0), S2 = $$('#shock span');
+      tl.add(pop(S2[0], { s: .7 }), W(i, 'One closed')); tl.to(cut.slice(0, cut.length / 2), { stroke: '#984421', strokeDashoffset: -1, duration: 1, ease: 'power2.in', stagger: .02 }, W(i, 'One closed') + .2); tl.to(cutD.slice(0, cutD.length / 2), { fill: '#984421', duration: .3, stagger: .02 }, W(i, 'One closed'));
+      tl.add(pop(S2[1], { s: .7 }), W(i, 'one bad')); tl.to(cut.slice(cut.length / 2), { stroke: '#984421', strokeDashoffset: -1, duration: 1, ease: 'power2.in', stagger: .02 }, W(i, 'one bad') + .2); tl.to(cutD.slice(cutD.length / 2), { fill: '#984421', duration: .3, stagger: .02 }, W(i, 'one bad'));
+      tl.to('#impSG circle', { fill: '#984421', duration: .4 }, W(i, 'our shelves')); tl.fromTo('#impSG', { scale: 1 }, { scale: 1.12, transformOrigin: '450px 450px', yoyo: true, repeat: 3, duration: .18 }, W(i, 'instantly.')); return tl; }
   ]
 };
 

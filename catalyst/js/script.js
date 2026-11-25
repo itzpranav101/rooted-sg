@@ -28,8 +28,8 @@ window.SPEAKERS = {
 /* who · scene · criterion · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
   // ───────── PRANAV · the opening ─────────
-  ['P', 'cold', 'Selection', 'June 2022. Malaysia stopped exporting chicken. Overnight, a third of Singapore\'s chicken imports disappeared, and chicken rice made the front page.', 0.8],
-  ['P', 'cold', 'Selection', 'That week exposed a hard truth. Singapore imports more than ninety percent of its food, from one hundred and eighty-seven countries and regions.', 1.0],
+  ['P', 'cold', 'Selection', 'Every single day, Singapore eats food grown somewhere else. More than ninety percent of it arrives by ship, truck and plane.', 0.8],
+  ['P', 'cold', 'Selection', 'And it comes from one hundred and eighty-seven countries and regions. One closed border, one bad harvest, and our shelves feel it instantly.', 1.0],
   ['P', 'gap', 'Selection', 'So the country set a goal. By 2035, grow twenty percent of our vegetables, sprouts and mushrooms locally. Today, it is about eight.', 0.6],
   ['P', 'gap', 'Selection', 'And it is handing people the tools: eight hundred and sixty thousand free seed packets, over two thousand allotment plots, over two thousand community gardens.', 0.8],
   ['P', 'gap', 'Selection', 'Hundreds of thousands of chances to grow. Yet one number does not exist: how many of those plants are still alive. Singapore counts what it plants, not what it keeps alive.', 1.2],
