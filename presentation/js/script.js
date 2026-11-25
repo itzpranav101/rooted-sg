@@ -56,6 +56,8 @@ window.SCRIPT = [
   ['I', 'plantday', 'Solutions', 'Thanks, Aashrith. So we built Rooted SG to make survival visible, around one number: the verified Plant-Day. It only grows while your plant stays alive.', 0.6],
   ['I', 'plantday', 'Solutions', 'A day earns its point in three steps. A real plant. A fresh photo. The right time. Miss any one, and nothing counts.', 0.6],
   ['I', 'plantday', 'Solutions', 'Cause number one was forgetting. So every morning, Mojo, our companion, tells you which plant needs you first. Once a day, timed to the weather.', 0.8],
+  ['I', 'mojo', 'Solutions', 'And Mojo is not decoration. He is strategy. Research from MIT, Stanford and Harvard shows people bond with characters, stick with them for longer, and are driven by small wins.', 0.6],
+  ['I', 'mojo', 'Solutions', 'So Mojo cheers when you check in, and visibly worries when a plant is ignored. Once a day, never twice, so care feels like a friendship, not a chore.', 0.8],
   ['I', 'doctor', 'Solutions', 'Cause number two was no one to ask. So when a leaf looks wrong, you open the Plant Doctor, and this is where we stop being a plant app.', 0.6],
   ['I', 'doctor', 'Solutions', 'Because a fungus starts inside the leaf. Its threads spread through the cells for days, long before the leaf looks wrong to anyone.', 0.6],
   ['I', 'doctor', 'Solutions', 'So you point your camera at the leaf. The app reads colour, fullness and light, and turns what it sees into clues.', 0.6],

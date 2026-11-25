@@ -261,6 +261,22 @@ S.plantday = {
   ]
 };
 
+/* ---------- MOJO: why a character works ---------- */
+const mjSet = (g, t) => { $('#mjBig').src = 'media/mojo/' + g + '.gif'; if (t) $('#mjTxt').textContent = t; };
+S.mojo = {
+  sec: 'Mojo',
+  reset() { hide('#mjStage', $$('.mj-right > *'), $$('#mjCards .mjc'), '#mjRules', $$('#mjRules .mjr'), '#mjState'); gsap.set('#mjCards', { autoAlpha: 1, y: 0 }); mjSet('idle', 'Mojo · watching your plants'); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.fromTo('#mjStage', { autoAlpha: 0, scale: .7 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'back.out(1.6)' }, 0); tl.add(rise($$('.mj-right > .eyebrow, .mj-right > .h3'), { st: .15 }), W(i, 'He is') - .4);
+      tl.set('.mj-right .mj-cards', { autoAlpha: 1 }, 0); const C = $$('#mjCards .mjc'); [W(i, 'MIT,'), W(i, 'Stanford'), W(i, 'Harvard'), W(i, 'stick with')].forEach((t, k) => tl.fromTo(C[k], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t));
+      tl.add(() => mjSet('think'), W(i, 'Research')); tl.add(() => mjSet('happy'), W(i, 'small wins.')); tl.fromTo('#mjBig', { y: 0 }, { y: -26, yoyo: true, repeat: 1, duration: .3, ease: 'power2.out' }, W(i, 'small wins.')); return tl; },
+    i => { const tl = gsap.timeline(); tl.to('#mjCards', { autoAlpha: 0, y: -30, duration: .5 }, 0); tl.set('#mjRules', { autoAlpha: 1 }, .3); tl.set('#mjState', { autoAlpha: 1 }, 0); const R = $$('#mjRules .mjr');
+      tl.fromTo(R[0], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'cheers')); tl.add(() => mjSet('happy', 'Checked in · Mojo celebrates'), W(i, 'cheers')); tl.fromTo('#mjBig', { y: 0 }, { y: -30, yoyo: true, repeat: 3, duration: .22 }, W(i, 'cheers'));
+      tl.fromTo(R[1], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'visibly worries')); tl.add(() => mjSet('sad', 'Pandan ignored · Mojo worries'), W(i, 'visibly worries'));
+      tl.fromTo(R[2], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'Once a day,')); tl.add(() => mjSet('idle', 'One nudge a day · never twice'), W(i, 'Once a day,')); tl.add(() => mjSet('happy', 'A friendship, not a chore'), W(i, 'a friendship,')); return tl; }
+  ]
+};
+
 /* ---------- PLANT DOCTOR: the leaf view from the site, then a full camera sequence ---------- */
 const leafCv = $('canvas[data-deckleaf]'); const LP = { p: 0 };
 const setP = (v, snap) => { LP.p = v; leafCv.dataset.p = v; if (snap && window.__deckleaf) window.__deckleaf.setP(v); };
