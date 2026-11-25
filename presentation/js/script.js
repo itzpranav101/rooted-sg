@@ -1,6 +1,6 @@
 /* ROOTED SG · Catalyst Challenge pitch — the script.
    One line = one click. Every animation on screen is fired by the line it belongs to.
-   53 lines · Pranav 19 · Aashrith 12 · Isha 10 · Anandita 12 · planned to 9:00.
+   55 lines · planned to 9:00.
 
    The thread that ties it together: what Singapore counts (imports, packets, plots) vs what nobody counts (survival),
    and the three causes (forgetting · no one to ask · motivation) → three features → three pilot results.
@@ -60,8 +60,9 @@ window.SCRIPT = [
   ['I', 'doctor', 'Solutions', 'Because a fungus starts inside the leaf. Its threads spread through the cells for days, long before the leaf looks wrong to anyone.', 0.6],
   ['I', 'doctor', 'Solutions', 'So you point your camera at the leaf. The app reads colour, fullness and light, and turns what it sees into clues.', 0.6],
   ['I', 'doctor', 'Solutions', 'The AI finds the clues. You make the call. A human stays in the loop, and the fix becomes a step-by-step plan.', 0.8],
-  ['I', 'grow', 'Solutions', 'Cause number three was motivation. So we built the Guardian Path, where we don\'t just identify diseases, we teach people to understand them.', 0.6],
-  ['I', 'grow', 'Solutions', 'Every lesson earns streaks, levels and weekly leagues. And on Roots, our marketplace, neighbours trade what they grow, like a pandan cutting with 421 Plant-Days.', 0.6],
+  ['I', 'grow', 'Solutions', 'Cause number three was motivation. So we built the Guardian Path. We don\'t just identify diseases, we teach people to understand them, with streaks, levels and weekly leagues.', 0.6],
+  ['I', 'grow', 'Solutions', 'And then there is Roots, the part we are proudest of. For the first time in Singapore, the plants on your street can find each other.', 0.6],
+  ['I', 'grow', 'Solutions', 'A neighbour with too much chilli meets a neighbour who needs a seedling. Surplus stops being waste, and a whole street becomes a farm, together.', 0.8],
   ['I', 'pipeline', 'Solutions', 'But none of this works unless every Plant-Day is real. So underneath it all is serious technology, and Anandita will show you how it works.', 1.0],
 
   // ───────── ANANDITA · technology, implementation, the pilot ─────────
@@ -69,13 +70,14 @@ window.SCRIPT = [
   ['N', 'pipeline', 'Solutions', 'An Excess Green index finds the living plant. A perceptual hash catches a reused photo. Blur detection rejects a bad one. Nothing can be faked.', 0.8],
   ['N', 'model', 'Solutions', 'The Plant Doctor runs on our own trained model. We fine-tuned MobileNet classifiers on hundreds of thousands of labelled plant images.', 0.4],
   ['N', 'model', 'Solutions', 'Then we compressed it to eight-bit and put it on the phone, with calibrated confidence. When it is unsure, it asks for a retake instead of guessing.', 0.8],
-  ['N', 'market', 'Solutions', 'Roots is how neighbours become collaborators. They swap cuttings, share advice and grow together, and every listing carries a verified record, kept private at neighbourhood level.', 0.8],
+  ['N', 'market', 'Solutions', 'Roots is built on trust. Every listing carries the grower\'s verified Plant-Days, so you know exactly who can keep a plant alive. And locations stay at neighbourhood level, private by design.', 0.6],
+  ['N', 'market', 'Solutions', 'It also opens street by street, only once enough growers have joined, so nobody ever lands in an empty market. That is how a community grows itself.', 0.8],
   ['N', 'built', 'Solutions', 'We built it twice: native SwiftUI on iPhone and Jetpack Compose on Android. Seventy-one thousand lines of code, and 167 automated tests.', 0.6],
   ['N', 'built', 'Solutions', 'Then we put it in real hands. At homes and schools we watched what people skipped, simplified every confusing screen, and tested again.', 0.8],
   ['N', 'pilot', 'Results', 'Then we ran a pilot for over three months: {users} people and {plants} real plants, every one checked in by photo, every day verified by the app.', 0.6],
   ['N', 'pilot', 'Results', 'Together they logged {plantDays} verified Plant-Days. Not self-reported. Every single one backed by a real plant and a fresh photo.', 0.6],
   ['N', 'pilot', 'Results', 'Remember the three causes. Against forgetting, {weekly} percent were still checking in every week, and {survival} percent of pilot plants were still alive.', 0.6],
-  ['N', 'pilot', 'Results', 'Against no one to ask, the Plant Doctor caught {flags} problems early. And against losing motivation, neighbours completed {trades} trades on Roots.', 0.6],
+  ['N', 'pilot', 'Results', 'The Plant Doctor spotted {flags} problems before a single one of those plants was lost. And {trades} times, one neighbour passed a cutting or seedling to another through Roots.', 0.6],
   ['N', 'pilot', 'Results', 'We tracked survival weekly on a control chart, so real improvement stands apart from noise. Now, Pranav will show you where this goes next.', 1.0],
 
   // ───────── PRANAV · results, the forecast, the close ─────────
@@ -84,7 +86,7 @@ window.SCRIPT = [
   ['P', 'forecast', 'Results', 'We wanted concrete numbers, not hopes. That pilot data constantly retrains our machine-learning models, and feeds a forecast built on Monte Carlo simulation, Sobol analysis and more, run one hundred thousand times.', 0.6],
   ['P', 'forecast', 'Results', 'The roll-out grows school by school. Two pilot schools first, twenty in year two, and sixty by year three, reaching seven thousand two hundred households.', 0.6],
   ['P', 'forecast', 'Results', 'In our base case, that is 1,814 more plants alive after a year, and three point three million verified Plant-Days. Data Singapore has never had.', 0.8],
-  ['P', 'sustain', 'Results', 'And it lasts without us. The models run on the phone, schools run their own leagues, and neighbours trade directly on Roots.', 0.8],
+  ['P', 'sustain', 'Results', 'And it lasts without us. The models run on the phone, schools run their own leagues, and every street on Roots keeps its own growers going.', 0.8],
   ['P', 'vision', 'Results', 'So picture 2035. Every block in Singapore growing something, and every living plant counted. That million-balcony farm, finally visible.', 1.0],
   ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 0.8],
   ['P', 'close', 'Results', 'That is Rooted SG. Not just an app, but the first measure of a nation that grows. Built by students, proven by data, ready to scale.', 1.2],
