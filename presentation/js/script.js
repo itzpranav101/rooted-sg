@@ -63,6 +63,7 @@ window.SCRIPT = [
   ['I', 'grow', 'Solutions', 'Cause number three was motivation. So we built the Guardian Path. We don\'t just identify diseases, we teach people to understand them, with streaks, levels and weekly leagues.', 0.6],
   ['I', 'grow', 'Solutions', 'And then there is Roots, the part we are proudest of. For the first time in Singapore, the plants on your street can find each other.', 0.6],
   ['I', 'grow', 'Solutions', 'A neighbour with too much chilli meets a neighbour who needs a seedling. Surplus stops being waste, and a whole street becomes a farm, together.', 0.8],
+  ['I', 'grow', 'Solutions', 'You can sell it, swap it, or give it away for free. Neighbours who never spoke start sharing advice, cuttings and harvests, and a block becomes a community.', 0.8],
   ['I', 'pipeline', 'Solutions', 'But none of this works unless every Plant-Day is real. So underneath it all is serious technology, and Anandita will show you how it works.', 1.0],
 
   // ───────── ANANDITA · technology, implementation, the pilot ─────────

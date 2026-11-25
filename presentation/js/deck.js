@@ -308,7 +308,7 @@ $('#gpNodes').innerHTML = GPN.map(([e, n, s], k) => { const [x, y] = gpPt(k / 5)
 const gpM = { f: 0 }; const gpMojo = () => { const [x, y] = gpPt(gpM.f); gsap.set('#gpMojo', { x: 520 + x - 60, y: 280 + y - 118 }); };
 S.grow = {
   sec: 'The app',
-  reset() { hide('#rt', $$('#gp > *'), $$('#gpNodes .gpn'), $$('#gpCard .qo'), $$('#gpChips .chip'), $$('#rt > *'), $$('#listings .lst'), '#match', $$('#match > *')); gsap.set('#gp', { autoAlpha: 1, x: 0 }); gsap.set(gpTrail, { strokeDashoffset: 1 }); gsap.set('#gpPath', { autoAlpha: 1 }); gsap.set('#gpNodes', { autoAlpha: 1 }); gsap.set('#gpChips', { autoAlpha: 1 }); gsap.set($$('.marrow path'), { strokeDashoffset: 1 }); $('#gpCard .qo.ok').classList.remove('on'); gpM.f = 0; gpMojo(); },
+  reset() { hide('#rt', $$('#gp > *'), $$('#gpNodes .gpn'), $$('#gpCard .qo'), $$('#gpChips .chip'), $$('#rt > *'), $$('#listings .lst'), '#match', $$('#match > *'), '#opts', $$('#opts .op'), '#comm', $$('#comm .chip')); gsap.set('#gp', { autoAlpha: 1, x: 0 }); gsap.set(gpTrail, { strokeDashoffset: 1 }); gsap.set('#gpPath', { autoAlpha: 1 }); gsap.set('#gpNodes', { autoAlpha: 1 }); gsap.set('#gpChips', { autoAlpha: 1 }); gsap.set($$('.marrow path'), { strokeDashoffset: 1 }); $('#gpCard .qo.ok').classList.remove('on'); gpM.f = 0; gpMojo(); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('.gp-head'), 0); tl.fromTo('.gp-ph', { autoAlpha: 0, y: 160 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E2 }, .2); tl.fromTo('.gp-ph img', { scale: 1.12, yPercent: 4 }, { scale: 1, yPercent: 0, duration: 5, ease: 'power1.out' }, .2);
       const t = W(i, 'Guardian Path.'); tl.to(gpTrail, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, t - .4);
@@ -324,7 +324,11 @@ S.grow = {
     i => { const tl = gsap.timeline(); tl.to('#listings', { autoAlpha: 0, x: 60, duration: .5 }, 0); tl.set('#match', { autoAlpha: 1 }, .3); const M = $$('#match > *');
       tl.fromTo(M[0], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'too much') - .3); tl.set(M[1], { autoAlpha: 1 }, W(i, 'meets')); tl.to($$('.marrow path'), { strokeDashoffset: 0, duration: .8, ease: 'power2.out', stagger: .4 }, W(i, 'meets'));
       tl.fromTo(M[2], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'needs a seedling.') - .2); tl.fromTo(M[3], { autoAlpha: 0, y: 30, scale: .95 }, { autoAlpha: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.8)' }, W(i, 'Surplus stops'));
-      tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'a whole street') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'a whole street') - .3); return tl; }
+      tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'a whole street') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'a whole street') - .3); return tl; },
+    i => { const tl = gsap.timeline(); tl.to('#match', { autoAlpha: 0, y: -30, duration: .5 }, 0); tl.set('#opts', { autoAlpha: 1 }, .3); const O = $$('#opts .op');
+      [W(i, 'sell it,'), W(i, 'swap it,'), W(i, 'give it')].forEach((t, k) => tl.fromTo(O[k], { autoAlpha: 0, y: 60, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: .8, ease: E2 }, t));
+      tl.add(() => { $('#rtHead .h3').innerHTML = 'Strangers become <em>a growing community</em>.'; }, W(i, 'Neighbours who') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'Neighbours who') - .3);
+      tl.set('#comm', { autoAlpha: 1 }, 0); const C = $$('#comm .chip'); [W(i, 'advice,'), W(i, 'cuttings and'), W(i, 'harvests,')].forEach((t, k) => tl.add(pop(C[k], { s: .6 }), t)); return tl; }
   ]
 };
 const rtH0 = $('#rtHead .h3').innerHTML; const _gr = S.grow.reset; S.grow.reset = () => { $('#rtHead .h3').innerHTML = rtH0; _gr(); };
@@ -552,8 +556,11 @@ function setChrome(n, i) {
   gsap.to('#chrome', { autoAlpha: on ? 1 : 0, duration: .5 });
   if (i >= 0) $('#secTxt').innerHTML = `<b>${LINES[i].crit}</b> · ${sc.sec || ''}`;
   gsap.to('#secpill', { autoAlpha: on && n !== 'hero' ? 1 : 0, duration: .4 });
-  gsap.to('#prog', { scaleX: (i + 1) / LINES.length, duration: .8, ease: E });
+  timeline(i);
 }
+const TOT = LINES.length ? LINES[LINES.length - 1].at + LINES[LINES.length - 1].dur : 1, PB = { f: 0 };
+const pbSet = () => { gsap.set('#prog', { scaleX: PB.f }); gsap.set('#knob', { left: (PB.f * 100) + '%' }); };
+function timeline(i) { gsap.killTweensOf(PB); if (i < 0) { PB.f = 0; return pbSet(); } const L = LINES[i]; PB.f = L.at / TOT; pbSet(); gsap.to(PB, { f: (L.at + L.dur) / TOT, duration: L.dur, ease: 'none', onUpdate: pbSet }); }
 function speaker(i) { return; /* speaker name pill removed */
   if (i < 0) return; const L = LINES[i], p = LINES[i - 1];
   const show = L.text.startsWith("I'm Pranav") || (i > 0 && p.who !== L.who);

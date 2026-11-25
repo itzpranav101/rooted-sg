@@ -270,3 +270,18 @@
 .tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
 .tile .num{font-size:118px}
 .tile p{font-size:24px}
+
+/* Roots: sell · swap · give */
+.opts{position:absolute;left:900px;right:120px;top:330px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.op{background:#fff;border-radius:30px;padding:30px 28px;box-shadow:inset 0 0 0 1.5px var(--rule),0 24px 44px -26px rgba(20,40,28,.45)}
+.op i{font-style:normal;font-size:58px;width:96px;height:96px;border-radius:24px;background:var(--leaf);display:grid;place-items:center;margin-bottom:18px}
+.op b{display:block;font-family:var(--serif);font-weight:400;font-size:48px;letter-spacing:-.02em}
+.op span{display:block;font-size:25px;font-weight:600;color:var(--green);margin-top:4px}
+.comm{position:absolute;left:900px;right:120px;top:700px;display:flex;flex-wrap:wrap;gap:16px}
+.comm .chip{position:relative;font-size:24px;padding:16px 26px}
+/* timeline bar, like a video scrubber */
+.progress{height:6px;background:rgba(10,10,10,.08)}
+.progress #knob{position:absolute;left:0;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(11,90,50,.18)}
+.progress{left:72px;right:72px;width:auto;bottom:22px;height:5px;border-radius:3px}
+.progress #prog{border-radius:3px}
+.op b{font-size:42px;white-space:nowrap}
