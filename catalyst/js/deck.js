@@ -151,15 +151,14 @@ $('#team').innerHTML = ['P', 'A', 'I', 'N'].map(k => { const s = SPEAKERS[k]; re
 $('#clNames').innerHTML = ['P', 'A', 'I', 'N'].map(k => SPEAKERS[k].name).join(' <b>·</b> ');
 S.hero = {
   chrome: true, sec: 'Rooted SG',
-  reset() { hide('#heroEye', $$('#heroH .hl'), $$('#heroTrio li'), $$('#heroStage .ph'), $$('#heroStage .chip'), '#heroQ'); gsap.set('#heroStage', { autoAlpha: 1, y: 0 }); gsap.set('#heroTrio', { autoAlpha: 1, y: 0 }); gsap.set($$('#s-hero .alive path'), { strokeDashoffset: 1 }); gsap.set('.hero-wrap', { y: 0 }); },
+  reset() { hide('#heroEye', $$('#heroH .hl'), $$('#heroTrio li'), $$('#heroStage .ph'), $$('#heroStage .chip')); gsap.set('#heroStage', { autoAlpha: 1, y: 0 }); gsap.set('#heroTrio', { autoAlpha: 1, y: 0 }); gsap.set($$('#s-hero .alive path'), { strokeDashoffset: 1 }); gsap.set('.hero-wrap', { y: 0 }); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('#heroEye', { y: 20 }), 0); tl.add(rise($$('#heroH .hl'), { y: 34, d: 1.1, st: .18 }), .1);
       tl.add(drawIn($('#s-hero .alive .ul path'), 1, 'power2.out'), 1.0); $$('#s-hero .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), [1.8, 2.1, 2.3][k]));
       const t = W(i, 'the first way'); tl.add(rise($$('#heroTrio li'), { y: 24, st: .14 }), t);
       const ph = $$('#heroStage .ph'); tl.fromTo(ph, { autoAlpha: 0, y: 380 }, { autoAlpha: 1, y: 0, duration: 1.6, ease: E2, stagger: { each: .14, from: 'center' } }, W(i, 'an app') - .3);
       tl.add(pop($$('#heroStage .chip'), { st: .25 }), W(i, 'earned by')); return tl; },
-    i => { const tl = gsap.timeline(); tl.to('#heroStage', { y: 500, autoAlpha: 0, duration: 1, ease: 'power3.in' }, W(i, 'So we') - .6); tl.to('#heroTrio', { autoAlpha: 0, y: 20, duration: .5 }, W(i, 'So we') - .6);
-      tl.fromTo('#heroQ', { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E2 }, W(i, 'three thousand') - .3); return tl; }
+    i => { const tl = gsap.timeline(); tl.to($$('#heroStage .chip'), { scale: 1.06, yoyo: true, repeat: 1, duration: .3, stagger: .2 }, W(i, 'three thousand')); return tl; }
   ]
 };
 
@@ -547,7 +546,7 @@ function setChrome(n, i) {
   gsap.to('#secpill', { autoAlpha: on && n !== 'hero' ? 1 : 0, duration: .4 });
   gsap.to('#prog', { scaleX: (i + 1) / LINES.length, duration: .8, ease: E });
 }
-function speaker(i) {
+function speaker(i) { return; /* speaker name pill removed */
   if (i < 0) return; const L = LINES[i], p = LINES[i - 1];
   const show = L.text.startsWith("I'm Pranav") || (i > 0 && p.who !== L.who);
   if (!show) return; const s = SPEAKERS[L.who];
