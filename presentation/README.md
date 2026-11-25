@@ -4,7 +4,7 @@ A 9-minute, four-speaker pitch in the heymeco.xyz Glasshouse (light) design, app
 Every animation is fired by the script line it belongs to, and timed to the words inside that line.
 
 - `index.html`: the deck (1920×1080 stage, scales to any screen). Serve it, don't open it as a file:
-  `python3 -m http.server` from the repo root, then open `/catalyst/`.
+  `python3 -m http.server` from the repo root, then open `/presentation/`.
 - `index.html?presenter` (or press **P** in the deck): presenter view with the current and next line, the timer against the 9:00 plan, and a live preview. It stays in sync with the deck through BroadcastChannel (same browser).
 - `script.html`: the printable script.
 - `js/script.js`: **the single source**. It holds the lines, speakers, pilot figures (`PILOT`) and timing. Change a number here and the slide and script both update.

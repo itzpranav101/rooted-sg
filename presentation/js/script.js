@@ -69,7 +69,7 @@ window.SCRIPT = [
   ['N', 'pipeline', 'Solutions', 'An Excess Green index finds the living plant. A perceptual hash catches a reused photo. Blur detection rejects a bad one. Nothing can be faked.', 0.8],
   ['N', 'model', 'Solutions', 'The Plant Doctor runs on our own trained model. We fine-tuned MobileNet classifiers on hundreds of thousands of labelled plant images.', 0.4],
   ['N', 'model', 'Solutions', 'Then we compressed it to eight-bit and put it on the phone, with calibrated confidence. When it is unsure, it asks for a retake instead of guessing.', 0.8],
-  ['N', 'market', 'Solutions', 'Roots runs on that same trust data. Every listing carries the seller\'s verified record, and locations stay at neighbourhood level, private by design.', 0.8],
+  ['N', 'market', 'Solutions', 'Roots is how neighbours become collaborators. They swap cuttings, share advice and grow together, and every listing carries a verified record, kept private at neighbourhood level.', 0.8],
   ['N', 'built', 'Solutions', 'We built it twice: native SwiftUI on iPhone and Jetpack Compose on Android. Seventy-one thousand lines of code, and 167 automated tests.', 0.6],
   ['N', 'built', 'Solutions', 'Then we put it in real hands. At homes and schools we watched what people skipped, simplified every confusing screen, and tested again.', 0.8],
   ['N', 'pilot', 'Results', 'Then we ran a pilot for over three months: {users} people and {plants} real plants, every one checked in by photo, every day verified by the app.', 0.6],
@@ -88,7 +88,7 @@ window.SCRIPT = [
   ['P', 'vision', 'Results', 'So picture 2035. Every block in Singapore growing something, and every living plant counted. That million-balcony farm, finally visible.', 1.0],
   ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 0.8],
   ['P', 'close', 'Results', 'That is Rooted SG. Not just an app, but the first measure of a nation that grows. Built by students, proven by data, ready to scale.', 1.2],
-  ['P', 'close', 'Results', 'Because a plant never dies in a day. It dies from being forgotten. So let\'s build a Singapore that never forgets. We are Rooted SG. Thank you.', 2.0]
+  ['P', 'close', 'Results', 'A plant never dies in a day. It dies from being forgotten. Singapore can no longer afford to forget. We will count every plant that lives, until this country grows its own future. We are Rooted SG. Thank you.', 2.0]
 ];
 
 /* Planned timing: words at a calm pitch pace, plus the pause, scaled to exactly 9:00. */

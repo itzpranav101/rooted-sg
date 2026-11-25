@@ -386,14 +386,14 @@ S.model = {
   h += `<text class="melab" x="${hx[me][0]}" y="${hx[me][1] + 62}" text-anchor="middle">YOUR NEIGHBOURHOOD</text>`;
   $('#mkMap').innerHTML = `<style>.hx{fill:#fff;stroke:#0A0A0A;stroke-width:2.5;stroke-dasharray:1;stroke-dashoffset:1}.hx.me{fill:#E4F0E8;stroke:#0B5A32;stroke-width:4}.arc{fill:none;stroke:#0B5A32;stroke-width:3.5;stroke-dasharray:1;stroke-dashoffset:1}.ad{fill:#0B5A32;opacity:0}.gw circle{fill:#0B5A32}.gw path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}.melab{font-family:'DM Mono',monospace;font-size:21px;letter-spacing:2px;fill:#0B5A32;font-weight:500}</style>` + h; })();
 S.market = {
-  sec: 'Roots marketplace',
+  sec: 'Roots community',
   reset() { gsap.set($$('#mkMap .hx'), { strokeDashoffset: 1 }); gsap.set($$('#mkMap .arc'), { strokeDashoffset: 1 }); hide($$('#mkMap .gw'), $$('#mkMap .ad'), '#mkMap .melab', $$('.mk-right > *'), $$('#mkList li')); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise($$('.mk-right > .eyebrow, .mk-right > .h3'), { st: .12 }), 0); tl.to($$('#mkMap .hx'), { strokeDashoffset: 0, duration: .9, ease: 'power2.inOut', stagger: { each: .05, from: 'center' } }, .1);
       tl.set('#mkList', { autoAlpha: 1 }, 0); tl.add(rise('#mkMap .melab', { y: 10 }), .9);
-      tl.fromTo($$('#mkMap .gw'), { autoAlpha: 0, scale: 0, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2.4)', stagger: .1 }, W(i, 'verified record'));
-      tl.to($$('#mkMap .arc'), { strokeDashoffset: 0, duration: 1, ease: 'power2.out', stagger: .2 }, W(i, 'trust data')); tl.to($$('#mkMap .ad'), { autoAlpha: 1, duration: .3, stagger: .2 }, W(i, 'trust data') + .8);
-      const L = $$('#mkList li'); [W(i, 'Every listing'), W(i, 'and locations'), W(i, 'private by')].forEach((t, k) => tl.fromTo(L[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t)); return tl; }
+      tl.fromTo($$('#mkMap .gw'), { autoAlpha: 0, scale: 0, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2.4)', stagger: .1 }, W(i, 'neighbours become'));
+      tl.to($$('#mkMap .arc'), { strokeDashoffset: 0, duration: 1, ease: 'power2.out', stagger: .2 }, W(i, 'swap cuttings,')); tl.to($$('#mkMap .ad'), { autoAlpha: 1, duration: .3, stagger: .2 }, W(i, 'swap cuttings,') + .8);
+      const L = $$('#mkList li'); [W(i, 'They swap'), W(i, 'every listing'), W(i, 'kept private')].forEach((t, k) => tl.fromTo(L[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t)); return tl; }
   ]
 };
 
@@ -524,8 +524,8 @@ S.close = {
       tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'a nation')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#clMission', { autoAlpha: 0, y: -40, duration: .6 }, 0); const q = $$('#clQuote p'); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, .3);
       tl.fromTo(q[0], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, .4); tl.fromTo(q[1], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, W(i, 'It dies'));
-      const t = W(i, 'We are'); tl.to('#clQuote', { autoAlpha: 0, y: -40, duration: .6 }, W(i, "So let's") - .1); tl.fromTo('#clEnd', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, "So let's"));
-      tl.add(drawIn($('#clEnd .alive .ul path'), 1, 'power2.out'), W(i, "So let's") + .9); $$('#clEnd .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), W(i, "So let's") + 1.6 + k * .25));
+      const t = W(i, 'We are'); tl.fromTo('#clQuote p:nth-child(2) em', { color: '#0B5A32' }, { color: '#984421', duration: .6 }, W(i, 'Singapore can')); tl.to('#clQuote', { autoAlpha: 0, y: -40, duration: .6 }, W(i, 'We will') - .1); tl.fromTo('#clEnd', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, 'We will'));
+      tl.add(drawIn($('#clEnd .alive .ul path'), 1, 'power2.out'), W(i, 'every plant that')); $$('#clEnd .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), W(i, 'its own future.') + k * .25));
       tl.add(rise('#clNames', { y: 20 }), t); tl.add(rise('#clThanks', { y: 30, d: 1.2 }), W(i, 'Thank you.')); return tl; }
   ]
 };
