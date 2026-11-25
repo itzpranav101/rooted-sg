@@ -11,5 +11,4 @@ Every animation is fired by the script line it belongs to, and timed to the word
 
 Keys: → / Space / clicker = next line, ← = back, F = full screen, P = presenter, C = caption, A = auto rehearsal on the 9:00 plan, V = read lines aloud, Home = start.
 
-Line split: Pranav 14 · Aashrith 12 · Isha 10 · Anandita 12 (48 lines).
 Fonts and GSAP are bundled locally, so the deck runs offline.

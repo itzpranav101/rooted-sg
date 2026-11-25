@@ -231,3 +231,27 @@
 .fc-m .tagchip.mlc{background:var(--btn);color:#fff}
 .ln-users{width:540px;gap:8px;top:320px}
 .fc-left .src{left:780px;bottom:40px;width:900px}
+
+/* v10: team after the hook · survey cards · hero teaser */
+.teamv{position:absolute;inset:0;padding:170px 120px 0}
+.teamv .h2{margin:18px 0 80px}
+.teamv .team{position:static;display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.teamv .mem{flex-direction:column;align-items:flex-start;gap:26px;padding:36px 34px;min-height:330px}
+.teamv .mem .ini{width:120px;height:120px;font-size:76px;border-radius:30px}
+.teamv .mem b{font-size:46px}
+.teamv .mem span{font-size:20px}
+.hk1{display:inline-block}
+.hero-q{position:absolute;left:0;right:0;top:640px;display:flex;align-items:center;justify-content:center;gap:34px}
+.hero-q .num{font-size:150px}
+.hero-q .h4{font-size:58px;max-width:760px;line-height:1.05}
+.sv-left{top:160px;width:860px}
+.sv-h{margin:16px 0 36px}
+.svc{display:grid;grid-template-columns:330px 1fr;align-items:center;gap:26px;background:var(--bg2);border-radius:30px;padding:20px 34px;margin-bottom:20px;min-height:150px}
+.svc .num{font-size:110px;display:flex;align-items:baseline}
+.svc p{font-size:32px;font-weight:600;line-height:1.2;display:flex;align-items:center;gap:16px}
+.svc .sw{width:26px;height:26px}
+#sv1,#sv2{position:static}
+.sv-src2{position:absolute;left:120px;bottom:40px}
+.sv-left .src{display:none}
+.dots{top:200px}
+.dots-cap{top:935px}

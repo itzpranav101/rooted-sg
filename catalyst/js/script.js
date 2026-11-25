@@ -28,14 +28,14 @@ window.SPEAKERS = {
 /* who · scene · criterion · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
   // ───────── PRANAV · the opening ─────────
-  ['P', 'hook', 'Selection', 'What if Singapore\'s next great farm is not a farm at all? What if it is already here, on a million balconies, corridors and windowsills?', 1.4],
-  ['P', 'cold', 'Selection', 'Every single day, Singapore eats food grown somewhere else. More than ninety percent of it arrives by ship, truck and plane.', 0.8],
-  ['P', 'cold', 'Selection', 'And it comes from one hundred and eighty-seven countries and regions. One closed border, one bad harvest, and our shelves feel it instantly.', 1.0],
+  ['P', 'hook', 'Selection', 'Singapore cannot feed itself. Not today, and not if we keep growing the way we do. But what if the farm we need is already here, on a million balconies?', 1.4],
+  ['P', 'cold', 'Selection', 'Ninety percent of the food on your plate tonight came from somewhere else. By ship, by truck, by plane. We do not control a single one of those journeys.', 0.8],
+  ['P', 'cold', 'Selection', 'I\'m Pranav, and with Aashrith, Isha and Anandita, we are Rooted SG. We are students, and we decided this problem was ours to solve.', 0.8],
+  ['P', 'cold', 'Selection', 'Our food comes from one hundred and eighty-seven countries and regions. Every one of them is a point of failure that Singapore does not control.', 1.0],
   ['P', 'gap', 'Selection', 'So the country set a goal. By 2035, grow twenty percent of our vegetables, sprouts and mushrooms locally. Today, it is about eight.', 0.6],
   ['P', 'gap', 'Selection', 'And it is handing people the tools: eight hundred and sixty thousand free seed packets, over two thousand allotment plots, over two thousand community gardens.', 0.8],
   ['P', 'gap', 'Selection', 'Hundreds of thousands of chances to grow. Yet one number does not exist: how many of those plants are still alive. Singapore counts what it plants, not what it keeps alive.', 1.2],
-  ['P', 'hero', 'Selection', 'That gap is our opportunity. We are Rooted SG, and we built the first way to measure it: an app where every point is earned by a real, living plant.', 0.8],
-  ['P', 'hero', 'Selection', 'I\'m Pranav. With Aashrith, Isha and Anandita, we\'ll take you from the problem, to the app, to the technology, to our three-month pilot.', 0.6],
+  ['P', 'hero', 'Selection', 'That gap is our opportunity. Rooted SG is the first way to measure it: an app where every single point is earned by a real, living plant.', 0.8],
   ['P', 'hero', 'Selection', 'But statistics only tell you what is happening, not why. So we ran our own nationwide survey, and three thousand and forty-three Singapore residents answered. Aashrith.', 1.0],
 
   // ───────── AASHRITH · selection and analysis ─────────
