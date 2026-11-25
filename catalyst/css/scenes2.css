@@ -174,3 +174,60 @@
 .shock{position:absolute;right:120px;bottom:70px;display:flex;gap:18px}
 .shock span{font-family:var(--mono);font-size:24px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:#fff;background:var(--alert);border-radius:99px;padding:14px 26px}
 #ib1{margin-top:26px}
+
+/* hook + vision: the million-balcony city */
+.hk-h{position:absolute;left:120px;top:150px;font-size:124px;line-height:1}
+.city{position:absolute;left:0;bottom:0;width:1920px;height:620px;overflow:visible}
+.city .bl{fill:#fff;stroke:#0A0A0A;stroke-width:3.5;stroke-linejoin:round}
+.city .wn{fill:#F3F3F1}
+.city .wn.on{fill:#0B5A32}
+.city .gl{stroke:#0A0A0A;stroke-width:4}
+.hk-n{position:absolute;right:120px;top:170px;width:620px;text-align:right}
+.hk-n .num{font-size:150px}
+.hk-n .lead{margin:10px 0 14px}
+#s-vision .city{bottom:0}
+.vi-t{position:absolute;left:0;right:0;top:150px;text-align:center;z-index:3}
+.vi-t .h2{margin-top:16px}
+.vi-c{position:absolute;left:0;right:0;top:420px;display:flex;justify-content:center;z-index:3}
+.vi-c .chip{position:relative;font-size:26px;padding:18px 30px}
+.cl-mission{position:absolute;left:0;right:0;top:250px;text-align:center;opacity:0}
+.cl-mission .h1{font-size:132px;margin:22px auto 56px;max-width:1500px}
+.cl-mission .ms{display:flex;gap:20px;justify-content:center}
+.cl-mission .chip{position:relative;font-size:28px;padding:20px 32px}
+.hk-h{font-size:104px;top:140px}
+.hk-n{left:120px;right:auto;top:385px;width:auto;text-align:left;display:grid;grid-template-columns:auto 560px;column-gap:30px;align-items:center}
+.hk-n .num{font-size:100px;grid-row:span 2}
+.hk-n .lead{margin:0;font-size:30px}
+#cityA{height:520px}
+#cityB{height:560px}
+.vi-c{top:330px}
+
+/* pilot → forecast bridge */
+.ln-head{position:absolute;left:120px;top:150px}
+.ln-head .h3{margin-top:14px}
+.ln-users{position:absolute;left:120px;top:330px;width:620px;display:grid;grid-template-columns:repeat(14,1fr);gap:10px}
+.ln-users i{aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 3px var(--text)}
+.ln-users i.on{background:var(--green);box-shadow:inset 0 0 0 3px var(--green)}
+.ln-flow{position:absolute;inset:0;width:1920px;height:1080px}
+.ln-flow path{stroke-dasharray:1;stroke-dashoffset:1}
+.ln-cards{position:absolute;left:1000px;right:120px;top:300px;display:flex;flex-direction:column;gap:30px}
+.lc{display:flex;align-items:center;gap:24px;background:var(--bg2);border-radius:28px;padding:24px 30px;min-height:160px}
+.lc i{font-style:normal;font-size:48px;width:90px;height:90px;border-radius:24px;background:#fff;display:grid;place-items:center;flex:none}
+.lc b{display:block;font-family:var(--serif);font-weight:400;font-size:44px;letter-spacing:-.02em;line-height:1.05}
+.lc p{font-size:27px;font-weight:500;margin-top:6px}
+.ln-q{position:absolute;left:0;right:0;bottom:70px;text-align:center}
+.fc-m{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;max-width:720px}
+.fc-m .tagchip{font-size:19px;padding:12px 20px}
+
+.fc-m{max-width:760px;gap:12px}.fc-m .tagchip{font-size:20px;padding:12px 20px}
+.fc-runs .num{font-size:150px}
+
+.fc-left .h3{margin:20px 0 20px}
+.fc-runs .num{font-size:110px}
+.fc-runs .lead{font-size:30px}
+.fc-m{max-width:780px;gap:10px;margin-top:22px}
+.fc-m .fg{flex-basis:100%;font-family:var(--mono);font-size:19px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;margin-top:8px}
+.fc-m .tagchip{font-size:18px;padding:10px 16px}
+.fc-m .tagchip.mlc{background:var(--btn);color:#fff}
+.ln-users{width:540px;gap:8px;top:320px}
+.fc-left .src{left:780px;bottom:40px;width:900px}

@@ -1,6 +1,6 @@
 /* ROOTED SG · Catalyst Challenge pitch — the script.
    One line = one click. Every animation on screen is fired by the line it belongs to.
-   48 lines · Pranav 14 · Aashrith 12 · Isha 10 · Anandita 12 · planned to 9:00.
+   53 lines · Pranav 19 · Aashrith 12 · Isha 10 · Anandita 12 · planned to 9:00.
 
    The thread that ties it together: what Singapore counts (imports, packets, plots) vs what nobody counts (survival),
    and the three causes (forgetting · no one to ask · motivation) → three features → three pilot results.
@@ -28,6 +28,7 @@ window.SPEAKERS = {
 /* who · scene · criterion · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
   // ───────── PRANAV · the opening ─────────
+  ['P', 'hook', 'Selection', 'What if Singapore\'s next great farm is not a farm at all? What if it is already here, on a million balconies, corridors and windowsills?', 1.4],
   ['P', 'cold', 'Selection', 'Every single day, Singapore eats food grown somewhere else. More than ninety percent of it arrives by ship, truck and plane.', 0.8],
   ['P', 'cold', 'Selection', 'And it comes from one hundred and eighty-seven countries and regions. One closed border, one bad harvest, and our shelves feel it instantly.', 1.0],
   ['P', 'gap', 'Selection', 'So the country set a goal. By 2035, grow twenty percent of our vegetables, sprouts and mushrooms locally. Today, it is about eight.', 0.6],
@@ -35,15 +36,15 @@ window.SCRIPT = [
   ['P', 'gap', 'Selection', 'Hundreds of thousands of chances to grow. Yet one number does not exist: how many of those plants are still alive. Singapore counts what it plants, not what it keeps alive.', 1.2],
   ['P', 'hero', 'Selection', 'That gap is our opportunity. We are Rooted SG, and we built the first way to measure it: an app where every point is earned by a real, living plant.', 0.8],
   ['P', 'hero', 'Selection', 'I\'m Pranav. With Aashrith, Isha and Anandita, we\'ll take you from the problem, to the app, to the technology, to our three-month pilot.', 0.6],
-  ['P', 'hero', 'Selection', 'And we did not stop at government data. We went to the people, and asked three thousand and forty-three of them why their plants die. Aashrith.', 1.0],
+  ['P', 'hero', 'Selection', 'But statistics only tell you what is happening, not why. So we ran our own nationwide survey, and three thousand and forty-three Singapore residents answered. Aashrith.', 1.0],
 
   // ───────── AASHRITH · selection and analysis ─────────
-  ['A', 'survey', 'Selection', 'Thank you, Pranav. Before we wrote a single line of code, we asked Singapore. Three thousand and forty-three residents answered our survey.', 0.6],
+  ['A', 'survey', 'Selection', 'Thank you, Pranav. We ran that survey before writing a single line of code, because the problem had to come from real people, not from us.', 0.6],
   ['A', 'survey', 'Analysis', 'Seventy point nine percent want to grow plants at home. So interest is not the problem. Singaporeans clearly want this.', 0.6],
   ['A', 'survey', 'Analysis', 'But fifty-one point two percent have stopped growing, or never started at all. That is the say-do gap, and it is enormous.', 1.0],
   ['A', 'pareto', 'Analysis', 'So why do their plants die? We ranked every reason people gave us on a Pareto chart, and the answer surprised us.', 0.5],
   ['A', 'pareto', 'Analysis', 'Forgetting, or no time: thirty-six point one percent. No one to ask: twenty-six point seven. Losing motivation: twenty-four percent.', 0.6],
-  ['A', 'pareto', 'Analysis', 'Space and money barely register. Remember these three causes, because every feature we built answers one of them.', 1.0],
+  ['A', 'pareto', 'Analysis', 'Notice what is not at the top: space or money. People do not give up for lack of resources. And every feature we built answers one of these three causes.', 1.0],
   ['A', 'whys', 'Analysis', 'Then we asked why, five times, digging down to the root. People forget because nothing reminds them. Nothing reminds them, because nobody can see the plant struggling.', 0.6],
   ['A', 'whys', 'Analysis', 'That is our root cause. Plants die of invisibility. Nobody sees one struggling, and nobody counts which ones survive.', 1.0],
   ['A', 'national', 'Analysis', 'We also mapped what exists today. Every scheme counts inputs: packets sent, plots allotted, trees planted. None of them follows what happens next.', 0.6],
@@ -69,7 +70,7 @@ window.SCRIPT = [
   ['N', 'model', 'Solutions', 'The Plant Doctor runs on our own trained model. We fine-tuned MobileNet classifiers on hundreds of thousands of labelled plant images.', 0.4],
   ['N', 'model', 'Solutions', 'Then we compressed it to eight-bit and put it on the phone, with calibrated confidence. When it is unsure, it asks for a retake instead of guessing.', 0.8],
   ['N', 'market', 'Solutions', 'Roots runs on that same trust data. Every listing carries the seller\'s verified record, and locations stay at neighbourhood level, private by design.', 0.8],
-  ['N', 'built', 'Solutions', 'We built it twice: native SwiftUI on iPhone and Jetpack Compose on Android. Sixty-nine thousand lines of code, and 167 automated tests.', 0.6],
+  ['N', 'built', 'Solutions', 'We built it twice: native SwiftUI on iPhone and Jetpack Compose on Android. Seventy-one thousand lines of code, and 167 automated tests.', 0.6],
   ['N', 'built', 'Solutions', 'Then we put it in real hands. At homes and schools we watched what people skipped, simplified every confusing screen, and tested again.', 0.8],
   ['N', 'pilot', 'Results', 'Then we ran a pilot for over three months: {users} people and {plants} real plants, every one checked in by photo, every day verified by the app.', 0.6],
   ['N', 'pilot', 'Results', 'Together they logged {plantDays} verified Plant-Days. Not self-reported. Every single one backed by a real plant and a fresh photo.', 0.6],
@@ -78,12 +79,16 @@ window.SCRIPT = [
   ['N', 'pilot', 'Results', 'We tracked survival weekly on a control chart, so real improvement stands apart from noise. Now, Pranav will show you where this goes next.', 1.0],
 
   // ───────── PRANAV · results, the forecast, the close ─────────
-  ['P', 'forecast', 'Results', 'Thank you, Anandita. A pilot is only the beginning. So we forecast the next three years, and ran our model one hundred thousand times.', 0.6],
-  ['P', 'forecast', 'Results', 'We start with two schools. Then twenty. By year three, sixty schools, seven thousand two hundred households, and fifteen thousand plants tracked.', 0.6],
+  ['P', 'learn', 'Results', 'Thank you, Anandita. Those {users} pilot users gave us far more than results. Every check-in, every diagnosis and every trade showed us how people really grow.', 0.6],
+  ['P', 'learn', 'Results', 'We learned which reminders bring people back, which problems the Plant Doctor sees most, and how fast a street starts trading. So how do we take this forward?', 1.0],
+  ['P', 'forecast', 'Results', 'We wanted concrete numbers, not hopes. That pilot data constantly retrains our machine-learning models, and feeds a forecast built on Monte Carlo simulation, Sobol analysis and more, run one hundred thousand times.', 0.6],
+  ['P', 'forecast', 'Results', 'The roll-out grows school by school. Two pilot schools first, twenty in year two, and sixty by year three, reaching seven thousand two hundred households.', 0.6],
   ['P', 'forecast', 'Results', 'In our base case, that is 1,814 more plants alive after a year, and three point three million verified Plant-Days. Data Singapore has never had.', 0.8],
   ['P', 'sustain', 'Results', 'And it lasts without us. The models run on the phone, schools run their own leagues, and neighbours trade directly on Roots.', 0.8],
-  ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 1.0],
-  ['P', 'close', 'Results', 'Our very first pandan? Still alive, day 194, and counting. Because a plant never dies in a day. It dies from being forgotten. We are Rooted SG. Thank you.', 2.0]
+  ['P', 'vision', 'Results', 'So picture 2035. Every block in Singapore growing something, and every living plant counted. That million-balcony farm, finally visible.', 1.0],
+  ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 0.8],
+  ['P', 'close', 'Results', 'That is Rooted SG. Not just an app, but the first measure of a nation that grows. Built by students, proven by data, ready to scale.', 1.2],
+  ['P', 'close', 'Results', 'Because a plant never dies in a day. It dies from being forgotten. So let\'s build a Singapore that never forgets. We are Rooted SG. Thank you.', 2.0]
 ];
 
 /* Planned timing: words at a calm pitch pace, plus the pause, scaled to exactly 9:00. */

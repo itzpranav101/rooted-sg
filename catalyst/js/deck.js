@@ -43,6 +43,38 @@ const S = {};
 /* ---------- READY ---------- */
 S.ready = { chrome: false, reset() { gsap.set('.ready-mark', { autoAlpha: 1 }); }, beats: [] };
 
+/* ---------- the million-balcony city (hook and vision) ---------- */
+function buildCity(svg, seed) {
+  const R = (n => () => (n = (n * 16807) % 2147483647) / 2147483647)(seed); let s = '', x = 30, k = 0;
+  while (x < 1890) { const w = 90 + R() * 70 | 0, hgt = 220 + R() * 360 | 0, top = 600 - hgt; s += `<g class="blk" data-k="${k++}"><rect class="bl" x="${x}" y="${top}" width="${w}" height="${hgt}" rx="4" pathLength="1"/>`;
+    const cols = Math.max(2, Math.floor((w - 16) / 22)), rows = Math.floor((hgt - 24) / 30);
+    for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) s += `<rect class="wn" x="${x + 10 + c * ((w - 20) / cols) + 2}" y="${top + 14 + r * 30}" width="${(w - 20) / cols - 6}" height="16" rx="3"/>`;
+    s += '</g>'; x += w + 10 + R() * 26; }
+  svg.innerHTML = s + `<path class="gl" d="M0 602H1920"/>`;
+  const wins = [...svg.querySelectorAll('.wn')]; const order = wins.map((w, j) => [w, R()]).sort((a, b) => a[1] - b[1]).map(a => a[0]); return { blocks: [...svg.querySelectorAll('.blk')], wins, order };
+}
+const CA = buildCity($('#cityA'), 17), CB = buildCity($('#cityB'), 17);
+const lightUp = (C, frac, d, t, tl) => { const list = C.order.slice(0, Math.round(C.order.length * frac)); const n = list.length; list.forEach((w, j) => tl.add(() => w.classList.add('on'), t + j / n * d)); };
+S.hook = {
+  chrome: false,
+  reset() { hide('#hkA', '#hkN', '.hk-h em'); CA.wins.forEach(w => w.classList.remove('on')); gsap.set(CA.blocks, { y: 0, autoAlpha: 1 }); gsap.set($$('#cityA .bl'), { strokeDasharray: 1, strokeDashoffset: 1 }); zero('#s-hook'); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.fromTo('#hkA', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E }, .1); tl.set('.hk-h em', { autoAlpha: 0 }, 0); tl.fromTo('.hk-h em', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, 'not a farm') - .2);
+      tl.to($$('#cityA .bl'), { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut', stagger: .05 }, .3);
+      const t = W(i, 'What if it'); tl.add(rise('#hkN', { y: 40 }), t); tl.add(count($('#hkN [data-n]'), 1000000, 3), t + .2);
+      lightUp(CA, .55, LINES[i].speak - t, t + .3, tl); return tl; }
+  ]
+};
+S.vision = {
+  chrome: false,
+  reset() { hide('#viT', '#viC', $$('#viT > *')); CB.wins.forEach(w => w.classList.remove('on')); gsap.set($$('#cityB .bl'), { strokeDasharray: 1, strokeDashoffset: 0 }); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.set('#viT', { autoAlpha: 1 }, 0); tl.fromTo($$('#viT > *'), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E, stagger: .3 }, .1);
+      tl.fromTo('#cityB', { y: 120 }, { y: 0, duration: 1.4, ease: E2 }, 0); lightUp(CB, 1, 5.5, W(i, 'Every block') , tl);
+      tl.add(pop('#viC', { s: .7 }), W(i, 'every living')); return tl; }
+  ]
+};
+
 /* ---------- COLD OPEN: the 2022 chicken shock, then the import map ---------- */
 (function () { const R = (n => () => (n = (n * 16807) % 2147483647) / 2147483647)(5), c = 450; let s = '<g id="impLines" fill="none" stroke="#0B5A32" stroke-width="1.4" opacity=".45">', dots = '<g id="impDots">';
   for (let k = 0; k < 187; k++) { const a = R() * Math.PI * 2, r = 170 + Math.pow(R(), .7) * 260, x = c + Math.cos(a) * r, y = c + Math.sin(a) * r * .92, mx = (x + c) / 2 + Math.sin(a) * 40, my = (y + c) / 2 - Math.cos(a) * 40;
@@ -134,8 +166,8 @@ S.survey = {
   sec: 'The problem',
   reset() { hide('#svBig', '#sv1', '#sv2', '#dotsCap', dots); dots.forEach(d => d.className = ''); zero('#s-survey'); gsap.set(['.sv-left .eyebrow', '.sv-h', '.sv-src'], { autoAlpha: 0 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise(['.sv-left .eyebrow', '.sv-h'], { st: .15 }), 0); tl.add(rise('#svBig'), W(i, 'Three thousand') - .3); tl.add(count($('#svBig [data-n]'), 3043, 2.2), W(i, 'Three thousand'));
-      tl.fromTo(dots, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)', stagger: { each: .012, grid: [10, 10], from: 'center' } }, W(i, 'Three thousand') + .2); tl.add(rise('.sv-src', { y: 10 }), W(i, 'answered')); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(rise(['.sv-left .eyebrow', '.sv-h'], { st: .15 }), 0); tl.add(rise('#svBig'), W(i, 'We ran') + .2); tl.add(count($('#svBig [data-n]'), 3043, 2.2), W(i, 'We ran') + .4);
+      tl.fromTo(dots, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)', stagger: { each: .012, grid: [10, 10], from: 'center' } }, W(i, 'real people,')); tl.add(rise('.sv-src', { y: 10 }), W(i, 'before writing')); return tl; },
     i => { const tl = gsap.timeline(); tl.add(rise('#sv1'), 0); tl.add(count($('#sv1 [data-n]'), 70.9, 2), .2);
       dots.slice(0, 71).forEach((d, k) => tl.add(() => d.classList.add('g'), .25 + k * .028)); tl.fromTo(dots.slice(0, 71), { scale: .7 }, { scale: 1, duration: .5, ease: 'back.out(3)', stagger: .028 }, .25);
       tl.add(() => $('#dotsCap').innerHTML = '<b>70.9%</b> want to grow at home', 0); tl.add(rise('#dotsCap', { y: 10 }), .3); return tl; },
@@ -374,7 +406,7 @@ S.built = {
   reset() { hide('.bt-eye', '.bt-h', $$('#tiles .tile'), '#kaizen', $$('#kaizen .kz')); gsap.set('#tiles', { autoAlpha: 1, y: 0 }); zero('#s-built'); kz.a = 0; kzSet(); },
   beats: [
     i => { const tl = gsap.timeline(), T = $$('#tiles .tile'); tl.add(rise(['.bt-eye', '.bt-h'], { st: .12 }), 0);
-      [W(i, 'native SwiftUI'), W(i, 'Sixty-nine'), W(i, '167'), W(i, '167') + 2.2].forEach((t, k) => { tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, k === 1 ? 2.4 : 1.6), t + .2);
+      [W(i, 'native SwiftUI'), W(i, 'Seventy-one'), W(i, '167'), W(i, '167') + 2.2].forEach((t, k) => { tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, k === 1 ? 2.4 : 1.6), t + .2);
         const v = $$('.viz > *', T[k]); if (k === 0) tl.fromTo(v, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .7, ease: 'back.out(2)', stagger: .2 }, t + .3); if (k === 1) tl.fromTo(v, { scaleX: 0 }, { scaleX: 1, duration: .6, ease: E2, stagger: .12 }, t + .3); if (k === 2) tl.fromTo(v, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .25, stagger: .009 }, t + .2); if (k === 3) tl.fromTo(v, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .3, stagger: { each: .012, from: 'random' } }, t + .2); }); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#tiles', { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, 0); tl.to('.bt-h', { autoAlpha: 0, duration: .4 }, 0); tl.fromTo('#kaizen', { autoAlpha: 0, scale: .8 }, { autoAlpha: 1, scale: 1, duration: 1.1, ease: E2 }, .4);
       const K = $$('#kaizen .kz'); [W(i, 'real hands'), W(i, 'we watched'), W(i, 'simplified'), W(i, 'tested again')].forEach((t, k) => { tl.to(kz, { a: (k + 1) / 4, duration: 1.4, ease: 'power2.inOut', onUpdate: kzSet }, Math.max(.6, t - .4)); tl.fromTo(K[k], { autoAlpha: 0, x: k === 0 || k === 3 ? -40 : 40 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, Math.max(.8, t)); }); return tl; }
@@ -424,6 +456,20 @@ S.pilot = {
   ]
 };
 
+/* ---------- PILOT → FORECAST: what 186 users taught us ---------- */
+$('#lnUsers').innerHTML = '<i></i>'.repeat(PILOT.users || 186); $('.lnN').textContent = (PILOT.users || 186).toLocaleString('en-SG');
+const lnU = $$('#lnUsers i');
+S.learn = {
+  sec: 'What we learned',
+  reset() { hide('.ln-head', $$('#lnCards .lc'), '#lnQ'); lnU.forEach(u => u.classList.remove('on')); gsap.set(lnU, { scale: 0 }); gsap.set($$('#lnFlow path'), { strokeDashoffset: 1 }); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.add(rise('.ln-head'), 0); tl.to(lnU, { scale: 1, duration: .35, ease: 'back.out(3)', stagger: { each: .008, grid: [14, 14], from: 'start' } }, .3);
+      const t = W(i, 'Every check-in,'); lnU.forEach((u, k) => tl.add(() => u.classList.add('on'), t + (k / lnU.length) * 3.4)); tl.to($$('#lnFlow path'), { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut', stagger: .25 }, W(i, 'how people')); return tl; },
+    i => { const tl = gsap.timeline(), C = $$('#lnCards .lc'); [W(i, 'which reminders'), W(i, 'which problems'), W(i, 'how fast')].forEach((t, k) => tl.fromTo(C[k], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t));
+      tl.fromTo('#lnQ', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, 'So how')); return tl; }
+  ]
+};
+
 /* ---------- FORECAST: Monte Carlo ---------- */
 const HS = { h: 0, m: 0 };
 function drawHist() {
@@ -439,15 +485,15 @@ function drawHist() {
 }
 S.forecast = {
   sec: 'The forecast',
-  reset() { HS.h = 0; HS.m = 0; drawHist(); hide($$('.fc-left > *'), '#fcBig', '#ladder', '#histNotes'); gsap.set('#hist', { autoAlpha: 1 }); gsap.set($$('#ladder .rung i'), { scaleY: 0 }); hide($$('#ladder .rung b, #ladder .rung span')); $('#runsN').textContent = '0'; zero('#fcBig'); gsap.set('#fcRuns', { autoAlpha: 0 }); },
+  reset() { HS.h = 0; HS.m = 0; drawHist(); hide($$('.fc-left > *'), '#fcBig', '#ladder', '#histNotes', $$('#fcM .tagchip'), $$('#fcM .fg')); gsap.set('#hist', { autoAlpha: 1 }); gsap.set($$('#ladder .rung i'), { scaleY: 0 }); hide($$('#ladder .rung b, #ladder .rung span')); $('#runsN').textContent = '0'; zero('#fcBig'); gsap.set('#fcRuns', { autoAlpha: 0 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise($$('.fc-left > .eyebrow, #fcH'), { st: .12 }), 0); tl.add(rise('#fcRuns'), W(i, 'we forecast')); const t = W(i, 'one hundred');
+    i => { const tl = gsap.timeline(); tl.add(rise($$('.fc-left > .eyebrow, #fcH'), { st: .12 }), 0); tl.add(rise('#fcRuns'), W(i, 'Monte Carlo') - .3); const ML = $$('#fcM .mlc'), FC = $$('#fcM .fc'), FG = $$('#fcM .fg'); tl.add(rise(FG[0], { y: 10 }), W(i, 'constantly') - .2); tl.fromTo(ML, { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .18 }, W(i, 'machine-learning')); tl.add(rise(FG[1], { y: 10 }), W(i, 'feeds a') - .2); [W(i, 'Monte Carlo'), W(i, 'Sobol')].forEach((t, k) => tl.add(pop(FC[k], { s: .6 }), t)); tl.fromTo(FC.slice(2), { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .2 }, W(i, 'and more,')); const t = W(i, 'one hundred');
       tl.to(HS, { h: 1, duration: 5.5, ease: 'power1.inOut', onUpdate: drawHist }, t - .8); tl.add(count($('#runsN'), 100000, 5.5), t - .8); tl.add(rise('.fc-left > .src', { y: 10 }), t); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#hist', { autoAlpha: 0, duration: .5 }, 0); tl.set('#ladder', { autoAlpha: 1 }, .3); const R = $$('#ladder .rung');
-      [W(i, 'two schools.'), W(i, 'Then twenty.'), W(i, 'sixty schools,')].forEach((t, k) => { tl.to($('i', R[k]), { scaleY: 1, duration: 1.2, ease: E2 }, t); tl.add(rise($$('b, span', R[k]), { y: 14, st: .1 }), t + .3); }); return tl; },
+      [W(i, 'Two pilot'), W(i, 'twenty in'), W(i, 'sixty by')].forEach((t, k) => { tl.to($('i', R[k]), { scaleY: 1, duration: 1.2, ease: E2 }, t); tl.add(rise($$('b, span', R[k]), { y: 14, st: .1 }), t + .3); }); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#ladder', { autoAlpha: 0, duration: .5 }, 0); tl.to('#hist', { autoAlpha: 1, duration: .6 }, .3); tl.add(() => { HS.h = 1; drawHist(); }, .3); tl.to(HS, { m: 1, duration: 1, onUpdate: drawHist }, .8);
       tl.to('#fcRuns', { autoAlpha: 0, y: -20, duration: .5 }, 0); tl.set('#fcBig', { autoAlpha: 1 }, .4); const B = $$('#fcBig > div'); tl.add(rise(B[0]), .4); tl.add(count($('[data-n]', B[0]), 1814, 1.8), .5);
-      const t = W(i, 'three point three'); tl.add(rise(B[1]), t - .3); tl.add(count($('[data-n]', B[1]), 3.3, 1.4, 1), t); tl.add(rise('#histNotes', { y: 16 }), t + 1.5); return tl; }
+      const t = W(i, 'three point three'); tl.add(rise(B[1]), t - .3); tl.add(count($('[data-n]', B[1]), 3.3, 1.4, 1), t); tl.add(rise('#histNotes', { y: 16 }), t + 1.5); tl.to('.fc-left > .src', { autoAlpha: 0, duration: .4 }, t + 1.2); return tl; }
   ]
 };
 $$('#fcBig .num').forEach(n => n.style.fontSize = '140px');
@@ -468,17 +514,16 @@ S.sustain = {
 (function () { const B = 380; $('#clPanSvg').innerHTML = `<path d="M130 ${B}h140l-18 40h-104z" fill="#fff" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"/>` + [-38, -24, -10, 4, 18, 32, 44].map((a, i) => { const r = a * Math.PI / 180, L = 230 + (i % 3) * 40, tx = 200 + Math.sin(r) * L, ty = B - Math.cos(r) * L, nx = Math.cos(r) * 13, ny = Math.sin(r) * 13; return `<path class="blade" pathLength="1" d="M${200 - nx} ${B - ny}Q${(200 + tx) / 2 - nx * 1.4} ${(B + ty) / 2 - ny * 1.4} ${tx} ${ty}Q${(200 + tx) / 2 + nx * 1.4} ${(B + ty) / 2 + ny * 1.4} ${200 + nx} ${B + ny}z" fill="#E4F0E8" stroke="#0B5A32" stroke-width="4" stroke-linejoin="round"/>`; }).join(''); })();
 S.close = {
   chrome: false,
-  reset() { F2 = F2 || Field($('#field2'), 43, 20, { keep: true, seed: 31 }); Object.assign(F2.st, { a: 0, g: 0, d: 0, ok: 0 }); F2.draw(); hide('#clImagine', '#clQuote', $$('#clQuote p'), '#clEnd', '#clNames', '#clThanks', '#clPandan'); gsap.set($$('#clPanSvg .blade'), { strokeDasharray: 1, strokeDashoffset: 1, fillOpacity: 0 }); gsap.set('#field2', { autoAlpha: 1 }); gsap.set($$('#clEnd .alive path'), { strokeDashoffset: 1 }); },
+  reset() { F2 = F2 || Field($('#field2'), 43, 20, { keep: true, seed: 31 }); Object.assign(F2.st, { a: 0, g: 0, d: 0, ok: 0 }); F2.draw(); hide('#clMission', '#clImagine', '#clQuote', $$('#clQuote p'), '#clEnd', '#clNames', '#clThanks', '#clPandan'); gsap.set($$('#clPanSvg .blade'), { strokeDasharray: 1, strokeDashoffset: 1, fillOpacity: 0 }); gsap.set('#field2', { autoAlpha: 1 }); gsap.set($$('#clEnd .alive path'), { strokeDashoffset: 1 }); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(F2.tween({ a: 1 }, 2.6), .1); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), W(i, 'Imagine')); tl.add(F2.tween({ g: 1 }, 3), W(i, 'Imagine') + .2); tl.add(F2.tween({ ok: 1 }, 2.4), W(i, 'exactly how')); return tl; },
-    i => { const tl = gsap.timeline(); tl.to(['#clImagine', '#field2'], { autoAlpha: 0, duration: .8 }, 0); const q = $$('#clQuote p');
-      tl.fromTo('#clPandan', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .9, ease: E2 }, .3); tl.to($$('#clPanSvg .blade'), { strokeDashoffset: 0, fillOpacity: 1, duration: 1.1, ease: 'power2.out', stagger: .1 }, .4);
-      tl.fromTo('#clPandan .chip', { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, W(i, 'Still alive,'));
-      const tb = W(i, 'Because a'); tl.to('#clPandan', { autoAlpha: 0, y: -40, duration: .6 }, tb - .4); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, tb - .2);
-      tl.fromTo(q[0], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, tb); tl.fromTo(q[1], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, W(i, 'It dies'));
-      const t = W(i, 'We are'); tl.to('#clQuote', { autoAlpha: 0, y: -40, duration: .6 }, t - .3); tl.fromTo('#clEnd', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, t);
-      tl.add(drawIn($('#clEnd .alive .ul path'), 1, 'power2.out'), t + .9); $$('#clEnd .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), t + 1.6 + k * .25));
-      tl.add(rise('#clNames', { y: 20 }), t + 1.2); tl.add(rise('#clThanks', { y: 30, d: 1.2 }), W(i, 'Thank you.')); return tl; }
+    i => { const tl = gsap.timeline(); tl.to(['#clImagine', '#field2'], { autoAlpha: 0, duration: .8 }, 0); tl.set('#clMission', { autoAlpha: 1 }, .3);
+      tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'a nation')); return tl; },
+    i => { const tl = gsap.timeline(); tl.to('#clMission', { autoAlpha: 0, y: -40, duration: .6 }, 0); const q = $$('#clQuote p'); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, .3);
+      tl.fromTo(q[0], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, .4); tl.fromTo(q[1], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, W(i, 'It dies'));
+      const t = W(i, 'We are'); tl.to('#clQuote', { autoAlpha: 0, y: -40, duration: .6 }, W(i, "So let's") - .1); tl.fromTo('#clEnd', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, "So let's"));
+      tl.add(drawIn($('#clEnd .alive .ul path'), 1, 'power2.out'), W(i, "So let's") + .9); $$('#clEnd .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), W(i, "So let's") + 1.6 + k * .25));
+      tl.add(rise('#clNames', { y: 20 }), t); tl.add(rise('#clThanks', { y: 30, d: 1.2 }), W(i, 'Thank you.')); return tl; }
   ]
 };
 
@@ -500,7 +545,7 @@ function setChrome(n, i) {
 }
 function speaker(i) {
   if (i < 0) return; const L = LINES[i], p = LINES[i - 1];
-  const show = (i === 6) || (i > 0 && p.who !== L.who);
+  const show = L.text.startsWith("I'm Pranav") || (i > 0 && p.who !== L.who);
   if (!show) return; const s = SPEAKERS[L.who];
   $('#spAv').textContent = s.short[0]; $('#spName').textContent = s.name; $('#spPart').textContent = s.part;
   gsap.killTweensOf('#speaker'); gsap.timeline().fromTo('#speaker', { autoAlpha: 0, y: -30, xPercent: -50 }, { autoAlpha: 1, y: 0, duration: .7, ease: E2 }, .6).to('#speaker', { autoAlpha: 0, y: -20, duration: .5 }, 6.2);
