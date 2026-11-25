@@ -285,3 +285,13 @@
 .progress{left:72px;right:72px;width:auto;bottom:22px;height:5px;border-radius:3px}
 .progress #prog{border-radius:3px}
 .op b{font-size:42px;white-space:nowrap}
+
+/* line icons (replace emoji): one stroke style across the deck */
+.ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;overflow:visible}
+.lst i,.mside i,.op i,.lc i{color:var(--green);font-size:52px}
+.node i .ico{width:46px;height:46px}
+.node.win i{color:#fff}
+.gpn i{color:var(--green);font-size:40px}
+.gpn.done i{color:#fff}.gpn.now i{color:#6B4A00}.gpn.lock i{color:var(--text)}
+.iq i .ico{width:30px;height:30px;stroke-width:2.6;color:#fff}
+.chip .ico,.comm .chip .ico{width:26px;height:26px;color:var(--green)}

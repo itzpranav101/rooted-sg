@@ -302,10 +302,10 @@ S.doctor = {
 };
 
 /* ---------- GUARDIAN PATH + ROOTS ---------- */
-const GPN = [['☀️', 'Light', 'done'], ['💧', 'Watering', 'done'], ['🍂', 'Leaf fungus', 'now'], ['🐛', 'Pests', 'lock'], ['🌱', 'Soil health', 'lock'], ['🧺', 'Harvest', 'lock']];
+const GPN = [['sun', 'Light', 'done'], ['drop', 'Watering', 'done'], ['fungus', 'Leaf fungus', 'now'], ['bug', 'Pests', 'lock'], ['soil', 'Soil health', 'lock'], ['basket', 'Harvest', 'lock']];
 const gpTrail = $('#gpPath .trail'); const gpPt = f => { const L = gpTrail.getTotalLength(), p = gpTrail.getPointAtLength(L * f), s = Math.min(560 / 600, 720 / 760); return [p.x * s + (560 - 600 * s) / 2, p.y * s + (720 - 760 * s) / 2]; };
-$('#gpNodes').innerHTML = GPN.map(([e, n, s], k) => { const [x, y] = gpPt(k / 5); return `<div class="gpn ${s}" style="left:${x}px;top:${y}px"><i>${e}</i><span>${n}</span></div>`; }).join('');
-const gpM = { f: 0 }; const gpMojo = () => { const [x, y] = gpPt(gpM.f); gsap.set('#gpMojo', { x: 520 + x - 60, y: 280 + y - 118 }); };
+$('#gpNodes').innerHTML = GPN.map(([e, n, s], k) => { const [x, y] = gpPt(k / 5); return `<div class="gpn ${s}" style="left:${x}px;top:${y}px"><i><svg class="ico"><use href="#ic-${e}"/></svg></i><span>${n}</span></div>`; }).join('');
+const gpM = { f: 0 }; const gpMojo = () => { const [x, y] = gpPt(gpM.f); gsap.set('#gpMojo', { x: 520 + x - 150, y: 280 + y - 150 }); };
 S.grow = {
   sec: 'The app',
   reset() { hide('#rt', $$('#gp > *'), $$('#gpNodes .gpn'), $$('#gpCard .qo'), $$('#gpChips .chip'), $$('#rt > *'), $$('#listings .lst'), '#match', $$('#match > *'), '#opts', $$('#opts .op'), '#comm', $$('#comm .chip')); gsap.set('#gp', { autoAlpha: 1, x: 0 }); gsap.set(gpTrail, { strokeDashoffset: 1 }); gsap.set('#gpPath', { autoAlpha: 1 }); gsap.set('#gpNodes', { autoAlpha: 1 }); gsap.set('#gpChips', { autoAlpha: 1 }); gsap.set($$('.marrow path'), { strokeDashoffset: 1 }); $('#gpCard .qo.ok').classList.remove('on'); gpM.f = 0; gpMojo(); },
