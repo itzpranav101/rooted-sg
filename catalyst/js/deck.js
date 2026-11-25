@@ -43,83 +43,65 @@ const S = {};
 /* ---------- READY ---------- */
 S.ready = { chrome: false, reset() { gsap.set('.ready-mark', { autoAlpha: 1 }); }, beats: [] };
 
-/* ---------- COLD OPEN: three homes, three plants, then they wilt ---------- */
-(function () {
-  const B = 302;
-  const leaf = (x, y, s, sz = 1) => `<g class="lf" data-o="${x} ${y}"><path class="leaff d" pathLength="1" d="M${x} ${y}c${s * 22 * sz} ${-28 * sz} ${s * 60 * sz} ${-32 * sz} ${s * 82 * sz} ${-22 * sz}c${s * -17 * sz} ${28 * sz} ${s * -54 * sz} ${36 * sz} ${s * -82 * sz} ${22 * sz}z"/></g>`;
-  const plant = (kind) => {
-    if (kind === 'pandan') return `<g class="plant" data-o="200 ${B}">${[-34, -20, -8, 6, 18, 32].map((a, i) => { const r = a * Math.PI / 180, L = 170 + (i % 3) * 22, tx = 200 + Math.sin(r) * L, ty = B - Math.cos(r) * L, nx = Math.cos(r) * 11, ny = Math.sin(r) * 11; return `<g class="lf" data-o="200 ${B}"><path class="leaff d" pathLength="1" d="M${200 - nx} ${B - ny}Q${(200 + tx) / 2 - nx * 1.4} ${(B + ty) / 2 - ny * 1.4} ${tx} ${ty}Q${(200 + tx) / 2 + nx * 1.4} ${(B + ty) / 2 + ny * 1.4} ${200 + nx} ${B + ny}z"/></g>`; }).join('')}</g>`;
-    const top = B - 150, L = [[B - 40, -1], [B - 70, 1], [B - 100, -1], [B - 126, 1]];
-    return `<g class="plant" data-o="200 ${B}"><path class="inkg d" pathLength="1" d="M200 ${B}V${top}"/>${L.map(([y, s]) => leaf(200, y, s, kind === 'chilli' ? .9 : 1.05)).join('')}
-      ${kind === 'chilli' ? [[240, B - 66], [160, B - 96], [228, B - 118]].map(([x, y]) => `<path class="chl" d="M${x} ${y}c5 10 5 26 -4 38c-7 -11 -7 -27 4 -38z" fill="#984421"/>`).join('') : ''}</g>`;
-  };
-  const pot = `<path class="ink d" pathLength="1" d="M146 ${B}h108l-14 70h-80z"/>`;
-  const H = [
-    ['Windowsill', `<path class="ink d" pathLength="1" d="M40 20h320v330H40z"/><path class="ink d" pathLength="1" d="M200 20v120M40 140h320"/><path class="ink d" pathLength="1" style="stroke-width:6" d="M14 ${B + 70}h372"/>${pot}${plant('leafy')}`],
-    ['Corridor ledge', `<path class="ink d" pathLength="1" style="stroke-width:6" d="M10 ${B + 70}h380"/>${[30, 80, 130, 270, 320, 370].map(x => `<path class="ink d" pathLength="1" d="M${x} ${B + 70}v80"/>`).join('')}<path class="ink d" pathLength="1" d="M10 ${B + 150}h380"/>${pot}${plant('chilli')}`],
-    ['Grandma\'s table', `<path class="ink d" pathLength="1" style="stroke-width:6" d="M20 ${B + 70}h360"/><path class="ink d" pathLength="1" d="M60 ${B + 70}v90M340 ${B + 70}v90"/>${pot}${plant('pandan')}`]
-  ];
-  $('#homes').innerHTML = H.map(([n, s]) => `<div class="home"><svg viewBox="0 0 400 470" class="draw">${s}</svg><span class="eyebrow"><b>${n}</b></span></div>`).join('');
-})();
+/* ---------- COLD OPEN: the 2022 chicken shock, then the import map ---------- */
+(function () { const R = (n => () => (n = (n * 16807) % 2147483647) / 2147483647)(5), c = 450; let s = '<g id="impLines" fill="none" stroke="#0B5A32" stroke-width="1.4" opacity=".45">', dots = '<g id="impDots">';
+  for (let k = 0; k < 187; k++) { const a = R() * Math.PI * 2, r = 170 + Math.pow(R(), .7) * 260, x = c + Math.cos(a) * r, y = c + Math.sin(a) * r * .92, mx = (x + c) / 2 + Math.sin(a) * 40, my = (y + c) / 2 - Math.cos(a) * 40;
+    s += `<path pathLength="1" d="M${x.toFixed(1)} ${y.toFixed(1)}Q${mx.toFixed(1)} ${my.toFixed(1)} ${c} ${c}"/>`; dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(4 + R() * 4).toFixed(1)}" fill="#0A0A0A"/>`; }
+  $('#impMap').innerHTML = s + '</g>' + dots + `</g><g id="impSG"><circle cx="${c}" cy="${c}" r="70" fill="#0B5A32" opacity=".12" class="sgp"/><circle cx="${c}" cy="${c}" r="26" fill="#0B5A32"/><text x="${c}" y="${c + 72}" text-anchor="middle" font-family="DM Mono, monospace" font-size="26" letter-spacing="3" fill="#0B5A32" font-weight="500">SINGAPORE</text></g>`; })();
 S.cold = {
   chrome: false,
-  reset() {
-    hide('#coldA', '#coldB', '#coldNo', $$('#homes .home'), $$('#homes .eyebrow'));
-    gsap.set($$('#homes .d'), { strokeDashoffset: 1 }); gsap.set($$('#homes .leaff'), { fill: '#E4F0E8', stroke: '#0B5A32' });
-    $$('#homes .lf, #homes .plant').forEach(e => gsap.set(e, { svgOrigin: e.dataset.o, scale: e.classList.contains('lf') ? 0 : 1, rotation: 0, y: 0, autoAlpha: 1 })); gsap.set($$('#homes .chl'), { autoAlpha: 0, y: 0 });
-  },
+  reset() { hide('#news', '#supply', '#imp', $$('#news > *'), '.sup-l', '#supply .src', $$('#imp .ib'), '#imp .src', '#impSG'); gsap.set('#segMy', { y: 0, rotation: 0, autoAlpha: 1 }); gsap.set($$('#supply .seg'), { scaleX: 1 }); gsap.set($$('#impLines path'), { strokeDasharray: 1, strokeDashoffset: 1 }); gsap.set($$('#impDots circle'), { scale: 0, transformOrigin: '50% 50%' }); zero('#s-cold'); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise('#coldA', { y: 50, d: 1.1 }), .1);
-      const homes = $$('#homes .home'), at = [W(i, 'The pot'), W(i, 'the chilli'), W(i, 'the pandan')];
-      homes.forEach((h, k) => { tl.set(h, { autoAlpha: 1 }, at[k]); tl.add(drawIn($$('.ink.d', h), 1.4), at[k]); tl.add(drawIn($$('.inkg.d', h), .8), at[k] + .6); tl.to($$('.lf', h), { scale: 1, duration: .8, ease: 'back.out(1.6)', stagger: .09 }, at[k] + .9); tl.add(drawIn($$('.leaff.d', h), .7), at[k] + .9); tl.to($$('.chl', h), { autoAlpha: 1, duration: .5, stagger: .1 }, at[k] + 1.6); tl.add(rise($$('.eyebrow', h), { y: 16 }), at[k] + .5); });
-      return tl; },
-    i => { const tl = gsap.timeline(); tl.add(out('#coldA'), 0); tl.add(rise('#coldB', { y: 50, d: 1.1 }), .35);
-      const t = W(i, 'For most');
-      tl.to($$('#homes .plant'), { rotation: k => [-7, 9, -5][k], scaleY: .9, duration: 3.2, ease: 'power1.inOut' }, t);
-      tl.to($$('#homes .lf'), { rotation: (k, e) => (k % 2 ? 1 : -1) * (+e.dataset.o.split(' ')[1] < 300 ? 55 : 38), duration: 2.6, ease: 'power2.inOut', stagger: .05 }, t);
-      tl.to($$('#homes .leaff'), { fill: '#F4E2B3', stroke: '#8A5A00', duration: 2.4, stagger: .04 }, t + .3);
-      tl.to($$('#homes .home') .map(h => $$('.lf', h)[1]), { y: 220, rotation: 140, autoAlpha: 0, duration: 2.2, ease: 'power2.in', stagger: .35 }, t + 1.6);
-      tl.to($$('#homes .chl'), { y: 160, autoAlpha: 0, duration: 1.6, ease: 'power2.in', stagger: .2 }, t + 1.2);
-      tl.add(rise('#coldNo', { y: 30, d: 1.2 }), W(i, 'quietly'));
-      return tl; }
+    i => { const tl = gsap.timeline(); tl.set('#news', { autoAlpha: 1 }, 0); tl.fromTo($$('#news > *'), { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E, stagger: .25 }, .1);
+      const t = W(i, 'Overnight,'); tl.set('#supply', { autoAlpha: 1 }, t - 1.4); tl.add(rise('#supply .eyebrow', { y: 14 }), t - 1.4); tl.fromTo($$('#supply .seg'), { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, duration: 1, ease: E2, stagger: .2 }, t - 1.2);
+      tl.to('#segMy', { y: 260, rotation: -8, autoAlpha: 0, duration: 1.3, ease: 'power3.in' }, t + .6); tl.add(rise('.sup-l', { y: 20 }), t + 1.4); tl.add(rise('#supply .src', { y: 10 }), t + 1.8); return tl; },
+    i => { const tl = gsap.timeline(); tl.to(['#news', '#supply'], { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, 0); tl.set('#imp', { autoAlpha: 1 }, .4);
+      tl.fromTo('#impSG', { autoAlpha: 0, scale: 0, transformOrigin: '450px 450px' }, { autoAlpha: 1, scale: 1, duration: .8, ease: 'back.out(2)' }, .5);
+      const t = W(i, 'more than'); tl.add(rise('#ib1'), t - .6); tl.add(count($('#ib1 [data-n]'), 90, 1.4), t - .4);
+      const t2 = W(i, 'from one'); tl.to($$('#impDots circle'), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: { each: .012, from: 'random' } }, t2 - 1); tl.to($$('#impLines path'), { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: { each: .012, from: 'random' } }, t2 - .4);
+      tl.add(rise('#ib2'), t2); tl.add(count($('#ib2 [data-n]'), 187, 2.2), t2 + .2); tl.add(rise('#imp .src', { y: 10 }), t2 + 1); tl.to('#impSG .sgp', { scale: 1.6, opacity: 0, transformOrigin: '450px 450px', duration: 1.4, repeat: 2 }, t2 + 1.5); return tl; }
   ]
 };
 
-/* ---------- THE GAP: a field of 860 dots (1,000 seed packets each) ---------- */
+/* ---------- THE GAP: the goal, the tools, and the number nobody keeps ---------- */
 function Field(cv, cols, rows, opt = {}) {
   const g = cv.getContext('2d'); const st = { a: 0, g: 0, d: 0, ok: 0 };
-  const W2 = cv.clientWidth || 1680, H2 = cv.clientHeight || 430; cv.width = W2 * 2; cv.height = H2 * 2;
+  const W2 = cv.clientWidth || 1680, H2 = cv.clientHeight || 430, DPR = 2; cv.width = W2 * DPR; cv.height = H2 * DPR;
   const R = (n => () => (n = (n * 16807) % 2147483647) / 2147483647)(opt.seed || 7);
-  const pts = []; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) pts.push({ c, r, x: (c + .5) / cols * W2 + (R() - .5) * 8, y: (r + .5) / rows * H2 + (R() - .5) * 6, j: R(), live: R() });
+  const pts = []; for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) pts.push({ c, r, x: (c + .5) / cols * W2 + (R() - .5) * 8, y: (r + .5) / rows * H2 + (R() - .5) * 6, j: R() });
   function draw() {
-    g.setTransform(2, 0, 0, 2, 0, 0); g.clearRect(0, 0, W2, H2); g.lineCap = 'round';
+    g.setTransform(DPR, 0, 0, DPR, 0, 0); g.clearRect(0, 0, W2, H2); g.lineCap = 'round';
     const sz = Math.min(W2 / cols, H2 / rows);
     for (const p of pts) {
       const ka = clamp(st.a * 1.7 - p.c / cols * .7 - p.j * .05); if (ka <= 0) continue;
-      const kg = clamp(st.g * 1.6 - p.j * .6), kd = clamp(st.d * 1.5 - p.j * .5), alive = opt.keep ? 1 : 1 - kd;
+      const kg = clamp(st.g * 1.6 - p.j * .6), kd = clamp(st.d * 1.5 - p.j * .5);
       g.globalAlpha = ka * (opt.keep ? 1 : (1 - kd * .85));
       const col = kd > .3 ? '#0A0A0A' : '#0B5A32';
       if (kg < .05) { g.fillStyle = col; g.beginPath(); g.arc(p.x, p.y, sz * .2 * ka, 0, 7); g.fill(); continue; }
       const h = sz * .62 * kg * (1 - kd * .4), by = p.y + sz * .3;
       g.strokeStyle = col; g.lineWidth = Math.max(1.2, sz * .07);
       g.beginPath(); g.moveTo(p.x, by); g.lineTo(p.x + kd * sz * .2, by - h); g.stroke();
-      const lw = sz * .26 * kg; g.fillStyle = kd > .3 ? 'rgba(10,10,10,.0)' : '#E4F0E8';
+      const lw = sz * .26 * kg; g.fillStyle = kd > .3 ? 'rgba(10,10,10,0)' : '#E4F0E8';
       [[-1, .55], [1, .8]].forEach(([s, f]) => { const yy = by - h * f, dr = kd * 1.2 * s; g.save(); g.translate(p.x + kd * sz * .2 * f, yy); g.rotate(s * -.5 + dr); g.beginPath(); g.ellipse(s * lw * .6, 0, lw * .6, lw * .28, 0, 0, 7); g.fill(); g.stroke(); g.restore(); });
       if (opt.keep && st.ok > 0) { const k = clamp(st.ok * 1.6 - p.j * .6); if (k > 0) { g.globalAlpha = k; g.fillStyle = '#0B5A32'; g.beginPath(); g.arc(p.x + sz * .26, by - h - sz * .02, sz * .12, 0, 7); g.fill(); } }
     }
   }
-  return { st, draw, tween: (vars, d = 2, pos) => gsap.to(st, { ...vars, duration: d, ease: 'power1.inOut', onUpdate: draw }) };
+  return { st, draw, tween: (vars, d = 2) => gsap.to(st, { ...vars, duration: d, ease: 'power1.inOut', onUpdate: draw }) };
 }
 let F1, F2;
 S.gap = {
   chrome: false,
-  reset() { F1 = F1 || Field($('#field'), 43, 20); Object.assign(F1.st, { a: 0, g: 0, d: 0 }); F1.draw(); hide('#gs1', '#gs2', '#gapQ', '#gapZero', '#gapLine', '#fieldKey'); gsap.set('#field', { autoAlpha: 1, y: 0 }); gsap.set('#gapStats', { autoAlpha: 1, y: 0 }); zero('#s-gap'); },
+  reset() { F1 = F1 || Field($('#field'), 43, 20); Object.assign(F1.st, { a: 0, g: 0, d: 0 }); F1.draw(); hide('#fsTwo', $$('#fsTwo > *'), '#tools', $$('#tools .tc'), '#gapZero', '#gapLine', '#fieldKey'); gsap.set(['#fsA', '#fsB'], { scaleX: 0 }); gsap.set('#field', { autoAlpha: 1, y: 0 }); zero('#s-gap'); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise('#gs1', { y: 60 }), 0); tl.add(count($('#gs1 [data-n]'), 90, 1.6), .2);
-      const t = W(i, 'So, since'); tl.add(rise('#gs2', { y: 60 }), t); tl.add(count($('#gs2 [data-n]'), 860000, 3.2), t + .2); tl.add(F1.tween({ a: 1 }, 3.4), t + .2); tl.add(rise('#fieldKey', { y: 10 }), t + 1.4); return tl; },
-    i => { const tl = gsap.timeline(); tl.add(F1.tween({ g: 1 }, 3.6), .1); const t = W(i, 'how many'); tl.add(out('#gapStats', { y: -40 }), t - .6); tl.add(rise('#gapQ', { y: 50, d: 1 }), t - .1); return tl; },
-    i => { const tl = gsap.timeline(); tl.add(out('#gapQ'), 0); tl.add(F1.tween({ d: 1 }, 3), .1); tl.fromTo('#gapZero', { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: E2 }, .5);
-      const t = W(i, 'Singapore counts'); tl.to(['#field', '#fieldKey'], { autoAlpha: 0, y: 40, duration: .8 }, t - .4); tl.add(rise('#gapLine', { y: 40, d: 1.1 }), t); return tl; }
+    i => { const tl = gsap.timeline(); tl.set('#fsTwo', { autoAlpha: 1 }, 0); tl.add(rise($$('#fsTwo > .eyebrow, #fsTwo > .h2'), { st: .2 }), 0); tl.add(rise($$('#fsTwo .fsb'), { st: .2, y: 30 }), W(i, 'By 2035,') - .2);
+      tl.to('#fsB', { scaleX: 20 / 25, duration: 1.8, ease: E2 }, W(i, 'twenty percent')); tl.add(count($$('#fsTwo [data-n]')[1], 20, 1.6), W(i, 'twenty percent'));
+      tl.to('#fsA', { scaleX: 8 / 25, duration: 1.4, ease: E2 }, W(i, 'Today,')); tl.add(count($$('#fsTwo [data-n]')[0], 8, 1.2), W(i, 'Today,')); tl.add(rise('#fsTwo .src', { y: 10 }), W(i, 'Today,') + .6); return tl; },
+    i => { const tl = gsap.timeline(); tl.to('#fsTwo', { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, 0); tl.set('#tools', { autoAlpha: 1 }, .4); tl.add(rise('#tools .eyebrow', { y: 14 }), .4); const C = $$('#tools .tc');
+      [W(i, 'eight hundred'), W(i, 'over two thousand allotment'), W(i, 'over two thousand community')].forEach((t, k) => { tl.fromTo(C[k], { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: .9, ease: E2 }, t); tl.add(count($('[data-n]', C[k]), +$('[data-n]', C[k]).dataset.n, k ? 1.4 : 2.6), t + .2); });
+      tl.add(F1.tween({ a: 1 }, 3.4), W(i, 'eight hundred') + .2); tl.add(rise('#fieldKey', { y: 10 }), W(i, 'eight hundred') + 1.4); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(F1.tween({ g: 1 }, 2.4), 0); const t = W(i, 'Yet one'); tl.to('#tools', { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, t - .5);
+      tl.add(F1.tween({ d: 1 }, 2.6), t + .4); tl.fromTo('#gapZero', { autoAlpha: 0, scale: .85 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: E2 }, t + .2);
+      const t2 = W(i, 'Singapore counts'); tl.to(['#field', '#fieldKey'], { autoAlpha: 0, y: 40, duration: .8 }, t2 - .4); tl.add(rise('#gapLine', { y: 40, d: 1.1 }), t2); return tl; }
   ]
 };
 
@@ -197,12 +179,12 @@ S.whys = {
 /* ---------- NATIONAL + COMPARISON ---------- */
 $$('#cmp .cr:not(.head)').forEach(r => r.dataset.v.split(' ').forEach(v => { const s = document.createElement('span'); s.innerHTML = `<i class="mk ${v}">${v === 'y' ? '<svg><use href="#check"/></svg>' : ''}</i>`; r.appendChild(s); }));
 S.national = {
-  sec: 'Why it matters',
-  reset() { hide('#naLeft', '#naRight', $$('#cmp .cr')); gsap.set(['#fs1', '#fs2'], { scaleX: 0 }); gsap.set($$('#cmp .mk'), { scale: 0 }); zero('#s-national'); },
+  sec: 'Solution scan',
+  reset() { hide('#naLeft', '#naRight', $$('#cmp .cr'), $$('#inq .iq')); gsap.set($$('#cmp .mk'), { scale: 0 }); gsap.set($$('#inq i'), { scale: 0 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise('#naLeft'), 0); const t = W(i, 'Singapore Food');
-      tl.to('#fs1', { scaleX: 8 / 25, duration: 1.4, ease: E2 }, t + .3); tl.add(count($('#naLeft .fs-bar:nth-of-type(1) [data-n]'), 8, 1.2), t + .3);
-      const t2 = W(i, 'twenty percent'); tl.to('#fs2', { scaleX: 20 / 25, duration: 1.8, ease: E2 }, t2); tl.add(count($$('#naLeft [data-n]')[1], 20, 1.6), t2); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(rise('#naLeft'), 0); const Q = $$('#inq .iq');
+      [W(i, 'packets sent,'), W(i, 'plots allotted,'), W(i, 'trees planted.'), W(i, 'None of')].forEach((t, k) => { tl.fromTo(Q[k], { autoAlpha: 0, x: -50 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, t); tl.to($('i', Q[k]), { scale: 1, duration: .5, ease: 'back.out(2.6)' }, t + .25); });
+      tl.fromTo(Q[3], { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .25 }, W(i, 'None of') + .8); return tl; },
     i => { const tl = gsap.timeline(), rows = $$('#cmp .cr'); tl.add(rise('#naRight', { y: 30 }), 0); tl.add(rise(rows[0], { y: 10 }), .3);
       const at = [W(i, 'Plant apps'), W(i, 'Habit apps'), W(i, 'Planting drives'), W(i, 'Planting drives') + 1.2, W(i, 'Not one')];
       rows.slice(1).forEach((r, k) => { tl.fromTo(r, { autoAlpha: 0, x: -40 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, at[k]); tl.to($$('.mk', r), { scale: 1, duration: .5, ease: 'back.out(2.4)', stagger: .12 }, at[k] + .25); });
@@ -235,7 +217,7 @@ S.plantday = {
       ['A real', 'A fresh', 'The right'].forEach((w, k) => { const t = W(i, w); tl.fromTo(c[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, t); tl.to($('svg', c[k]), { scale: 1, duration: .5, ease: 'back.out(3)' }, t + .3); });
       const t = W(i, 'Miss any'); tl.fromTo('#plus1', { autoAlpha: 0, y: 40, scale: .6 }, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, t - 1.6); tl.to('#plus1', { autoAlpha: 0, y: -50, duration: .5 }, t - .7); tl.add(count($('#pdNum'), 315, .4), t - .7); tl.fromTo('#pdNum', { scale: 1 }, { scale: 1.08, yoyo: true, repeat: 1, duration: .2 }, t - .7); return tl; },
     i => { const tl = gsap.timeline(); tl.add(() => pdShow(2), 0); tl.fromTo('#mojo', { autoAlpha: 0, x: -300 }, { autoAlpha: 1, x: 0, duration: 1.1, ease: 'back.out(1.4)' }, W(i, 'Mojo,'));
-      tl.fromTo('.bubble', { autoAlpha: 0, scale: .5, transformOrigin: '0% 100%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, W(i, 'tells you')); tl.add(() => $('#mojoImg').src = 'media/mojo/happy.gif', W(i, 'Today,'));
+      tl.fromTo('.bubble', { autoAlpha: 0, scale: .5, transformOrigin: '0% 100%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, W(i, 'tells you')); tl.add(() => $('#mojoImg').src = 'media/mojo/happy.gif', W(i, 'Once a day,'));
       tl.add(pop('#solves1', { s: .8 }), W(i, 'Cause number one') + .3); return tl; }
   ]
 };

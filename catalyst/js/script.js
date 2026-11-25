@@ -2,7 +2,7 @@
    One line = one click. Every animation on screen is fired by the line it belongs to.
    48 lines · Pranav 14 · Aashrith 12 · Isha 10 · Anandita 12 · planned to 9:00.
 
-   The thread that ties it together: grandma's pandan (opening → survey → Mojo → Plant Doctor → Roots → close),
+   The thread that ties it together: what Singapore counts (imports, packets, plots) vs what nobody counts (survival),
    and the three causes (forgetting · no one to ask · motivation) → three features → three pilot results.
 
    PILOT: the pilot figures shown on the slides and spoken in the script. Edit them here; slides and script update together. */
@@ -28,25 +28,25 @@ window.SPEAKERS = {
 /* who · scene · criterion · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
   // ───────── PRANAV · the opening ─────────
-  ['P', 'cold', 'Selection', 'Think about the last plant you brought home. The pot on the windowsill, the chilli on the corridor ledge, the pandan on your grandmother\'s table.', 1.2],
-  ['P', 'cold', 'Selection', 'Now be honest with yourself. Is it still alive? For most people in this room, and most people in Singapore, the answer is quietly: no.', 1.6],
-  ['P', 'gap', 'Selection', 'Singapore imports more than ninety percent of its food. So, since 2020, the government has handed out eight hundred and sixty thousand free seed packets.', 0.6],
-  ['P', 'gap', 'Selection', 'Eight hundred and sixty thousand chances to grow something. And one question nobody in Singapore can answer: how many of them are still alive?', 1.0],
-  ['P', 'gap', 'Selection', 'Not a low number. No number at all. Singapore counts what it plants. It has never once counted what it keeps alive.', 1.4],
-  ['P', 'hero', 'Selection', 'We are Rooted SG, and we built the first way to count it: an app where every single point is earned by a real, living plant.', 0.8],
+  ['P', 'cold', 'Selection', 'June 2022. Malaysia stopped exporting chicken. Overnight, a third of Singapore\'s chicken imports disappeared, and chicken rice made the front page.', 0.8],
+  ['P', 'cold', 'Selection', 'That week exposed a hard truth. Singapore imports more than ninety percent of its food, from one hundred and eighty-seven countries and regions.', 1.0],
+  ['P', 'gap', 'Selection', 'So the country set a goal. By 2035, grow twenty percent of our vegetables, sprouts and mushrooms locally. Today, it is about eight.', 0.6],
+  ['P', 'gap', 'Selection', 'And it is handing people the tools: eight hundred and sixty thousand free seed packets, over two thousand allotment plots, over two thousand community gardens.', 0.8],
+  ['P', 'gap', 'Selection', 'Hundreds of thousands of chances to grow. Yet one number does not exist: how many of those plants are still alive. Singapore counts what it plants, not what it keeps alive.', 1.2],
+  ['P', 'hero', 'Selection', 'That gap is our opportunity. We are Rooted SG, and we built the first way to measure it: an app where every point is earned by a real, living plant.', 0.8],
   ['P', 'hero', 'Selection', 'I\'m Pranav. With Aashrith, Isha and Anandita, we\'ll take you from the problem, to the app, to the technology, to our three-month pilot.', 0.6],
-  ['P', 'hero', 'Selection', 'And it starts with that pandan on grandma\'s table. We did not guess why it dies. We asked three thousand and forty-three people. Aashrith.', 1.0],
+  ['P', 'hero', 'Selection', 'And we did not stop at government data. We went to the people, and asked three thousand and forty-three of them why their plants die. Aashrith.', 1.0],
 
   // ───────── AASHRITH · selection and analysis ─────────
   ['A', 'survey', 'Selection', 'Thank you, Pranav. Before we wrote a single line of code, we asked Singapore. Three thousand and forty-three residents answered our survey.', 0.6],
   ['A', 'survey', 'Analysis', 'Seventy point nine percent want to grow plants at home. So interest is not the problem. Singaporeans clearly want this.', 0.6],
   ['A', 'survey', 'Analysis', 'But fifty-one point two percent have stopped growing, or never started at all. That is the say-do gap, and it is enormous.', 1.0],
-  ['A', 'pareto', 'Analysis', 'So why does grandma\'s pandan die? We ranked every reason people gave us on a Pareto chart, and the answer surprised us.', 0.5],
+  ['A', 'pareto', 'Analysis', 'So why do their plants die? We ranked every reason people gave us on a Pareto chart, and the answer surprised us.', 0.5],
   ['A', 'pareto', 'Analysis', 'Forgetting, or no time: thirty-six point one percent. No one to ask: twenty-six point seven. Losing motivation: twenty-four percent.', 0.6],
   ['A', 'pareto', 'Analysis', 'Space and money barely register. Remember these three causes, because every feature we built answers one of them.', 1.0],
   ['A', 'whys', 'Analysis', 'Then we asked why, five times, digging down to the root. People forget because nothing reminds them. Nothing reminds them, because nobody can see the plant struggling.', 0.6],
   ['A', 'whys', 'Analysis', 'That is our root cause. Plants die of invisibility. Nobody sees one struggling, and nobody counts which ones survive.', 1.0],
-  ['A', 'national', 'Selection', 'And this matters for the whole country. Singapore Food Story 2 aims to grow twenty percent of our vegetables locally by 2035, up from eight.', 0.6],
+  ['A', 'national', 'Analysis', 'We also mapped what exists today. Every scheme counts inputs: packets sent, plots allotted, trees planted. None of them follows what happens next.', 0.6],
   ['A', 'national', 'Analysis', 'We tested every existing option. Plant apps remind you. Habit apps keep streaks. Planting drives plant. Not one of them counts survival.', 1.0],
   ['A', 'target', 'Selection', 'So we set one measurable target: lift twelve-month plant survival from eighteen percent today to thirty percent. A twelve-point gain.', 0.6],
   ['A', 'target', 'Selection', 'And a rule that keeps us honest: if the pilot beats the baseline by less than five points, we do not scale. Isha.', 1.2],
@@ -54,7 +54,7 @@ window.SCRIPT = [
   // ───────── ISHA · the solution ─────────
   ['I', 'plantday', 'Solutions', 'Thanks, Aashrith. So we built Rooted SG to make survival visible, around one number: the verified Plant-Day. It only grows while your plant stays alive.', 0.6],
   ['I', 'plantday', 'Solutions', 'A day earns its point in three steps. A real plant. A fresh photo. The right time. Miss any one, and nothing counts.', 0.6],
-  ['I', 'plantday', 'Solutions', 'Cause number one was forgetting. So every morning, Mojo, our companion, tells you which plant needs you first. Today, that is grandma\'s pandan.', 0.8],
+  ['I', 'plantday', 'Solutions', 'Cause number one was forgetting. So every morning, Mojo, our companion, tells you which plant needs you first. Once a day, timed to the weather.', 0.8],
   ['I', 'doctor', 'Solutions', 'Cause number two was no one to ask. So when a leaf looks wrong, you open the Plant Doctor, and this is where we stop being a plant app.', 0.6],
   ['I', 'doctor', 'Solutions', 'Because a fungus starts inside the leaf. Its threads spread through the cells for days, long before the leaf looks wrong to anyone.', 0.6],
   ['I', 'doctor', 'Solutions', 'So you point your camera at the leaf. The app reads colour, fullness and light, and turns what it sees into clues.', 0.6],
@@ -83,7 +83,7 @@ window.SCRIPT = [
   ['P', 'forecast', 'Results', 'In our base case, that is 1,814 more plants alive after a year, and three point three million verified Plant-Days. Data Singapore has never had.', 0.8],
   ['P', 'sustain', 'Results', 'And it lasts without us. The models run on the phone, schools run their own leagues, and neighbours trade directly on Roots.', 0.8],
   ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 1.0],
-  ['P', 'close', 'Results', 'And grandma\'s pandan? Still alive, day 194, and counting. Because a plant never dies in a day. It dies from being forgotten. We are Rooted SG. Thank you.', 2.0]
+  ['P', 'close', 'Results', 'Our very first pandan? Still alive, day 194, and counting. Because a plant never dies in a day. It dies from being forgotten. We are Rooted SG. Thank you.', 2.0]
 ];
 
 /* Planned timing: words at a calm pitch pace, plus the pause, scaled to exactly 9:00. */

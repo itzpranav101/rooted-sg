@@ -44,19 +44,40 @@
 
   <!-- ===== COLD OPEN ===== -->
   <section class="scene" id="s-cold">
-    <h1 class="h h2 cold-h" id="coldA">The last plant you <em>brought home</em>.</h1>
-    <h1 class="h h1 cold-h" id="coldB">Is it still <span class="alive2">alive</span>?</h1>
-    <div class="homes" id="homes"></div>
-    <p class="cold-no display" id="coldNo">For most of us, quietly: <em>no</em>.</p>
+    <div class="news" id="news"><span class="eyebrow"><b>1 June 2022</b> · Breaking</span><h1 class="h h1">Malaysia stops exporting <em>chicken</em>.</h1></div>
+    <div class="supply" id="supply">
+      <span class="eyebrow">Singapore's chicken imports</span>
+      <div class="sbar"><i class="ghost"></i><div class="seg my" id="segMy"><b class="num">34%</b><span>Malaysia</span></div><div class="seg rest"><b class="num">66%</b><span>Everywhere else</span></div></div>
+      <p class="lead sup-l">About a third of supply, <b>gone overnight</b>.</p>
+      <span class="src">Singapore Food Agency data, 2021 · <b>Malaysian export ban from 1 June 2022</b></span>
+    </div>
+    <div class="imp" id="imp">
+      <div class="imp-l">
+        <div class="ib" id="ib1"><div class="num"><small>&gt;</small><span data-n="90">0</span><small>%</small></div><p class="lead">of Singapore's food is imported</p></div>
+        <div class="ib" id="ib2"><div class="num g"><span data-n="187">0</span></div><p class="lead">countries and regions we buy it from</p></div>
+        <span class="src">Singapore Food Agency · <b>Singapore Food Statistics 2024</b></span>
+      </div>
+      <svg class="imp-map" id="impMap" viewBox="0 0 900 900"></svg>
+    </div>
   </section>
 
   <!-- ===== THE GAP ===== -->
   <section class="scene" id="s-gap">
-    <div class="gap-stats" id="gapStats">
-      <div class="gs" id="gs1"><div class="num"><small>&gt;</small><span data-n="90">0</span><small>%</small></div><p class="lead">of Singapore's food is imported</p><span class="src">Singapore Food Agency · <b>Singapore Food Statistics 2024</b></span></div>
-      <div class="gs" id="gs2"><div class="num g"><span data-n="860000">0</span></div><p class="lead">free seed packets handed out to households since 2020</p><span class="src">NParks · <b>Gardening with Edibles programme</b></span></div>
+    <div class="fs2" id="fsTwo">
+      <span class="eyebrow"><b>Singapore Food Story 2</b> · the national goal</span>
+      <h2 class="h h2">Grow <em>20%</em> of our fibre locally by 2035.</h2>
+      <div class="fsb"><span class="lead">2024 · grown here</span><div class="track"><i id="fsA"></i></div><b class="num"><span data-n="8">0</span>%</b></div>
+      <div class="fsb"><span class="lead">2035 · the target</span><div class="track"><i id="fsB" class="g"></i></div><b class="num g"><span data-n="20">0</span>%</b></div>
+      <span class="src">Ministry of Sustainability and the Environment · <b>Singapore Food Story 2, Nov 2025</b> · fibre = vegetables, sprouts, mushrooms</span>
     </div>
-    <h2 class="h h2 gap-q" id="gapQ">How many are <em>still alive</em>?</h2>
+    <div class="tools" id="tools">
+      <span class="eyebrow"><b>The tools</b> · handed to residents</span>
+      <div class="tcards">
+        <div class="tc"><div class="num g"><span data-n="860000">0</span></div><b>free seed packets</b><span class="src">NParks · <b>Gardening with Edibles</b></span></div>
+        <div class="tc"><div class="num"><span data-n="2000">0</span>+</div><b>allotment plots in 23 parks</b><span class="src">NParks · <b>Allotment Gardening Scheme</b></span></div>
+        <div class="tc"><div class="num"><span data-n="2000">0</span>+</div><b>community gardening groups</b><span class="src">NParks · <b>Community in Bloom, 2025</b></span></div>
+      </div>
+    </div>
     <div class="gap-zero" id="gapZero">
       <div class="num">0</div>
       <div><p class="lead">public records of how many of those plants survive</p><span class="src">No survival record exists</span></div>
@@ -149,12 +170,14 @@
   <!-- ===== NATIONAL + COMPARISON ===== -->
   <section class="scene" id="s-national">
     <div class="na-left" id="naLeft">
-      <span class="eyebrow"><b>04</b> · Why it matters nationally</span>
-      <h2 class="h h4">Singapore Food Story 2</h2>
-      <div class="fs-bar"><span class="lead">2024 · grown here</span><div class="track"><i id="fs1"></i></div><b class="num"><span data-n="8">0</span>%</b></div>
-      <div class="fs-bar"><span class="lead">2035 · the target</span><div class="track"><i id="fs2" class="g"></i></div><b class="num g"><span data-n="20">0</span>%</b></div>
-      <p class="lead fs-note">of our <b>fibre</b> (vegetables, beansprouts, mushrooms) grown locally.</p>
-      <span class="src">Ministry of Sustainability and the Environment · <b>Singapore Food Story 2, Nov 2025</b></span>
+      <span class="eyebrow"><b>04</b> · What gets counted today</span>
+      <h2 class="h h4">Inputs, <em>not outcomes</em>.</h2>
+      <div class="inq" id="inq">
+        <div class="iq"><i class="y"><svg><use href="#check"/></svg></i><b>Seed packets sent</b><span>counted</span></div>
+        <div class="iq"><i class="y"><svg><use href="#check"/></svg></i><b>Plots allotted</b><span>counted</span></div>
+        <div class="iq"><i class="y"><svg><use href="#check"/></svg></i><b>Trees planted</b><span>counted</span></div>
+        <div class="iq no"><i>✕</i><b>Plants still alive</b><span>not counted</span></div>
+      </div>
     </div>
     <div class="na-right" id="naRight">
       <span class="eyebrow"><b>05</b> · Solution scan</span>
@@ -208,7 +231,7 @@
         <div><svg><use href="#check"/></svg><b>The right time</b><span>a valid timestamp, the right day</span></div>
       </div>
     </div>
-    <div class="mojo" id="mojo"><img src="media/mojo/idle.gif" alt="" id="mojoImg"><div class="bubble"><b>Mojo · 8:02 am</b>Grandma's pandan needs you first 🌿</div></div>
+    <div class="mojo" id="mojo"><img src="media/mojo/idle.gif" alt="" id="mojoImg"><div class="bubble"><b>Mojo · 8:02 am</b>Your pandan needs you first 🌿</div></div>
     <div class="tagchip solves" id="solves1">Solves cause #1 · <b>forgetting · 36.1%</b></div>
   </section>
 
@@ -446,7 +469,7 @@
       <div class="card pl"><svg viewBox="0 0 48 48" class="inkg"><path d="M6 20 24 8l18 12"/><path d="M10 18v22h28V18"/><path d="M20 40V28h8v12"/></svg><h3 class="h h4">Owned</h3><p class="lead">Schools run their own leagues. No single person it depends on.</p></div>
       <div class="card pl"><svg viewBox="0 0 48 48" class="inkg"><circle cx="14" cy="16" r="6"/><circle cx="34" cy="16" r="6"/><path d="M4 40c1-8 5-12 10-12s9 4 10 12M24 40c1-8 5-12 10-12s9 4 10 12"/></svg><h3 class="h h4">Neighbour to neighbour</h3><p class="lead">Roots needs no middleman. Surplus moves block to block.</p></div>
     </div>
-    <div class="su-band" id="suBand"><div class="num g"><span data-n="48000">0</span>+</div><p class="lead">community gardeners in <b>2,000+ groups</b> are a ready-made network to grow into.</p><span class="src">NParks · <b>Community in Bloom, Aug 2025</b></span></div>
+    <div class="su-band" id="suBand"><div class="num g"><span data-n="48000">0</span>+</div><p class="lead">community gardeners in <b>2,000+ groups</b> today, and <b>3,000</b> allotment plots planned by 2030: a ready-made network.</p><span class="src">NParks · <b>Community in Bloom, Aug 2025</b> · allotment target 2030</span></div>
   </section>
 
   <!-- ===== CLOSE ===== -->
@@ -454,7 +477,7 @@
     <div class="sky"><svg class="cloud cl1" viewBox="0 0 420 260"><use href="#cloudA"/></svg><svg class="cloud cl2" viewBox="0 0 420 260"><use href="#cloudB"/></svg><svg class="cloud cl3" viewBox="0 0 420 260"><use href="#cloudC"/></svg></div>
     <h2 class="h h2 cl-imagine" id="clImagine">Imagine if we could <em>see them</em>.</h2>
     <canvas class="field" id="field2"></canvas>
-    <div class="cl-pandan" id="clPandan"><svg viewBox="0 0 400 420" id="clPanSvg"></svg><div class="chip"><i class="pdot"></i>Grandma's pandan · <b>alive · day 194</b></div></div>
+    <div class="cl-pandan" id="clPandan"><svg viewBox="0 0 400 420" id="clPanSvg"></svg><div class="chip"><i class="pdot"></i>Our first pandan · <b>alive · day 194</b></div></div>
     <div class="cl-quote" id="clQuote"><p class="h h2">A plant never dies in a day.</p><p class="h h2"><em>It dies from being forgotten.</em></p></div>
     <div class="cl-end" id="clEnd">
       <div class="brand big"><svg><use href="#sprout"/></svg><span>Rooted SG</span></div>
