@@ -273,10 +273,10 @@
 
 /* Roots: sell · swap · give */
 .opts{position:absolute;left:900px;right:120px;top:330px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.op{background:#fff;border-radius:30px;padding:30px 28px;box-shadow:inset 0 0 0 1.5px var(--rule),0 24px 44px -26px rgba(20,40,28,.45)}
-.op i{font-style:normal;font-size:58px;width:96px;height:96px;border-radius:24px;background:var(--leaf);display:grid;place-items:center;margin-bottom:18px}
-.op b{display:block;font-family:var(--serif);font-weight:400;font-size:48px;letter-spacing:-.02em}
-.op span{display:block;font-size:25px;font-weight:600;color:var(--green);margin-top:4px}
+.opts .op{background:#fff;border-radius:30px;padding:30px 28px;box-shadow:inset 0 0 0 1.5px var(--rule),0 24px 44px -26px rgba(20,40,28,.45)}
+.opts .op i{font-style:normal;font-size:58px;width:96px;height:96px;border-radius:24px;background:var(--leaf);display:grid;place-items:center;margin-bottom:18px}
+.opts .op b{display:block;font-family:var(--serif);font-weight:400;font-size:48px;letter-spacing:-.02em}
+.opts .op span{display:block;font-size:25px;font-weight:600;color:var(--green);margin-top:4px}
 .comm{position:absolute;left:900px;right:120px;top:700px;display:flex;flex-wrap:wrap;gap:16px}
 .comm .chip{position:relative;font-size:24px;padding:16px 26px}
 /* timeline bar, like a video scrubber */
@@ -284,11 +284,11 @@
 .progress #knob{position:absolute;left:0;top:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(11,90,50,.18)}
 .progress{left:72px;right:72px;width:auto;bottom:22px;height:5px;border-radius:3px}
 .progress #prog{border-radius:3px}
-.op b{font-size:42px;white-space:nowrap}
+.opts .op b{font-size:42px;white-space:nowrap}
 
 /* line icons (replace emoji): one stroke style across the deck */
 .ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;overflow:visible}
-.lst i,.mside i,.op i,.lc i{color:var(--green);font-size:52px}
+.lst i,.mside i,.opts .op i,.lc i{color:var(--green);font-size:52px}
 .node i .ico{width:46px;height:46px}
 .node.win i{color:#fff}
 .gpn i{color:var(--green);font-size:40px}
@@ -316,3 +316,24 @@
 .mjr i.g{background:var(--green)}.mjr i.a{background:var(--amber);box-shadow:inset 0 0 0 3px #8A5A00}.mjr i.k{background:var(--text)}
 .mjr b{font-family:var(--serif);font-weight:400;font-size:46px;letter-spacing:-.02em;line-height:1.05}
 .mjr span{font-size:27px;font-weight:600;color:var(--green)}
+
+/* QA fixes */
+#solves1{right:120px;bottom:56px}
+.checks{gap:12px}
+.checks div{padding:12px 24px}
+.pd-count .num{font-size:200px}
+.pd-count{margin:30px 0 30px}
+.tiles .tile{min-height:540px;padding:34px 30px}
+.tiles .tile .num{font-size:92px;white-space:nowrap}
+.tiles .tile b{font-size:30px;margin:18px 0 8px}
+.tiles .tile p{font-size:22px}
+.viz{height:120px;bottom:30px}
+.md-device{grid-template-columns:720px 1fr}
+.quant .num{font-size:220px}
+.quant b{margin-left:-6px}
+.match{align-items:stretch}
+.match .marrow{align-self:center}
+.mside{justify-content:flex-start}
+.mk-map .melab{paint-order:stroke;stroke:#fff;stroke-width:8px;stroke-linejoin:round}
+.g-read .lead{margin-top:14px}
+.fc-big .lead{margin-top:14px}

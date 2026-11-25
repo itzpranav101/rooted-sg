@@ -17,7 +17,7 @@ const ease = x => 1 - Math.pow(1 - clamp(x), 3), sub = (b, a, z) => clamp((b - a
 function frame(c, d, u) { c.setTransform(d, 0, 0, d, 0, 0); c.translate(W / 2, H / 2); c.scale(u, u); c.lineCap = 'round'; c.lineJoin = 'round'; }
 function bmp(fn) { const o = document.createElement('canvas'); o.width = Math.max(2, Math.round(W * D)); o.height = Math.max(2, Math.round(H * D)); const c = o.getContext('2d'); frame(c, D, U); c.strokeStyle = C.fg; c.fillStyle = C.fg; fn(c); return o; }
 function txt(c, s, x, y, o = {}) { c.save(); c.globalAlpha *= o.a ?? 1; c.fillStyle = o.col || C.fg; c.font = `${o.w || 400} ${o.s || 2}px ${C.mono}`; c.textAlign = o.al || 'left'; c.textBaseline = 'middle'; c.fillText(s, x, y); c.restore(); }
-function tag(c, s, x, y, tx, ty, a = 1, al, col) { if (a <= .01) return; c.save(); al = al || (tx >= x ? 'left' : 'right'); c.font = `500 2.6px ${C.mono}`; const tw = c.measureText(s).width, hx = W / U / 2 - 2.5, hy = H / U / 2 - 4; if (al === 'right') tx = Math.max(tx, -hx + tw + .8); else tx = Math.min(tx, hx - tw - .8); tx = clamp(tx, -hx, hx); ty = clamp(ty, -hy, hy); c.globalAlpha *= a; c.strokeStyle = C.fg; c.lineWidth = .14; c.beginPath(); c.moveTo(x, y); c.lineTo(tx, ty); c.stroke(); c.fillStyle = col || C.gr; c.beginPath(); c.arc(x, y, .55, 0, TAU); c.fill(); txt(c, s, tx + (tx >= x ? .8 : -.8), ty, { col: col || C.gr, s: 2.6, al, w: 500 }); c.restore(); }
+function tag(c, s, x, y, tx, ty, a = 1, al, col) { if (a <= .01) return; c.save(); al = al || (tx >= x ? 'left' : 'right'); c.font = `500 2.6px ${C.mono}`; const tw = c.measureText(s).width, hx = W / U / 2 - 2.5, hy = H / U / 2 - 4; if (al === 'right') tx = Math.max(tx, -hx + tw + .8); else tx = Math.min(tx, hx - tw - .8); tx = clamp(tx, -hx, hx); ty = clamp(ty, -hy, hy); c.globalAlpha *= a; c.strokeStyle = C.fg; c.lineWidth = .14; c.beginPath(); c.moveTo(x, y); c.lineTo(tx, ty); c.stroke(); { const bx = tx >= x ? tx + .2 : tx - .8 - tw - .6; c.save(); c.fillStyle = 'rgba(243,243,241,.95)'; c.fillRect(bx, ty - 1.9, tw + 1.2, 3.8); c.restore(); } c.fillStyle = col || C.gr; c.beginPath(); c.arc(x, y, .55, 0, TAU); c.fill(); txt(c, s, tx + (tx >= x ? .8 : -.8), ty, { col: col || C.gr, s: 2.6, al, w: 500 }); c.restore(); }
 function leafPath(c, len, w) { c.beginPath(); c.moveTo(0, 0); c.bezierCurveTo(len * .25, -len * w, len * .7, -len * w * .8, len, 0); c.bezierCurveTo(len * .7, len * w * .8, len * .25, len * w, 0, 0); }
 function leaf(c, x, y, len, ang, w = .34) {
   c.save(); c.translate(x, y); c.rotate(ang); leafPath(c, len, w); c.stroke();
@@ -164,7 +164,7 @@ function render(now) {
       // a day-by-day readout
       const prog = clamp(grow * .6 + dmg * .4 + spo * .15), day = Math.round(prog * 14), marks = [[0, 'A spore lands'], [4, 'Hyphae reach the vein'], [9, 'Cells lose their green'], [12, 'The leaf still looks fine']];
       let mk2 = marks[0]; marks.forEach(m => { if (day >= m[0]) mk2 = m; });
-      g.save(); const bx0 = -30, bx1 = 30, by = 43.5; g.globalAlpha = clamp(grow * 6) * (1 - T(.64, .68)); g.lineWidth = .24; g.strokeStyle = C.fg; g.beginPath(); g.moveTo(bx0, by); g.lineTo(bx1, by); g.stroke();
+      g.save(); const bx0 = -30, bx1 = 30, by = 43.5; g.globalAlpha = clamp(grow * 6) * (1 - T(.64, .68)); g.fillStyle = 'rgba(243,243,241,.94)'; g.beginPath(); g.roundRect ? g.roundRect(bx0 - 4, by - 7.6, 68, 11.4, 2.4) : g.rect(bx0 - 4, by - 7.6, 68, 11.4); g.fill(); g.fillStyle = C.fg; g.lineWidth = .24; g.strokeStyle = C.fg; g.beginPath(); g.moveTo(bx0, by); g.lineTo(bx1, by); g.stroke();
       marks.forEach(m => { const x = lerp(bx0, bx1, m[0] / 14); g.beginPath(); g.moveTo(x, by - .8); g.lineTo(x, by + .8); g.stroke(); });
       g.fillStyle = C.gr; g.beginPath(); g.arc(lerp(bx0, bx1, day / 14), by, 1, 0, TAU); g.fill();
       txt(g, 'DAY ' + day, bx0, by - 3.4, { s: 2.6, col: C.gr, w: 500 }); txt(g, mk2[1], bx1, by - 3.4, { s: 2.4, al: 'right', w: 500 }); g.restore();
@@ -172,7 +172,7 @@ function render(now) {
       const p0 = hyph[Math.max(0, Math.min(n - 1, 300))];
       tag(g, 'FUNGAL HYPHAE', p0.x1, p0.y1, -44, 35, t1, 'right'); tag(g, 'ENTERING THE VEIN', VES[0][0], VES[0][1] + 3, 22, 33, t1, 'left');
       const pt = pits.find(q => q.age <= maxA) || pits[0]; if (pt) tag(g, 'THROUGH THE WALL AT A PIT', pt.x, pt.y, -48, -20, T(.48, .52) * (1 - T(.57, .6)), 'right');
-      const dc = cells.find(c => c.dmg < 60) || cells[0]; tag(g, 'CELLS FAIL, GREEN FADES', dc.x, dc.y, -46, -34, t2, 'right'); tag(g, 'VEIN CLOGGED', VES[0][0], VES[0][1], 24, -36, t2, 'left'); tag(g, 'THE PLANT PLUGS ITS OWN PIPE', VES[1][0] - 5, VES[1][1] + 4, 12, -44, T(.6, .63) * (1 - T(.67, .7)), 'left'); }
+      const dc = cells.find(c => c.dmg < 60) || cells[0]; tag(g, 'CELLS FAIL, GREEN FADES', dc.x, dc.y, -46, -38, t2, 'right'); }
     g.restore(); }
 
   // ----- 4 · THE PHONE: what the camera can see -----
