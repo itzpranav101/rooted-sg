@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rooted SG · Catalyst Challenge</title>
+<meta name="description" content="Rooted SG, the Catalyst Challenge pitch: a nine-minute, four-speaker deck with every animation synced to the script.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27none%27 stroke=%270B5A32%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M12 21V11%27/%3E%3Cpath d=%27M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z%27/%3E%3Cpath d=%27M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z%27/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/deck.css">
+<link rel="stylesheet" href="css/scenes.css">
+<link rel="stylesheet" href="css/scenes2.css">
+</head>
+<body>
+<!-- shared cloud filter, copied from the heymeco.xyz hero -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <filter id="cfilt" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".02 .03" numOctaves="2" seed="7" result="warp"/>
+    <feDisplacementMap in="SourceGraphic" in2="warp" scale="15" xChannelSelector="R" yChannelSelector="G" result="shape"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".011 .016" numOctaves="3" seed="11" result="billow"/>
+    <feColorMatrix in="billow" type="matrix" values="0 0 0 0 .74  0 0 0 0 .86  0 0 0 0 .95  0 0 0 -2.2 1.0" result="shade"/>
+    <feComposite in="shade" in2="shape" operator="in" result="shadeIn"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="3" result="grain"/>
+    <feColorMatrix in="grain" type="matrix" values="0 0 0 0 .68  0 0 0 0 .82  0 0 0 0 .93  0 0 0 -9 3.7" result="spk"/>
+    <feComposite in="spk" in2="shape" operator="in" result="spkIn"/>
+    <feMerge><feMergeNode in="shape"/><feMergeNode in="shadeIn"/><feMergeNode in="spkIn"/></feMerge>
+    <feGaussianBlur stdDeviation=".5"/>
+  </filter>
+  <pattern id="cdots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.5" fill="#9cc6e3"/></pattern>
+  <linearGradient id="cfade" x1=".35" y1=".25" x2=".85" y2="1"><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
+  <linearGradient id="cfill" x1="0" y1="0" x2="0" y2="1"><stop offset=".55" stop-color="#ffffff"/><stop offset="1" stop-color="#e3f1fb"/></linearGradient>
+  <mask id="cmask"><rect x="-50" y="-50" width="520" height="360" fill="url(#cfade)"/></mask>
+  <g id="cloudA"><g filter="url(#cfilt)"><g fill="url(#cfill)"><circle cx="120" cy="160" r="74"/><circle cx="195" cy="118" r="86"/><circle cx="272" cy="150" r="70"/><circle cx="330" cy="185" r="52"/><circle cx="70" cy="188" r="50"/><circle cx="205" cy="188" r="74"/><circle cx="140" cy="200" r="58"/><circle cx="260" cy="200" r="56"/></g><g mask="url(#cmask)" fill="url(#cdots)"><circle cx="120" cy="160" r="74"/><circle cx="195" cy="118" r="86"/><circle cx="272" cy="150" r="70"/><circle cx="330" cy="185" r="52"/><circle cx="70" cy="188" r="50"/><circle cx="205" cy="188" r="74"/><circle cx="140" cy="200" r="58"/><circle cx="260" cy="200" r="56"/></g></g></g>
+  <g id="cloudB"><g filter="url(#cfilt)"><g fill="url(#cfill)"><circle cx="110" cy="150" r="60"/><circle cx="190" cy="105" r="78"/><circle cx="270" cy="138" r="66"/><circle cx="335" cy="172" r="48"/><circle cx="85" cy="182" r="44"/><circle cx="200" cy="180" r="66"/><circle cx="150" cy="196" r="50"/></g><g mask="url(#cmask)" fill="url(#cdots)"><circle cx="110" cy="150" r="60"/><circle cx="190" cy="105" r="78"/><circle cx="270" cy="138" r="66"/><circle cx="335" cy="172" r="48"/><circle cx="85" cy="182" r="44"/><circle cx="200" cy="180" r="66"/><circle cx="150" cy="196" r="50"/></g></g></g>
+  <g id="cloudC"><g filter="url(#cfilt)"><g fill="url(#cfill)"><circle cx="90" cy="150" r="50"/><circle cx="160" cy="112" r="62"/><circle cx="228" cy="142" r="54"/><circle cx="280" cy="176" r="40"/><circle cx="130" cy="184" r="50"/></g><g mask="url(#cmask)" fill="url(#cdots)"><circle cx="90" cy="150" r="50"/><circle cx="160" cy="112" r="62"/><circle cx="228" cy="142" r="54"/><circle cx="280" cy="176" r="40"/><circle cx="130" cy="184" r="50"/></g></g></g>
+  <symbol id="sprout" viewBox="0 0 24 24"><path d="M12 21V11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 11C12 6 8.5 3.5 4 4c0 4.5 3 7.5 8 7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 14c0-3.2 2.6-5.5 7-5.2 0 3.6-2.6 6-7 5.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="viewport"><div class="stage" id="stage">
+
+  <!-- ===== READY: a calm hold card before the first click ===== -->
+  <section class="scene" id="s-ready">
+    <div class="ready-mark"><svg><use href="#sprout"/></svg><span class="display">Rooted SG</span></div>
+  </section>
+
+  <!-- ===== COLD OPEN ===== -->
+  <section class="scene" id="s-cold">
+    <h1 class="h h2 cold-h" id="coldA">The last plant you <em>brought home</em>.</h1>
+    <h1 class="h h1 cold-h" id="coldB">Is it still <span class="alive2">alive</span>?</h1>
+    <div class="homes" id="homes"></div>
+    <p class="cold-no display" id="coldNo">For most of us, quietly: <em>no</em>.</p>
+  </section>
+
+  <!-- ===== THE GAP ===== -->
+  <section class="scene" id="s-gap">
+    <div class="gap-stats" id="gapStats">
+      <div class="gs" id="gs1"><div class="num"><small>&gt;</small><span data-n="90">0</span><small>%</small></div><p class="lead">of Singapore's food is imported</p><span class="src">Singapore Food Agency · <b>Singapore Food Statistics 2024</b></span></div>
+      <div class="gs" id="gs2"><div class="num g"><span data-n="860000">0</span></div><p class="lead">free seed packets handed out to households since 2020</p><span class="src">NParks · <b>Gardening with Edibles programme</b></span></div>
+    </div>
+    <h2 class="h h2 gap-q" id="gapQ">How many are <em>still alive</em>?</h2>
+    <div class="gap-zero" id="gapZero">
+      <div class="num">0</div>
+      <div><p class="lead">public records of how many of those plants survive</p><span class="src">No survival record exists</span></div>
+    </div>
+    <h2 class="h h3 gap-line" id="gapLine">Singapore counts what it plants. <em>Not what it keeps alive.</em></h2>
+    <canvas class="field" id="field"></canvas>
+    <div class="field-key" id="fieldKey"><i></i>Each dot is 1,000 seed packets</div>
+  </section>
+
+  <!-- ===== HERO (heymeco.xyz, app only) ===== -->
+  <section class="scene" id="s-hero">
+    <div class="sky"><svg class="cloud cl1" viewBox="0 0 420 260"><use href="#cloudA"/></svg><svg class="cloud cl2" viewBox="0 0 420 260"><use href="#cloudB"/></svg><svg class="cloud cl3" viewBox="0 0 420 260"><use href="#cloudC"/></svg></div>
+    <div class="hero-wrap">
+      <span class="eyebrow hero-eye" id="heroEye">Rooted SG · <b>Made in Singapore</b> · A youth-led movement</span>
+      <h1 class="h hero-h" id="heroH"><span class="hl">Don't count what we plant.</span> <em class="hl">Count what we keep <span class="alive">alive<svg class="ul" viewBox="0 0 300 24" preserveAspectRatio="none"><path pathLength="1" d="M3 15C40 4 70 22 110 12S190 4 230 14 280 12 297 8"/></svg><svg class="sp" viewBox="0 0 40 44"><path pathLength="1" class="s1" d="M20 42V18"/><path pathLength="1" class="s2" d="M20 28C11 28 6 22 6 14c9 0 14 6 14 14"/><path pathLength="1" class="s3" d="M20 20C29 20 34 14 34 6c-9 0-14 6-14 14"/></svg></span>.</em></h1>
+      <ul class="hero-trio" id="heroTrio">
+        <li><svg viewBox="0 0 48 48" class="ink"><rect x="14" y="5" width="20" height="38" rx="5"/><circle cx="24" cy="24" r="6"/><path d="M21 9h6"/></svg><span>A <b>photo</b> of a real plant</span></li>
+        <li class="op">+</li>
+        <li><svg viewBox="0 0 48 48" class="ink"><rect x="7" y="10" width="34" height="30" rx="4"/><path d="M7 18h34M16 6v8M32 6v8"/></svg><span>A day it <b>stayed alive</b></span></li>
+        <li class="op">=</li>
+        <li class="tot"><svg viewBox="0 0 48 48" class="inkg"><circle cx="24" cy="24" r="17"/><path d="M15 25l6 6 12-13"/></svg><span>One verified <b>Plant-Day</b></span></li>
+      </ul>
+    </div>
+    <div class="hero-stage" id="heroStage">
+      <div class="ph p1"><div class="scr"><img src="media/app-pandan.jpg" alt=""></div></div>
+      <div class="ph p2"><div class="scr"><img src="media/app-today.jpg" alt=""></div></div>
+      <div class="ph p3"><div class="scr"><img src="media/app-market.jpg" alt=""></div></div>
+      <div class="chip float hc1"><i class="pdot"></i>Verified Plant-Days <b>314</b></div>
+      <div class="chip float d2 hc2">Care streak <b>5</b></div>
+      <div class="chip float d3 hc3">Pandan <b>alive · 194 days</b></div>
+      <svg class="cloud f1" viewBox="0 0 420 260"><use href="#cloudA"/></svg><svg class="cloud f2" viewBox="0 0 420 260"><use href="#cloudB"/></svg>
+    </div>
+    <div class="team" id="team"></div>
+  </section>
+
+  <!-- ===== SURVEY ===== -->
+  <section class="scene" id="s-survey">
+    <div class="sv-left">
+      <span class="eyebrow"><b>01</b> · Our survey · Project selection</span>
+      <h2 class="h h3 sv-h">We didn't guess.<br><em>We asked Singapore.</em></h2>
+      <div class="sv-big" id="svBig"><div class="num"><span data-n="3043">0</span></div><p class="lead">Singapore residents answered</p></div>
+      <div class="sv-stat" id="sv1"><i class="sw g"></i><div><div class="num g"><span data-n="70.9" data-d="1">0</span>%</div><p class="lead">want to grow plants at home</p></div></div>
+      <div class="sv-stat" id="sv2"><i class="sw a"></i><div><div class="num amber"><span data-n="51.2" data-d="1">0</span>%</div><p class="lead">stopped, or never started</p></div></div>
+      <span class="src sv-src">Rooted SG resident survey, 2026 · <b>n = 3,043</b> · interest rated 4 or 5 out of 5</span>
+    </div>
+    <div class="dots" id="dots"></div>
+    <div class="dots-cap" id="dotsCap"><b>The say-do gap</b></div>
+  </section>
+
+  <!-- ===== PARETO ===== -->
+  <section class="scene" id="s-pareto">
+    <span class="eyebrow pa-eye"><b>02</b> · Project analysis · Pareto</span>
+    <h2 class="h h3 pa-h">Why plants <em>don't make it</em>.</h2>
+    <div class="pareto" id="pareto">
+      <svg class="pa-axis" viewBox="0 0 1180 600" preserveAspectRatio="none"><path class="ink" pathLength="1" d="M0 600H1180"/><path class="ink" pathLength="1" d="M0 0V600"/></svg>
+    </div>
+    <div class="pa-side" id="paSide">
+      <span class="eyebrow">Not at the top</span>
+      <p class="pa-strike"><span>Space</span><span>Money</span><span>Pets</span></p>
+      <p class="lead">Plants don't die from a lack of resources. They die from <b>habit</b>, <b>knowledge</b> and <b>motivation</b>.</p>
+    </div>
+    <span class="src pa-src">Rooted SG resident survey · <b>n = 3,043</b> · people could pick more than one reason</span>
+  </section>
+
+  <!-- ===== 5 WHYS ===== -->
+  <section class="scene" id="s-whys">
+    <div class="wy-head"><span class="eyebrow"><b>03</b> · Root cause analysis · 5 Whys</span><h2 class="h h3">Dig down to <em>the root</em>.</h2></div>
+    <svg class="wy-svg" id="wySvg" viewBox="0 0 1920 1080">
+      <defs><pattern id="soilp" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="5" cy="7" r="2.2" fill="#D9CDB6"/><circle cx="18" cy="19" r="1.6" fill="#D9CDB6"/></pattern>
+      <linearGradient id="soilg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6F0E4"/><stop offset="1" stop-color="#EADFCB"/></linearGradient></defs>
+      <rect id="wySoil" x="0" y="330" width="1920" height="750" fill="url(#soilg)"/><rect x="0" y="330" width="1920" height="750" fill="url(#soilp)" id="wySoilP"/>
+      <path id="wyGround" class="ink" style="stroke-width:5" pathLength="1" d="M0 330H1920"/>
+      <g id="wyPlant"><path class="inkg" style="stroke-width:6" pathLength="1" d="M960 330V190"/>
+        <path class="leaff" style="stroke-width:4" d="M960 280c-30-34-84-40-118-22 22 36 80 46 118 22z"/><path class="leaff" style="stroke-width:4" d="M960 240c30-34 84-40 118-22-22 36-80 46-118 22z"/><path class="leaff" style="stroke-width:4" d="M960 200c-20-30-60-40-86-30 14 30 56 42 86 30z"/></g>
+      <path id="wyTap" pathLength="1" d="M960 330C952 380 972 420 960 470S946 560 960 600S974 690 960 730S948 800 960 850" fill="none" stroke="#6B4A33" stroke-width="10" stroke-linecap="round"/>
+      <g id="wySide" fill="none" stroke="#8A6A50" stroke-width="5" stroke-linecap="round">
+        <path pathLength="1" d="M962 400C900 410 860 440 820 430"/><path pathLength="1" d="M958 450C1020 460 1060 490 1110 480"/>
+        <path pathLength="1" d="M960 540C890 556 850 590 800 584"/><path pathLength="1" d="M962 610C1030 626 1080 660 1130 650"/>
+        <path pathLength="1" d="M960 700C900 716 860 746 810 744"/><path pathLength="1" d="M962 770C1020 786 1060 812 1100 808"/></g>
+      <g id="wyGlow"><circle cx="960" cy="860" r="26" fill="#984421"/><circle class="ring" cx="960" cy="860" r="26" fill="none" stroke="#984421" stroke-width="4"/><circle class="ring" cx="960" cy="860" r="26" fill="none" stroke="#984421" stroke-width="4"/></g>
+    </svg>
+    <div class="wyn" style="--y:405px" data-s="l"><i>1</i><p>Home plants die. <em>Why?</em></p></div>
+    <div class="wyn" style="--y:505px" data-s="r"><i>2</i><p>Care is missed when it matters. <em>Why?</em></p></div>
+    <div class="wyn" style="--y:605px" data-s="l"><i>3</i><p>Owners forget, or don't know what's wrong. <em>Why?</em></p></div>
+    <div class="wyn" style="--y:705px" data-s="r"><i>4</i><p>Nothing reminds them. Nobody tells them. <em>Why?</em></p></div>
+    <div class="wyn" style="--y:805px" data-s="l"><i>5</i><p>Nobody can <b>see</b> a plant struggling.</p></div>
+    <div class="card dark wy-root" id="root"><span class="eyebrow"><b>Root cause</b></span><p class="h h4">Plants die of <em>invisibility</em>.</p></div>
+  </section>
+
+  <!-- ===== NATIONAL + COMPARISON ===== -->
+  <section class="scene" id="s-national">
+    <div class="na-left" id="naLeft">
+      <span class="eyebrow"><b>04</b> · Why it matters nationally</span>
+      <h2 class="h h4">Singapore Food Story 2</h2>
+      <div class="fs-bar"><span class="lead">2024 · grown here</span><div class="track"><i id="fs1"></i></div><b class="num"><span data-n="8">0</span>%</b></div>
+      <div class="fs-bar"><span class="lead">2035 · the target</span><div class="track"><i id="fs2" class="g"></i></div><b class="num g"><span data-n="20">0</span>%</b></div>
+      <p class="lead fs-note">of our <b>fibre</b> (vegetables, beansprouts, mushrooms) grown locally.</p>
+      <span class="src">Ministry of Sustainability and the Environment · <b>Singapore Food Story 2, Nov 2025</b></span>
+    </div>
+    <div class="na-right" id="naRight">
+      <span class="eyebrow"><b>05</b> · Solution scan</span>
+      <h2 class="h h4">What existing options <em>miss</em>.</h2>
+      <div class="cmp" id="cmp">
+        <div class="cr head"><span></span><span>Counts survival</span><span>Verified care</span><span>Public record</span></div>
+        <div class="cr" data-v="h n n"><span>Plant-care apps<small>e.g. Planta</small></span></div>
+        <div class="cr" data-v="n n n"><span>Habit apps<small>e.g. Duolingo</small></span></div>
+        <div class="cr" data-v="n h y"><span>Planting drives</span></div>
+        <div class="cr" data-v="n y y"><span>Citizen science<small>e.g. iNaturalist</small></span></div>
+        <div class="cr me" data-v="y y y"><span>Rooted SG</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TARGET ===== -->
+  <section class="scene" id="s-target">
+    <span class="eyebrow tg-eye"><b>06</b> · Target setting</span>
+    <div class="gauge" id="gauge">
+      <svg viewBox="0 0 600 340"><path class="g-bg" d="M50 310A250 250 0 0 1 550 310"/><path class="g-fill" id="gFill" pathLength="100" d="M50 310A250 250 0 0 1 550 310"/><g id="gNeedle"><line x1="300" y1="310" x2="300" y2="96"/><circle cx="300" cy="310" r="14"/></g></svg>
+      <div class="g-read"><div class="num"><span id="gNum">18</span>%</div><p class="lead">12-month plant survival</p></div>
+    </div>
+    <div class="tg-right">
+      <h2 class="h h3">From <span class="num-inline">18%</span> to <em>30%</em>.</h2>
+      <p class="lead">A twelve-point rise in plants still alive after one year.</p>
+      <div class="smart" id="smart">
+        <div><b>S</b><span>Specific</span><p>Survival of real home plants</p></div>
+        <div><b>M</b><span>Measurable</span><p>Verified Plant-Days</p></div>
+        <div><b>A</b><span>Achievable</span><p>+12 points, piloted first</p></div>
+        <div><b>R</b><span>Relevant</span><p>Food Story 2</p></div>
+        <div><b>T</b><span>Time-bound</span><p>12 months</p></div>
+      </div>
+      <span class="src">Baseline: Rooted SG first survey, <b>n = 466</b> · kept a plant alive past one year</span>
+    </div>
+    <div class="card dark stoprule" id="stoprule">
+      <span class="eyebrow"><b>Our stopping rule</b></span>
+      <p class="h h4">Less than <em>+5 points</em> in the pilot? We don't scale. We redesign, and publish it.</p>
+    </div>
+  </section>
+
+  <!-- ===== PLANT-DAY ===== -->
+  <section class="scene" id="s-plantday">
+    <div class="pd-phone"><div class="ph" id="pdPh"><div class="scr"><img src="media/app-today.jpg" alt="" class="on"><img src="media/app-checkin.jpg" alt=""><img src="media/app-mojo.jpg" alt=""></div></div></div>
+    <div class="pd-right">
+      <span class="eyebrow"><b>07</b> · The solution · Rooted SG</span>
+      <h2 class="h h3">One number: the verified <em>Plant-Day</em>.</h2>
+      <div class="pd-count"><div class="num g" id="pdNum">0</div><p class="lead">verified Plant-Days<br>in one garden</p><span class="plus1" id="plus1">+1</span></div>
+      <div class="checks" id="checks">
+        <div><svg><use href="#check"/></svg><b>A real plant</b><span>living plant found in the photo</span></div>
+        <div><svg><use href="#check"/></svg><b>A fresh photo</b><span>never a reused one</span></div>
+        <div><svg><use href="#check"/></svg><b>The right time</b><span>a valid timestamp, the right day</span></div>
+      </div>
+    </div>
+    <div class="mojo" id="mojo"><img src="media/mojo/idle.gif" alt="" id="mojoImg"><div class="bubble"><b>Mojo · 8:02 am</b>Grandma's pandan needs you first 🌿</div></div>
+    <div class="tagchip solves" id="solves1">Solves cause #1 · <b>forgetting · 36.1%</b></div>
+  </section>
+
+  <!-- ===== PLANT DOCTOR (the leaf view from the site) ===== -->
+  <section class="scene" id="s-doctor">
+    <div class="dr-vis"><canvas data-deckleaf data-p="0"></canvas><div class="cam" id="cam">
+        <svg class="cam-bg" viewBox="0 0 900 880" preserveAspectRatio="xMidYMid slice"><g opacity=".9"><ellipse cx="760" cy="760" rx="260" ry="120" fill="#DCEBDD"/><ellipse cx="120" cy="120" rx="200" ry="90" fill="#E4F0E8"/></g></svg>
+        <div class="ph cam-ph" id="camPh"><div class="scr">
+          <svg id="camSvg" viewBox="0 0 360 780">
+            <defs>
+              <radialGradient id="les"><stop offset="0" stop-color="#5A3510"/><stop offset=".28" stop-color="#8A5A1C"/><stop offset=".55" stop-color="#D9AE3E"/><stop offset=".8" stop-color="#E8CF6A" stop-opacity=".75"/><stop offset="1" stop-color="#E8CF6A" stop-opacity="0"/></radialGradient>
+              <linearGradient id="leafg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5FA857"/><stop offset=".6" stop-color="#3D8443"/><stop offset="1" stop-color="#2A6233"/></linearGradient>
+              <linearGradient id="tipg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9B44A"/><stop offset=".25" stop-color="#D9B44A" stop-opacity=".0"/></linearGradient>
+              <radialGradient id="bgc" cx=".5" cy=".4"><stop offset="0" stop-color="#3E5A3A"/><stop offset="1" stop-color="#16231A"/></radialGradient>
+              <pattern id="camgrid" width="18" height="18" patternUnits="userSpaceOnUse"><path d="M18 0H0V18" fill="none" stroke="rgba(163,230,139,.45)" stroke-width="1"/></pattern>
+              <clipPath id="leafclip"><path d="M180 700C52 590 26 300 180 70C334 300 308 590 180 700Z"/></clipPath>
+            </defs>
+            <rect width="360" height="780" fill="url(#bgc)"/>
+            <g opacity=".35"><ellipse cx="40" cy="160" rx="90" ry="40" fill="#5C8A55" transform="rotate(-30 40 160)"/><ellipse cx="330" cy="620" rx="100" ry="38" fill="#5C8A55" transform="rotate(35 330 620)"/><ellipse cx="320" cy="140" rx="70" ry="30" fill="#5C8A55"/></g>
+            <g id="camView"><g id="camLeaf" class="sway">
+              <path d="M180 700C52 590 26 300 180 70C334 300 308 590 180 700Z" fill="url(#leafg)" stroke="#1E4A26" stroke-width="3"/>
+              <g clip-path="url(#leafclip)"><rect x="0" y="60" width="360" height="200" fill="url(#tipg)"/>
+                <g id="camVeins" fill="none" stroke="#9FD08F" stroke-linecap="round"></g>
+                <g id="camLes"><circle cx="128" cy="360" r="44" fill="url(#les)"/><circle cx="226" cy="300" r="34" fill="url(#les)"/><circle cx="210" cy="480" r="40" fill="url(#les)"/><circle cx="118" cy="540" r="28" fill="url(#les)"/><circle cx="168" cy="190" r="22" fill="url(#les)"/></g>
+                <g fill="#3A220C"><circle cx="124" cy="356" r="5"/><circle cx="136" cy="368" r="3.5"/><circle cx="228" cy="298" r="4.5"/><circle cx="214" cy="486" r="5"/><circle cx="202" cy="474" r="3"/><circle cx="120" cy="544" r="4"/></g>
+              </g></g>
+              <rect id="camGrid" width="360" height="780" fill="url(#camgrid)" opacity="0"/>
+              <rect id="camScan" x="0" y="0" width="360" height="6" fill="#A3E68B" opacity="0"/>
+              <g id="camDet" fill="none" stroke="#F2C14E" stroke-width="3" stroke-dasharray="7 5"><circle cx="128" cy="360" r="50"/><circle cx="226" cy="300" r="40"/><circle cx="210" cy="480" r="46"/><circle cx="118" cy="540" r="34"/><circle cx="168" cy="190" r="28"/></g>
+              <path id="camOutline" pathLength="1" d="M180 700C52 590 26 300 180 70C334 300 308 590 180 700Z" fill="none" stroke="#A3E68B" stroke-width="4" stroke-dasharray="1" stroke-dashoffset="1"/>
+            </g>
+            <g id="camUI" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round">
+              <path d="M30 120v-30h30M330 120v-30h-30M30 640v30h30M330 640v30h-30"/>
+              <g id="camFocus"><rect x="-45" y="-45" width="90" height="90" rx="6" stroke="#F2C14E" stroke-width="3.5"/><path d="M0 -45v12M0 45v-12M-45 0h12M45 0h-12" stroke="#F2C14E" stroke-width="3"/></g>
+            </g>
+            <g id="camTop"><rect x="96" y="40" width="168" height="32" rx="16" fill="rgba(0,0,0,.55)"/><text x="180" y="61" text-anchor="middle" font-family="DM Mono, monospace" font-size="14" letter-spacing="1.5" fill="#fff">PLANT DOCTOR</text>
+              <text id="camStatus" x="180" y="100" text-anchor="middle" font-family="DM Mono, monospace" font-size="15" letter-spacing="1" fill="#F2C14E">FOCUSING…</text></g>
+            <g id="camShutter"><circle cx="180" cy="722" r="34" fill="none" stroke="#fff" stroke-width="5"/><circle id="shutIn" cx="180" cy="722" r="26" fill="#fff"/></g>
+            <rect id="camFlash" width="360" height="780" fill="#fff" opacity="0"/>
+            <g id="camSheet">
+              <rect x="0" y="350" width="360" height="440" rx="28" fill="#fff"/><rect x="155" y="364" width="50" height="6" rx="3" fill="#D6D6D2"/>
+              <text x="24" y="404" font-family="DM Mono, monospace" font-size="13" letter-spacing="1.4" fill="#0B5A32">PLANT DOCTOR · 5 CLUES</text>
+              <text x="24" y="440" font-family="Newsreader, serif" font-size="30" fill="#0A0A0A">Possible leaf fungus</text>
+              <text x="24" y="468" font-family="Hanken Grotesk, sans-serif" font-size="17" font-weight="600" fill="#0B5A32">The AI finds clues. You make the call.</text>
+              <g id="btnYes"><rect x="24" y="488" width="150" height="46" rx="23" fill="#0B5A32"/><text x="99" y="517" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="17" font-weight="600" fill="#fff">Looks right</text></g>
+              <g><rect x="186" y="488" width="150" height="46" rx="23" fill="#fff" stroke="#0A0A0A" stroke-width="2"/><text x="261" y="517" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="17" font-weight="600" fill="#0A0A0A">Not sure</text></g>
+              <circle id="tap" cx="99" cy="511" r="22" fill="#0A0A0A" opacity="0"/>
+              <g id="camPlan" font-family="Hanken Grotesk, sans-serif" font-size="18" font-weight="600" fill="#0A0A0A">
+                <g><circle cx="38" cy="572" r="12" fill="none" stroke="#0B5A32" stroke-width="2.5"/><path class="ck" d="M32 572l4 4 8-9" fill="none" stroke="#0B5A32" stroke-width="3" stroke-linecap="round"/><text x="62" y="578">Remove the spotted leaves</text></g>
+                <g><circle cx="38" cy="614" r="12" fill="none" stroke="#0B5A32" stroke-width="2.5"/><path class="ck" d="M32 614l4 4 8-9" fill="none" stroke="#0B5A32" stroke-width="3" stroke-linecap="round"/><text x="62" y="620">Give it more airflow</text></g>
+                <g><circle cx="38" cy="656" r="12" fill="none" stroke="#0B5A32" stroke-width="2.5"/><path class="ck" d="M32 656l4 4 8-9" fill="none" stroke="#0B5A32" stroke-width="3" stroke-linecap="round"/><text x="62" y="662">Check in tomorrow</text></g>
+              </g>
+              <g id="camToast"><rect x="40" y="694" width="280" height="44" rx="22" fill="#0B5A32"/><text x="180" y="722" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="17" font-weight="600" fill="#fff">+1 verified Plant-Day</text></g>
+            </g>
+          </svg>
+        </div></div>
+        <div class="clues" id="clues">
+          <div class="clue"><i class="sw1"></i><div><span class="eyebrow"><b>Colour</b></span><p>Yellow halos, dark centres</p></div></div>
+          <div class="clue"><i class="sw2"></i><div><span class="eyebrow"><b>Fullness</b></span><p>Leaf edge mapped, area thinning</p></div></div>
+          <div class="clue"><i class="sw3"></i><div><span class="eyebrow"><b>Light</b></span><p>Bright enough to judge</p></div></div>
+        </div>
+      </div></div>
+    <div class="dr-steps" id="drSteps">
+      <div class="st"><span class="eyebrow"><b>08</b> · The Plant Doctor</span><h2 class="h h3">Where we stop being <em>a plant app</em>.</h2><p class="lead">From a whole garden, to one plant, to one leaf.</p></div>
+      <div class="st"><span class="eyebrow"><b>08</b> · Inside the leaf</span><h2 class="h h3">Cells fail <em>long before</em> the leaf looks wrong.</h2><p class="lead">A fungus threads through the cell walls for days. Nobody can see it yet.</p></div>
+      <div class="st"><span class="eyebrow"><b>08</b> · The camera</span><h2 class="h h3">Point. Shoot. <em>Read the leaf.</em></h2><p class="lead">Focus, capture, scan: colour, fullness and light become <b>clues</b>.</p></div>
+      <div class="st"><span class="eyebrow"><b>08</b> · Human in the loop</span><h2 class="h h3">The AI finds clues. <em>You make the call.</em></h2><p class="lead">Then a step-by-step plan, and a check-in tomorrow.</p></div>
+    </div>
+    <div class="tagchip solves" id="solves2">Solves cause #2 · <b>no one to ask · 26.7%</b></div>
+  </section>
+
+  <!-- ===== GUARDIAN PATH + ROOTS ===== -->
+  <section class="scene" id="s-grow">
+    <div class="gp" id="gp">
+      <div class="gp-head"><span class="eyebrow"><b>09</b> · The Guardian Path</span><h2 class="h h3">Every diagnosis becomes <em>a lesson</em>.</h2></div>
+      <div class="ph gp-ph"><div class="scr"><img src="media/app-guardian.jpg" alt="" class="pan"></div></div>
+      <svg class="gp-path" id="gpPath" viewBox="0 0 600 760">
+        <path class="trail" pathLength="1" d="M300 720C120 680 120 600 300 560S480 440 300 400S120 280 300 240S480 120 300 60"/>
+      </svg>
+      <div class="gp-nodes" id="gpNodes"></div>
+      <img class="gp-mojo" id="gpMojo" src="media/mojo/run.gif" alt="">
+      <div class="card gp-card" id="gpCard">
+        <span class="eyebrow"><b>Unlocked by your diagnosis</b></span>
+        <p class="qq">Leaf fungus: why it spreads</p>
+        <p class="qsub">What helps leaf fungus spread fastest?</p>
+        <div class="qo">Strong sunlight</div><div class="qo ok">Wet leaves, still air <svg><use href="#check"/></svg></div><div class="qo">Too much fertiliser</div>
+      </div>
+      <div class="gp-chips" id="gpChips"><span class="chip st">🔥 Streak <b>12 days</b></span><span class="chip st">Level <b>4 · Guardian</b></span><span class="chip st">Weekly league <b>3rd</b></span></div>
+    </div>
+    <div class="rt" id="rt">
+      <div class="rt-head"><span class="eyebrow"><b>10</b> · Roots · the marketplace</span><h2 class="h h3">Neighbours trade <em>what they grow</em>.</h2></div>
+      <div class="ph rt-ph"><div class="scr"><img src="media/app-roots.jpg" alt="" class="pan"></div></div>
+      <div class="ph rt-ph2"><div class="scr"><img src="media/app-market.jpg" alt=""></div></div>
+      <div class="listings" id="listings">
+        <div class="lst"><i>🌿</i><div><b>Pandan cutting</b><span>Verified grower · <em>421 Plant-Days</em></span></div></div>
+        <div class="lst"><i>🌶️</i><div><b>Chilli seedlings</b><span>Verified grower</span></div></div>
+        <div class="lst"><i>🌱</i><div><b>Basil, two pots</b><span>Verified grower</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CV PIPELINE ===== -->
+  <section class="scene" id="s-pipeline">
+    <h2 class="h h2 pp-intro" id="ppIntro">None of it works unless the data is <em>real</em>.</h2>
+    <div class="pp-head" id="ppHead"><span class="eyebrow"><b>09</b> · Solution development · Computer vision</span><h2 class="h h3">Every check-in, <em>checked on the phone</em>.</h2></div>
+    <div class="pipe" id="pipe">
+      <svg class="pipe-line" viewBox="0 0 1720 40" preserveAspectRatio="none"><path id="pipePath" class="inkg" pathLength="1" d="M0 20H1720"/></svg>
+      <div class="node"><i>📷</i><b>Photo</b><span>Check-in</span></div>
+      <div class="node" data-k="blur"><i>◎</i><b>Sharp?</b><span>Laplacian variance</span></div>
+      <div class="node" data-k="exg"><i>🌿</i><b>Living plant?</b><span>Excess Green + Otsu</span></div>
+      <div class="node" data-k="hash"><i>#</i><b>New photo?</b><span>Perceptual hash</span></div>
+      <div class="node" data-k="time"><i>◷</i><b>Right time?</b><span>Timestamp</span></div>
+      <div class="node" data-k="conf"><i>◐</i><b>Confident?</b><span>Calibrated gate</span></div>
+      <div class="node win"><i>✓</i><b>+1 Plant-Day</b><span>Verified</span></div>
+      <div class="pkt" id="pkt1"></div><div class="pkt bad" id="pkt2"></div><div class="pkt bad" id="pkt3"></div>
+    </div>
+    <div class="rejects" id="rejects">
+      <div class="rj" id="rj1"><b>Blurry photo</b>→ asks for a retake</div>
+      <div class="rj" id="rj2"><b>Reused photo</b>→ rejected, no Plant-Day</div>
+      <div class="rj ok" id="rj3"><b>Real plant, fresh photo</b>→ +1 verified Plant-Day</div>
+    </div>
+    <div class="exg" id="exg"><canvas id="exgCv" width="520" height="300"></canvas><span class="eyebrow"><b>ExG = 2g − r − b</b> · finds the living plant, pixel by pixel</span></div>
+  </section>
+
+  <!-- ===== OUR MODEL ===== -->
+  <section class="scene" id="s-model">
+    <div class="md-head"><span class="eyebrow"><b>10</b> · Our own trained model</span><h2 class="h h3">The Plant Doctor runs on <em>our model</em>.</h2></div>
+    <div class="md-flow" id="mdFlow">
+      <div class="md-data" id="mdData"></div>
+      <svg class="md-wires" id="mdWires" viewBox="0 0 1700 520" preserveAspectRatio="none"></svg>
+      <div class="md-net" id="mdNet"></div>
+      <div class="md-out" id="mdOut">
+        <div><b>Yellowing</b><i></i></div><div><b>Dark spots</b><i></i></div><div><b>Fullness</b><i></i></div><div><b>Light</b><i></i></div>
+      </div>
+      <div class="md-labels">
+        <div class="ml" id="ml1"><span class="eyebrow"><b>Training data</b></span><p>PlantVillage · Pl@ntNet-300K</p></div>
+        <div class="ml" id="ml2"><span class="eyebrow"><b>Fine-tuned</b></span><p>MobileNetV3 · EfficientNet-Lite</p></div>
+        <div class="ml" id="ml3"><span class="eyebrow"><b>Output</b></span><p>Clues, not a verdict</p></div>
+      </div>
+    </div>
+    <div class="md-device" id="mdDevice">
+      <div class="quant"><span class="num">32</span><span class="arrow">→</span><span class="num g">8</span><b>bit</b></div>
+      <p class="lead">Quantised and shipped <b>on-device</b> with Core ML and TensorFlow Lite. Zero cost per photo.</p>
+      <div class="conf" id="conf"><div class="conf-bar"><i id="confFill"></i><span class="thr"></span></div><div class="conf-read" id="confRead">Unsure → <b>asks for a retake</b></div></div>
+    </div>
+  </section>
+
+  <!-- ===== ROOTS MARKETPLACE SYSTEM ===== -->
+  <section class="scene" id="s-market">
+    <div class="mk-map"><svg id="mkMap" viewBox="0 0 900 820"></svg></div>
+    <div class="mk-right">
+      <span class="eyebrow"><b>11</b> · Roots · the marketplace</span>
+      <h2 class="h h3">Trade on <em>proof</em>, not promises.</h2>
+      <ul class="mk-list" id="mkList">
+        <li><b>Trust score</b>Every listing shows the seller's verified Plant-Days.</li>
+        <li><b>Opens street by street</b>Only after local supply passes a threshold, so no empty market.</li>
+        <li><b>Private by design · PDPA</b>Neighbourhood level, never an address. Cloud AI off by default.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== BUILT ===== -->
+  <section class="scene" id="s-built">
+    <span class="eyebrow bt-eye"><b>12</b> · Solution implementation</span>
+    <h2 class="h h3 bt-h">Built for real. <em>Built twice.</em></h2>
+    <div class="tiles" id="tiles">
+      <div class="tile"><div class="num g"><span data-n="2">0</span></div><b>native apps</b><p>SwiftUI on iPhone · Jetpack Compose on Android</p></div>
+      <div class="tile"><div class="num"><span data-n="69629">0</span></div><b>lines of production code</b><p>Measured from our repositories</p></div>
+      <div class="tile"><div class="num"><span data-n="167">0</span></div><b>automated tests passing</b><p>Run on every change</p></div>
+      <div class="tile"><div class="num"><span data-n="3043">0</span></div><b>residents surveyed</b><p>Before a line of code</p></div>
+    </div>
+    <div class="kaizen" id="kaizen">
+      <svg viewBox="0 0 600 600"><circle class="kz-ring" cx="300" cy="300" r="220" pathLength="1"/><circle class="kz-dot" id="kzDot" r="16" cx="300" cy="80"/></svg>
+      <div class="kz-c"><span class="eyebrow"><b>Kaizen</b></span><p class="display">In real hands</p></div>
+      <div class="kz k1"><b>1 · Test</b>at homes and schools</div>
+      <div class="kz k2"><b>2 · Find</b>what people skip</div>
+      <div class="kz k3"><b>3 · Simplify</b>every confusing screen</div>
+      <div class="kz k4"><b>4 · Check again</b>every fix, re-tested</div>
+    </div>
+  </section>
+
+  <!-- ===== PILOT ===== -->
+  <section class="scene" id="s-pilot">
+    <div class="pl-head"><span class="eyebrow"><b>13</b> · Project achievement · The pilot</span><h2 class="h h3">Over three months. <em>Real plants, real people.</em></h2></div>
+    <div class="pl-grow" id="plGrow">
+      <div class="pl-week"><span class="eyebrow">Pilot week</span><b class="num g" id="plWk">1</b></div>
+      <svg viewBox="0 0 640 560" id="plPlant"></svg>
+      <div class="pl-cal" id="plCal"></div>
+    </div>
+    <div class="pl-m" id="plM">
+      <div class="m m1"><div><b class="num" data-k="users">0</b><span>people</span></div><i>·</i><div><b class="num" data-k="plants">0</b><span>real plants</span></div></div>
+      <div class="m m2"><b class="num g" data-k="plantDays">0</b><span>verified Plant-Days</span></div>
+      <div class="m m3">
+        <div class="ring" data-k="weekly"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" class="rb"/><circle cx="100" cy="100" r="80" class="rf" pathLength="100"/></svg><b class="num"><span data-k="weekly">0</span>%</b><p><em>Forgetting →</em> still checking in every week</p></div>
+        <div class="ring" data-k="survival"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="80" class="rb"/><circle cx="100" cy="100" r="80" class="rf" pathLength="100"/></svg><b class="num g"><span data-k="survival">0</span>%</b><p>of pilot plants still alive</p></div>
+      </div>
+      <div class="m m4"><div class="pc"><b class="num" data-k="flags">0</b><p><em>No one to ask →</em> problems caught early</p></div><div class="pc"><b class="num" data-k="trades">0</b><p><em>Motivation →</em> trades on Roots</p></div></div>
+    </div>
+    <div class="cchart" id="cchart"><svg viewBox="0 0 1500 560" id="ccSvg"></svg><div class="cc-key"></div></div>
+    <span class="src pl-src">Rooted SG pilot · <b>3+ months</b> · every figure from verified in-app check-ins</span>
+  </section>
+
+  <!-- ===== FORECAST ===== -->
+  <section class="scene" id="s-forecast">
+    <div class="fc-left">
+      <span class="eyebrow"><b>14</b> · The forecast · Monte Carlo</span>
+      <h2 class="h h3" id="fcH">We ran year three <em>100,000 times</em>.</h2>
+      <div class="fc-runs" id="fcRuns"><div class="num"><span id="runsN">0</span></div><p class="lead">simulated futures</p></div>
+      <div class="fc-big" id="fcBig">
+        <div><div class="num g"><span data-n="1814">0</span></div><p class="lead">more plants alive at 12 months · base case</p></div>
+        <div><div class="num"><span data-n="3.3" data-d="1">0</span>M</div><p class="lead">verified Plant-Days · a brand-new national dataset</p></div>
+      </div>
+      <span class="src">Rooted SG Monte Carlo model · <b>100,000 runs</b> · MOE (~330 schools) · a forecast, not a result</span>
+    </div>
+    <div class="fc-right">
+      <canvas id="hist" width="1700" height="1100"></canvas>
+      <div class="ladder" id="ladder">
+        <div class="rung"><i></i><b>Pilot</b><span>2 schools · 240 students</span></div>
+        <div class="rung"><i></i><b>Year 2</b><span>20 schools · 2,400 households</span></div>
+        <div class="rung"><i></i><b>Year 3</b><span>60 schools · 7,200 households</span></div>
+      </div>
+      <div class="hist-notes" id="histNotes">
+        <div class="hn"><b>86%</b> of runs clear the +5-point pilot bar</div>
+        <div class="hn"><b>1,464</b> median extra plants alive</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SUSTAINABILITY ===== -->
+  <section class="scene" id="s-sustain">
+    <span class="eyebrow su-eye"><b>15</b> · Sustainability · Overall impact</span>
+    <h2 class="h h2 su-h">It lasts <em>without us</em>.</h2>
+    <div class="pillars" id="pillars">
+      <div class="card pl"><svg viewBox="0 0 48 48" class="inkg"><rect x="14" y="5" width="20" height="38" rx="5"/><path d="M19 24l4 4 7-8"/></svg><h3 class="h h4">Light</h3><p class="lead">Every model runs on the phone. More users, no heavier servers.</p></div>
+      <div class="card pl"><svg viewBox="0 0 48 48" class="inkg"><path d="M6 20 24 8l18 12"/><path d="M10 18v22h28V18"/><path d="M20 40V28h8v12"/></svg><h3 class="h h4">Owned</h3><p class="lead">Schools run their own leagues. No single person it depends on.</p></div>
+      <div class="card pl"><svg viewBox="0 0 48 48" class="inkg"><circle cx="14" cy="16" r="6"/><circle cx="34" cy="16" r="6"/><path d="M4 40c1-8 5-12 10-12s9 4 10 12M24 40c1-8 5-12 10-12s9 4 10 12"/></svg><h3 class="h h4">Neighbour to neighbour</h3><p class="lead">Roots needs no middleman. Surplus moves block to block.</p></div>
+    </div>
+    <div class="su-band" id="suBand"><div class="num g"><span data-n="48000">0</span>+</div><p class="lead">community gardeners in <b>2,000+ groups</b> are a ready-made network to grow into.</p><span class="src">NParks · <b>Community in Bloom, Aug 2025</b></span></div>
+  </section>
+
+  <!-- ===== CLOSE ===== -->
+  <section class="scene" id="s-close">
+    <div class="sky"><svg class="cloud cl1" viewBox="0 0 420 260"><use href="#cloudA"/></svg><svg class="cloud cl2" viewBox="0 0 420 260"><use href="#cloudB"/></svg><svg class="cloud cl3" viewBox="0 0 420 260"><use href="#cloudC"/></svg></div>
+    <h2 class="h h2 cl-imagine" id="clImagine">Imagine if we could <em>see them</em>.</h2>
+    <canvas class="field" id="field2"></canvas>
+    <div class="cl-pandan" id="clPandan"><svg viewBox="0 0 400 420" id="clPanSvg"></svg><div class="chip"><i class="pdot"></i>Grandma's pandan · <b>alive · day 194</b></div></div>
+    <div class="cl-quote" id="clQuote"><p class="h h2">A plant never dies in a day.</p><p class="h h2"><em>It dies from being forgotten.</em></p></div>
+    <div class="cl-end" id="clEnd">
+      <div class="brand big"><svg><use href="#sprout"/></svg><span>Rooted SG</span></div>
+      <h1 class="h h1">Count what we keep <span class="alive">alive<svg class="ul" viewBox="0 0 300 24" preserveAspectRatio="none"><path pathLength="1" d="M3 15C40 4 70 22 110 12S190 4 230 14 280 12 297 8"/></svg><svg class="sp" viewBox="0 0 40 44"><path pathLength="1" d="M20 42V18"/><path pathLength="1" d="M20 28C11 28 6 22 6 14c9 0 14 6 14 14"/><path pathLength="1" d="M20 20C29 20 34 14 34 6c-9 0-14 6-14 14"/></svg></span>.</h1>
+      <p class="cl-names" id="clNames"></p>
+      <p class="h h3 cl-thanks" id="clThanks"><em>Thank you.</em></p>
+    </div>
+  </section>
+
+  <!-- chrome -->
+  <header class="chrome" id="chrome">
+    <div class="brand"><svg><use href="#sprout"/></svg><span>Rooted SG</span><i class="sep"></i><span class="eyebrow">Catalyst Challenge</span></div>
+    <div class="secpill" id="secpill"><i></i><span id="secTxt"></span></div>
+  </header>
+  <div class="speaker" id="speaker"><div class="av" id="spAv"></div><div><b id="spName"></b><span id="spPart"></span></div></div>
+  <div class="caption" id="caption"></div>
+  <div class="progress"><i id="prog"></i></div>
+</div></div>
+
+<div class="autoflag" id="autoflag">REHEARSAL · AUTO</div>
+<div class="help" id="help">
+  <div><kbd>→</kbd><kbd>Space</kbd>next line (clickers work)</div>
+  <div><kbd>←</kbd>previous line</div>
+  <div><kbd>F</kbd>full screen</div>
+  <div><kbd>P</kbd>open the presenter view</div>
+  <div><kbd>C</kbd>show the script as a caption</div>
+  <div><kbd>A</kbd>rehearsal: auto-advance on the 9:00 plan</div>
+  <div><kbd>V</kbd>rehearsal: read each line aloud</div>
+  <div><kbd>Home</kbd>back to the start</div>
+  <div><kbd>?</kbd>this help</div>
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/script.js"></script>
+<script src="js/simdata.js"></script>
+<script src="js/leaf.js"></script>
+<script src="js/deck.js"></script>
+</body>
+</html>

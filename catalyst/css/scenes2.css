@@ -1,0 +1,123 @@
+/* Round 2 · redesigned scenes: 5 Whys as a taproot, the Plant Doctor camera, the Guardian Path, the pilot dashboard */
+
+/* ---------- 5 WHYS: a root dug into the soil ---------- */
+.wy-head{position:absolute;left:120px;top:150px;z-index:3}
+.wy-head .h3{margin-top:14px}
+.wy-svg{position:absolute;inset:0;width:1920px;height:1080px}
+.wy-svg .ring{transform-box:fill-box;transform-origin:center}
+.wyn{position:absolute;top:var(--y);transform:translateY(-50%);display:flex;align-items:center;gap:22px;z-index:3}
+.wyn[data-s="l"]{right:1000px;flex-direction:row-reverse;text-align:right}
+.wyn[data-s="r"]{left:1000px}
+.wyn i{flex:none;width:62px;height:62px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-style:normal;font-family:var(--serif);font-size:34px;box-shadow:0 0 0 8px #F6F0E4}
+.wyn p{background:#fff;border-radius:22px;padding:16px 26px;font-family:var(--serif);font-weight:400;font-size:38px;letter-spacing:-.02em;line-height:1.1;box-shadow:0 18px 40px -24px rgba(60,40,20,.5),inset 0 0 0 1.5px rgba(10,10,10,.1);max-width:700px}
+.wyn p em{color:var(--green)}
+.wyn p b{font-weight:500;color:var(--alert);font-style:italic}
+.wy-root{position:absolute;left:50%;top:900px;transform:translateX(-50%);width:820px;padding:26px 40px;text-align:center;z-index:4}
+.wy-root .h4{margin-top:8px;font-size:60px}
+
+/* ---------- PLANT DOCTOR camera ---------- */
+.cam{position:absolute;inset:0;opacity:0;visibility:hidden}
+.cam-bg{position:absolute;inset:0;width:100%;height:100%}
+.cam-ph{position:absolute;left:60px;top:28px;--w:380px}
+#camSvg{position:absolute;inset:0;width:100%;height:100%}
+.sway{animation:sway 4.5s ease-in-out infinite;transform-box:view-box;transform-origin:180px 700px}
+.sway.frozen{animation-play-state:paused}
+@keyframes sway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.4deg) translateY(-4px)}}
+.clues{position:absolute;left:480px;top:150px;width:380px;display:flex;flex-direction:column;gap:22px}
+.clue{display:flex;align-items:center;gap:18px;background:#fff;border-radius:24px;padding:20px 22px;box-shadow:inset 0 0 0 1.5px var(--rule),0 22px 40px -26px rgba(20,40,28,.45)}
+.clue i{flex:none;width:58px;height:58px;border-radius:16px}
+.clue .sw1{background:radial-gradient(circle at 50% 50%,#5A3510 0 18%,#D9AE3E 40%,#5FA857 72%)}
+.clue .sw2{background:#fff;box-shadow:inset 0 0 0 4px #0B5A32;border-radius:50% 0}
+.clue .sw3{background:linear-gradient(135deg,#FFE9A8,#F2C14E)}
+.clue .eyebrow{font-size:19px}
+.clue p{font-size:27px;font-weight:600;line-height:1.2;margin-top:4px}
+
+/* ---------- GUARDIAN PATH + ROOTS ---------- */
+.gp,.rt{position:absolute;inset:0}
+.gp-head,.rt-head{position:absolute;left:120px;top:150px}
+.gp-head .h3,.rt-head .h3{margin-top:14px}
+.gp-ph{position:absolute;left:120px;top:300px;--w:330px}
+.rt-ph{position:absolute;left:200px;top:300px;--w:330px;z-index:2}
+.rt-ph2{position:absolute;left:470px;top:350px;--w:300px;transform:rotate(5deg)}
+.ph .scr img.pan{height:auto;min-height:100%;object-fit:cover;object-position:top}
+.gp-path{position:absolute;left:520px;top:280px;width:560px;height:720px;overflow:visible}
+.gp-path .trail{fill:none;stroke:var(--green);stroke-width:10;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.gp-nodes{position:absolute;left:520px;top:280px;width:560px;height:720px}
+.gpn{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;gap:14px}
+.gpn i{width:76px;height:76px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 4px var(--green);display:grid;place-items:center;font-style:normal;font-size:34px}
+.gpn.done i{background:var(--green);color:#fff}
+.gpn.now i{background:var(--amber);box-shadow:inset 0 0 0 4px #8A5A00,0 0 0 12px color-mix(in srgb,var(--amber) 28%,transparent)}
+.gpn.lock i{box-shadow:inset 0 0 0 3px var(--text);background:var(--bg2)}
+.gpn span{font-size:26px;font-weight:600;white-space:nowrap;background:rgba(255,255,255,.92);padding:6px 14px;border-radius:12px}
+.gpn.now span{color:#6B4A00}
+.gp-mojo{position:absolute;width:120px;left:0;top:0;z-index:4;pointer-events:none}
+.gp-card{position:absolute;left:1180px;top:300px;width:620px;padding:34px 38px}
+.gp-card .qq{font-family:var(--serif);font-size:48px;line-height:1.05;letter-spacing:-.025em;margin:12px 0 10px}
+.gp-card .qsub{font-size:28px;font-weight:600;margin-bottom:8px}
+.gp-card .qo{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-radius:18px;box-shadow:inset 0 0 0 2px var(--rule);font-size:28px;font-weight:500;margin-top:12px}
+.gp-card .qo.ok.on{box-shadow:inset 0 0 0 3px var(--green);color:var(--green);background:var(--leaf)}
+.gp-card .qo svg{width:36px;height:36px;color:var(--green);opacity:0}
+.gp-card .qo.ok.on svg{opacity:1}
+.gp-chips{position:absolute;left:1180px;top:820px;width:640px;display:flex;flex-wrap:wrap;gap:14px}
+.gp-chips .chip{position:relative}
+.rt .listings{left:900px;top:330px;width:760px;gap:22px}
+.rt .lst{padding:26px 30px}
+.rt .lst b{font-size:46px}
+.rt .lst span{font-size:28px}
+.rt .lst i{width:90px;height:90px;font-size:56px}
+
+/* ---------- PILOT ---------- */
+.pl-head{left:120px;top:150px}
+.pl-grow{position:absolute;left:120px;top:300px;width:700px;height:720px;border-radius:40px;background:linear-gradient(180deg,#EAF5FC 0%,#F3F3F1 60%)}
+.pl-week{position:absolute;left:36px;top:26px;display:flex;align-items:baseline;gap:18px}
+.pl-week .num{font-size:110px}
+#plPlant{position:absolute;left:30px;top:110px;width:640px;height:460px;overflow:visible}
+.pl-cal{position:absolute;left:36px;right:36px;bottom:30px;display:grid;grid-template-columns:repeat(13,1fr);gap:7px}
+.pl-cal div{display:grid;grid-template-rows:repeat(7,1fr);gap:4px}
+.pl-cal i{height:10px;border-radius:3px;background:rgba(10,10,10,.1)}
+.pl-cal i.on{background:var(--green)}
+.pl-m{position:absolute;left:900px;right:120px;top:300px;display:flex;flex-direction:column;gap:24px}
+.pl-m .m{background:var(--bg2);border-radius:30px;padding:24px 34px}
+.m1{display:flex;align-items:center;gap:30px}
+.m1>div{display:flex;align-items:baseline;gap:16px}
+.m1 .num{font-size:110px}
+.m1 span,.m2 span{font-size:32px;font-weight:600}
+.m1>i{font-style:normal;font-size:70px;font-weight:300}
+.m2{background:var(--leaf)!important;display:flex;align-items:baseline;gap:24px}
+.m2 .num{font-size:150px}
+.m3{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.ring{position:relative;display:grid;grid-template-columns:150px 1fr;align-items:center;gap:20px}
+.ring svg{width:150px;height:150px;transform:rotate(-90deg)}
+.ring .rb{fill:none;stroke:#fff;stroke-width:22}
+.ring .rf{fill:none;stroke:var(--green);stroke-width:22;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100}
+.ring .num{position:absolute;left:0;width:150px;text-align:center;font-size:50px}
+.ring p,.pc p{font-size:25px;font-weight:600;line-height:1.25}
+.ring p em,.pc p em{color:var(--green);font-style:normal}
+.m4{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pc{display:flex;align-items:center;gap:22px}
+.pc .num{font-size:96px}
+.cchart{left:120px;right:120px;top:300px}
+.pl-src{bottom:30px}
+
+/* ---------- BUILT: each number gets a picture ---------- */
+.tile{min-height:500px;position:relative}
+.viz{position:absolute;left:36px;right:36px;bottom:34px;height:150px}
+.viz.code{display:flex;flex-direction:column;gap:9px;justify-content:flex-end}
+.viz.code i{display:block;height:10px;border-radius:5px;background:var(--text);transform-origin:0 50%}
+.viz.code i:nth-child(3n){background:var(--green)}
+.viz.tests{display:grid;grid-template-columns:repeat(21,1fr);gap:4px;align-content:end}
+.viz.tests i{aspect-ratio:1;border-radius:3px;background:var(--green)}
+.viz.people{display:grid;grid-template-columns:repeat(15,1fr);gap:7px;align-content:end}
+.viz.people i{aspect-ratio:1;border-radius:50%;background:var(--text)}
+.viz.people i:nth-child(10n+3),.viz.people i:nth-child(7n){background:var(--green)}
+.viz.phones{display:flex;gap:22px;align-items:flex-end}
+.viz.phones div{width:74px;height:150px;border-radius:16px;box-shadow:inset 0 0 0 5px var(--text);position:relative;display:grid;place-items:center;font-family:var(--mono);font-size:15px;letter-spacing:.06em}
+.viz.phones div:last-child{border-radius:10px;box-shadow:inset 0 0 0 5px var(--green);color:var(--green)}
+
+/* ---------- CLOSE: the pandan comes back ---------- */
+.cl-pandan{position:absolute;left:50%;top:250px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;opacity:0}
+.cl-pandan svg{width:420px;height:420px;overflow:visible}
+.cl-pandan .chip{position:relative;font-size:26px;padding:18px 30px}
+
+/* misc */
+.md-device .conf{grid-column:1/-1}
