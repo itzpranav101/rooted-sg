@@ -16,3 +16,4 @@ rwcc/_head.txt
 rwcc/_tail.txt
 rwcc/build.py
 rwcc/sim
+presentation/*.pptx
