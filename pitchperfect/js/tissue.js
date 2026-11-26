@@ -220,7 +220,7 @@ function render(now) {
         // membrane crossings flash where the line meets cell walls
         cells.forEach(ce => { if (Math.abs(ce.y) < ce.r && Math.abs(ce.x) < 34) { const u = (tt * .9) % 1, xx = lerp(-33, 33, u); if (Math.abs(xx - (ce.x - ce.r * .8)) < 1.2) { g.save(); g.strokeStyle = C.gr; g.lineWidth = .25; g.beginPath(); g.arc(ce.x - ce.r * .8, 0, 1.4, 0, TAU); g.stroke(); g.restore(); } } }); }
       g.restore();
-      txt(g, low > hi ? '1 kHz' : '100 kHz', 0, -42, { s: 4.2, col: C.gr, al: 'center', w: 300 }); txt(g, low > hi ? 'around the cells' : 'through the cells', 0, -37.6, { s: 1.9, al: 'center', a: .8 }); }
+      txt(g, low > hi ? 'around' : 'through', 0, -42, { s: 4.2, col: C.gr, al: 'center', w: 300 }); txt(g, low > hi ? 'the cells' : 'the cells', 0, -37.6, { s: 1.9, al: 'center', a: .8 }); }
     // cell part labels (step 5)
     const lab = (1 - T(.495, .52)) * T(.43, .47);
     if (lab > .01) { const c0 = cells.reduce((b, c) => (Math.hypot(c.x + 26, c.y + 26) < Math.hypot(b.x + 26, b.y + 26) ? c : b)); const c1 = cells.reduce((b, c) => (Math.hypot(c.x - 30, c.y - 24) < Math.hypot(b.x - 30, b.y - 24) ? c : b));
@@ -275,8 +275,8 @@ function render(now) {
   const aG = T(.82, .86) * (1 - T(.89, .93));
   if (aG > .01) { g.save(); g.globalAlpha = aG; const x0 = -36, x1 = 38, y0 = 30, y1 = -18, k = T(.82, .88), curve = (a, b, f) => b + (1 - b) * (1 / (1 + Math.pow(f / 12, 1.4)));
     g.lineWidth = .3; g.beginPath(); g.moveTo(x0, y1 - 3); g.lineTo(x0, y0); g.lineTo(x1, y0); g.stroke();
-    txt(g, 'IMPEDANCE |Z|', x0 - .5, y1 - 4.5, { s: 1.8, a: .7 }); txt(g, 'FREQUENCY  1 kHz → 100 kHz', x1, y0 + 4, { s: 1.8, a: .7, al: 'right' });
-    [1, 10, 100].forEach((f, i) => { const x = lerp(x0, x1, Math.log10(f) / 2); g.beginPath(); g.moveTo(x, y0); g.lineTo(x, y0 + 1); g.stroke(); txt(g, f + ' kHz', x, y0 + 2.8, { s: 1.6, al: 'center', a: .6 }); });
+    txt(g, 'HOW MUCH IT RESISTS', x0 - .5, y1 - 4.5, { s: 1.8, a: .7 }); txt(g, 'LOW → HIGH SPEED', x1, y0 + 4, { s: 1.8, a: .7, al: 'right' });
+    [1, 10, 100].forEach((f, i) => { const x = lerp(x0, x1, Math.log10(f) / 2); g.beginPath(); g.moveTo(x, y0); g.lineTo(x, y0 + 1); g.stroke(); txt(g, (f == 1 ? 'low' : f == 10 ? 'mid' : 'high'), x, y0 + 2.8, { s: 1.6, al: 'center', a: .6 }); });
     const path = (b, dash, w, kk) => { g.save(); g.lineWidth = w; if (dash) g.setLineDash([1.1, 1]); g.beginPath(); const N = 80, nn = Math.floor(N * kk); for (let i = 0; i <= nn; i++) { const f = Math.pow(10, i / N * 2), x = lerp(x0, x1, i / N), y = lerp(y0, y1, curve(0, b, f)); g[i ? 'lineTo' : 'moveTo'](x, y); } g.stroke(); g.restore(); };
     path(.35, true, .3, k); path(.62, false, .5, clamp(k * 1.2 - .1));
     const kk2 = clamp(k * 1.2 - .1); if (kk2 > .6) { txt(g, 'HEALTHY: big gap', x1, lerp(y0, y1, curve(0, .35, 100)) + 4.5, { s: 1.8, a: .8, al: 'right' }); txt(g, 'COLONISED: gap closes', x1, lerp(y0, y1, curve(0, .62, 100)) - 4.2, { s: 1.8, col: C.gr, w: 500, al: 'right' }); }
