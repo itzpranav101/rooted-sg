@@ -621,7 +621,7 @@ function tick(now) {
   const dt = Math.min(.05, (now - last) / 1000); last = now;
   ptr.x += (ptr.tx - ptr.x) * .06; ptr.y += (ptr.ty - ptr.y) * .06;
   for (const o of live) {
-    if (!o.vis) continue;
+    if (!o.vis || !o.canvas.closest('.scene.on')) continue;
     const p = o.pinned ? parseFloat(o.canvas.dataset.p || 0) : ownProgress(o.canvas);
     o.api.update((now / 1000) * (reduced ? 0 : 1) + o.t0, p, ptr, dt);
     o.renderer.render(o.scene, o.camera); callouts(o, p);

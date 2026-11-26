@@ -1,0 +1,29 @@
+/* RootStake scenes: a feasible, working prototype */
+.rs-vis{position:absolute;left:84px;top:140px;width:1010px;height:830px;border-radius:44px;overflow:hidden;background:radial-gradient(90% 70% at 50% 25%,#F2F7F0,#DDE8DA);box-shadow:0 40px 90px -40px rgba(20,40,28,.35),inset 0 0 0 2px rgba(11,90,50,.1)}
+.rs-vis.tis{background:#FBFAF6}
+.rs-vis canvas{position:absolute;inset:0;width:100%;height:100%}
+.rs-txt{position:absolute;left:1160px;top:170px;width:690px}
+.rs-txt .h2{margin:14px 0 30px;font-size:84px}
+.rs-pt{display:grid;grid-template-columns:52px 1fr;gap:18px;font-size:34px;line-height:1.28;margin-top:26px;font-weight:300}
+.rs-pt svg{width:46px;height:46px;padding:8px;border-radius:50%;background:var(--green,#0B5A32);color:#fff;margin-top:4px}
+.rs-pt b{display:block;font-weight:500;font-size:38px;margin-bottom:2px}
+.rs-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.rs-tiers .tr{padding:20px 22px;border-radius:26px;box-shadow:inset 0 0 0 2px rgba(18,26,21,.18);font-size:28px;line-height:1.25;font-weight:300}
+.rs-tiers .tr b{display:block;font-size:30px;font-weight:500;margin-bottom:4px}
+.rs-tiers .tr.b{background:#121A15;color:#F8F6F1;box-shadow:none}.rs-tiers .tr.b b{color:#A3E68B}
+.rs-tiers .tr.p b{color:var(--green,#0B5A32)}
+.callouts{position:absolute;inset:0;pointer-events:none}
+.callouts svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.callouts line{stroke:#121A15;stroke-width:2;opacity:.55}
+.callouts circle{fill:#0B5A32}
+.call{position:absolute;left:0;top:0;opacity:0;font-size:28px;font-weight:500;color:#0B5A32;white-space:nowrap;padding:12px 20px;border-radius:18px;background:rgba(248,246,241,.9);box-shadow:0 8px 26px -12px rgba(0,0,0,.25)}
+.call b{display:block;font-family:'Newsreader',serif;font-weight:300;font-size:34px;letter-spacing:-.02em;color:#121A15;margin-top:2px}
+
+.rs-photos{background:#EFEBE1}
+.rs-photos figure{position:absolute;margin:0;overflow:hidden;border-radius:28px;box-shadow:0 20px 50px -26px rgba(20,40,28,.5)}
+.rs-photos img{width:100%;height:100%;object-fit:cover;display:block}
+.rs-photos figcaption{position:absolute;left:18px;bottom:18px;background:rgba(248,246,241,.92);padding:10px 22px;border-radius:99px;font-size:28px;font-weight:500;color:#0B5A32}
+.rs-photos .f1{left:20px;top:20px;width:970px;height:520px}
+.rs-photos .f2{left:20px;top:560px;width:480px;height:250px}
+.rs-photos .f3{left:510px;top:560px;width:480px;height:250px}
+.rs-photos .f2 img{object-position:30% 60%}
