@@ -591,7 +591,7 @@ function go(i, opts = {}) {
   i = Math.max(-1, Math.min(LINES.length - 1, i));
   const n = i < 0 ? 'ready' : LINES[i].scene, sc = S[n], local = i < 0 ? -1 : i - first[n];
   const stepForward = i === cur + 1 && n === curScene;
-  killLive(); gsap.killTweensOf('#speaker'); gsap.set('#speaker', { autoAlpha: 0 });
+  live.forEach(t => t.progress(1)); killLive(); gsap.killTweensOf('#speaker'); gsap.set('#speaker', { autoAlpha: 0 });
   if (n !== curScene) {
     const o = sceneEl(curScene), nx = sceneEl(n);
     gsap.killTweensOf([o, nx]);
@@ -642,7 +642,7 @@ $('#s-ready').classList.add('on'); gsap.set('#s-ready', { autoAlpha: 1 }); gsap.
 const start = parseInt(location.hash.slice(1)) - 1;
 const boot = () => { if (start >= 0) go(start); else if (chan && MIRROR) chan.postMessage({ ask: 1 }); };
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(boot, 50));
-window.DECK = { go, get cur() { return cur; }, W, ff: () => live.forEach(t => t.progress(1)) };
+window.DECK = { go, get cur() { return cur; }, W, ff: () => live.forEach(t => t.progress(1)), liveDur: () => Math.max(0, ...live.map(t => t.totalDuration() + t.delay())) };
 
 /* =====================================================================
    ===================================================================== */
