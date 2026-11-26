@@ -142,7 +142,6 @@
 .g-fill{fill:none;stroke:var(--green);stroke-width:56;stroke-linecap:round;stroke-dasharray:100;stroke-dashoffset:100}
 #gNeedle line{stroke:var(--text);stroke-width:8;stroke-linecap:round}
 #gNeedle circle{fill:var(--text)}
-#gNeedle{transform-origin:300px 310px}
 .g-read{text-align:center;margin-top:20px}
 .g-read .num{font-size:150px;color:var(--green)}
 .g-read .lead{font-size:32px}

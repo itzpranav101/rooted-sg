@@ -4,7 +4,6 @@
 .wy-head{position:absolute;left:120px;top:150px;z-index:3}
 .wy-head .h3{margin-top:14px}
 .wy-svg{position:absolute;inset:0;width:1920px;height:1080px}
-.wy-svg .ring{transform-box:fill-box;transform-origin:center}
 .wyn{position:absolute;top:var(--y);transform:translateY(-50%);display:flex;align-items:center;gap:22px;z-index:3}
 .wyn[data-s="l"]{right:1000px;flex-direction:row-reverse;text-align:right}
 .wyn[data-s="r"]{left:1000px}
@@ -337,3 +336,5 @@
 .mk-map .melab{paint-order:stroke;stroke:#fff;stroke-width:8px;stroke-linejoin:round}
 .g-read .lead{margin-top:14px}
 .fc-big .lead{margin-top:14px}
+.wy-root{left:1060px;top:790px;transform:none;width:760px;text-align:left}
+.wy-root{top:868px}
