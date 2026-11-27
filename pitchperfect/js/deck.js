@@ -359,8 +359,8 @@ S.grow = {
       tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'needs a seedling.') + .9); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'needs a seedling.') + .9); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#match', { autoAlpha: 0, y: -30, duration: .5 }, 0); tl.set('#opts', { autoAlpha: 1 }, .3); const O = $$('#opts .op');
       [W(i, 'sell it,'), W(i, 'swap it,'), W(i, 'give it')].forEach((t, k) => tl.fromTo(O[k], { autoAlpha: 0, y: 60, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: .8, ease: E2 }, t));
-      tl.add(() => { $('#rtHead .h3').innerHTML = 'Strangers become <em>a growing community</em>.'; }, W(i, "Neighbours who've") - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, "Neighbours who've") - .3);
-      tl.set('#comm', { autoAlpha: 1 }, 0); const C = $$('#comm .chip'); [W(i, 'advice,'), W(i, 'cuttings and'), W(i, 'harvests,')].forEach((t, k) => tl.add(pop(C[k], { s: .6 }), t)); return tl; }
+      tl.add(() => { $('#rtHead .h3').innerHTML = 'Strangers become <em>a growing community</em>.'; }, W(i, 'harvests.') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'harvests.') - .3);
+      tl.set('#comm', { autoAlpha: 1 }, 0); const C = $$('#comm .chip'); [W(i, 'cuttings and'), W(i, 'cuttings and'), W(i, 'harvests,')].forEach((t, k) => tl.add(pop(C[k], { s: .6 }), t)); return tl; }
   ]
 };
 const rtH0 = $('#rtHead .h3').innerHTML; const _gr = S.grow.reset; S.grow.reset = () => { $('#rtHead .h3').innerHTML = rtH0; _gr(); };
@@ -584,14 +584,14 @@ S.rs1 = { sec: 'RootStake', reset() { hide('#rs1V', $$('#rs1V figure'), $$('#rs1
     i => { const tl = gsap.timeline(); tl.set('#rs1V', { autoAlpha: 1 }, 0); tl.fromTo('#rs1V .f1', { autoAlpha: 0, clipPath: 'inset(0 100% 0 0 round 28px)' }, { autoAlpha: 1, clipPath: 'inset(0 0% 0 0 round 28px)', duration: 1.5, ease: 'power3.inOut' }, .1); tl.fromTo('#rs1V .f1 img', { scale: 1.25 }, { scale: 1.04, duration: 16, ease: 'power1.out' }, .1); tl.add(rise($$('#rs1T > .eyebrow, #rs1T > .h2'), { st: .15 }), .5); return tl; },
     i => { const tl = gsap.timeline(), r = $$('#rs1T .rs-pt'); tl.set('#rs1T > *', { autoAlpha: 1 }, 0); tl.set(r, { autoAlpha: 0 }, 0); tl.set($$('#rs1T .tr'), { autoAlpha: 0 }, 0); [['house module', 0], ['soil probe', 1]].forEach(([w, k]) => tl.fromTo(r[k], { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, w) - .2));
       ['f2', 'f3'].forEach((f, k) => { const t = W(i, k ? 'tube that' : 'soil probe') - .2; tl.fromTo('#rs1V .' + f, { autoAlpha: 0, clipPath: 'inset(100% 0 0 0 round 28px)' }, { autoAlpha: 1, clipPath: 'inset(0% 0 0 0 round 28px)', duration: 1.2, ease: 'power3.inOut' }, t); tl.fromTo('#rs1V .' + f + ' img', { scale: 1.3 }, { scale: 1.05, duration: 12, ease: 'power1.out' }, t); tl.fromTo('#rs1V .' + f + ' figcaption', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .6 }, t + .9); }); tl.fromTo(r[2], { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'tube that') + .2); return tl; },
-    i => { const tl = gsap.timeline(), t = $$('#rs1T .tr'); tl.set('#rs1T > *', { autoAlpha: 1 }, 0); tl.set(t, { autoAlpha: 0 }, 0); [['house, the', 0], ['in progress', 1], ['ion sensing', 2]].forEach(([w, k]) => { const at = W(i, w) - .2; tl.fromTo(t[k], { autoAlpha: 0, y: 40, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .9, ease: 'back.out(1.6)' }, at); tl.fromTo(t[k], { boxShadow: '0 0 0 0 rgba(11,90,50,.45)' }, { boxShadow: '0 0 0 26px rgba(11,90,50,0)', duration: 1.2, ease: 'power2.out' }, at + .3); }); return tl; }
+    i => { const tl = gsap.timeline(), t = $$('#rs1T .tr'); tl.set('#rs1T > *', { autoAlpha: 1 }, 0); tl.set(t, { autoAlpha: 0 }, 0); [['house, the', 0], ['in progress', 1], ['pilot users', 2]].forEach(([w, k]) => { const at = W(i, w) - .2; tl.fromTo(t[k], { autoAlpha: 0, y: 40, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: .9, ease: 'back.out(1.6)' }, at); tl.fromTo(t[k], { boxShadow: '0 0 0 0 rgba(11,90,50,.45)' }, { boxShadow: '0 0 0 26px rgba(11,90,50,0)', duration: 1.2, ease: 'power2.out' }, at + .3); }); return tl; }
   ] };
 S.rs2 = { sec: 'RootStake', reset() { hide('#rs2V', '#rs2Sig', $$('#rs2T > *'), $$('#rs2T .rs-pt')); rsSet('#rs2Cv', .06); },
   beats: [
-    i => { const tl = gsap.timeline(); rsIn(2, tl, i); tl.add(rsTo('#rs2Cv', .17, 2.6), W(i, 'two halves') - .3); tl.add(rsTo('#rs2Cv', .28, 2.4), W(i, 'many versions') - .2); rsPts(2, tl, i, ['many versions']); return tl; },
-    i => { const tl = gsap.timeline(), r = $$('#rs2T .rs-pt'); tl.set('#rs2T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0);
-      tl.add(rsTo('#rs2Cv', .5, 2.8), W(i, 'moisture fork') - .4); tl.add(rsTo('#rs2Cv', .58, 2), W(i, 'thin tube') - .3); tl.add(rsTo('#rs2Cv', .64, 2), W(i, 'pH sensor') - .3); tl.add(rsTo('#rs2Cv', .76, 2.4), W(i, 'Close it') - .3); tl.add(rsTo('#rs2Cv', .96, 3), W(i, 'exits at the nose') - .6);
-      tl.fromTo('#rs2Sig', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .9, ease: E2 }, W(i, 'Close it')); tl.fromTo('#sgBar', { scaleX: .04 }, { scaleX: .96, duration: 5, ease: 'power2.inOut' }, W(i, 'exits at the nose') - 1.2); tl.fromTo(r[1], { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'moisture fork')); tl.fromTo(r[2], { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'thin tube')); tl.fromTo(r[3], { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'exits at the nose')); return tl; }
+    i => { const tl = gsap.timeline(), r = $$('#rs2T .rs-pt'); rsIn(2, tl, i);
+      tl.add(rsTo('#rs2Cv', .28, 3), W(i, 'two halves') - .4); rsPt(tl, r[0], W(i, 'two halves') - .2);
+      tl.add(rsTo('#rs2Cv', .76, 4.4, 'power1.inOut'), W(i, 'multiple versions') - .4); rsPt(tl, r[1], W(i, 'multiple versions') - .2);
+      tl.add(rsTo('#rs2Cv', .96, 3), W(i, 'perfect penetration') - .3); rsPt(tl, r[2], W(i, 'perfect penetration') - .2); return tl; }
   ] };
 const rsPt = (tl, el, t) => { tl.fromTo(el, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t); tl.fromTo($('svg', el), { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: .6, ease: 'back.out(2.2)' }, t + .1); };
 const flow = (tl, el, pts, t, n = 5, d = .9) => { const c = gsap.timeline({ repeat: n }); pts.slice(1).forEach(([x, y], k) => c.to(el, { attr: { cx: x, cy: y }, duration: d / (pts.length - 1), ease: 'none' })); tl.set(el, { autoAlpha: 1, attr: { cx: pts[0][0], cy: pts[0][1] } }, t); tl.add(c, t); tl.to(el, { autoAlpha: 0, duration: .3 }, '>'); };
@@ -617,8 +617,8 @@ S.eco = { sec: 'The solution', reset() { hide('.eco-eye', '.eco-h', '#ecoTabs', 
 
 S.rs4 = { sec: 'RootStake', reset() { hide('#rs4V', $$('#rs4T > *'), $$('#rs4T .rs-pt')); rsSet('#rs4Cv', .78); },
   beats: [
-    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); rsIn(4, tl, i); tl.add(rsTo('#rs4Cv', .86, 6, 'power1.inOut'), W(i, 'Fungal diseases') - .4); rsPt(tl, r[0], W(i, 'move fast') - .4); return tl; },
-    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); tl.set('#rs4T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs4Cv', .9, 3.2), W(i, 'shift across') - .5); tl.set('#rs4Cv', { attr: { 'data-p': .985 } }, W(i, 'raise the alarm') - 1); tl.add(rsTo('#rs4Cv', 1, 2.4, 'power2.out'), W(i, 'raise the alarm') - .9); rsPt(tl, r[1], W(i, 'catch it first') - .2); rsPt(tl, r[2], W(i, 'raise the alarm') - .2); return tl; }
+    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); rsIn(4, tl, i); tl.add(rsTo('#rs4Cv', .9, 4, 'power1.inOut'), W(i, 'zoom out') - .2); rsPt(tl, r[0], W(i, 'move fast') - .4); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); tl.set('#rs4T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.set('#rs4Cv', { attr: { 'data-p': .995 } }, W(i, 'raise the alarm') - .5); tl.add(rsTo('#rs4Cv', 1, 1.4, 'power2.out'), W(i, 'raise the alarm') - .45); rsPt(tl, r[1], W(i, 'catch it first') - .2); rsPt(tl, r[2], W(i, 'raise the alarm') - .2); return tl; }
   ] };
 const fanPh = () => $$('#fanPh .fp');
 S.fan = { sec: 'The solution', reset() { hide('.fan-eye', '.fan-h', '.fan-sub', fanPh()); },
@@ -646,7 +646,7 @@ S.built = { sec: 'Feasibility', reset() { hide('.bt-eye', '.bt-h', $$('#tiles .t
   beats: [
     i => { const tl = gsap.timeline(), T = $$('#tiles .tile'); tl.add(rise(['.bt-eye', '.bt-h'], { st: .12 }), 0);
       [['for iPhone', 0], ['a hundred and sixty', 1]].forEach(([w, k]) => { const t = W(i, w); tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, 1.8), t + .2); }); return tl; },
-    i => { const tl = gsap.timeline(), T = $$('#tiles .tile'); [['three hundred', 2], ['four-plant', 3]].forEach(([w, k]) => { const t = W(i, w); tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, k === 2 ? 2.4 : 1.6), t + .2); });
+    i => { const tl = gsap.timeline(), T = $$('#tiles .tile'); [['three hundred', 2], ['fifteen-day', 3]].forEach(([w, k]) => { const t = W(i, w); tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, k === 2 ? 2.4 : 1.6), t + .2); });
       tl.add(rise('#btNote', { y: 20 }), W(i, 'A small test,')); return tl; }
   ] };
 
