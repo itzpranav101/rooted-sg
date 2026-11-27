@@ -9,13 +9,13 @@ window.SPEAKERS = {
 
 /* who · scene · stage · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
-  ['P', 'hook', 'The problem', 'Napoleon said an army marches on its stomach. A nation is no different, and ours is fed from abroad. But what if part of the answer is already sitting on a million balconies?', 1.2],
-  ['P', 'cold', 'The problem', 'Ninety percent of our food came from somewhere else, by ship, truck or plane. We don\'t control those journeys.', 0.6],
-  ['P', 'cold', 'The problem', 'I\'m Pranav, and together with Anandita, Pranav and Jiya, we\'re Rooted SG. We\'re four students who decided this was our problem to solve.', 0.6],
+  ['P', 'hook', 'The problem', 'Lao Tzu is said to have said: give a man a fish and you feed him for a day, teach him to fish and you feed him for a lifetime. Singapore can\'t feed itself. We are handed the fish. But what if part of the answer is already sitting on a million balconies?', 1.2],
+  ['P', 'cold', 'The problem', 'Ninety percent of our food came from somewhere else, by ship, truck or plane.', 0.6],
+  ['P', 'cold', 'The problem', 'I\'m Pranav, and with Anandita, Pranav and Jiya, we\'re Rooted SG, four students who decided this was our problem to solve.', 0.6],
   ['P', 'cold', 'The problem', 'It comes from over one hundred and eighty countries and regions. Every one is a point of failure, and none are in our hands.', 0.8],
   ['P', 'gap', 'The problem', 'The government\'s target: by 2035, twenty percent of our vegetables, sprouts and mushrooms grown here. Right now, about eight.', 0.5],
   ['P', 'gap', 'The problem', 'And it\'s handing people the tools: eight hundred and sixty thousand free seed packets, over two thousand four hundred allotment plots, and over seventeen hundred community gardens.', 0.6],
-  ['P', 'gap', 'The problem', 'Hundreds of thousands of chances to grow. But nobody can say how many plants survive. Singapore counts what it plants, not what it keeps alive.', 1.0],
+  ['P', 'gap', 'The problem', 'But nobody can say how many plants survive. Singapore counts what it plants, not what it keeps alive.', 1.0],
   ['P', 'hero', 'The insight', 'That gap is where we come in. For months we have been building Rooted SG, the first way to measure it: an app where you only earn points for a real, living plant.', 0.6],
   ['P', 'survey', 'The insight', 'Official numbers tell you what is happening, not why. So we ran our own survey, and three thousand and forty-three residents answered.', 0.8],
   ['P', 'survey', 'The insight', 'We did it before writing a single line of code, so the problem came from real people, not from us.', 0.5],
@@ -56,14 +56,14 @@ window.SCRIPT = [
   ['I', 'bm', 'Business model', 'Rooted SG is free to start, because a plant should never need a paywall to survive. We earn in three places.', 0.5],
   ['I', 'bm', 'Business model', 'One: Rooted SG Premium, planned at about thirty dollars a year.', 0.4],
   ['I', 'bm', 'Business model', 'Two: the RootStake kit, sold once, for people who want the pot to water itself. Three: schools and community gardens, which license leagues and class dashboards.', 0.5],
-  ['I', 'bm', 'Business model', 'The maths is modest and honest. At seven thousand two hundred households, with one in five on Premium, that is about forty-three thousand dollars a year, before kits and schools.', 0.9],
+  ['I', 'bm', 'Business model', 'The maths is modest and honest. At seven thousand two hundred households, with one in five on Premium, that is about forty-three thousand dollars a year.', 0.9],
   ['I', 'imp', 'Impact', 'The impact is bigger than the app. Climate action: more living plants means fewer journeys by ship, truck and plane.', 0.5],
   ['I', 'imp', 'Impact', 'Quality education: every check-in teaches a student how a plant lives and fails, and schools can run their own leagues.', 0.4],
-  ['I', 'imp', 'Impact', 'Good health and wellbeing: neighbours growing together on Roots. And technology: it runs on the phone, and keeps every location at neighbourhood level.', 0.7],
+  ['I', 'imp', 'Impact', 'Good health and wellbeing: neighbours growing together on Roots. And technology: it all runs on the phone, with locations kept at neighbourhood level.', 0.7],
   ['I', 'road', 'What is next', 'So what is next? First, we publish both apps and build a small batch of RootStake kits, then finish and test the stem electrode.', 0.5],
   ['I', 'road', 'What is next', 'Then we pilot with schools and community gardens, and let their feedback decide what we build next, expanding neighbourhood by neighbourhood. One number will tell us if it works: plant survival over twelve months.', 0.7],
   ['I', 'close', 'The close', 'Remember those eight hundred and sixty thousand seed packets? Imagine if we could see how many of them grew.', 0.7],
-  ['I', 'close', 'The close', 'That\'s what Rooted SG is for. It\'s the first real measure of a nation that grows its own food, built by students and proven one plant at a time.', 1.0],
+  ['I', 'close', 'The close', 'That\'s what Rooted SG is for. It\'s the first real measure of a nation that grows its own food.', 1.0],
   ['I', 'close', 'The close', 'A plant never dies in a day. It dies from being forgotten. Singapore can\'t afford to forget anymore, so we\'ll count every plant that lives, until this country grows its own future. We\'re Rooted SG. Thank you.', 2.0]
 ];
 (function () {
