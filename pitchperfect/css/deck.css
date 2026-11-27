@@ -1,0 +1,116 @@
+/* ROOTED SG · Catalyst deck. The heymeco.xyz "Glasshouse" light theme, as a 1920×1080 stage.
+   Rule for this deck: no small grey text. Every word is ink (#0A0A0A) or Rooted green (#0B5A32). */
+@import url('../fonts/fonts.css');
+:root{
+  --bg:#FFFFFF;--bg2:#F3F3F1;--panel:#FFFFFF;--text:#0A0A0A;--green:#0B5A32;--green2:#1B7A45;--leaf:#E4F0E8;
+  --warm:#0B5A32;--alert:#984421;--amber:#D9A92E;--amberbg:#FBF1D6;--on-accent:#fff;--btn:#121A15;--btn-text:#F8F6F1;
+  --rule:color-mix(in srgb,#0A0A0A 16%,transparent);--fill:color-mix(in srgb,#0A0A0A 5%,transparent);
+  --shadow:0 30px 70px -28px rgba(20,40,28,.35);
+  --serif:'Newsreader','Iowan Old Style',Georgia,serif;--sans:'Hanken Grotesk','Helvetica Neue',Arial,sans-serif;--mono:'DM Mono',Menlo,monospace;
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#fff;color:var(--text);overflow:hidden}
+body{font-family:var(--sans);-webkit-font-smoothing:antialiased;cursor:default}
+body.hidecursor{cursor:none}
+img{display:block}
+
+/* ---------- the stage ---------- */
+.viewport{position:fixed;inset:0;display:grid;place-items:center;background:#fff}
+.stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:var(--bg);font-size:30px;line-height:1.35}
+.scene{position:absolute;inset:0;visibility:hidden;opacity:0}
+.scene.on{visibility:visible;opacity:1}
+
+/* ---------- type ---------- */
+.eyebrow{font-family:var(--mono);font-size:24px;letter-spacing:.16em;text-transform:uppercase;color:var(--text);font-weight:400;line-height:1.3}
+.eyebrow b{color:var(--green);font-weight:500}
+.display,.h{font-family:var(--serif);font-weight:300;letter-spacing:-.035em;line-height:.98;font-optical-sizing:auto;color:var(--text)}
+.h em,.display em,.g{font-style:italic;color:var(--green)}
+.h1{font-size:132px}.h2{font-size:96px}.h3{font-size:72px}.h4{font-size:54px}
+.lead{font-family:var(--sans);font-size:34px;line-height:1.38;color:var(--text);font-weight:400}
+.lead b{color:var(--green);font-weight:600}
+.num{font-family:var(--serif);font-weight:300;letter-spacing:-.04em;line-height:.9;color:var(--text);font-variant-numeric:lining-nums tabular-nums}
+.num.g{color:var(--green);font-style:normal}
+.src{display:inline-block;font-family:var(--mono);font-size:24px;letter-spacing:.06em;color:var(--text);line-height:1.3}
+.src::before{content:"";display:inline-block;vertical-align:middle;width:9px;height:9px;border-radius:50%;background:var(--green);margin:-3px 12px 0 0}
+.src b{color:var(--green);font-weight:500}
+mark.todo,.todo{background:var(--amberbg);color:#6B4A00;outline:3px dashed var(--amber);outline-offset:4px;border-radius:10px;padding:0 .2em;font-style:normal}
+
+/* ---------- chrome (the site's floating header, as a deck frame) ---------- */
+.chrome{position:absolute;left:0;right:0;top:0;height:120px;padding:0 72px;display:flex;align-items:center;justify-content:space-between;z-index:50;pointer-events:none}
+.brand{display:flex;align-items:center;gap:16px;font-family:var(--serif);font-size:40px;letter-spacing:-.03em;font-weight:400}
+.brand svg{width:34px;height:34px;color:var(--green)}
+.brand .sep{width:1.5px;height:30px;background:var(--rule);margin:0 6px}
+.brand .eyebrow{font-size:24px}
+.secpill{display:flex;align-items:center;gap:14px;padding:14px 26px;border-radius:99px;background:color-mix(in srgb,var(--bg2) 85%,transparent);backdrop-filter:blur(10px);font-family:var(--mono);font-size:24px;letter-spacing:.14em;text-transform:uppercase}
+.secpill b{color:var(--green);font-weight:500}
+.secpill i{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 0 5px color-mix(in srgb,var(--green) 18%,transparent)}
+.progress{position:absolute;left:0;bottom:0;height:6px;width:100%;z-index:50;background:transparent}
+.progress i{display:block;height:100%;width:100%;background:var(--green);transform-origin:0 50%;transform:scaleX(0)}
+
+/* speaker lower third */
+.speaker{position:absolute;left:50%;top:22px;z-index:55;display:flex;align-items:center;gap:18px;padding:10px 30px 10px 10px;border-radius:99px;background:var(--btn);color:var(--btn-text);box-shadow:var(--shadow);opacity:0;transform:translateY(30px)}
+.speaker .av{width:56px;height:56px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-size:36px;font-style:italic}
+.speaker b{display:block;font-family:var(--serif);font-weight:400;font-size:32px;letter-spacing:-.02em;line-height:1.05}
+.speaker span{display:block;font-family:var(--mono);font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:#CDEBD6}
+
+/* rehearsal caption (C) */
+.caption{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);width:1500px;z-index:60;padding:22px 34px;border-radius:24px;background:rgba(255,255,255,.96);box-shadow:0 0 0 2px var(--green),var(--shadow);font-size:32px;line-height:1.35;display:none}
+.caption b{font-family:var(--mono);font-size:24px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:6px}
+.showcap .caption{display:block}
+.help{position:fixed;right:20px;bottom:20px;z-index:99;background:#fff;border-radius:18px;box-shadow:0 0 0 2px var(--text),var(--shadow);padding:22px 28px;font-size:24px;line-height:1.7;display:none;color:var(--text)}
+.help kbd{font-family:var(--mono);background:var(--bg2);border-radius:6px;padding:1px 8px;margin-right:8px;font-size:24px}
+.showhelp .help{display:block}
+.autoflag{position:fixed;left:20px;top:16px;z-index:99;font-family:var(--mono);font-size:24px;letter-spacing:.12em;background:var(--green);color:#fff;border-radius:99px;padding:6px 14px;display:none}
+.auto .autoflag{display:block}
+
+/* ---------- phone (from the site) ---------- */
+.ph{--w:300px;width:var(--w);aspect-ratio:1206/2622;border-radius:calc(var(--w)*.15);padding:calc(var(--w)*.028);background:#0b0f0c;box-shadow:0 40px 80px -30px rgba(20,40,28,.45),inset 0 0 0 1.5px rgba(255,255,255,.14);position:relative;flex:none}
+.ph .scr{position:relative;width:100%;height:100%;border-radius:calc(var(--w)*.125);overflow:hidden;background:#e9e5da}
+.ph .scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 30%);pointer-events:none}
+
+/* chips (hs-chip from the hero, scaled for a room) */
+.chip{position:absolute;z-index:6;display:inline-flex;align-items:center;gap:14px;padding:16px 26px;border-radius:99px;background:rgba(255,255,255,.95);box-shadow:inset 0 0 0 1.5px var(--rule),0 18px 36px -18px rgba(30,60,90,.45);font-family:var(--mono);font-size:24px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);white-space:nowrap}
+.chip b{color:var(--green);font-weight:500}
+.chip .pdot,.pdot{width:12px;height:12px;border-radius:50%;background:var(--green);box-shadow:0 0 0 6px color-mix(in srgb,var(--green) 20%,transparent);flex:none}
+.float{animation:hsfloat 6s ease-in-out infinite}
+.float.d2{animation-delay:-2s}.float.d3{animation-delay:-4s}
+@keyframes hsfloat{50%{transform:translateY(-12px)}}
+.tagchip{display:inline-flex;align-items:center;gap:14px;padding:14px 24px;border-radius:99px;background:var(--leaf);color:var(--green);font-family:var(--mono);font-size:24px;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+.tagchip b{color:var(--text);font-weight:500}
+
+/* ---------- sky + halftone clouds (the heymeco hero) ---------- */
+.sky{position:absolute;left:0;right:0;top:0;height:600px;pointer-events:none;background:linear-gradient(180deg,#bfe0f5 0%,#d8ecf8 45%,color-mix(in srgb,#eaf5fc 50%,transparent) 75%,transparent 100%);overflow:hidden}
+.cloud{position:absolute;display:block;height:auto;filter:drop-shadow(0 10px 14px rgba(80,140,190,.12));pointer-events:none}
+.cl1{left:-6%;top:26%;width:420px;animation:cldrift 40s ease-in-out infinite alternate}
+.cl2{right:-7%;top:3%;width:480px;animation:cldrift 52s ease-in-out infinite alternate-reverse}
+.cl3{left:46%;top:1%;width:200px;opacity:.8;animation:cldrift 60s ease-in-out infinite alternate}
+@keyframes cldrift{to{transform:translateX(60px)}}
+
+/* ---------- the drawn underline + sprout on "alive" (exact hero) ---------- */
+.alive{position:relative;display:inline-block;white-space:nowrap}
+.alive .ul{position:absolute;left:-1%;bottom:-.12em;width:102%;height:.2em;overflow:visible;pointer-events:none}
+.alive .ul path{fill:none;stroke:var(--green);stroke-width:4.5;stroke-linecap:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1}
+.alive .sp{position:absolute;right:-.62em;top:-.3em;width:.5em;height:auto;overflow:visible;pointer-events:none;color:var(--green)}
+.alive .sp path{fill:none;stroke:currentColor;stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:1}
+
+/* generic drawn line art */
+.draw path,.draw line,.draw rect,.draw circle,.draw polyline,.draw ellipse{vector-effect:non-scaling-stroke}
+.ink{fill:none;stroke:var(--text);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.inkg{fill:none;stroke:var(--green);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.leaff{fill:var(--leaf);stroke:var(--green);stroke-width:3;stroke-linejoin:round}
+
+/* ---------- cards ---------- */
+.card{background:var(--panel);border-radius:34px;box-shadow:inset 0 0 0 1.5px var(--rule),0 30px 60px -36px rgba(20,40,28,.35);padding:40px 44px}
+.card.dark{background:var(--btn);color:var(--btn-text);box-shadow:var(--shadow)}
+.card.dark .h,.card.dark .lead{color:var(--btn-text)}
+.card.dark .h em{color:#A3E68B}
+.card.dark .eyebrow{color:#CDEBD6}
+.card.dark .eyebrow b{color:#A3E68B}
+.card.green{background:var(--green);color:#fff}
+.card.green .h,.card.green .lead,.card.green .eyebrow{color:#fff}
+
+.abs{position:absolute}
+.row{display:flex;align-items:center}
+.center{text-align:center}

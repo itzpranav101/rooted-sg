@@ -17,3 +17,5 @@ rwcc/_tail.txt
 rwcc/build.py
 rwcc/sim
 presentation/*.pptx
+pitchperfect/build.py
+pitchperfect/README.md
