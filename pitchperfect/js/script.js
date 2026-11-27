@@ -9,7 +9,7 @@ window.SPEAKERS = {
 
 /* who · scene · stage · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
-  ['P', 'hook', 'The problem', 'Singapore is one closed border away from hunger. But what if part of the answer is already sitting on a million balconies?', 1.2],
+  ['P', 'hook', 'The problem', 'What happens to six million people the day the ships stop coming? But what if part of the answer is already sitting on a million balconies?', 1.2],
   ['P', 'cold', 'The problem', 'Ninety percent of our food came from somewhere else, by ship, truck or plane. We don\'t control those journeys.', 0.6],
   ['P', 'cold', 'The problem', 'I\'m Pranav, and together with Anandita, Pranav and Jiya, we\'re Rooted SG. We\'re four students who decided this was our problem to solve.', 0.6],
   ['P', 'cold', 'The problem', 'It comes from over one hundred and eighty countries and regions. Every one is a point of failure, and none are in our hands.', 0.8],
