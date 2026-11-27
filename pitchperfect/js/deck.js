@@ -711,6 +711,7 @@ function speaker(i) { return; /* speaker name pill removed */
 }
 function caption(i) { $('#caption').innerHTML = i < 0 ? '' : `<b>line ${i + 1} of ${LINES.length}</b>${fillTokens(LINES[i].text)}`; }
 
+const fitTl = (tl, i) => { const max = LINES[i].speak + .5, du = tl.totalDuration(); if (du > max) tl.timeScale(du / max); return tl; };
 function go(i, opts = {}) {
   i = Math.max(-1, Math.min(LINES.length - 1, i));
   const n = i < 0 ? 'ready' : LINES[i].scene, sc = S[n], local = i < 0 ? -1 : i - first[n];
@@ -723,10 +724,10 @@ function go(i, opts = {}) {
     gsap.to(o, { autoAlpha: 0, y: -24, duration: .5, ease: 'power2.in', onComplete: () => { o.classList.remove('on'); gsap.set(o, { y: 0 }); } });
     sc.reset(); for (let k = 0; k < local; k++) { const t = sc.beats[k](first[n] + k); t.progress(1); t.kill(); }
     nx.classList.add('on'); gsap.fromTo(nx, { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: .7, ease: E, delay: .35 });
-    if (local >= 0) live.push(sc.beats[local](i).delay(.45)); else if (sc.play) live.push(sc.play().delay(.5));
+    if (local >= 0) live.push(fitTl(sc.beats[local](i), i).delay(.45)); else if (sc.play) live.push(sc.play().delay(.5));
   } else if (local >= 0) {
     if (!stepForward) { sc.reset(); for (let k = 0; k < local; k++) { const t = sc.beats[k](first[n] + k); t.progress(1); t.kill(); } }
-    live.push(sc.beats[local](i));
+    live.push(fitTl(sc.beats[local](i), i));
   } else { sc.reset(); if (sc.play) live.push(sc.play().delay(.3)); }
   cur = i; curScene = n; setChrome(n, i); speaker(i); caption(i);
   if (!opts.remote && chan) chan.postMessage({ i });
@@ -777,7 +778,7 @@ $('#s-ready').classList.add('on'); gsap.set('#s-ready', { autoAlpha: 1 }); gsap.
 const start = parseInt(location.hash.slice(1)) - 1;
 const boot = () => { if (start >= 0) go(start); else if (chan && MIRROR) chan.postMessage({ ask: 1 }); };
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(boot, 50));
-window.DECK = { go, get cur() { return cur; }, W, ff: () => live.forEach(t => t.progress(1)), liveDur: () => Math.max(0, ...live.map(t => t.totalDuration() + t.delay())) };
+window.DECK = { go, get cur() { return cur; }, W, ff: () => live.forEach(t => t.progress(1)), liveDur: () => Math.max(0, ...live.map(t => t.totalDuration() / t.timeScale() + t.delay())), speak: i => LINES[i].speak };
 
 /* =====================================================================
    ===================================================================== */

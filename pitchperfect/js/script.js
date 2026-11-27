@@ -68,7 +68,7 @@ window.SCRIPT = [
   ['I', 'close', 'The close', 'A plant never dies in a day. It dies from being forgotten. Singapore can\'t afford to forget anymore, so we\'ll count every plant that lives, until this country grows its own future. We\'re Rooted SG. Thank you.', 2.0]
 ];
 (function () {
-  const WPS = 2.6;
+  const WPS = 2.85;
   const words = l => l[3].split(/\s+/).length;
   const raw = SCRIPT.map(l => words(l) / WPS + l[4]);
   let t = 0;
