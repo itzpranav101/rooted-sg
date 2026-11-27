@@ -633,6 +633,14 @@ S.idx = { sec: 'The solution', reset() { hide('.ix-eye', '.ix-h', '#ixPhone', $$
       ['Today', 'Garden', 'Market', 'Quests', 'BioDex'].forEach((w, k) => tl.add(() => ixSet(k), Math.max(1.2, W(i, w) - .1))); return tl; }
   ] };
 
+S.meco = { sec: 'The solution', reset() { hide('.mc-eye', '.mc-h', '#mcA', '#mcB', '#mcPlus'); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.add(rise(['.mc-eye', '.mc-h'], { st: .15 }), 0);
+      tl.fromTo('#mcA', { autoAlpha: 0, x: -90 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'Rooted SG,') - .2);
+      tl.fromTo('#mcPlus', { autoAlpha: 0, scale: .3 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2.4)' }, W(i, 'and RootStake,') - .3);
+      tl.fromTo('#mcB', { autoAlpha: 0, x: 90 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'RootStake,') - .1); return tl; }
+  ] };
+
 /* ---------- FEASIBILITY: built and tested ---------- */
 S.built = { sec: 'Feasibility', reset() { hide('.bt-eye', '.bt-h', $$('#tiles .tile'), '#btNote'); gsap.set('#tiles', { autoAlpha: 1, y: 0 }); zero('#s-built'); },
   beats: [
