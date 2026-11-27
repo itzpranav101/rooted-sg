@@ -698,8 +698,8 @@ if (chan) chan.onmessage = e => { if (typeof e.data.i === 'number' && e.data.i !
 /* ---------- one click per scene: its lines play on their own, timed to the words ---------- */
 let linesTimer, paused = false, PACE = 1;
 function autoLines() { clearTimeout(linesTimer); if (paused || cur < 0) return; const L = LINES[cur], N = LINES[cur + 1]; if (!N || N.scene !== L.scene) return; linesTimer = setTimeout(() => go(cur + 1), L.dur * PACE * 1000); }
-function nextScene() { if (cur < 0) return go(0); const k = ORDER.indexOf(curScene); if (k + 1 < ORDER.length) go(first[ORDER[k + 1]]); }
-function prevScene() { const k = ORDER.indexOf(curScene); if (cur < 0) return; if (k > 0) go(first[ORDER[k - 1]]); else go(-1); }
+function nextScene() { if (cur < 0) return go(0); const nl = LINES[cur + 1]; if (nl && nl.scene === curScene) return go(cur + 1); const k = ORDER.indexOf(curScene); if (k + 1 < ORDER.length) go(first[ORDER[k + 1]]); }
+function prevScene() { const k = ORDER.indexOf(curScene); if (cur < 0) return; if (cur > first[curScene]) return go(first[curScene]); if (k > 0) go(first[ORDER[k - 1]]); else go(-1); }
 function toast(t) { let e = $('#toast'); if (!e) { e = document.createElement('div'); e.id = 'toast'; e.style.cssText = 'position:absolute;left:50%;bottom:60px;transform:translateX(-50%);z-index:90;background:#121A15;color:#F8F6F1;padding:14px 34px;border-radius:99px;font:400 30px Hanken Grotesk,sans-serif;pointer-events:none'; stage.appendChild(e); } e.textContent = t; gsap.killTweensOf(e); gsap.fromTo(e, { autoAlpha: 0 }, { autoAlpha: 1, duration: .3 }); gsap.to(e, { autoAlpha: 0, delay: 1.6, duration: .5 }); }
 /* ---------- (rehearsal mode kept for practice) ---------- */
 let auto = false, voice = false, timer;
