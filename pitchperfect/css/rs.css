@@ -167,3 +167,13 @@
 .mc-plus{text-align:center;font-family:var(--serif);font-weight:300;font-size:130px;color:var(--green)}
 
 .mc-img{width:260px}.mc-img.mcp{width:226px;height:470px;justify-self:center}
+
+/* Meco cards: final formatting */
+.mc-row{left:110px;right:110px;top:380px;grid-template-columns:1fr 110px 1fr}
+.mc-card{grid-template-columns:240px 1fr;gap:36px;padding:34px 40px 34px 34px;height:560px}
+.mc-img.mcp{width:236px;height:490px}
+.mc-img.mcc{width:240px;height:490px;border-radius:28px;background:radial-gradient(90% 70% at 50% 30%,#F2F7F0,#DDE8DA);position:relative}
+.mc-img.mcc canvas{position:absolute;inset:0;width:100%;height:100%}
+.mc-t .tagchip{font-size:24px}
+.mc-t b{font-size:72px;margin:20px 0 16px}
+.mc-t p{font-size:30px;line-height:1.35}

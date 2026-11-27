@@ -204,7 +204,7 @@ builders.pod = async (ctx) => {
   const cable = wire([new V3(1.16, -.35, 0), new V3(1.8, -.7, .2), new V3(2.4, -.4, .5), new V3(3.2, -.9, .3)], .035, 0xff9a1f), tubeW = wire([new V3(1.16, -.45, 0), new V3(1.7, -.9, -.2), new V3(2.3, -.7, -.3), new V3(3.2, -1.0, -.1)], .05, 0x4aa8e0);
   tubeW.material = new THREE.MeshPhysicalMaterial({ color: 0x4aa8e0, transparent: true, opacity: .6, roughness: .1 }); g.add(cable, tubeW);
   camera.position.set(1.0, 1.0, 8.2);
-  return { update(t, p, ptr) { g.rotation.y = -.5 + Math.sin(t * .35) * .5 + ptr.x * .4 + p * 1.6; g.rotation.x = ptr.y * .12; g.position.y = .2 + Math.sin(t) * .05; camera.lookAt(.8, .1, 0); } };
+  return { update(t, p, ptr) { g.rotation.y = -.5 + Math.sin(t * .35) * .5 + ptr.x * .4 + p * 1.6; g.rotation.x = ptr.y * .12; g.position.y = .2 + Math.sin(t) * .05; const nar = camera.aspect < .8; if (nar) { camera.position.set(.3, 1.4, 15.5); camera.lookAt(.4, .1, 0); } else camera.lookAt(.8, .1, 0); } };
 };
 
 builders.field = async (ctx) => {
