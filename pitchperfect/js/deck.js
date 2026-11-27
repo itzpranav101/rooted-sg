@@ -575,7 +575,7 @@ S.close = {
    ROOTSTAKE · four scenes. The CAD scenes and the tissue animation are driven by one number, p (0-1),
    tweened to the words of each line.
    ===================================================================== */
-const rsTo = (sel, v, d = 2.6, ease = 'sine.inOut') => { const cv = $(sel), o = { v: parseFloat(cv.dataset.p || 0) }; return gsap.to(o, { v, duration: d, ease, onUpdate: () => { cv.dataset.p = o.v.toFixed(4); } }); };
+const rsTo = (sel, v, d = 2.6, ease = 'sine.inOut') => { const cv = $(sel), o = { get v() { return parseFloat(cv.dataset.p || 0); }, set v(x) { cv.dataset.p = x.toFixed(4); } }; return gsap.to(o, { v, duration: d, ease }); };
 const rsSet = (sel, v) => { const cv = $(sel); cv.dataset.p = v; if (cv.__tissue) cv.__tissue.setP(v); };
 const rsIn = (n, tl, i) => { tl.fromTo('#rs' + n + 'V', { autoAlpha: 0, x: -120 }, { autoAlpha: 1, x: 0, duration: 1.2, ease: E2 }, 0); tl.add(rise($$('#rs' + n + 'T > .eyebrow, #rs' + n + 'T > .h2'), { st: .15 }), .3); };
 const rsPts = (n, tl, i, words, at) => $$('#rs' + n + 'T .rs-pt').forEach((e, k) => { if (words[k]) { const t = Math.max(.2, W(i, words[k]) - .2); tl.fromTo(e, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t); tl.fromTo($('svg', e), { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: .6, ease: 'back.out(2.2)' }, t + .1); } });
@@ -615,10 +615,10 @@ S.eco = { sec: 'The solution', reset() { hide('.eco-eye', '.eco-h', '#ecoTabs', 
       ecoTab(tl, 2, W(i, 'Quests') - .1); ecoBubble(tl, 'Quests keep you coming back.', W(i, 'Quests')); ecoTab(tl, 3, W(i, 'BioDex') - .1); ecoBubble(tl, 'Every plant you have grown.', W(i, 'BioDex')); ecoTab(tl, 4, W(i, 'Profile') - .1); ecoBubble(tl, 'Your lifetime Plant-Days.', W(i, 'Profile')); return tl; }
   ] };
 
-S.rs4 = { sec: 'RootStake', reset() { hide('#rs4V', $$('#rs4T > *'), $$('#rs4T .rs-pt')); rsSet('#rs4Cv', 0); },
+S.rs4 = { sec: 'RootStake', reset() { hide('#rs4V', $$('#rs4T > *'), $$('#rs4T .rs-pt')); rsSet('#rs4Cv', .78); },
   beats: [
-    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); rsIn(4, tl, i); tl.add(rsTo('#rs4Cv', .08, 2.2), .6); tl.add(rsTo('#rs4Cv', .13, 2.6), W(i, 'Fungal diseases') - .6); tl.add(rsTo('#rs4Cv', .62, 4.6), W(i, 'move fast') - .4); rsPt(tl, r[0], W(i, 'move fast') - .4); return tl; },
-    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); tl.set('#rs4T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs4Cv', .78, 3.2), W(i, 'shift across') - .5); tl.add(rsTo('#rs4Cv', 1, 5), W(i, 'raise the alarm') - 1.6); rsPt(tl, r[1], W(i, 'catch it first') - .2); rsPt(tl, r[2], W(i, 'raise the alarm') - .2); return tl; }
+    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); rsIn(4, tl, i); tl.add(rsTo('#rs4Cv', .86, 6, 'power1.inOut'), W(i, 'Fungal diseases') - .4); rsPt(tl, r[0], W(i, 'move fast') - .4); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); tl.set('#rs4T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs4Cv', .9, 3.2), W(i, 'shift across') - .5); tl.set('#rs4Cv', { attr: { 'data-p': .985 } }, W(i, 'raise the alarm') - 1); tl.add(rsTo('#rs4Cv', 1, 2.4, 'power2.out'), W(i, 'raise the alarm') - .9); rsPt(tl, r[1], W(i, 'catch it first') - .2); rsPt(tl, r[2], W(i, 'raise the alarm') - .2); return tl; }
   ] };
 const fanPh = () => $$('#fanPh .fp');
 S.fan = { sec: 'The solution', reset() { hide('.fan-eye', '.fan-h', '.fan-sub', fanPh()); },

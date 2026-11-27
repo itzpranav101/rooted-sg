@@ -37,7 +37,7 @@ window.SCRIPT = [
   ['A', 'grow', 'The solution', 'On Roots you can sell it, swap it, or give it away: plants, cuttings and harvests. Neighbours who\'ve never spoken start sharing advice too.', 0.7],
   ['A', 'eco', 'The solution', 'Rooted isn\'t just for one thing, it\'s for your things. Everything lives in one connected app.', 0.4],
   ['A', 'eco', 'The solution', 'Your Garden holds every pot on one screen, and the Market is where neighbours offer produce or ask someone to grow it.', 0.5],
-  ['A', 'eco', 'The solution', 'Quests keep you coming back, your BioDex collects every plant you grow, and your Profile counts your Plant-Days.', 0.6],
+  ['A', 'eco', 'The solution', 'Quests keep you coming back. Your BioDex automatically logs every type of plant you grow, so you build your own digital record, and your Profile counts your Plant-Days.', 0.6],
   ['N', 'rs1', 'RootStake', 'The app verifies a plant with a photo. RootStake is our hardware: a small smart stake you push into the pot, built to measure what a photo can\'t see, the soil and the stem.', 0.5],
   ['N', 'rs1', 'RootStake', 'This is the one we built: a small house module with a solar roof, wired to a soil probe, with a tube that carries water to the roots.', 0.5],
   ['N', 'rs1', 'RootStake', 'We\'re clear about where it stands. The house, the soil probe and the tube are built and working. The stem electrode is in progress, and ion sensing is next. We keep tweaking RootStake from the invaluable feedback our pilot users give us.', 0.7],
