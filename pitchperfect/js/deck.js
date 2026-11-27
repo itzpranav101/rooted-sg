@@ -105,7 +105,7 @@ S.cold = {
       tl.add(rise('#ib1', { y: 50 }), .2); tl.add(count($('#ib1 [data-n]'), 90, 1.8), .4);
       const T = $$('#trans > div'); ['ship,', 'truck,', 'plane.'].forEach((w, k) => tl.fromTo(T[k], { autoAlpha: 0, x: -80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, w) - .1));
       const P = $$('#impLines path'), Dd = $$('#impDots circle'); tl.to(Dd.slice(0, 40), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: .03 }, W(i, 'came from') - .2); tl.to(P.slice(0, 40), { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: .03 }, W(i, 'came from'));
-      tl.to('#impSG circle', { fill: '#984421', duration: .5 }, W(i, "We don't")); tl.to('#impSG circle', { fill: '#0B5A32', duration: .5 }, W(i, 'those journeys.') + .6); return tl; },
+      tl.to('#impSG circle', { fill: '#984421', duration: .5 }, W(i, 'by ship,')); tl.to('#impSG circle', { fill: '#0B5A32', duration: .5 }, W(i, 'plane.') + .6); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#imp', { autoAlpha: 0, y: -30, duration: .6, ease: 'power2.in' }, 0); tl.set('#teamV', { autoAlpha: 1 }, .3);
       tl.fromTo($$('#teamV > .eyebrow, #teamV > .h2'), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E, stagger: .2 }, W(i, "we're Rooted") - .4); tl.set('#team', { autoAlpha: 1 }, 0);
       const m = $$('#team .mem'); [W(i, "I'm Pranav,"), W(i, 'Anandita,'), W(i, 'Pranav', 1), W(i, 'Jiya,')].forEach((t, k) => tl.fromTo(m[k], { autoAlpha: 0, scale: .9 }, { autoAlpha: 1, scale: 1, duration: .8, ease: E2 }, Math.max(.4 + k * .2, t)));
@@ -272,7 +272,7 @@ S.plantday = {
       ['A real', 'A fresh', 'The right'].forEach((w, k) => { const t = W(i, w); tl.fromTo(c[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, t); tl.to($('svg', c[k]), { scale: 1, duration: .5, ease: 'back.out(3)' }, t + .3); });
       const t = W(i, 'Miss one'); tl.fromTo('#plus1', { autoAlpha: 0, y: 40, scale: .6 }, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, t - 1.6); tl.to('#plus1', { autoAlpha: 0, y: -50, duration: .5 }, t - .7); tl.add(count($('#pdNum'), 315, .4), t - .7); tl.fromTo('#pdNum', { scale: 1 }, { scale: 1.08, yoyo: true, repeat: 1, duration: .2 }, t - .7); return tl; },
     i => { const tl = gsap.timeline(); tl.add(() => pdShow(2), 0); tl.fromTo('#mojo', { autoAlpha: 0, x: -300 }, { autoAlpha: 1, x: 0, duration: 1.1, ease: 'back.out(1.4)' }, W(i, 'Mojo,'));
-      tl.fromTo('.bubble', { autoAlpha: 0, scale: .5, transformOrigin: '0% 100%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, W(i, 'tells you')); tl.add(() => $('#mojoImg').src = 'media/mojo/happy.gif', W(i, 'Once a day,'));
+      tl.fromTo('.bubble', { autoAlpha: 0, scale: .5, transformOrigin: '0% 100%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, W(i, 'tells you')); tl.add(() => $('#mojoImg').src = 'media/mojo/happy.gif', W(i, 'each morning'));
       tl.add(pop('#solves1', { s: .8 }), W(i, 'The first cause') + .3); return tl; }
   ]
 };
@@ -337,7 +337,7 @@ S.doctor = {
 const GPN = [['sun', 'Light', 'done'], ['drop', 'Watering', 'done'], ['fungus', 'Leaf fungus', 'now'], ['bug', 'Pests', 'lock'], ['soil', 'Soil health', 'lock'], ['basket', 'Harvest', 'lock']];
 const gpTrail = $('#gpPath .trail'); const gpPt = f => { const L = gpTrail.getTotalLength(), p = gpTrail.getPointAtLength(L * f), s = Math.min(560 / 600, 720 / 760); return [p.x * s + (560 - 600 * s) / 2, p.y * s + (720 - 760 * s) / 2]; };
 $('#gpNodes').innerHTML = GPN.map(([e, n, s], k) => { const [x, y] = gpPt(k / 5); return `<div class="gpn ${s}" style="left:${x}px;top:${y}px"><i><svg class="ico"><use href="#ic-${e}"/></svg></i><span>${n}</span></div>`; }).join('');
-const gpM = { f: 0 }; const gpMojo = () => { const [x, y] = gpPt(gpM.f); gsap.set('#gpMojo', { x: 520 + x - 150, y: 280 + y - 150 }); };
+const gpM = { f: 0 }; const gpMojo = () => { const [x, y] = gpPt(gpM.f); gsap.set('#gpMojo', { x: 520 + x - 236, y: 280 + y - 62 }); };
 S.grow = {
   sec: 'The app',
   reset() { hide('#rt', $$('#gp > *'), $$('#gpNodes .gpn'), $$('#gpCard .qo'), $$('#gpChips .chip'), $$('#rt > *'), $$('#listings .lst'), '#match', $$('#match > *'), '#opts', $$('#opts .op'), '#comm', $$('#comm .chip')); gsap.set('#gp', { autoAlpha: 1, x: 0 }); gsap.set(gpTrail, { strokeDashoffset: 1 }); gsap.set('#gpPath', { autoAlpha: 1 }); gsap.set('#gpNodes', { autoAlpha: 1 }); gsap.set('#gpChips', { autoAlpha: 1 }); gsap.set($$('.marrow path'), { strokeDashoffset: 1 }); $('#gpCard .qo.ok').classList.remove('on'); gpM.f = 0; gpMojo(); },
@@ -346,8 +346,8 @@ S.grow = {
       const t = W(i, 'Guardian Path.'); tl.to(gpTrail, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, t - .4);
       $$('#gpNodes .gpn').forEach((n, k) => tl.fromTo(n, { autoAlpha: 0, scale: .4 }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2.4)' }, t - .2 + k * .3));
       tl.fromTo('#gpMojo', { autoAlpha: 0 }, { autoAlpha: 1, duration: .3 }, t + .4); tl.to(gpM, { f: .4, duration: 2, ease: 'power1.inOut', onUpdate: gpMojo }, t + .5);
-      tl.fromTo('#gpCard', { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'identify diseases,')); tl.add(rise($$('#gpCard .qo'), { y: 16, st: .15 }), W(i, 'we teach'));
-      tl.add(() => $('#gpCard .qo.ok').classList.add('on'), W(i, 'understand them,')); tl.fromTo('#gpCard .qo.ok', { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .2 }, W(i, 'understand them,'));
+      tl.fromTo('#gpCard', { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'It teaches')); tl.add(rise($$('#gpCard .qo'), { y: 16, st: .15 }), W(i, 'teaches you'));
+      tl.add(() => $('#gpCard .qo.ok').classList.add('on'), W(i, 'streaks,')); tl.fromTo('#gpCard .qo.ok', { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .2 }, W(i, 'streaks,'));
       const ch = $$('#gpChips .chip'); [W(i, 'streaks,'), W(i, 'levels'), W(i, 'weekly leagues.')].forEach((tt, k) => tl.add(pop(ch[k], { s: .6 }), tt)); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#gp', { autoAlpha: 0, x: -120, duration: .7, ease: 'power2.in' }, 0); tl.set('#rt', { autoAlpha: 1 }, .3); tl.add(rise('#rtHead', { y: 40 }), W(i, 'For the first') - .3);
       tl.fromTo('.rt-ph', { autoAlpha: 0, y: 200 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E2 }, .4); tl.fromTo('.rt-ph2', { autoAlpha: 0, y: 240, rotation: 12 }, { autoAlpha: 1, y: 0, rotation: 5, duration: 1.3, ease: E2 }, .6); tl.set('#listings', { autoAlpha: 1 }, 0);
@@ -355,8 +355,8 @@ S.grow = {
       tl.fromTo('#listings .lst:first-child', { boxShadow: '0 0 0 0 rgba(11,90,50,0)' }, { boxShadow: '0 0 0 6px rgba(11,90,50,1)', duration: .5 }, W(i, 'find each other.')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#listings', { autoAlpha: 0, x: 60, duration: .5 }, 0); tl.set('#match', { autoAlpha: 1 }, .3); const M = $$('#match > *');
       tl.fromTo(M[0], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'too much') - .3); tl.set(M[1], { autoAlpha: 1 }, W(i, 'meets')); tl.to($$('.marrow path'), { strokeDashoffset: 0, duration: .8, ease: 'power2.out', stagger: .4 }, W(i, 'meets'));
-      tl.fromTo(M[2], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'needs a seedling.') - .2); tl.fromTo(M[3], { autoAlpha: 0, y: 30, scale: .95 }, { autoAlpha: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.8)' }, W(i, 'Surplus stops'));
-      tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'a whole street') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'a whole street') - .3); return tl; },
+      tl.fromTo(M[2], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'needs a seedling.') - .2); tl.fromTo(M[3], { autoAlpha: 0, y: 30, scale: .95 }, { autoAlpha: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.8)' }, W(i, 'needs a seedling.') + .5);
+      tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'needs a seedling.') + .9); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'needs a seedling.') + .9); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#match', { autoAlpha: 0, y: -30, duration: .5 }, 0); tl.set('#opts', { autoAlpha: 1 }, .3); const O = $$('#opts .op');
       [W(i, 'sell it,'), W(i, 'swap it,'), W(i, 'give it')].forEach((t, k) => tl.fromTo(O[k], { autoAlpha: 0, y: 60, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: .8, ease: E2 }, t));
       tl.add(() => { $('#rtHead .h3').innerHTML = 'Strangers become <em>a growing community</em>.'; }, W(i, "Neighbours who've") - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, "Neighbours who've") - .3);
@@ -559,7 +559,7 @@ S.close = {
   chrome: false,
   reset() { F2 = F2 || Field($('#field2'), 43, 20, { keep: true, seed: 31 }); Object.assign(F2.st, { a: 0, g: 0, d: 0, ok: 0 }); F2.draw(); hide('#clMission', '#clImagine', '#clQuote', $$('#clQuote p'), '#clEnd', '#clNames', '#clThanks', '#clPandan'); gsap.set($$('#clPanSvg .blade'), { strokeDasharray: 1, strokeDashoffset: 1, fillOpacity: 0 }); gsap.set('#field2', { autoAlpha: 1 }); gsap.set($$('#clEnd .alive path'), { strokeDashoffset: 1 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(F2.tween({ a: 1 }, 2.6), .1); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), W(i, 'Imagine')); tl.add(F2.tween({ g: 1 }, 3), W(i, 'Imagine') + .2); tl.add(F2.tween({ ok: 1 }, 2.4), W(i, 'actually see')); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(F2.tween({ a: 1 }, 2.6), .1); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), W(i, 'Imagine')); tl.add(F2.tween({ g: 1 }, 3), W(i, 'Imagine') + .2); tl.add(F2.tween({ ok: 1 }, 2.4), W(i, 'see how many')); return tl; },
     i => { const tl = gsap.timeline(); tl.to(['#clImagine', '#field2'], { autoAlpha: 0, duration: .8 }, 0); tl.set('#clMission', { autoAlpha: 1 }, .3);
       tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'a nation')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#clMission', { autoAlpha: 0, y: -40, duration: .6 }, 0); const q = $$('#clQuote p'); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, .3);
@@ -647,7 +647,7 @@ S.mk = { sec: 'Market', reset() { hide('.mk-eye', '.mk-h', $$('.mk-r'), '#mkH', 
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise(['.mk-eye', '.mk-h'], { st: .12 }), 0); tl.to('#mkC1', { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut' }, W(i, 'one and a half') - .3); tl.add(rise('#mkR1', { y: 40 }), W(i, 'one and a half')); tl.add(count($('#mkR1 [data-n]'), 1.49, 2, 2), W(i, 'one and a half') + .2); tl.add(pop('#mkH', { s: .8 }), W(i, 'three in four')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#mkC2', { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut' }, W(i, 'one in two') - .3); tl.add(rise('#mkR2', { y: 40 }), W(i, 'one in two')); tl.add(count($('#mkR2 [data-n]'), 750, 2.2), W(i, 'seven hundred')); return tl; },
-    i => { const tl = gsap.timeline(); tl.to('#mkC3', { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut' }, W(i, 'seven thousand') - .3); tl.add(rise('#mkR3', { y: 40 }), W(i, 'seven thousand')); tl.add(count($('#mkR3 [data-n]'), 7200, 2.2), W(i, 'seven thousand') + .2); tl.add(rise('#mkG', { y: 30 }), W(i, 'wider market')); return tl; }
+    i => { const tl = gsap.timeline(); tl.to('#mkC3', { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut' }, W(i, 'seven thousand') - .3); tl.add(rise('#mkR3', { y: 40 }), W(i, 'seven thousand')); tl.add(count($('#mkR3 [data-n]'), 7200, 2.2), W(i, 'seven thousand') + .2); tl.add(rise('#mkG', { y: 30 }), W(i, 'under one percent')); return tl; }
   ] };
 
 /* ---------- BUSINESS MODEL ---------- */
@@ -672,7 +672,7 @@ S.road = { sec: 'Next', reset() { hide('.rd-eye', '.rd-h', $$('.rd-s'), '#rdM');
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise(['.rd-eye', '.rd-h'], { st: .15 }), 0); tl.set('.rd-line', { autoAlpha: 1 }, 0); tl.to('#rdLine', { scaleX: .34, duration: 1.4, ease: E2 }, W(i, 'First, we publish')); tl.fromTo('#rdS1', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, W(i, 'First, we publish')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#rdLine', { scaleX: 1, duration: 6, ease: 'power1.inOut' }, W(i, 'Then we pilot') - .3); tl.fromTo('#rdS2', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, W(i, 'Then we pilot'));
-      tl.fromTo('#rdS3', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, W(i, 'we expand')); tl.add(rise('#rdM', { y: 40 }), W(i, 'one number')); return tl; }
+      tl.fromTo('#rdS3', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, W(i, 'expanding')); tl.add(rise('#rdM', { y: 40 }), W(i, 'one number')); return tl; }
   ] };
 
 /* =====================================================================
@@ -710,6 +710,7 @@ function go(i, opts = {}) {
   live.forEach(t => t.progress(1)); killLive(); gsap.killTweensOf('#speaker'); gsap.set('#speaker', { autoAlpha: 0 });
   if (n !== curScene) {
     const o = sceneEl(curScene), nx = sceneEl(n);
+    $$('.scene.on').forEach(s => { if (s !== o && s !== nx) { s.classList.remove('on'); gsap.killTweensOf(s); gsap.set(s, { autoAlpha: 0, y: 0 }); } });
     gsap.killTweensOf([o, nx]);
     gsap.to(o, { autoAlpha: 0, y: -24, duration: .5, ease: 'power2.in', onComplete: () => { o.classList.remove('on'); gsap.set(o, { y: 0 }); } });
     sc.reset(); for (let k = 0; k < local; k++) { const t = sc.beats[k](first[n] + k); t.progress(1); t.kill(); }

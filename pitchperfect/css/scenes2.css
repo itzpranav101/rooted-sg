@@ -340,3 +340,8 @@
 .wy-root{top:868px}
 
 .tiles .tile{min-height:380px}
+
+/* guardian path: no overlaps */
+.gp-chips{top:800px;width:660px;gap:12px}
+.gp-chips .chip{font-size:24px;padding:12px 22px}
+.gp-card{top:290px}
