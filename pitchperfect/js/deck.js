@@ -173,8 +173,7 @@ S.hero = {
       tl.add(drawIn($('#s-hero .alive .ul path'), 1, 'power2.out'), 1.0); $$('#s-hero .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), [1.8, 2.1, 2.3][k]));
       const t = W(i, 'the first way'); tl.add(rise($$('#heroTrio li'), { y: 24, st: .14 }), t);
       const ph = $$('#heroStage .ph'); tl.fromTo(ph, { autoAlpha: 0, y: 380 }, { autoAlpha: 1, y: 0, duration: 1.6, ease: E2, stagger: { each: .14, from: 'center' } }, W(i, 'an app') - .3);
-      tl.add(pop($$('#heroStage .chip'), { st: .25 }), W(i, 'only earn')); return tl; },
-    i => { const tl = gsap.timeline(); tl.to($$('#heroStage .chip'), { scale: 1.06, yoyo: true, repeat: 1, duration: .3, stagger: .2 }, W(i, 'three thousand')); return tl; }
+      tl.add(pop($$('#heroStage .chip'), { st: .25 }), W(i, 'only earn')); return tl; }
   ]
 };
 
@@ -185,7 +184,8 @@ S.survey = {
   sec: 'The problem',
   reset() { hide('#svBig', '#sv1', '#sv2', '#dotsCap', dots); dots.forEach(d => d.className = ''); zero('#s-survey'); gsap.set(['.sv-left .eyebrow', '.sv-h', '.sv-src2'], { autoAlpha: 0 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise(['.sv-left .eyebrow', '.sv-h'], { st: .15 }), 0); tl.add(rise('#svBig'), W(i, 'We did') + .2); tl.add(count($('#svBig [data-n]'), 3043, 2.2), W(i, 'We did') + .4);
+    i => { const tl = gsap.timeline(); tl.add(rise(['.sv-left .eyebrow', '.sv-h'], { st: .15 }), 0); tl.add(rise('#svBig'), W(i, 'three thousand') - .5); tl.add(count($('#svBig [data-n]'), 3043, 2.2), W(i, 'three thousand') - .3); return tl; },
+    i => { const tl = gsap.timeline();
       tl.fromTo(dots, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)', stagger: { each: .012, grid: [10, 10], from: 'center' } }, W(i, 'real people,')); tl.add(rise('.sv-src2', { y: 10 }), W(i, 'before writing')); return tl; },
     i => { const tl = gsap.timeline(); tl.add(rise('#sv1'), 0); tl.add(count($('#sv1 [data-n]'), 70.9, 2), .2);
       dots.slice(0, 71).forEach((d, k) => tl.add(() => d.classList.add('g'), .25 + k * .028)); tl.fromTo(dots.slice(0, 71), { scale: .7 }, { scale: 1, duration: .5, ease: 'back.out(3)', stagger: .028 }, .25);
