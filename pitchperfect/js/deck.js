@@ -595,27 +595,42 @@ S.rs2 = { sec: 'RootStake', reset() { hide('#rs2V', '#rs2Sig', $$('#rs2T > *'), 
   ] };
 const rsPt = (tl, el, t) => { tl.fromTo(el, { autoAlpha: 0, x: 50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t); tl.fromTo($('svg', el), { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: .6, ease: 'back.out(2.2)' }, t + .1); };
 const flow = (tl, el, pts, t, n = 5, d = .9) => { const c = gsap.timeline({ repeat: n }); pts.slice(1).forEach(([x, y], k) => c.to(el, { attr: { cx: x, cy: y }, duration: d / (pts.length - 1), ease: 'none' })); tl.set(el, { autoAlpha: 1, attr: { cx: pts[0][0], cy: pts[0][1] } }, t); tl.add(c, t); tl.to(el, { autoAlpha: 0, duration: .3 }, '>'); };
-S.rs3 = { sec: 'RootStake', reset() { hide('#rs3V', $$('#rs3T > *'), $$('#rs3T .rs-pt')); gsap.set('#rs3D .cell', { autoAlpha: 0 }); gsap.set('#rs3Clip', { autoAlpha: 0, y: -260 }); gsap.set('#rs3A, #rs3B', { strokeDashoffset: 1 }); gsap.set('#rs3P1, #rs3P2', { autoAlpha: 0 }); gsap.set('#rs3Res, #rs3Leg', { autoAlpha: 0 }); },
+S.rs3 = { sec: 'RootStake', reset() { hide('#rs3V', $$('#rs3T > *'), $$('#rs3T .rs-pt')); rsSet('#rs3Cv', .1); },
   beats: [
-    i => { const tl = gsap.timeline(); rsIn(3, tl, i); tl.fromTo('#rs3D .cell', { autoAlpha: 0, scale: .85, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: E2, stagger: { each: .03, from: 'center' } }, .5);
-      tl.fromTo('#rs3Clip', { autoAlpha: 0, y: -260 }, { autoAlpha: 1, y: 0, duration: 1.3, ease: 'power3.out' }, W(i, 'extremely thin') - .4); tl.fromTo('#rs3Nd circle', { scale: 1 }, { scale: 1.8, transformOrigin: '50% 50%', duration: .45, yoyo: true, repeat: 3, ease: 'sine.inOut' }, W(i, 'stop in') - .2); rsPt(tl, $$('#rs3T .rs-pt')[0], Math.max(.3, W(i, 'extremely thin') - .2)); return tl; },
-    i => { const tl = gsap.timeline(), r = $$('#rs3T .rs-pt'); tl.set('#rs3T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.set('#rs3Clip', { autoAlpha: 1, y: 0 }, 0); tl.to('#rs3Leg', { autoAlpha: 1, duration: .6 }, 0);
-      const t1 = W(i, 'goes around'), t2 = W(i, 'straight through'), t3 = W(i, 'trend');
-      tl.fromTo('#rs3A', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut' }, t1 - .2); flow(tl, '#rs3P1', [[239, 392], [239, 440], [683, 440], [683, 392]], t1 + 1.4, 4, 1.4); rsPt(tl, r[1], t1);
-      tl.fromTo('#rs3B', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut' }, t2 - .2); flow(tl, '#rs3P2', [[239, 392], [683, 392]], t2 + 1.4, 4, 1); rsPt(tl, r[2], t2);
-      tl.fromTo('#rs3Res', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .9, ease: E2 }, t3 - .2); rsPt(tl, r[3], t3 - .2); return tl; }
+    i => { const tl = gsap.timeline(), r = $$('#rs3T .rs-pt'); rsIn(3, tl, i); tl.add(rsTo('#rs3Cv', .2, 2.4), .5); tl.add(rsTo('#rs3Cv', .3, 3), W(i, 'closes gently') - .6); rsPt(tl, r[0], Math.max(.4, W(i, 'a small clip') - .2)); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs3T .rs-pt'); tl.set('#rs3T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs3Cv', .36, 2.6), .2); tl.add(rsTo('#rs3Cv', .42, 3), W(i, 'stop in') - 1.2); rsPt(tl, r[1], Math.max(.3, W(i, 'slip through') - .2)); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs3T .rs-pt'); tl.set('#rs3T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(2), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs3Cv', .48, 2.4), .2); tl.add(rsTo('#rs3Cv', .58, 3.4), W(i, 'straight through') - 1.4); rsPt(tl, r[2], Math.max(.3, W(i, 'goes around') - .6)); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs3T .rs-pt'); tl.set('#rs3T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(3), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs3Cv', .62, 4, 'none'), .3); rsPt(tl, r[3], W(i, 'trend') - .6); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs3T .rs-pt'); tl.set('#rs3T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(4), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs3Cv', .62, 3.4), W(i, 'fungus') - .3); tl.add(rsTo('#rs3Cv', .78, 3.4), W(i, 'gap closes') - .6); rsPt(tl, r[4], W(i, 'warn you') - .5); return tl; }
   ] };
-S.rs4 = { sec: 'RootStake', reset() { hide('#rs4V', $$('#rs4T > *'), $$('#rs4T .rs-pt')); gsap.set('#rs4Pl .pl', { autoAlpha: 0 }); gsap.set('#rs4S', { autoAlpha: 0 }); gsap.set('#rs4Tag, #rs4Ring, #rs4Stake, #rs4Sp .sp', { autoAlpha: 0 }); gsap.set('#rs4L1, #rs4L2', { fill: '#3E9461' }); gsap.set('#rs4W, #rs4Sg', { strokeDashoffset: 1 }); gsap.set('#rs4WL, #rs4Chart, #rs4Pill', { autoAlpha: 0 }); },
+
+/* ---------- ONE CONNECTED ECOSYSTEM ---------- */
+const ecoTab = (tl, k, t) => { tl.add(() => { $$('#ecoTabs span').forEach((s, j) => s.classList.toggle('on', j === k)); }, t); tl.to($$('#ecoPhone .eco-scr img')[k], { opacity: 1, duration: .5 }, t); $$('#ecoPhone .eco-scr img').forEach((im, j) => { if (j !== k) tl.to(im, { opacity: 0, duration: .5 }, t); }); tl.fromTo('#ecoPhone', { y: 20 }, { y: 0, duration: .6, ease: E2 }, t); };
+const ecoBubble = (tl, txt, t) => { tl.add(() => { $('#ecoBub').textContent = txt; }, t); tl.fromTo('#ecoBub', { scale: .85, transformOrigin: '0 50%' }, { scale: 1, duration: .5, ease: 'back.out(2)' }, t); };
+S.eco = { sec: 'The solution', reset() { hide('.eco-eye', '.eco-h', '#ecoTabs', '#ecoMojo', '#ecoPhone'); $$('#ecoTabs span').forEach((s, j) => s.classList.toggle('on', j === 0)); $$('#ecoPhone .eco-scr img').forEach((im, j) => im.style.opacity = j === 0 ? 1 : 0); $('#ecoBub').textContent = 'Poke the tabs. Each one is a real screen.'; },
   beats: [
-    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); rsIn(4, tl, i); tl.fromTo('#rs4Pl .pl', { autoAlpha: 0, scale: .2, transformOrigin: '50% 100%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(1.8)', stagger: { each: .025, from: 'center' } }, .4);
-      const t0 = W(i, 'one module'); tl.set('#rs4S', { autoAlpha: 1 }, t0 - .3); tl.fromTo('#rs4S > g:first-child', { autoAlpha: 0, scale: .2, transformOrigin: '50% 100%' }, { autoAlpha: 1, scale: 1.25, duration: .7, ease: 'back.out(2)' }, t0 - .3);
-      tl.fromTo('#rs4Ring', { autoAlpha: 0, scale: .3, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .9, ease: 'power3.out' }, t0); tl.to('#rs4Ring', { rotation: 360, transformOrigin: '50% 50%', duration: 9, ease: 'none' }, t0);
-      tl.fromTo('#rs4Stake', { autoAlpha: 0, y: -60 }, { autoAlpha: 1, y: 0, duration: .7, ease: 'bounce.out' }, t0 + .3); tl.fromTo('#rs4Tag', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .6 }, t0 + .5); rsPt(tl, r[0], t0 - .2);
-      const t1 = W(i, 'takes hold'); tl.to('#rs4Sp .sp', { autoAlpha: 1, duration: .1, stagger: .45 }, t1); tl.fromTo('#rs4Sp .sp', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1.6, duration: 1.2, ease: 'power2.out', stagger: .45 }, t1); tl.to('#rs4L1, #rs4L2', { fill: '#984421', duration: 2.4, ease: 'none' }, t1 + .2);
-      const t2 = W(i, 'membranes leak'); tl.fromTo('#rs4Chart', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, t2 - .6); tl.fromTo('#rs4Sg', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 3.6, ease: 'power1.inOut' }, t2 - .2); rsPt(tl, r[1], t2); return tl; },
-    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); tl.set('#rs4T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(2), { autoAlpha: 0 }, 0);
-      const t0 = W(i, 'shared weather'); tl.fromTo('#rs4W', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut' }, t0 - .8); tl.fromTo('#rs4WL', { autoAlpha: 0, y: 14 }, { autoAlpha: 1, y: 0, duration: .6 }, t0 - .3); tl.to('#rs4Pl .pl', { y: -6, duration: .5, yoyo: true, repeat: 3, ease: 'sine.inOut', stagger: { each: .02, from: 'center' } }, t0 - .2);
-      const t1 = W(i, 'never claims'); tl.fromTo('#rs4Pill', { autoAlpha: 0, scale: .6, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .7, ease: 'back.out(2)' }, Math.max(.2, W(i, 'warned early') - .2)); rsPt(tl, r[2], t1); return tl; }
+    i => { const tl = gsap.timeline(); tl.add(rise(['.eco-eye', '.eco-h'], { st: .15 }), 0); tl.add(rise('#ecoTabs', { y: 30 }), W(i, 'one connected') - .2); tl.add(rise('#ecoMojo', { y: 30 }), W(i, 'one connected') + .4); tl.fromTo('#ecoPhone', { autoAlpha: 0, y: 140 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E2 }, W(i, 'one connected')); return tl; },
+    i => { const tl = gsap.timeline(); tl.set(['.eco-eye', '.eco-h', '#ecoTabs', '#ecoMojo', '#ecoPhone'], { autoAlpha: 1 }, 0); ecoBubble(tl, 'Every pot on one screen.', W(i, 'Garden') - .2); ecoBubble(tl, 'Neighbours swap and sell here.', W(i, 'Market') - .1); ecoTab(tl, 1, W(i, 'Market') - .1); return tl; },
+    i => { const tl = gsap.timeline(); tl.set(['.eco-eye', '.eco-h', '#ecoTabs', '#ecoMojo', '#ecoPhone'], { autoAlpha: 1 }, 0); tl.add(() => { $$('#ecoTabs span').forEach((s, j) => s.classList.toggle('on', j === 1)); $$('#ecoPhone .eco-scr img').forEach((im, j) => im.style.opacity = j === 1 ? 1 : 0); }, 0);
+      ecoTab(tl, 2, W(i, 'Quests') - .1); ecoBubble(tl, 'Quests keep you coming back.', W(i, 'Quests')); ecoTab(tl, 3, W(i, 'BioDex') - .1); ecoBubble(tl, 'Every plant you have grown.', W(i, 'BioDex')); ecoTab(tl, 4, W(i, 'Profile') - .1); ecoBubble(tl, 'Your lifetime Plant-Days.', W(i, 'Profile')); return tl; }
+  ] };
+
+S.rs4 = { sec: 'RootStake', reset() { hide('#rs4V', $$('#rs4T > *'), $$('#rs4T .rs-pt')); rsSet('#rs4Cv', 0); },
+  beats: [
+    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); rsIn(4, tl, i); tl.add(rsTo('#rs4Cv', .08, 2.2), .6); tl.add(rsTo('#rs4Cv', .13, 2.6), W(i, 'Fungal diseases') - .6); tl.add(rsTo('#rs4Cv', .62, 4.6), W(i, 'move fast') - .4); rsPt(tl, r[0], W(i, 'move fast') - .4); return tl; },
+    i => { const tl = gsap.timeline(), r = $$('#rs4T .rs-pt'); tl.set('#rs4T > *', { autoAlpha: 1 }, 0); tl.set(r.slice(1), { autoAlpha: 0 }, 0); tl.add(rsTo('#rs4Cv', .78, 3.2), W(i, 'shift across') - .5); tl.add(rsTo('#rs4Cv', 1, 5), W(i, 'raise the alarm') - 1.6); rsPt(tl, r[1], W(i, 'catch it first') - .2); rsPt(tl, r[2], W(i, 'raise the alarm') - .2); return tl; }
+  ] };
+const fanPh = () => $$('#fanPh .fp');
+S.fan = { sec: 'The solution', reset() { hide('.fan-eye', '.fan-h', '.fan-sub', fanPh()); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.add(rise(['.fan-eye', '.fan-h'], { st: .15 }), 0); tl.add(rise('.fan-sub', { y: 30 }), W(i, 'Every screen') - .3);
+      const P = fanPh(), order = [2, 1, 3, 0, 4]; order.forEach((k, n) => tl.fromTo(P[k], { autoAlpha: 0, y: 260, scale: .9 }, { autoAlpha: 1, y: 0, scale: 1, duration: 1.1, ease: 'back.out(1.2)', clearProps: 'scale' }, .5 + n * .28)); return tl; }
+  ] };
+const ixSet = k => { $$('#ixList .ix-r').forEach((r, j) => r.classList.toggle('on', j === k)); $$('#ixPhone .ix-m').forEach((r, j) => r.classList.toggle('on', j === k)); };
+S.idx = { sec: 'The solution', reset() { hide('.ix-eye', '.ix-h', '#ixPhone', $$('#ixList .ix-r')); ixSet(0); },
+  beats: [
+    i => { const tl = gsap.timeline(); tl.add(rise(['.ix-eye', '.ix-h'], { st: .15 }), 0); tl.fromTo($$('#ixList .ix-r'), { autoAlpha: 0, x: -50 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2, stagger: .12 }, .5); tl.fromTo('#ixPhone', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, .7);
+      ['Today', 'Garden', 'Market', 'Quests', 'BioDex'].forEach((w, k) => tl.add(() => ixSet(k), Math.max(1.2, W(i, w) - .1))); return tl; }
   ] };
 
 /* ---------- FEASIBILITY: built and tested ---------- */
@@ -713,9 +728,9 @@ if (chan) chan.onmessage = e => { if (typeof e.data.i === 'number' && e.data.i !
 
 /* ---------- one click per scene: its lines play on their own, timed to the words ---------- */
 let linesTimer, paused = false, PACE = 1;
-function autoLines() { clearTimeout(linesTimer); if (paused || cur < 0) return; const L = LINES[cur], N = LINES[cur + 1]; if (!N || N.scene !== L.scene) return; linesTimer = setTimeout(() => go(cur + 1), L.dur * PACE * 1000); }
+function autoLines() { clearTimeout(linesTimer); return; if (paused || cur < 0) return; const L = LINES[cur], N = LINES[cur + 1]; if (!N || N.scene !== L.scene) return; linesTimer = setTimeout(() => go(cur + 1), L.dur * PACE * 1000); }
 function nextScene() { if (cur < 0) return go(0); const nl = LINES[cur + 1]; if (nl && nl.scene === curScene) return go(cur + 1); const k = ORDER.indexOf(curScene); if (k + 1 < ORDER.length) go(first[ORDER[k + 1]]); }
-function prevScene() { const k = ORDER.indexOf(curScene); if (cur < 0) return; if (cur > first[curScene]) return go(first[curScene]); if (k > 0) go(first[ORDER[k - 1]]); else go(-1); }
+function prevScene() { const k = ORDER.indexOf(curScene); if (cur < 0) return; if (cur > first[curScene]) return go(cur - 1); if (k > 0) go(first[ORDER[k - 1]]); else go(-1); }
 function toast(t) { let e = $('#toast'); if (!e) { e = document.createElement('div'); e.id = 'toast'; e.style.cssText = 'position:absolute;left:50%;bottom:60px;transform:translateX(-50%);z-index:90;background:#121A15;color:#F8F6F1;padding:14px 34px;border-radius:99px;font:400 30px Hanken Grotesk,sans-serif;pointer-events:none'; stage.appendChild(e); } e.textContent = t; gsap.killTweensOf(e); gsap.fromTo(e, { autoAlpha: 0 }, { autoAlpha: 1, duration: .3 }); gsap.to(e, { autoAlpha: 0, delay: 1.6, duration: .5 }); }
 /* ---------- (rehearsal mode kept for practice) ---------- */
 let auto = false, voice = false, timer;

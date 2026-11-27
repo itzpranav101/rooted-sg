@@ -84,3 +84,71 @@
 .rd-measure .h3{font-size:62px;margin-top:10px}
 
 .rd-line{top:470px}.rd-steps{top:520px}.rd-s b{font-size:46px}.rd-s p{font-size:34px}.rd-measure{top:850px}
+
+#rs3T .h2{font-size:72px;margin:10px 0 12px}#rs3T .rs-pt{margin-top:15px;font-size:30px}#rs3T .rs-pt b{font-size:34px}
+
+/* ---- one connected ecosystem (mirrors heymeco.xyz) ---- */
+#s-eco{text-align:center}
+.eco-eye{position:absolute;left:0;right:0;top:112px;text-align:center;font-size:26px}
+.eco-h{position:absolute;left:50%;top:160px;transform:translateX(-50%);width:1000px;font-size:104px;line-height:.98;margin:0}
+.eco-tabs{position:absolute;left:0;right:0;top:488px;display:flex;justify-content:center;gap:16px}
+.eco-tabs span{font-family:'Newsreader',Georgia,serif;font-size:42px;letter-spacing:-.02em;padding:14px 34px;border-radius:99px;background:#fff;box-shadow:inset 0 0 0 2px rgba(18,26,21,.16);color:#121A15}
+.eco-tabs span.on{background:#121A15;color:#fff;box-shadow:none}
+.eco-mojo{position:absolute;left:50%;top:600px;transform:translateX(-50%);display:flex;align-items:center;gap:18px;width:max-content}
+.eco-mojo img{width:92px;height:92px;image-rendering:pixelated;object-fit:contain}
+.eco-bub{position:relative;font-size:30px;padding:16px 28px;border-radius:99px;background:#F4F4F2;box-shadow:inset 0 0 0 2px rgba(18,26,21,.14)}
+.eco-phone{position:absolute;left:50%;top:720px;width:380px;height:720px;transform:translateX(-50%);border-radius:68px;background:#0B0F0D;padding:12px;box-shadow:0 60px 120px -40px rgba(20,40,28,.5)}
+.eco-scr{position:relative;width:100%;height:100%;border-radius:58px;overflow:hidden;background:#fff}
+.eco-scr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0}
+.eco-scr img.on{opacity:1}
+
+/* ---- the app: fan of phones ---- */
+.fan-eye{position:absolute;left:0;right:0;top:92px;text-align:center;font-size:26px}
+.fan-h{position:absolute;left:50%;top:132px;transform:translateX(-50%);width:1400px;text-align:center;font-size:138px;line-height:.95;margin:0}
+.fan-sub{position:absolute;left:50%;top:420px;transform:translateX(-50%);width:1100px;text-align:center;font-size:34px;line-height:1.35;margin:0}
+.fan-ph{position:absolute;left:50%;top:560px;width:0;height:0}
+.fan-ph .fp{position:absolute;left:-155px;top:0;width:310px;height:640px;border-radius:54px;background:#0B0F0D;padding:9px;box-shadow:0 50px 90px -40px rgba(20,40,28,.55);transform:translate(var(--x),var(--y)) rotate(var(--r))}
+.fan-ph .fp.c{z-index:3;transform:translate(var(--x),var(--y)) rotate(var(--r)) scale(1.08)}
+.fan-ph .fp img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:46px;display:block}
+/* ---- the app: index ---- */
+.ix-eye{position:absolute;left:170px;top:108px;font-size:26px}
+.ix-h{position:absolute;left:520px;right:120px;top:70px;font-size:104px;line-height:1;margin:0;white-space:nowrap}
+.ix-list{position:absolute;left:170px;top:330px;width:840px}
+.ix-r{display:grid;grid-template-columns:70px 1fr;align-items:start;padding:20px 0 18px;border-top:2px solid rgba(18,26,21,.18);opacity:.95}
+.ix-n{font-family:var(--mono);font-size:26px;color:#121A15;padding-top:30px}
+.ix-t{font-family:var(--serif);font-weight:300;font-size:92px;line-height:1;letter-spacing:-.03em;transition:color .3s,transform .3s;transform-origin:0 50%}
+.ix-s{font-size:30px;line-height:1.3;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s,opacity .4s,margin .4s}
+.ix-r.on .ix-t{color:#0B5A32;transform:translateX(24px)}
+.ix-r.on .ix-s{max-height:60px;opacity:1;margin-top:8px;padding-left:24px}
+.ix-r:last-child{border-bottom:2px solid rgba(18,26,21,.18)}
+.ix-phone{position:absolute;left:1330px;top:360px;width:340px;height:690px;border-radius:60px;background:#0B0F0D;padding:10px;box-shadow:0 60px 110px -40px rgba(20,40,28,.5)}
+.ix-scr{width:100%;height:100%;border-radius:50px;background:#F6F4EE;padding:70px 26px 24px;position:relative}
+.ix-top{font-family:var(--mono);font-size:24px;letter-spacing:.14em;color:#121A15;margin-bottom:26px}
+.ix-m{font-family:var(--serif);font-size:40px;line-height:1;padding:14px 0;color:#121A15;transition:color .3s}
+.ix-m i{font-style:normal;font-family:var(--mono);font-size:24px;margin-right:14px}
+.ix-m.on{color:#0B5A32}
+.ix-foot{position:absolute;left:26px;right:26px;bottom:26px;font-style:italic;font-size:24px;line-height:1.25;color:#121A15;font-family:var(--serif)}
+
+/* ---- layout corrections (no overlaps) ---- */
+.fan-eye{top:84px}
+.fan-h{top:128px;width:1000px;font-size:134px}
+.fan-sub{top:432px;width:1200px;font-size:32px}
+.fan-ph{top:560px}
+.ix-h{left:560px;right:60px;top:84px;font-size:84px}
+.ix-eye{top:104px}
+.ix-list{top:290px}
+.ix-r{padding:14px 0 12px}
+.ix-t{font-size:78px}
+.ix-n{padding-top:22px}
+.ix-r.on .ix-s{max-height:44px;margin-top:2px}
+.ix-phone{top:330px}
+.mk-rings{top:340px;width:600px;height:560px}
+.mk-rows{top:330px}
+.mk-r{padding:10px 0 10px}
+.mk-r .num{font-size:84px}.mk-r .num small{font-size:44px}
+.mk-r .lead{font-size:28px;margin:2px 0 2px}
+.mk-hdb{top:930px}
+.mk-global{top:935px;font-size:26px;line-height:1.25;padding-top:10px}
+.mk-h{top:196px}
+
+.fan-ph{top:600px}

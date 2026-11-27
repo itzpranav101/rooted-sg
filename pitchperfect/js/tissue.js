@@ -187,7 +187,7 @@ function render(now) {
     if (bP > .995) { const P = PBEZ(plantClip.x, plantClip.y); g.fillStyle = C.gr; for (let n = 0; n < 4; n++) { const u = (tt * .35 + n / 4) % 1, q = bez(P, u); g.globalAlpha = aP * Math.sin(u * Math.PI); g.beginPath(); g.arc(q[0], q[1], .55, 0, TAU); g.fill(); } g.globalAlpha = aP; }
     g.restore(); g.save(); g.globalAlpha = aP; const s2 = ps < .18 ? lerp(.35, 1, T(.1, .17)) : lerp(1, 3.4, T(.2, .27)); const k = (x, y) => [(x - plantClip.x) * s2 + plantClip.x, (y - plantClip.y) * s2 + plantClip.y];
     const lab = (s, x, y, tx, ty, a) => { const p = k(x, y), q = k(tx, ty); tag(g, s, p[0], p[1], q[0], q[1], a * clamp(1 - T(.2, .24)), tx >= x ? 'left' : 'right'); };
-    lab('HOUSE MODULE · ESP32-S3 · SOLAR', -32, 13, -46, -4, aP); lab('SOIL PROBE', -8, 30, -30, 43, aP); lab('STEM ELECTRODE', plantClip.x, plantClip.y, 38, -12, aP); lab('WIRE', -8, 20, -6, 8, aP * .8);
+    lab('HOUSE MODULE · SOLAR', -32, 13, -46, -4, aP); lab('SOIL PROBE', -8, 30, -30, 43, aP); lab('STEM ELECTRODE', plantClip.x, plantClip.y, 38, -12, aP); lab('WIRE', -8, 20, -6, 8, aP * .8);
     g.restore(); }
 
   // ----- 3 · STEM (side) → CROSS-SECTION -----
@@ -220,7 +220,7 @@ function render(now) {
         // membrane crossings flash where the line meets cell walls
         cells.forEach(ce => { if (Math.abs(ce.y) < ce.r && Math.abs(ce.x) < 34) { const u = (tt * .9) % 1, xx = lerp(-33, 33, u); if (Math.abs(xx - (ce.x - ce.r * .8)) < 1.2) { g.save(); g.strokeStyle = C.gr; g.lineWidth = .25; g.beginPath(); g.arc(ce.x - ce.r * .8, 0, 1.4, 0, TAU); g.stroke(); g.restore(); } } }); }
       g.restore();
-      txt(g, low > hi ? 'around' : 'through', 0, -42, { s: 4.2, col: C.gr, al: 'center', w: 300 }); txt(g, low > hi ? 'the cells' : 'the cells', 0, -37.6, { s: 1.9, al: 'center', a: .8 }); }
+      txt(g, low > hi ? 'around' : 'through', 0, -35, { s: 4.2, col: C.gr, al: 'center', w: 300 }); txt(g, low > hi ? 'the cells' : 'the cells', 0, -30.6, { s: 1.9, al: 'center', a: .8 }); }
     // cell part labels (step 5)
     const lab = (1 - T(.495, .52)) * T(.43, .47);
     if (lab > .01) { const c0 = cells.reduce((b, c) => (Math.hypot(c.x + 26, c.y + 26) < Math.hypot(b.x + 26, b.y + 26) ? c : b)); const c1 = cells.reduce((b, c) => (Math.hypot(c.x - 30, c.y - 24) < Math.hypot(b.x - 30, b.y - 24) ? c : b));
