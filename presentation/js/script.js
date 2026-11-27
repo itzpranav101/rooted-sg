@@ -15,7 +15,8 @@ window.PILOT = {
   flags: 137,          // problems the Plant Doctor flagged early
   trades: 96,          // trades completed on Roots
   weeks: 13,           // length of the pilot in weeks
-  curve: [100, 99, 97, 96, 94, 93, 91, 90, 88, 87, 85, 84, 82]  // weekly survival %
+  curve: [100, 99, 97, 96, 94, 93, 91, 90, 88, 87, 85, 84, 82],  // weekly survival %
+  checkins: [78, 75, 73, 76, 72, 74, 75, 73, 72, 74, 73, 75, 74]   // % of users checking in, each week (control chart)
 };
 
 window.SPEAKERS = {
@@ -63,9 +64,9 @@ window.SCRIPT = [
   ['I', 'doctor', 'Solutions', 'So you point your camera at the leaf. The app reads colour, fullness and light, and turns what it sees into clues.', 0.6, 'Camera focuses, snaps and scans'],
   ['I', 'doctor', 'Solutions', 'The AI finds the clues. You make the call. A human stays in the loop, and the fix becomes a step-by-step plan.', 0.8, 'Diagnosis and the step-by-step plan'],
   ['I', 'grow', 'Solutions', 'Cause number three was motivation. So we built the Guardian Path. We don\'t just identify diseases, we teach people to understand them, with streaks, levels and weekly leagues.', 0.6, 'Learning path, quiz card and streaks'],
-  ['I', 'grow', 'Solutions', 'And then there is Roots, the part we are proudest of. For the first time in Singapore, the plants on your street can find each other.', 0.6, 'The Roots marketplace screens'],
+  ['I', 'grow', 'Solutions', 'And then there is Roots, our marketplace, and the part we are proudest of. Roots is a marketplace for home growers. For the first time in Singapore, the plants on your street can find each other.', 0.6, 'Roots: the marketplace screens and listings'],
   ['I', 'grow', 'Solutions', 'A neighbour with extra chillies can connect with one who\'s looking for seedlings. What one person has in excess becomes something another person can use.', 0.8, 'Chilli matched to a seedling'],
-  ['I', 'grow', 'Solutions', 'You can sell it, swap it, or give it away for free. Neighbours who never spoke start sharing advice, cuttings and harvests, and a block becomes a community.', 0.8, 'Sell, swap and give-away cards'],
+  ['I', 'grow', 'Solutions', 'Every listing on the marketplace gives you three choices. You can sell it, swap it, or give it away for free. And it goes beyond trading. Neighbours who never spoke start sharing advice, cuttings and harvests, and a block becomes a community.', 0.8, 'Sell, swap and give-away cards'],
   ['I', 'pipeline', 'Solutions', 'But none of this works unless every Plant-Day is real. So underneath it all is serious technology, and Anandita will show you how it works.', 1.0, 'None of it works unless the data is real'],
 
   // ───────── ANANDITA · technology, implementation, the pilot ─────────
@@ -81,7 +82,7 @@ window.SCRIPT = [
   ['N', 'pilot', 'Results', 'Together they logged {plantDays} verified Plant-Days. Not self-reported. Every single one backed by a real plant and a fresh photo.', 0.6, 'Verified Plant-Days total'],
   ['N', 'pilot', 'Results', 'Remember the three causes. Against forgetting, {weekly} percent were still checking in every week, and {survival} percent of pilot plants were still alive.', 0.6, 'Check-in and survival rings'],
   ['N', 'pilot', 'Results', 'The Plant Doctor spotted {flags} problems before a single one of those plants was lost. And {trades} times, one neighbour passed a cutting or seedling to another through Roots.', 0.6, 'Problems caught and Roots trades'],
-  ['N', 'pilot', 'Results', 'We tracked survival weekly on a control chart, so real improvement stands apart from noise.', 1.0, 'Control chart'],
+  ['N', 'pilot', 'Results', 'This is a control chart of our weekly check-ins. All thirteen weeks stayed inside the control limits, so the habit held steady. It was not a launch-week spike that faded away.', 1.0, 'Control chart of weekly check-ins'],
 
   // ───────── PRANAV · results, the forecast, the close ─────────
   ['N', 'learn', 'Results', 'But the pilot gave us more than just numbers. It showed us how people actually use the app, where they struggle, and what keeps them coming back.', 0.6, '186 users flow into three lessons'],
@@ -91,7 +92,7 @@ window.SCRIPT = [
   ['P', 'forecast', 'Results', 'In our base case, that is 1,814 more plants alive after a year, and three point three million verified Plant-Days. Data Singapore has never had.', 0.8, '1,814 and 3.3M'],
   ['P', 'sustain', 'Results', 'And it lasts without us. The models run on the phone, schools run their own leagues, and every street on Roots keeps its own growers going.', 0.8, 'Three sustainability cards'],
   ['P', 'vision', 'Results', 'So picture 2035. Every block in Singapore growing something, and every living plant counted. That million-balcony farm, finally visible.', 1.0, 'The 2035 skyline lights up'],
-  ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 0.8, 'Field of sprouts'],
+  ['P', 'close', 'Results', 'Remember those eight hundred and sixty thousand seed packets? Imagine if next time, Singapore could see exactly how many of them grew.', 0.8, '860,000 packets, then the field of sprouts'],
   ['P', 'close', 'Results', 'That is Rooted SG. Not just an app, but the first measure of a nation that grows. Built by students, proven by data, ready to scale.', 1.2, 'The first measure of a nation that grows'],
   ['P', 'close', 'Results', 'A plant never dies in a day. It dies from being forgotten. Singapore can no longer afford to forget. We will count every plant that lives, until this country grows its own future. We are Rooted SG. Thank you.', 2.0, 'Quote, then logo and Thank you']
 ];

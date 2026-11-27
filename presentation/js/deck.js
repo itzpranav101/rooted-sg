@@ -125,7 +125,7 @@ function Field(cv, cols, rows, opt = {}) {
       g.beginPath(); g.moveTo(p.x, by); g.lineTo(p.x + kd * sz * .2, by - h); g.stroke();
       const lw = sz * .26 * kg; g.fillStyle = kd > .3 ? 'rgba(10,10,10,0)' : '#E4F0E8';
       [[-1, .55], [1, .8]].forEach(([s, f]) => { const yy = by - h * f, dr = kd * 1.2 * s; g.save(); g.translate(p.x + kd * sz * .2 * f, yy); g.rotate(s * -.5 + dr); g.beginPath(); g.ellipse(s * lw * .6, 0, lw * .6, lw * .28, 0, 0, 7); g.fill(); g.stroke(); g.restore(); });
-      if (opt.keep && st.ok > 0) { const k = clamp(st.ok * 1.6 - p.j * .6); if (k > 0) { g.globalAlpha = k; g.fillStyle = '#0B5A32'; g.beginPath(); g.arc(p.x + sz * .26, by - h - sz * .02, sz * .12, 0, 7); g.fill(); } }
+      if (opt.keep && st.ok > 0) { const k = clamp(st.ok * 1.6 - p.j * .6); if (k > 0) { g.globalAlpha = k; const bx = p.x + sz * .3, byy = by - h - sz * .02, br = sz * .17 * (.6 + .4 * k); g.fillStyle = '#0B5A32'; g.beginPath(); g.arc(bx, byy, br, 0, 7); g.fill(); g.strokeStyle = '#FFFFFF'; g.lineWidth = Math.max(1.2, br * .32); g.beginPath(); g.moveTo(bx - br * .45, byy); g.lineTo(bx - br * .1, byy + br * .38); g.lineTo(bx + br * .5, byy - br * .38); g.stroke(); } }
     }
   }
   return { st, draw, tween: (vars, d = 2) => gsap.to(st, { ...vars, duration: d, ease: 'power1.inOut', onUpdate: draw }) };
@@ -334,9 +334,9 @@ S.grow = {
       tl.fromTo('#gpCard', { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'identify diseases,')); tl.add(rise($$('#gpCard .qo'), { y: 16, st: .15 }), W(i, 'we teach'));
       tl.add(() => $('#gpCard .qo.ok').classList.add('on'), W(i, 'understand them,')); tl.fromTo('#gpCard .qo.ok', { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .2 }, W(i, 'understand them,'));
       const ch = $$('#gpChips .chip'); [W(i, 'streaks,'), W(i, 'levels'), W(i, 'weekly leagues.')].forEach((tt, k) => tl.add(pop(ch[k], { s: .6 }), tt)); return tl; },
-    i => { const tl = gsap.timeline(); tl.to('#gp', { autoAlpha: 0, x: -120, duration: .7, ease: 'power2.in' }, 0); tl.set('#rt', { autoAlpha: 1 }, .3); tl.add(rise('#rtHead', { y: 40 }), W(i, 'For the first') - .3);
+    i => { const tl = gsap.timeline(); tl.to('#gp', { autoAlpha: 0, x: -120, duration: .7, ease: 'power2.in' }, 0); tl.set('#rt', { autoAlpha: 1 }, .3); tl.add(rise('#rtHead', { y: 40 }), W(i, 'Roots, our') - .2);
       tl.fromTo('.rt-ph', { autoAlpha: 0, y: 200 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E2 }, .4); tl.fromTo('.rt-ph2', { autoAlpha: 0, y: 240, rotation: 12 }, { autoAlpha: 1, y: 0, rotation: 5, duration: 1.3, ease: E2 }, .6); tl.set('#listings', { autoAlpha: 1 }, 0);
-      const L = $$('#listings .lst'); L.forEach((l, k) => tl.fromTo(l, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'the plants') + k * .35));
+      const L = $$('#listings .lst'); L.forEach((l, k) => tl.fromTo(l, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'a marketplace for') + k * .35));
       tl.fromTo('#listings .lst:first-child', { boxShadow: '0 0 0 0 rgba(11,90,50,0)' }, { boxShadow: '0 0 0 6px rgba(11,90,50,1)', duration: .5 }, W(i, 'find each other.')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#listings', { autoAlpha: 0, x: 60, duration: .5 }, 0); tl.set('#match', { autoAlpha: 1 }, .3); const M = $$('#match > *');
       tl.fromTo(M[0], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'extra chillies') - .3); tl.set(M[1], { autoAlpha: 1 }, W(i, 'can connect')); tl.to($$('.marrow path'), { strokeDashoffset: 0, duration: .8, ease: 'power2.out', stagger: .4 }, W(i, 'can connect'));
@@ -461,22 +461,23 @@ function plSet() { const w = PW.w, h = 20 + w / NW * 400, top = 500 - h; $('#plS
 const pk = k => $$(`#plM [data-k="${k}"]`).filter(e => !e.classList.contains('ring'));
 function plCount(tl, k, t, d = 1.6) { pk(k).forEach(e => tl.add(count(e, PILOT[k] || 0, d), t)); const r = $(`#plM .ring[data-k="${k}"] .rf`); if (r) tl.to(r, { strokeDashoffset: 100 - (PILOT[k] || 0), duration: d + .4, ease: E2 }, t); }
 function drawChart() {
-  const svg = $('#ccSvg'), W0 = 1500, H0 = 560, P = { l: 120, r: 40, t: 30, b: 70 }, vals = PILOT.curve || [], n = Math.max(2, vals.length);
-  const lo = Math.max(0, Math.floor((Math.min(...vals, 100) - 15) / 10) * 10), hi = 100;
+  const svg = $('#ccSvg'), W0 = 1500, H0 = 560, P = { l: 120, r: 40, t: 30, b: 70 }, vals = PILOT.checkins || PILOT.curve || [], n = Math.max(2, vals.length);
+  const lo = 50, hi = 100;
   const X = k => P.l + k / (n - 1) * (W0 - P.l - P.r), Y = v => P.t + (1 - (v - lo) / (hi - lo)) * (H0 - P.t - P.b);
-  let s = `<style>.ax{stroke:#0A0A0A;stroke-width:2.5;fill:none}.gl{stroke:rgba(10,10,10,.12);stroke-width:1.5}.tx{font-family:'DM Mono',monospace;font-size:22px;fill:#0A0A0A;letter-spacing:1px}.ln{fill:none;stroke:#0B5A32;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.lim{stroke:#0A0A0A;stroke-width:2.5;stroke-dasharray:10 8}.cl{stroke:#984421;stroke-width:3}.pt{fill:#0B5A32;stroke:#fff;stroke-width:4}</style>`;
+  let s = `<style>.ax{stroke:#0A0A0A;stroke-width:2.5;fill:none}.gl{stroke:rgba(10,10,10,.12);stroke-width:1.5}.tx{font-family:'DM Mono',monospace;font-size:22px;fill:#0A0A0A;letter-spacing:1px}.ln{fill:none;stroke:#0B5A32;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}.lim{stroke:#0A0A0A;stroke-width:2.5;stroke-dasharray:10 8}.cl{stroke:#984421;stroke-width:3}.pt{fill:#0B5A32;stroke:#fff;stroke-width:4}.band{fill:rgba(11,90,50,.09)}.bl{font-family:'DM Mono',monospace;font-size:19px;letter-spacing:1px;fill:#0A0A0A}</style>`;
   for (let v = lo; v <= hi; v += 10) s += `<line class="gl" x1="${P.l}" x2="${W0 - P.r}" y1="${Y(v)}" y2="${Y(v)}"/><text class="tx" x="${P.l - 16}" y="${Y(v) + 8}" text-anchor="end">${v}%</text>`;
   for (let k = 0; k < n; k++) s += `<text class="tx" x="${X(k)}" y="${H0 - P.b + 42}" text-anchor="middle">W${k + 1}</text>`;
   s += `<path class="ax" d="M${P.l} ${P.t}V${H0 - P.b}H${W0 - P.r}"/>`;
   if (vals.length) { const m = vals.reduce((a, b) => a + b, 0) / vals.length, sd = Math.sqrt(vals.reduce((a, b) => a + (b - m) ** 2, 0) / Math.max(1, vals.length - 1)), u = Math.min(hi, m + 3 * sd), l = Math.max(lo, m - 3 * sd);
+    s += `<rect class="band" id="ccBand" x="${P.l}" y="${Y(u)}" width="${W0 - P.r - P.l}" height="${Y(l) - Y(u)}"/><text class="bl" x="${W0 - P.r - 10}" y="${Y(u) - 12}" text-anchor="end">UPPER LIMIT ${u.toFixed(0)}%</text><text class="bl" x="${W0 - P.r - 10}" y="${Y(l) + 30}" text-anchor="end">LOWER LIMIT ${l.toFixed(0)}%</text>`;
     s += `<line class="lim" x1="${P.l}" x2="${W0 - P.r}" y1="${Y(u)}" y2="${Y(u)}"/><line class="lim" x1="${P.l}" x2="${W0 - P.r}" y1="${Y(l)}" y2="${Y(l)}"/><line class="cl" x1="${P.l}" x2="${W0 - P.r}" y1="${Y(m)}" y2="${Y(m)}"/>`;
     s += `<path class="ln" id="ccLine" pathLength="1" d="M${vals.map((v, k) => `${X(k)} ${Y(v)}`).join('L')}"/>` + vals.map((v, k) => `<circle class="pt" cx="${X(k)}" cy="${Y(v)}" r="11"/>`).join(''); }
-  svg.innerHTML = s; $('.cc-key').innerHTML = '<span><i class="k1"></i>Weekly survival</span><span><i class="k2"></i>Control limits (±3σ)</span><span><i class="k3"></i>Centre line (mean)</span>';
+  svg.innerHTML = s; $('.cc-key').innerHTML = '<span><i class="k1"></i>Users checking in that week</span><span><i class="k2"></i>Control limits (±3σ)</span><span><i class="k3"></i>Centre line (mean ' + Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) + '%)</span>';
 }
 drawChart();
 S.pilot = {
   sec: 'The pilot',
-  reset() { PW.w = 0; plSet(); hide('.pl-head', '#plGrow', $$('#plM .m'), '#cchart', '.pl-src'); gsap.set('#plM', { autoAlpha: 1, y: 0 }); $$('#plM .num[data-k], #plM span[data-k]').forEach(e => e.textContent = '0'); gsap.set($$('#plM .rf'), { strokeDashoffset: 100 }); },
+  reset() { PW.w = 0; plSet(); hide('.pl-head', '#plGrow', $$('#plM .m'), '#cchart', '#ccBadge', '.pl-src'); gsap.set('#plM', { autoAlpha: 1, y: 0 }); $$('#plM .num[data-k], #plM span[data-k]').forEach(e => e.textContent = '0'); gsap.set($$('#plM .rf'), { strokeDashoffset: 100 }); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('.pl-head'), 0); tl.fromTo('#plGrow', { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, .2); tl.to(PW, { w: NW, duration: LINES[i].speak - .6, ease: 'none', onUpdate: plSet }, .6);
       tl.add(rise('.pl-src', { y: 10 }), 1); tl.add(rise('#plM .m1'), W(i, '{users}') - .3); plCount(tl, 'users', W(i, '{users}')); plCount(tl, 'plants', W(i, '{plants}')); return tl; },
@@ -484,7 +485,9 @@ S.pilot = {
     i => { const tl = gsap.timeline(); tl.add(rise('#plM .m3'), 0); plCount(tl, 'weekly', W(i, '{weekly}')); plCount(tl, 'survival', W(i, '{survival}')); return tl; },
     i => { const tl = gsap.timeline(); tl.add(rise('#plM .m4'), 0); plCount(tl, 'flags', W(i, '{flags}')); plCount(tl, 'trades', W(i, '{trades}')); return tl; },
     i => { const tl = gsap.timeline(); tl.to(['#plGrow', '#plM'], { autoAlpha: 0, y: -30, duration: .6, ease: 'power2.in' }, 0); tl.fromTo('#cchart', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, .5); const ln = $('#ccLine');
-      if (ln) { tl.fromTo(ln, { strokeDashoffset: 1, strokeDasharray: 1 }, { strokeDashoffset: 0, duration: 3.4, ease: 'power1.inOut' }, 1); tl.fromTo($$('#ccSvg .pt'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, ease: 'back.out(3)', stagger: 3.4 / (PILOT.curve.length) }, 1); } return tl; }
+      if (ln) { tl.fromTo(ln, { strokeDashoffset: 1, strokeDasharray: 1 }, { strokeDashoffset: 0, duration: 3.4, ease: 'power1.inOut' }, 1); tl.fromTo($$('#ccSvg .pt'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, ease: 'back.out(3)', stagger: 3.4 / ($$('#ccSvg .pt').length) }, 1); }
+      tl.fromTo('#ccBand', { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, .9); tl.add(pop('#ccBadge', { s: .7 }), W(i, 'All thirteen')); tl.fromTo('#ccBand', { fill: 'rgba(11,90,50,.09)' }, { fill: 'rgba(11,90,50,.22)', duration: .4, yoyo: true, repeat: 1 }, W(i, 'All thirteen') + .2);
+      tl.fromTo($$('#ccSvg .pt')[0], { attr: { r: 11 } }, { attr: { r: 18 }, duration: .35, yoyo: true, repeat: 1 }, W(i, 'launch-week')); return tl; }
   ]
 };
 
@@ -546,9 +549,11 @@ S.sustain = {
 (function () { const B = 380; $('#clPanSvg').innerHTML = `<path d="M130 ${B}h140l-18 40h-104z" fill="#fff" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"/>` + [-38, -24, -10, 4, 18, 32, 44].map((a, i) => { const r = a * Math.PI / 180, L = 230 + (i % 3) * 40, tx = 200 + Math.sin(r) * L, ty = B - Math.cos(r) * L, nx = Math.cos(r) * 13, ny = Math.sin(r) * 13; return `<path class="blade" pathLength="1" d="M${200 - nx} ${B - ny}Q${(200 + tx) / 2 - nx * 1.4} ${(B + ty) / 2 - ny * 1.4} ${tx} ${ty}Q${(200 + tx) / 2 + nx * 1.4} ${(B + ty) / 2 + ny * 1.4} ${200 + nx} ${B + ny}z" fill="#E4F0E8" stroke="#0B5A32" stroke-width="4" stroke-linejoin="round"/>`; }).join(''); })();
 S.close = {
   chrome: false,
-  reset() { F2 = F2 || Field($('#field2'), 43, 20, { keep: true, seed: 31 }); Object.assign(F2.st, { a: 0, g: 0, d: 0, ok: 0 }); F2.draw(); hide('#clMission', '#clImagine', '#clQuote', $$('#clQuote p'), '#clEnd', '#clNames', '#clThanks', '#clPandan'); gsap.set($$('#clPanSvg .blade'), { strokeDasharray: 1, strokeDashoffset: 1, fillOpacity: 0 }); gsap.set('#field2', { autoAlpha: 1 }); gsap.set($$('#clEnd .alive path'), { strokeDashoffset: 1 }); },
+  reset() { F2 = F2 || Field($('#field2'), 43, 20, { keep: true, seed: 31 }); Object.assign(F2.st, { a: 0, g: 0, d: 0, ok: 0 }); F2.draw(); hide('#clPackets', '#clCount', '#clMission', '#clImagine', '#clQuote', $$('#clQuote p'), '#clEnd', '#clNames', '#clThanks', '#clPandan'); gsap.set($$('#clPanSvg .blade'), { strokeDasharray: 1, strokeDashoffset: 1, fillOpacity: 0 }); gsap.set('#field2', { autoAlpha: 1 }); $('#clPkN').textContent = '0'; $('#clCnN').textContent = '0'; gsap.set($$('#clEnd .alive path'), { strokeDashoffset: 1 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(F2.tween({ a: 1 }, 2.6), .1); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), W(i, 'Imagine')); tl.add(F2.tween({ g: 1 }, 3), W(i, 'Imagine') + .2); tl.add(F2.tween({ ok: 1 }, 2.4), W(i, 'exactly how')); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(rise('#clPackets', { y: 50, d: 1 }), .1); tl.add(count($('#clPkN'), 860000, 2.6), .3); tl.add(F2.tween({ a: 1 }, 2.6), .3);
+      const t = W(i, 'Imagine'); tl.to('#clPackets', { autoAlpha: 0, y: -50, duration: .6, ease: 'power2.in' }, t - .5); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), t); tl.add(F2.tween({ g: 1 }, 3), t + .2);
+      const t2 = W(i, 'exactly how'); tl.add(pop('#clCount', { s: .7 }), t2 - .3); tl.add(F2.tween({ ok: 1 }, 2.4), t2); tl.add(count($('#clCnN'), 860000, 2.4), t2); return tl; },
     i => { const tl = gsap.timeline(); tl.to(['#clImagine', '#field2'], { autoAlpha: 0, duration: .8 }, 0); tl.set('#clMission', { autoAlpha: 1 }, .3);
       tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'a nation')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#clMission', { autoAlpha: 0, y: -40, duration: .6 }, 0); const q = $$('#clQuote p'); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, .3);

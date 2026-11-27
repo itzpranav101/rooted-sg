@@ -338,3 +338,16 @@
 .fc-big .lead{margin-top:14px}
 .wy-root{left:1060px;top:790px;transform:none;width:760px;text-align:left}
 .wy-root{top:868px}
+
+/* control chart: title row + badge */
+.cc-title{display:flex;align-items:center;justify-content:space-between;margin:0 0 14px 0}
+.cc-badge{font-size:22px;opacity:0}
+.cc-badge b{color:var(--green)}
+/* close: the 860,000 packets, then the counted field */
+.cl-packets{position:absolute;left:0;right:0;top:120px;text-align:center;opacity:0}
+.cl-packets .num{font-size:180px;line-height:1;color:var(--green)}
+.cl-packets .lead{font-size:34px;margin-top:10px}
+.cl-packets .lead b{color:var(--green)}
+.cl-count{position:absolute;left:0;right:0;top:310px;margin:auto;width:max-content;font-size:24px;opacity:0}
+.cl-count b{color:var(--green);font-variant-numeric:tabular-nums}
+.cc-title .cc-badge{position:static;transform:none;left:auto;top:auto}
