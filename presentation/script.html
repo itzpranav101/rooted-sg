@@ -26,6 +26,10 @@ h1 em{color:var(--green)}
 .ln p{font-family:Newsreader,serif;font-size:22px;line-height:1.35}
 .ln .meta{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
 .ln .meta b{color:var(--green);font-weight:500}
+.clk{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.1em;text-transform:uppercase;background:var(--green);color:#fff;border-radius:99px;padding:4px 12px;margin-bottom:8px}
+.clk b{font-weight:500;color:#fff}
+.clk span{text-transform:none;letter-spacing:0;font-family:'Hanken Grotesk',sans-serif;font-size:14px;font-weight:600}
+.how{background:var(--bg2);border-radius:16px;padding:14px 20px;margin-bottom:22px;font-size:16px}
 .hand{background:var(--ink);color:#fff;border-radius:99px;padding:2px 10px;margin-left:6px}
 @media(max-width:640px){.sum{grid-template-columns:1fr 1fr}h1{font-size:40px}}
 @media print{body{padding:0}.ln{padding:8px 0}.ln p{font-size:16px}}
@@ -35,6 +39,7 @@ h1 em{color:var(--green)}
 <span class="eb"><b>Rooted SG</b> · Catalyst Challenge · pitch script</span>
 <h1>Rooted SG. <em>The pitch.</em></h1>
 <div class="crit"><b>How the pitch maps to the judging criteria.</b> <b>Selection:</b> Singapore imports over 90% of its food; Food Story 2; the government's tools; the survival number nobody keeps; our target of 18% → 30% survival and our stopping rule. <b>Analysis:</b> the 3,043-resident survey, Pareto chart, 5 Whys, inputs vs outcomes, solution scan. <b>Solutions:</b> the verified Plant-Day, Mojo, the Plant Doctor, the Guardian Path, Roots, computer vision, our own trained model, building and testing the app. <b>Results:</b> the 3+ month pilot, control chart, what 186 users taught us, machine learning retrained on pilot data, the Monte Carlo forecast, sustainability, the 2035 vision.</div>
+<div class="how"><b>Using the clicker:</b> press once at every <b>▶ CLICK</b>, right before you start that line. The note next to it tells you what appears. Everything else on the slide animates by itself while you speak.</div>
 <div id="lines"></div>
 </main>
 <script src="js/script.js"></script>
@@ -44,7 +49,7 @@ const per = {}; LINES.forEach(l => { per[l.who] = per[l.who] || { n: 0, t: 0 }; 
 let last = '', h = '';
 LINES.forEach(l => { if (l.who !== last) { h += `<h2 class="sp">${SPEAKERS[l.who].name}<span>${SPEAKERS[l.who].part}</span></h2>`; last = l.who; }
   const nx = LINES[l.i + 1], hand = nx && nx.who !== l.who ? `<span class="hand">hand to ${SPEAKERS[nx.who].short}</span>` : '';
-  h += `<div class="ln"><div class="n"><b>${String(l.i + 1).padStart(2, '0')}</b></div><div><p>${fillTokens(l.text)}</p><div class="meta"><b>${l.crit}</b> ${hand}</div></div></div>`; });
+  h += `<div class="ln"><div class="n"><b>${String(l.i + 1).padStart(2, '0')}</b></div><div><div class="clk"><b>▶ CLICK</b><span>${l.click}</span></div><p>${fillTokens(l.text)}</p><div class="meta"><b>${l.crit}</b> ${hand}</div></div></div>`; });
 document.getElementById('lines').innerHTML = h;
 </script>
 </body></html>

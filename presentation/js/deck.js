@@ -72,7 +72,7 @@ S.vision = {
   beats: [
     i => { const tl = gsap.timeline(); tl.set('#viT', { autoAlpha: 1 }, 0); tl.fromTo($$('#viT > *'), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E, stagger: .3 }, .1);
       tl.fromTo('#cityB', { y: 120 }, { y: 0, duration: 1.4, ease: E2 }, 0); lightUp(CB, 1, 5.5, W(i, 'Every block') , tl);
-      tl.add(pop('#viC', { s: .7 }), W(i, 'every living')); return tl; }
+      tl.add(pop('#viC', { s: .7 }), W(i, 'every plant')); return tl; }
   ]
 };
 
@@ -90,18 +90,18 @@ S.cold = {
       tl.add(rise('#ib1', { y: 50 }), .2); tl.add(count($('#ib1 [data-n]'), 90, 1.8), .4);
       const T = $$('#trans > div'); ['ship,', 'truck,', 'plane.'].forEach((w, k) => tl.fromTo(T[k], { autoAlpha: 0, x: -80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, w) - .1));
       const P = $$('#impLines path'), Dd = $$('#impDots circle'); tl.to(Dd.slice(0, 40), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: .03 }, W(i, 'came from') - .2); tl.to(P.slice(0, 40), { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: .03 }, W(i, 'came from'));
-      tl.to('#impSG circle', { fill: '#984421', duration: .5 }, W(i, "We don't")); tl.to('#impSG circle', { fill: '#0B5A32', duration: .5 }, W(i, 'those journeys.') + .6); return tl; },
+      tl.to('#impSG circle', { fill: '#984421', duration: .5 }, W(i, "We don't")); tl.to('#impSG circle', { fill: '#0B5A32', duration: .5 }, W(i, 'any of that.') + .6); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#imp', { autoAlpha: 0, y: -30, duration: .6, ease: 'power2.in' }, 0); tl.set('#teamV', { autoAlpha: 1 }, .3);
       tl.fromTo($$('#teamV > .eyebrow, #teamV > .h2'), { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E, stagger: .2 }, W(i, "we're Rooted") - .4); tl.set('#team', { autoAlpha: 1 }, 0);
       const m = $$('#team .mem'); [W(i, "I'm Pranav,"), W(i, 'Aashrith,'), W(i, 'Isha'), W(i, 'Anandita,')].forEach((t, k) => tl.fromTo(m[k], { autoAlpha: 0, scale: .9 }, { autoAlpha: 1, scale: 1, duration: .8, ease: E2 }, Math.max(.4 + k * .2, t)));
-      tl.add(() => m.forEach(x => x.classList.add('on')), W(i, 'problem to solve.')); return tl; },
+      tl.add(() => m.forEach(x => x.classList.add('on')), W(i, 'about this.')); return tl; },
     i => { const tl = gsap.timeline(), P = $$('#impLines path'), Dd = $$('#impDots circle'); tl.to('#teamV', { autoAlpha: 0, y: -30, duration: .6, ease: 'power2.in' }, 0); tl.fromTo('#imp', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .8, ease: E }, .4);
       tl.set('#trans', { autoAlpha: 0 }, .3); tl.set('#ib1', { autoAlpha: 0 }, .3);
       tl.add(rise('#ib2', { y: 50 }), .7); tl.add(count($('#ib2 [data-n]'), 187, 2.4), .9); tl.to(Dd.slice(40), { scale: 1, duration: .4, ease: 'back.out(3)', stagger: { each: .009, from: 'random' } }, .7); tl.to(P.slice(40), { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', stagger: { each: .009, from: 'random' } }, 1);
       tl.add(rise('#imp .src', { y: 10 }), 1.8);
       const cut = P.filter((_, k) => k % 5 === 0), cutD = Dd.filter((_, k) => k % 5 === 0), S2 = $$('#shock span'), n3 = Math.ceil(cut.length / 3);
-      [W(i, 'Every one'), W(i, 'point of failure'), W(i, 'in our hands.')].forEach((t, k) => { tl.add(pop(S2[k], { s: .7 }), t); tl.to(cut.slice(k * n3, (k + 1) * n3), { stroke: '#984421', strokeDashoffset: -1, duration: 1, ease: 'power2.in', stagger: .02 }, t + .2); tl.to(cutD.slice(k * n3, (k + 1) * n3), { fill: '#984421', duration: .3, stagger: .02 }, t); });
-      tl.to('#impSG circle', { fill: '#984421', duration: .4 }, W(i, 'in our hands.') + .3); return tl; }
+      [W(i, 'If even'), W(i, 'closes its'), W(i, 'feel it here.')].forEach((t, k) => { tl.add(pop(S2[k], { s: .7 }), t); tl.to(cut.slice(k * n3, (k + 1) * n3), { stroke: '#984421', strokeDashoffset: -1, duration: 1, ease: 'power2.in', stagger: .02 }, t + .2); tl.to(cutD.slice(k * n3, (k + 1) * n3), { fill: '#984421', duration: .3, stagger: .02 }, t); });
+      tl.to('#impSG circle', { fill: '#984421', duration: .4 }, W(i, 'feel it here.') + .3); return tl; }
   ]
 };
 
@@ -135,7 +135,7 @@ S.gap = {
   chrome: false,
   reset() { F1 = F1 || Field($('#field'), 43, 20); Object.assign(F1.st, { a: 0, g: 0, d: 0 }); F1.draw(); hide('#fsTwo', $$('#fsTwo > *'), '#tools', $$('#tools .tc'), '#gapZero', '#gapLine', '#fieldKey'); gsap.set(['#fsA', '#fsB'], { scaleX: 0 }); gsap.set('#field', { autoAlpha: 1, y: 0 }); zero('#s-gap'); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.set('#fsTwo', { autoAlpha: 1 }, 0); tl.add(rise($$('#fsTwo > .eyebrow, #fsTwo > .h2'), { st: .2 }), 0); tl.add(rise($$('#fsTwo .fsb'), { st: .2, y: 30 }), W(i, 'By 2035,') - .2);
+    i => { const tl = gsap.timeline(); tl.set('#fsTwo', { autoAlpha: 1 }, 0); tl.add(rise($$('#fsTwo > .eyebrow, #fsTwo > .h2'), { st: .2 }), 0); tl.add(rise($$('#fsTwo .fsb'), { st: .2, y: 30 }), W(i, 'The target') - .2);
       tl.to('#fsB', { scaleX: 20 / 25, duration: 1.8, ease: E2 }, W(i, 'twenty percent')); tl.add(count($$('#fsTwo [data-n]')[1], 20, 1.6), W(i, 'twenty percent'));
       tl.to('#fsA', { scaleX: 8 / 25, duration: 1.4, ease: E2 }, W(i, 'Right now,')); tl.add(count($$('#fsTwo [data-n]')[0], 8, 1.2), W(i, 'Right now,')); tl.add(rise('#fsTwo .src', { y: 10 }), W(i, 'Right now,') + .6); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#fsTwo', { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, 0); tl.set('#tools', { autoAlpha: 1 }, .4); tl.add(rise('#tools .eyebrow', { y: 14 }), .4); const C = $$('#tools .tc');
@@ -156,7 +156,7 @@ S.hero = {
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('#heroEye', { y: 20 }), 0); tl.add(rise($$('#heroH .hl'), { y: 34, d: 1.1, st: .18 }), .1);
       tl.add(drawIn($('#s-hero .alive .ul path'), 1, 'power2.out'), 1.0); $$('#s-hero .alive .sp path').forEach((p, k) => tl.add(drawIn(p, .5, 'power2.out'), [1.8, 2.1, 2.3][k]));
-      const t = W(i, 'the first way'); tl.add(rise($$('#heroTrio li'), { y: 24, st: .14 }), t);
+      const t = W(i, 'Rooted SG is'); tl.add(rise($$('#heroTrio li'), { y: 24, st: .14 }), t);
       const ph = $$('#heroStage .ph'); tl.fromTo(ph, { autoAlpha: 0, y: 380 }, { autoAlpha: 1, y: 0, duration: 1.6, ease: E2, stagger: { each: .14, from: 'center' } }, W(i, 'an app') - .3);
       tl.add(pop($$('#heroStage .chip'), { st: .25 }), W(i, 'only earn')); return tl; },
     i => { const tl = gsap.timeline(); tl.to($$('#heroStage .chip'), { scale: 1.06, yoyo: true, repeat: 1, duration: .3, stagger: .2 }, W(i, 'three thousand')); return tl; }
@@ -171,7 +171,7 @@ S.survey = {
   reset() { hide('#svBig', '#sv1', '#sv2', '#dotsCap', dots); dots.forEach(d => d.className = ''); zero('#s-survey'); gsap.set(['.sv-left .eyebrow', '.sv-h', '.sv-src2'], { autoAlpha: 0 }); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise(['.sv-left .eyebrow', '.sv-h'], { st: .15 }), 0); tl.add(rise('#svBig'), W(i, 'We did') + .2); tl.add(count($('#svBig [data-n]'), 3043, 2.2), W(i, 'We did') + .4);
-      tl.fromTo(dots, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)', stagger: { each: .012, grid: [10, 10], from: 'center' } }, W(i, 'real people,')); tl.add(rise('.sv-src2', { y: 10 }), W(i, 'before writing')); return tl; },
+      tl.fromTo(dots, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)', stagger: { each: .012, grid: [10, 10], from: 'center' } }, W(i, 'real people,')); tl.add(rise('.sv-src2', { y: 10 }), W(i, 'before we')); return tl; },
     i => { const tl = gsap.timeline(); tl.add(rise('#sv1'), 0); tl.add(count($('#sv1 [data-n]'), 70.9, 2), .2);
       dots.slice(0, 71).forEach((d, k) => tl.add(() => d.classList.add('g'), .25 + k * .028)); tl.fromTo(dots.slice(0, 71), { scale: .7 }, { scale: 1, duration: .5, ease: 'back.out(3)', stagger: .028 }, .25);
       tl.add(() => $('#dotsCap').innerHTML = '<b>70.9%</b> want to grow at home', 0); tl.add(rise('#dotsCap', { y: 10 }), .3); return tl; },
@@ -189,7 +189,7 @@ S.pareto = {
   sec: 'The problem',
   reset() { hide('.pa-eye', '.pa-h', '#paSide', '.pa-src', $$('#pareto .bar .v'), $$('#pareto .bar .lb'), $$('#pareto .bar .tg')); gsap.set($$('#pareto .col'), { scaleY: 0 }); gsap.set($$('.pa-axis path'), { strokeDashoffset: 1 }); $$('#pareto .v span').forEach(e => e.textContent = '0'); $$('.pa-strike span').forEach(s => s.style.setProperty('--s', 0)); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise(['.pa-eye', '.pa-h'], { st: .12 }), 0); tl.add(drawIn($$('.pa-axis path'), 1.2), .5); tl.add(rise($$('#pareto .lb'), { y: 14, st: .12 }), W(i, 'We put')); tl.add(rise('.pa-src', { y: 10 }), W(i, 'Pareto')); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(rise(['.pa-eye', '.pa-h'], { st: .12 }), 0); tl.add(drawIn($$('.pa-axis path'), 1.2), .5); tl.add(rise($$('#pareto .lb'), { y: 14, st: .12 }), W(i, 'and put')); tl.add(rise('.pa-src', { y: 10 }), W(i, 'Pareto')); return tl; },
     i => { const tl = gsap.timeline(), bars = $$('#pareto .bar'); const at = [0, W(i, 'No one'), W(i, 'Losing'), W(i, 'Losing') + 2.6];
       bars.forEach((b, k) => { tl.to($('.col', b), { scaleY: 1, duration: 1.2, ease: E2 }, at[k]); tl.add(rise($('.v', b), { y: 20 }), at[k] + .2); tl.add(count($('.v span', b), PA[k][1], 1.2, 1), at[k] + .2); }); return tl; },
     i => { const tl = gsap.timeline(); tl.add(pop($$('#pareto .tg'), { st: .15 }), 0); tl.add(rise('#paSide'), 0);
@@ -205,14 +205,14 @@ S.whys = {
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('.wy-head', { y: 20 }), 0); tl.to('#wyGround', { strokeDashoffset: 0, duration: .9, ease: 'power2.inOut' }, .1);
       tl.fromTo(['#wySoil', '#wySoilP'], { autoAlpha: 0 }, { autoAlpha: 1, duration: .8 }, .3); tl.fromTo('#wyPlant', { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: .9, ease: E2 }, .4);
-      const at = [W(i, 'why, five'), W(i, 'to dig'), W(i, 'People forget'), W(i, 'Nothing reminds them,'), W(i, 'nobody can see')], seg = [.16, .36, .55, .75, 1], side = $$('#wySide path');
+      const at = [W(i, 'why, five'), W(i, 'to find'), W(i, 'People forget'), W(i, 'Nothing reminds them,'), W(i, 'nobody can see')], seg = [.16, .36, .55, .75, 1], side = $$('#wySide path');
       at.forEach((t, k) => { tl.to('#wyTap', { strokeDashoffset: 1 - seg[k], duration: 1, ease: 'power2.inOut' }, t); if (side[k]) tl.to(side[k], { strokeDashoffset: 0, duration: 1.1, ease: 'power2.out' }, t + .5); if (k === 4 && side[5]) tl.to(side[5], { strokeDashoffset: 0, duration: 1.1 }, t + .7);
         tl.fromTo(wyN[k], { autoAlpha: 0, x: wyN[k].dataset.s === 'l' ? -60 : 60 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t + .5); tl.fromTo($('i', wyN[k]), { scale: 0 }, { scale: 1, duration: .5, ease: 'back.out(2.5)' }, t + .5); });
       return tl; },
     i => { const tl = gsap.timeline(); tl.fromTo('#wyGlow', { autoAlpha: 0, scale: 0, svgOrigin: '960 860' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, 0);
       tl.fromTo('#wyGlow .ring', { scale: 1, opacity: .9, svgOrigin: '960 860' }, { scale: 2.6, opacity: 0, duration: 1.8, ease: 'power1.out', stagger: .9, repeat: 3 }, .2);
-      tl.to(wyN.slice(0, 4), { autoAlpha: .35, duration: .6 }, W(i, 'Plants die')); tl.fromTo('#root', { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, W(i, 'Plants die') - .2);
-      tl.to('#wyPlant .leaff', { fill: '#F4E2B3', stroke: '#8A5A00', duration: 1.6, stagger: .15 }, W(i, 'Nobody sees')); return tl; }
+      tl.to(wyN.slice(0, 4), { autoAlpha: .35, duration: .6 }, W(i, 'the root cause')); tl.fromTo('#root', { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, W(i, 'the root cause') - .2);
+      tl.to('#wyPlant .leaff', { fill: '#F4E2B3', stroke: '#8A5A00', duration: 1.6, stagger: .15 }, W(i, 'no one is')); return tl; }
   ]
 };
 
@@ -223,7 +223,7 @@ S.national = {
   reset() { hide('#naLeft', '#naRight', $$('#cmp .cr'), $$('#inq .iq')); gsap.set($$('#cmp .mk'), { scale: 0 }); gsap.set($$('#inq i'), { scale: 0 }); },
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('#naLeft'), 0); const Q = $$('#inq .iq');
-      [W(i, 'packets sent,'), W(i, 'plots allotted,'), W(i, 'trees planted.'), W(i, 'None of')].forEach((t, k) => { tl.fromTo(Q[k], { autoAlpha: 0, x: -50 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, t); tl.to($('i', Q[k]), { scale: 1, duration: .5, ease: 'back.out(2.6)' }, t + .25); });
+      [W(i, 'packets were'), W(i, 'plots allotted,'), W(i, 'trees planted.'), W(i, 'None of')].forEach((t, k) => { tl.fromTo(Q[k], { autoAlpha: 0, x: -50 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, t); tl.to($('i', Q[k]), { scale: 1, duration: .5, ease: 'back.out(2.6)' }, t + .25); });
       tl.fromTo(Q[3], { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .25 }, W(i, 'None of') + .8); return tl; },
     i => { const tl = gsap.timeline(), rows = $$('#cmp .cr'); tl.add(rise('#naRight', { y: 30 }), 0); tl.add(rise(rows[0], { y: 10 }), .3);
       const at = [W(i, 'Plant apps'), W(i, 'Habit apps'), W(i, 'Planting drives'), W(i, 'Planting drives') + 1.2, W(i, 'Not one')];
@@ -239,9 +239,9 @@ S.target = {
   sec: 'Target setting',
   reset() { hide('.tg-eye', '#gauge', '.tg-right .h3', '.tg-right .lead', '.tg-right .src', $$('#smart div'), '#stoprule'); gaugeSet(0); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise(['.tg-eye', '#gauge'], { st: .15 }), 0); tl.add(gaugeTo(18, 1.6), .5); tl.add(rise('.tg-right .h3'), W(i, 'lift')); tl.add(gaugeTo(30, 2.2), W(i, 'to thirty')); tl.add(rise('.tg-right .lead'), W(i, 'A twelve-point'));
-      tl.add(rise($$('#smart div'), { y: 30, st: .16 }), W(i, 'one measurable') + .4); tl.add(rise('.tg-right .src', { y: 10 }), W(i, 'eighteen')); return tl; },
-    i => { const tl = gsap.timeline(); tl.fromTo('#stoprule', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E2 }, .2); tl.fromTo('#stoprule em', { backgroundSize: '0% 100%' }, { backgroundSize: '100% 100%', duration: .8 }, W(i, 'less than')); return tl; }
+    i => { const tl = gsap.timeline(); tl.add(rise(['.tg-eye', '#gauge'], { st: .15 }), 0); tl.add(gaugeTo(18, 1.6), .5); tl.add(rise('.tg-right .h3'), W(i, 'raise the')); tl.add(gaugeTo(30, 2.2), W(i, 'to thirty')); tl.add(rise('.tg-right .lead'), W(i, 'after a year'));
+      tl.add(rise($$('#smart div'), { y: 30, st: .16 }), W(i, 'one clear') + .4); tl.add(rise('.tg-right .src', { y: 10 }), W(i, 'eighteen')); return tl; },
+    i => { const tl = gsap.timeline(); tl.fromTo('#stoprule', { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E2 }, .2); tl.fromTo('#stoprule em', { backgroundSize: '0% 100%' }, { backgroundSize: '100% 100%', duration: .8 }, W(i, 'at least')); return tl; }
   ]
 };
 
@@ -255,10 +255,10 @@ S.plantday = {
       tl.add(rise($$('.pd-right > .eyebrow, .pd-right > .h3'), { st: .12 }), .2); const t = W(i, 'verified Plant-Day.'); tl.add(rise('.pd-count'), t - .3); tl.add(count($('#pdNum'), 314, 2.6), t); return tl; },
     i => { const tl = gsap.timeline(), c = $$('#checks > div'); tl.add(() => pdShow(1), .1); tl.set('#checks', { autoAlpha: 1 }, 0);
       ['A real', 'A fresh', 'The right'].forEach((w, k) => { const t = W(i, w); tl.fromTo(c[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .7, ease: E2 }, t); tl.to($('svg', c[k]), { scale: 1, duration: .5, ease: 'back.out(3)' }, t + .3); });
-      const t = W(i, 'Miss one'); tl.fromTo('#plus1', { autoAlpha: 0, y: 40, scale: .6 }, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, t - 1.6); tl.to('#plus1', { autoAlpha: 0, y: -50, duration: .5 }, t - .7); tl.add(count($('#pdNum'), 315, .4), t - .7); tl.fromTo('#pdNum', { scale: 1 }, { scale: 1.08, yoyo: true, repeat: 1, duration: .2 }, t - .7); return tl; },
+      const t = W(i, 'If one'); tl.fromTo('#plus1', { autoAlpha: 0, y: 40, scale: .6 }, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, t - 1.6); tl.to('#plus1', { autoAlpha: 0, y: -50, duration: .5 }, t - .7); tl.add(count($('#pdNum'), 315, .4), t - .7); tl.fromTo('#pdNum', { scale: 1 }, { scale: 1.08, yoyo: true, repeat: 1, duration: .2 }, t - .7); return tl; },
     i => { const tl = gsap.timeline(); tl.add(() => pdShow(2), 0); tl.fromTo('#mojo', { autoAlpha: 0, x: -300 }, { autoAlpha: 1, x: 0, duration: 1.1, ease: 'back.out(1.4)' }, W(i, 'Mojo,'));
       tl.fromTo('.bubble', { autoAlpha: 0, scale: .5, transformOrigin: '0% 100%' }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'back.out(2)' }, W(i, 'tells you')); tl.add(() => $('#mojoImg').src = 'media/mojo/happy.gif', W(i, 'Once a day,'));
-      tl.add(pop('#solves1', { s: .8 }), W(i, 'The first cause') + .3); return tl; }
+      tl.add(pop('#solves1', { s: .8 }), W(i, 'To fix') + .3); return tl; }
   ]
 };
 
@@ -268,13 +268,13 @@ S.mojo = {
   sec: 'Mojo',
   reset() { hide('#mjStage', $$('.mj-right > *'), $$('#mjCards .mjc'), '#mjRules', $$('#mjRules .mjr'), '#mjState'); gsap.set('#mjCards', { autoAlpha: 1, y: 0 }); mjSet('idle', 'Mojo · watching your plants'); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.fromTo('#mjStage', { autoAlpha: 0, scale: .7 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'back.out(1.6)' }, 0); tl.add(rise($$('.mj-right > .eyebrow, .mj-right > .h3'), { st: .15 }), W(i, 'just there') - .4);
-      tl.set('.mj-right .mj-cards', { autoAlpha: 1 }, 0); const C = $$('#mjCards .mjc'); [W(i, 'MIT,'), W(i, 'Stanford'), W(i, 'Harvard'), W(i, 'stay with')].forEach((t, k) => tl.fromTo(C[k], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t));
+    i => { const tl = gsap.timeline(); tl.fromTo('#mjStage', { autoAlpha: 0, scale: .7 }, { autoAlpha: 1, scale: 1, duration: 1.2, ease: 'back.out(1.6)' }, 0); tl.add(rise($$('.mj-right > .eyebrow, .mj-right > .h3'), { st: .15 }), W(i, 'on purpose.') - .4);
+      tl.set('.mj-right .mj-cards', { autoAlpha: 1 }, 0); const C = $$('#mjCards .mjc'); [W(i, 'MIT,'), W(i, 'Stanford'), W(i, 'Harvard'), W(i, 'use them')].forEach((t, k) => tl.fromTo(C[k], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t));
       tl.add(() => mjSet('think'), W(i, 'Research')); tl.add(() => mjSet('happy'), W(i, 'small wins.')); tl.fromTo('#mjBig', { y: 0 }, { y: -26, yoyo: true, repeat: 1, duration: .3, ease: 'power2.out' }, W(i, 'small wins.')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#mjCards', { autoAlpha: 0, y: -30, duration: .5 }, 0); tl.set('#mjRules', { autoAlpha: 1 }, .3); tl.set('#mjState', { autoAlpha: 1 }, 0); const R = $$('#mjRules .mjr');
-      tl.fromTo(R[0], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'cheers')); tl.add(() => mjSet('happy', 'Checked in · Mojo celebrates'), W(i, 'cheers')); tl.fromTo('#mjBig', { y: 0 }, { y: -30, yoyo: true, repeat: 3, duration: .22 }, W(i, 'cheers'));
-      tl.fromTo(R[1], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'visibly worries')); tl.add(() => mjSet('sad', 'Pandan ignored · Mojo worries'), W(i, 'visibly worries'));
-      tl.fromTo(R[2], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'Once a day,')); tl.add(() => mjSet('idle', 'One nudge a day · never twice'), W(i, 'Once a day,')); tl.add(() => mjSet('happy', 'A friendship, not a chore'), W(i, 'a friend')); return tl; }
+      tl.fromTo(R[0], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'celebrates.')); tl.add(() => mjSet('happy', 'Checked in · Mojo celebrates'), W(i, 'celebrates.')); tl.fromTo('#mjBig', { y: 0 }, { y: -30, yoyo: true, repeat: 3, duration: .22 }, W(i, 'celebrates.'));
+      tl.fromTo(R[1], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'looks worried.')); tl.add(() => mjSet('sad', 'Pandan ignored · Mojo worries'), W(i, 'looks worried.'));
+      tl.fromTo(R[2], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'It feels')); tl.add(() => mjSet('idle', 'One nudge a day · never twice'), W(i, 'It feels')); tl.add(() => mjSet('happy', 'A friendship, not a chore'), W(i, 'a friend')); return tl; }
   ]
 };
 
@@ -308,11 +308,11 @@ S.doctor = {
       tl.to('#camGrid', { opacity: .55, duration: .4 }, ts + .5); tl.set('#camScan', { opacity: 1 }, ts + .5); tl.fromTo('#camScan', { y: 40 }, { y: 740, duration: 1.8, ease: 'none' }, ts + .5); tl.to(['#camScan', '#camGrid'], { opacity: 0, duration: .4 }, ts + 2.3);
       const C = $$('#clues .clue');
       tl.to($$('#camDet circle'), { scale: 1, duration: .5, ease: 'back.out(2.5)', stagger: .12 }, W(i, 'colour,')); tl.fromTo(C[0], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'colour,'));
-      tl.to('#camOutline', { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut' }, W(i, 'fullness')); tl.fromTo(C[1], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'fullness'));
+      tl.to('#camOutline', { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut' }, W(i, 'how full')); tl.fromTo(C[1], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'how full'));
       tl.fromTo(C[2], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'light,')); tl.add(() => { $('#camStatus').textContent = '5 CLUES FOUND'; $('#camStatus').setAttribute('fill', '#A3E68B'); }, W(i, 'into clues.'));
       tl.to(C, { scale: 1.03, duration: .2, yoyo: true, repeat: 1, stagger: .1 }, W(i, 'into clues.')); return tl; },
     i => { const tl = gsap.timeline(); tl.add(stepTo(3), 0); tl.to('#camTop', { autoAlpha: 0, duration: .3 }, 0); tl.to('#camSheet', { y: 0, duration: 1, ease: E2 }, .2);
-      const t = W(i, 'You make'); tl.to('#tap', { opacity: .35, scale: 1, duration: .15 }, t + .3); tl.to('#tap', { opacity: 0, scale: 2.6, duration: .6 }, t + .45); tl.to('#btnYes', { scale: 1.06, transformOrigin: '50% 50%', duration: .15, yoyo: true, repeat: 1 }, t + .3);
+      const t = W(i, 'you decide.'); tl.to('#tap', { opacity: .35, scale: 1, duration: .15 }, t + .3); tl.to('#tap', { opacity: 0, scale: 2.6, duration: .6 }, t + .45); tl.to('#btnYes', { scale: 1.06, transformOrigin: '50% 50%', duration: .15, yoyo: true, repeat: 1 }, t + .3);
       tl.add(pop('#solves2', { s: .8 }), t); $$('#camPlan .ck').forEach((c, k) => tl.to(c, { opacity: 1, duration: .3 }, W(i, 'step-by-step') + k * .45));
       tl.fromTo('#camToast', { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .5, ease: 'back.out(2)' }, W(i, 'step-by-step') + 1.6); return tl; }
   ]
@@ -331,21 +331,21 @@ S.grow = {
       const t = W(i, 'Guardian Path.'); tl.to(gpTrail, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, t - .4);
       $$('#gpNodes .gpn').forEach((n, k) => tl.fromTo(n, { autoAlpha: 0, scale: .4 }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2.4)' }, t - .2 + k * .3));
       tl.fromTo('#gpMojo', { autoAlpha: 0 }, { autoAlpha: 1, duration: .3 }, t + .4); tl.to(gpM, { f: .4, duration: 2, ease: 'power1.inOut', onUpdate: gpMojo }, t + .5);
-      tl.fromTo('#gpCard', { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'identify diseases,')); tl.add(rise($$('#gpCard .qo'), { y: 16, st: .15 }), W(i, 'we teach'));
-      tl.add(() => $('#gpCard .qo.ok').classList.add('on'), W(i, 'understand them,')); tl.fromTo('#gpCard .qo.ok', { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .2 }, W(i, 'understand them,'));
+      tl.fromTo('#gpCard', { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: 1, ease: E2 }, W(i, 'teaches you')); tl.add(rise($$('#gpCard .qo'), { y: 16, st: .15 }), W(i, 'plant problems,'));
+      tl.add(() => $('#gpCard .qo.ok').classList.add('on'), W(i, 'just found,')); tl.fromTo('#gpCard .qo.ok', { scale: 1 }, { scale: 1.04, yoyo: true, repeat: 1, duration: .2 }, W(i, 'just found,'));
       const ch = $$('#gpChips .chip'); [W(i, 'streaks,'), W(i, 'levels'), W(i, 'weekly leagues.')].forEach((tt, k) => tl.add(pop(ch[k], { s: .6 }), tt)); return tl; },
-    i => { const tl = gsap.timeline(); tl.to('#gp', { autoAlpha: 0, x: -120, duration: .7, ease: 'power2.in' }, 0); tl.set('#rt', { autoAlpha: 1 }, .3); tl.add(rise('#rtHead', { y: 40 }), W(i, 'For the first') - .3);
+    i => { const tl = gsap.timeline(); tl.to('#gp', { autoAlpha: 0, x: -120, duration: .7, ease: 'power2.in' }, 0); tl.set('#rt', { autoAlpha: 1 }, .3); tl.add(rise('#rtHead', { y: 40 }), W(i, 'It connects') - .3);
       tl.fromTo('.rt-ph', { autoAlpha: 0, y: 200 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E2 }, .4); tl.fromTo('.rt-ph2', { autoAlpha: 0, y: 240, rotation: 12 }, { autoAlpha: 1, y: 0, rotation: 5, duration: 1.3, ease: E2 }, .6); tl.set('#listings', { autoAlpha: 1 }, 0);
-      const L = $$('#listings .lst'); L.forEach((l, k) => tl.fromTo(l, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'the plants') + k * .35));
-      tl.fromTo('#listings .lst:first-child', { boxShadow: '0 0 0 0 rgba(11,90,50,0)' }, { boxShadow: '0 0 0 6px rgba(11,90,50,1)', duration: .5 }, W(i, 'find each other.')); return tl; },
+      const L = $$('#listings .lst'); L.forEach((l, k) => tl.fromTo(l, { autoAlpha: 0, x: 120 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'people on') + k * .35));
+      tl.fromTo('#listings .lst:first-child', { boxShadow: '0 0 0 0 rgba(11,90,50,0)' }, { boxShadow: '0 0 0 6px rgba(11,90,50,1)', duration: .5 }, W(i, 'plants too.')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#listings', { autoAlpha: 0, x: 60, duration: .5 }, 0); tl.set('#match', { autoAlpha: 1 }, .3); const M = $$('#match > *');
-      tl.fromTo(M[0], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'too much') - .3); tl.set(M[1], { autoAlpha: 1 }, W(i, 'meets')); tl.to($$('.marrow path'), { strokeDashoffset: 0, duration: .8, ease: 'power2.out', stagger: .4 }, W(i, 'meets'));
-      tl.fromTo(M[2], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'needs a seedling.') - .2); tl.fromTo(M[3], { autoAlpha: 0, y: 30, scale: .95 }, { autoAlpha: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.8)' }, W(i, 'Surplus stops'));
-      tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'a whole street') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'a whole street') - .3); return tl; },
+      tl.fromTo(M[0], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'too much') - .3); tl.set(M[1], { autoAlpha: 1 }, W(i, 'two doors')); tl.to($$('.marrow path'), { strokeDashoffset: 0, duration: .8, ease: 'power2.out', stagger: .4 }, W(i, 'two doors'));
+      tl.fromTo(M[2], { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: .8, ease: E2 }, W(i, 'needs a seedling.') - .2); tl.fromTo(M[3], { autoAlpha: 0, y: 30, scale: .95 }, { autoAlpha: 1, y: 0, scale: 1, duration: .8, ease: 'back.out(1.8)' }, W(i, 'Roots matches'));
+      tl.add(() => { $('#rtHead .h3').innerHTML = 'A whole street becomes <em>a farm</em>.'; }, W(i, 'shared instead') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'shared instead') - .3); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#match', { autoAlpha: 0, y: -30, duration: .5 }, 0); tl.set('#opts', { autoAlpha: 1 }, .3); const O = $$('#opts .op');
-      [W(i, 'sell it,'), W(i, 'swap it,'), W(i, 'give it')].forEach((t, k) => tl.fromTo(O[k], { autoAlpha: 0, y: 60, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: .8, ease: E2 }, t));
-      tl.add(() => { $('#rtHead .h3').innerHTML = 'Strangers become <em>a growing community</em>.'; }, W(i, "Neighbours who've") - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, "Neighbours who've") - .3);
-      tl.set('#comm', { autoAlpha: 1 }, 0); const C = $$('#comm .chip'); [W(i, 'advice,'), W(i, 'cuttings and'), W(i, 'harvests,')].forEach((t, k) => tl.add(pop(C[k], { s: .6 }), t)); return tl; }
+      [W(i, 'sell your'), W(i, 'swap them,'), W(i, 'give them')].forEach((t, k) => tl.fromTo(O[k], { autoAlpha: 0, y: 60, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: .8, ease: E2 }, t));
+      tl.add(() => { $('#rtHead .h3').innerHTML = 'Strangers become <em>a growing community</em>.'; }, W(i, 'Neighbours start') - .3); tl.fromTo('#rtHead .h3', { autoAlpha: .2 }, { autoAlpha: 1, duration: .6 }, W(i, 'Neighbours start') - .3);
+      tl.set('#comm', { autoAlpha: 1 }, 0); const C = $$('#comm .chip'); [W(i, 'tips,'), W(i, 'cuttings and'), W(i, 'harvests,')].forEach((t, k) => tl.add(pop(C[k], { s: .6 }), t)); return tl; }
   ]
 };
 const rtH0 = $('#rtHead .h3').innerHTML; const _gr = S.grow.reset; S.grow.reset = () => { $('#rtHead .h3').innerHTML = rtH0; _gr(); };
@@ -366,13 +366,13 @@ S.pipeline = {
   beats: [
     i => { const tl = gsap.timeline(); tl.fromTo('#ppIntro', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, .1); tl.fromTo('#ppIntro em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: .8 }, W(i, 'real.')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#ppIntro', { autoAlpha: 0, y: -60, scale: .9, duration: .6, ease: 'power2.in' }, 0); tl.add(rise('#ppHead'), .4);
-      tl.add(rise(nodes, { y: 50, st: .12 }), W(i, 'computer-vision') - .5); tl.add(drawIn('#pipePath', 1.8), W(i, 'computer-vision'));
-      tl.add(travel($('#pkt1'), 6, 2.6), W(i, 'runs right')); tl.add(() => nodes[6].classList.add('pass'), W(i, 'runs right') + 2.6); tl.fromTo(nodes[6], { scale: 1 }, { scale: 1.08, yoyo: true, repeat: 1, duration: .25 }, W(i, 'runs right') + 2.6); return tl; },
+      tl.add(rise(nodes, { y: 50, st: .12 }), W(i, 'image-checking') - .5); tl.add(drawIn('#pipePath', 1.8), W(i, 'image-checking'));
+      tl.add(travel($('#pkt1'), 6, 2.6), W(i, 'runs on')); tl.add(() => nodes[6].classList.add('pass'), W(i, 'runs on') + 2.6); tl.fromTo(nodes[6], { scale: 1 }, { scale: 1.08, yoyo: true, repeat: 1, duration: .25 }, W(i, 'runs on') + 2.6); return tl; },
     i => { const tl = gsap.timeline(); tl.set('#pkt1', { autoAlpha: 0 }, 0); nodes[6].classList.remove('pass');
-      const t1 = W(i, 'An Excess'); tl.add(() => nodes[2].classList.add('pass'), t1); tl.add(rise('#exg', { y: 30 }), t1); tl.add(exg.to(1, 2.4), t1 + .4);
-      const t2 = W(i, 'A perceptual'); tl.add(travel($('#pkt2'), 3, 1.4), t2); tl.add(() => nodes[3].classList.add('hit'), t2 + 1.4); tl.to('#pkt2', { scale: 0, duration: .3 }, t2 + 1.4); tl.add(rise('#rj2', { y: 16 }), t2 + 1.3);
-      const t3 = W(i, 'Blur detection'); tl.add(travel($('#pkt3'), 1, .9), t3); tl.add(() => nodes[1].classList.add('hit'), t3 + .9); tl.to('#pkt3', { scale: 0, duration: .3 }, t3 + .9); tl.add(rise('#rj1', { y: 16 }), t3 + .8);
-      const t4 = W(i, "You can't"); tl.add(travel($('#pkt1'), 6, 2), t4 - .6); tl.add(() => nodes[6].classList.add('pass'), t4 + 1.4); tl.add(rise('#rj3', { y: 16 }), t4 + 1.2); return tl; }
+      const t1 = W(i, 'a colour'); tl.add(() => nodes[2].classList.add('pass'), t1); tl.add(rise('#exg', { y: 30 }), t1); tl.add(exg.to(1, 2.4), t1 + .4);
+      const t2 = W(i, 'Then we'); tl.add(travel($('#pkt2'), 3, 1.4), t2); tl.add(() => nodes[3].classList.add('hit'), t2 + 1.4); tl.to('#pkt2', { scale: 0, duration: .3 }, t2 + 1.4); tl.add(rise('#rj2', { y: 16 }), t2 + 1.3);
+      const t3 = W(i, 'and that'); tl.add(travel($('#pkt3'), 1, .9), t3); tl.add(() => nodes[1].classList.add('hit'), t3 + .9); tl.to('#pkt3', { scale: 0, duration: .3 }, t3 + .9); tl.add(rise('#rj1', { y: 16 }), t3 + .8);
+      const t4 = W(i, 'So you'); tl.add(travel($('#pkt1'), 6, 2), t4 - .6); tl.add(() => nodes[6].classList.add('pass'), t4 + 1.4); tl.add(rise('#rj3', { y: 16 }), t4 + 1.2); return tl; }
   ]
 };
 
@@ -390,15 +390,15 @@ S.model = {
   sec: 'Technology',
   reset() { hide('.md-head', $$('#mdData i'), $$('#mdNet .blk'), $$('#mdOut > div'), $$('.ml'), '#mdDevice'); gsap.set('#mdFlow', { autoAlpha: 1, scale: 1, y: 0 }); gsap.set($$('#mdWires path'), { strokeDashoffset: 1, strokeDasharray: 1 }); gsap.set($$('#mdOut i'), { scaleX: 0 }); $('.quant .num.g').textContent = '32'; confSet(0); $('#confRead').innerHTML = '&nbsp;'; },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise('.md-head'), 0); const t = W(i, 'We fine-tuned');
+    i => { const tl = gsap.timeline(); tl.add(rise('.md-head'), 0); const t = W(i, 'We trained');
       tl.fromTo($$('#mdData i'), { autoAlpha: 0, scale: .3 }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2)', stagger: { each: .04, grid: [5, 5], from: 'random' } }, W(i, 'own trained') - .2); tl.add(rise('#ml1', { y: 14 }), W(i, 'hundreds'));
       tl.add(drawIn($$('#mdWires path').slice(0, 18), 1.2), t - .4); tl.fromTo($$('#mdNet .blk'), { autoAlpha: 0, scaleY: 0 }, { autoAlpha: 1, scaleY: 1, duration: .8, ease: E2, stagger: .09 }, t); tl.add(rise('#ml2', { y: 14 }), t + .4);
       tl.add(drawIn($$('#mdWires path').slice(18), .8), t + 1.2); tl.add(rise($$('#mdOut > div'), { y: 16, st: .12 }), t + 1.5); tl.to($$('#mdOut i'), { scaleX: k => [.82, .58, .7, .9][k], duration: 1.2, ease: E2, stagger: .12 }, t + 1.8); tl.add(rise('#ml3', { y: 14 }), t + 2.2);
       tl.to($$('#mdNet .blk'), { scaleY: 1.06, duration: .3, yoyo: true, repeat: 3, stagger: .06, ease: 'sine.inOut' }, t + 2.4); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#mdFlow', { autoAlpha: 0, scale: .55, y: -40, duration: .9, ease: 'power3.in' }, 0); tl.fromTo('#mdDevice', { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, .6);
-      const q = $('.quant .num.g'), t = W(i, 'eight-bit'); const qo = { v: 32 }; tl.to(qo, { v: 8, duration: 1, ease: 'power2.inOut', onUpdate: () => q.textContent = Math.round(qo.v) }, t);
-      const c = { v: 0 }; tl.to(c, { v: .9, duration: 1.2, ease: E2, onUpdate: () => confSet(c.v) }, W(i, 'calibrated')); tl.add(() => $('#confRead').innerHTML = 'Confident → <b>shows its clues</b>', W(i, 'calibrated') + .6);
-      tl.to(c, { v: .32, duration: 1.2, ease: 'power2.inOut', onUpdate: () => confSet(c.v) }, W(i, 'When it')); tl.add(() => $('#confRead').innerHTML = 'Unsure → <b style="color:var(--alert)">asks for a retake</b>', W(i, 'asks')); return tl; }
+      const q = $('.quant .num.g'), t = W(i, 'shrank it'); const qo = { v: 32 }; tl.to(qo, { v: 8, duration: 1, ease: 'power2.inOut', onUpdate: () => q.textContent = Math.round(qo.v) }, t);
+      const c = { v: 0 }; tl.to(c, { v: .9, duration: 1.2, ease: E2, onUpdate: () => confSet(c.v) }, W(i, 'how sure')); tl.add(() => $('#confRead').innerHTML = 'Confident → <b>shows its clues</b>', W(i, 'how sure') + .6);
+      tl.to(c, { v: .32, duration: 1.2, ease: 'power2.inOut', onUpdate: () => confSet(c.v) }, W(i, 'if it')); tl.add(() => $('#confRead').innerHTML = 'Unsure → <b style="color:var(--alert)">asks for a retake</b>', W(i, 'asks')); return tl; }
   ]
 };
 
@@ -417,12 +417,12 @@ S.market = {
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise($$('.mk-right > .eyebrow, .mk-right > .h3'), { st: .12 }), 0); tl.to($$('#mkMap .hx'), { strokeDashoffset: 0, duration: .9, ease: 'power2.inOut', stagger: { each: .05, from: 'center' } }, .1);
       tl.set('#mkList', { autoAlpha: 1 }, 0); tl.add(rise('#mkMap .melab', { y: 10 }), .9);
-      tl.fromTo($$('#mkMap .gw'), { autoAlpha: 0, scale: 0, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2.4)', stagger: .1 }, W(i, 'verified Plant-Days,'));
-      tl.to($$('#mkMap .arc'), { strokeDashoffset: 0, duration: 1, ease: 'power2.out', stagger: .2 }, W(i, 'who can')); tl.to($$('#mkMap .ad'), { autoAlpha: 1, duration: .3, stagger: .2 }, W(i, 'who can') + .8);
-      const L = $$('#mkList li'); [W(i, 'Every listing'), W(i, 'neighbourhood level,')].forEach((t, k) => tl.fromTo(L[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t)); return tl; },
-    i => { const tl = gsap.timeline(), L = $$('#mkList li'), HX = $$('#mkMap .hx'); tl.fromTo(L[2], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'street by'));
+      tl.fromTo($$('#mkMap .gw'), { autoAlpha: 0, scale: 0, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: .5, ease: 'back.out(2.4)', stagger: .1 }, W(i, 'how many'));
+      tl.to($$('#mkMap .arc'), { strokeDashoffset: 0, duration: 1, ease: 'power2.out', stagger: .2 }, W(i, 'they can')); tl.to($$('#mkMap .ad'), { autoAlpha: 1, duration: .3, stagger: .2 }, W(i, 'they can') + .8);
+      const L = $$('#mkList li'); [W(i, 'Every listing'), W(i, 'the neighbourhood,')].forEach((t, k) => tl.fromTo(L[k], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, t)); return tl; },
+    i => { const tl = gsap.timeline(), L = $$('#mkList li'), HX = $$('#mkMap .hx'); tl.fromTo(L[2], { autoAlpha: 0, x: 60 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, W(i, 'one street'));
       const order = HX.map((x, k) => [x, Math.hypot(+x.getAttribute('points').split(' ')[0].split(',')[0] - 450, +x.getAttribute('points').split(' ')[0].split(',')[1] - 410)]).sort((a, b) => a[1] - b[1]).map(a => a[0]);
-      order.forEach((x, k) => tl.add(() => x.classList.add('lit'), W(i, 'street by') + .4 + k * .28)); tl.to($$('#mkMap .gw'), { scale: 1.15, yoyo: true, repeat: 1, duration: .3, stagger: .1 }, W(i, 'grows itself.')); return tl; }
+      order.forEach((x, k) => tl.add(() => x.classList.add('lit'), W(i, 'one street') + .4 + k * .28)); tl.to($$('#mkMap .gw'), { scale: 1.15, yoyo: true, repeat: 1, duration: .3, stagger: .1 }, W(i, 'on its own.')); return tl; }
   ]
 };
 
@@ -438,10 +438,10 @@ S.built = {
   reset() { hide('.bt-eye', '.bt-h', $$('#tiles .tile'), '#kaizen', $$('#kaizen .kz')); gsap.set('#tiles', { autoAlpha: 1, y: 0 }); zero('#s-built'); kz.a = 0; kzSet(); },
   beats: [
     i => { const tl = gsap.timeline(), T = $$('#tiles .tile'); tl.add(rise(['.bt-eye', '.bt-h'], { st: .12 }), 0);
-      [W(i, 'SwiftUI on'), W(i, 'Seventy-one'), W(i, '167'), W(i, '167') + 2.2].forEach((t, k) => { tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, k === 1 ? 2.4 : 1.6), t + .2);
+      [W(i, 'one for'), W(i, 'Seventy-one'), W(i, '167'), W(i, '167') + 2.2].forEach((t, k) => { tl.fromTo(T[k], { autoAlpha: 0, y: 80 }, { autoAlpha: 1, y: 0, duration: 1, ease: E2 }, t); const n = $('[data-n]', T[k]); tl.add(count(n, +n.dataset.n, k === 1 ? 2.4 : 1.6), t + .2);
         const v = $$('.viz > *', T[k]); if (k === 0) tl.fromTo(v, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: .7, ease: 'back.out(2)', stagger: .2 }, t + .3); if (k === 1) tl.fromTo(v, { scaleX: 0 }, { scaleX: 1, duration: .6, ease: E2, stagger: .12 }, t + .3); if (k === 2) tl.fromTo(v, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .25, stagger: .009 }, t + .2); if (k === 3) tl.fromTo(v, { autoAlpha: 0, scale: 0 }, { autoAlpha: 1, scale: 1, duration: .3, stagger: { each: .012, from: 'random' } }, t + .2); }); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#tiles', { autoAlpha: 0, y: -40, duration: .6, ease: 'power2.in' }, 0); tl.to('.bt-h', { autoAlpha: 0, duration: .4 }, 0); tl.fromTo('#kaizen', { autoAlpha: 0, scale: .8 }, { autoAlpha: 1, scale: 1, duration: 1.1, ease: E2 }, .4);
-      const K = $$('#kaizen .kz'); [W(i, 'real hands'), W(i, 'watched where'), W(i, 'simplified'), W(i, 'tested again')].forEach((t, k) => { tl.to(kz, { a: (k + 1) / 4, duration: 1.4, ease: 'power2.inOut', onUpdate: kzSet }, Math.max(.6, t - .4)); tl.fromTo(K[k], { autoAlpha: 0, x: k === 0 || k === 3 ? -40 : 40 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, Math.max(.8, t)); }); return tl; }
+      const K = $$('#kaizen .kz'); [W(i, 'real people'), W(i, 'watched where'), W(i, 'made those'), W(i, 'tested again')].forEach((t, k) => { tl.to(kz, { a: (k + 1) / 4, duration: 1.4, ease: 'power2.inOut', onUpdate: kzSet }, Math.max(.6, t - .4)); tl.fromTo(K[k], { autoAlpha: 0, x: k === 0 || k === 3 ? -40 : 40 }, { autoAlpha: 1, x: 0, duration: .8, ease: E2 }, Math.max(.8, t)); }); return tl; }
   ]
 };
 
@@ -497,8 +497,8 @@ S.learn = {
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('.ln-head'), 0); tl.to(lnU, { scale: 1, duration: .35, ease: 'back.out(3)', stagger: { each: .008, grid: [14, 14], from: 'start' } }, .3);
       const t = W(i, 'Every check-in,'); lnU.forEach((u, k) => tl.add(() => u.classList.add('on'), t + (k / lnU.length) * 3.4)); tl.to($$('#lnFlow path'), { strokeDashoffset: 0, duration: 1.4, ease: 'power2.inOut', stagger: .25 }, W(i, 'how people')); return tl; },
-    i => { const tl = gsap.timeline(), C = $$('#lnCards .lc'); [W(i, 'which reminders'), W(i, 'which problems'), W(i, 'how fast')].forEach((t, k) => tl.fromTo(C[k], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t));
-      tl.fromTo('#lnQ', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, 'So where')); return tl; }
+    i => { const tl = gsap.timeline(), C = $$('#lnCards .lc'); [W(i, 'which reminders'), W(i, 'which plant'), W(i, 'how quickly')].forEach((t, k) => tl.fromTo(C[k], { autoAlpha: 0, x: 80 }, { autoAlpha: 1, x: 0, duration: .9, ease: E2 }, t));
+      tl.fromTo('#lnQ', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, "So what's")); return tl; }
   ]
 };
 
@@ -519,10 +519,10 @@ S.forecast = {
   sec: 'The forecast',
   reset() { HS.h = 0; HS.m = 0; drawHist(); hide($$('.fc-left > *'), '#fcBig', '#ladder', '#histNotes', $$('#fcM .tagchip'), $$('#fcM .fg')); gsap.set('#hist', { autoAlpha: 1 }); gsap.set($$('#ladder .rung i'), { scaleY: 0 }); hide($$('#ladder .rung b, #ladder .rung span')); $('#runsN').textContent = '0'; zero('#fcBig'); gsap.set('#fcRuns', { autoAlpha: 0 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(rise($$('.fc-left > .eyebrow, #fcH'), { st: .12 }), 0); tl.add(rise('#fcRuns'), W(i, 'Monte Carlo') - .3); const ML = $$('#fcM .mlc'), FC = $$('#fcM .fc'), FG = $$('#fcM .fg'); tl.add(rise(FG[0], { y: 10 }), W(i, 'keeps retraining') - .2); tl.fromTo(ML, { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .18 }, W(i, 'machine-learning')); tl.add(rise(FG[1], { y: 10 }), W(i, 'feeds a') - .2); [W(i, 'Monte Carlo'), W(i, 'Sobol')].forEach((t, k) => tl.add(pop(FC[k], { s: .6 }), t)); tl.fromTo(FC.slice(2), { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .2 }, W(i, 'and more,')); const t = W(i, 'one hundred');
+    i => { const tl = gsap.timeline(); tl.add(rise($$('.fc-left > .eyebrow, #fcH'), { st: .12 }), 0); tl.add(rise('#fcRuns'), W(i, 'Monte Carlo') - .3); const ML = $$('#fcM .mlc'), FC = $$('#fcM .fc'), FG = $$('#fcM .fg'); tl.add(rise(FG[0], { y: 10 }), W(i, 'keeps improving') - .2); tl.fromTo(ML, { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .18 }, W(i, 'AI models,')); tl.add(rise(FG[1], { y: 10 }), W(i, 'we used') - .2); [W(i, 'Monte Carlo'), W(i, 'Sobol')].forEach((t, k) => tl.add(pop(FC[k], { s: .6 }), t)); tl.fromTo(FC.slice(2), { autoAlpha: 0, scale: .6 }, { autoAlpha: 1, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .2 }, W(i, 'other methods,')); const t = W(i, 'one hundred');
       tl.to(HS, { h: 1, duration: 5.5, ease: 'power1.inOut', onUpdate: drawHist }, t - .8); tl.add(count($('#runsN'), 100000, 5.5), t - .8); tl.add(rise('.fc-left > .src', { y: 10 }), t); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#hist', { autoAlpha: 0, duration: .5 }, 0); tl.to('.fc-left > .src', { autoAlpha: 0, duration: .4 }, 0); tl.set('#ladder', { autoAlpha: 1 }, .3); const R = $$('#ladder .rung');
-      [W(i, 'Two pilot'), W(i, 'twenty in'), W(i, 'sixty by')].forEach((t, k) => { tl.to($('i', R[k]), { scaleY: 1, duration: 1.2, ease: E2 }, t); tl.add(rise($$('b, span', R[k]), { y: 14, st: .1 }), t + .3); }); return tl; },
+      [W(i, 'Two schools'), W(i, 'twenty in'), W(i, 'sixty by')].forEach((t, k) => { tl.to($('i', R[k]), { scaleY: 1, duration: 1.2, ease: E2 }, t); tl.add(rise($$('b, span', R[k]), { y: 14, st: .1 }), t + .3); }); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#ladder', { autoAlpha: 0, duration: .5 }, 0); tl.to('#hist', { autoAlpha: 1, duration: .6 }, .3); tl.add(() => { HS.h = 1; drawHist(); }, .3); tl.to(HS, { m: 1, duration: 1, onUpdate: drawHist }, .8);
       tl.to('#fcRuns', { autoAlpha: 0, y: -20, duration: .5 }, 0); tl.set('#fcBig', { autoAlpha: 1 }, .4); const B = $$('#fcBig > div'); tl.add(rise(B[0]), .4); tl.add(count($('[data-n]', B[0]), 1814, 1.8), .5);
       const t = W(i, 'three point three'); tl.add(rise(B[1]), t - .3); tl.add(count($('[data-n]', B[1]), 3.3, 1.4, 1), t); tl.add(rise('#histNotes', { y: 16 }), t + 1.5); tl.to('.fc-left > .src', { autoAlpha: 0, duration: .4 }, t + 1.2); return tl; }
@@ -537,7 +537,7 @@ S.sustain = {
   reset() { hide('.su-eye', '.su-h', $$('#pillars .pl'), '#suBand'); zero('#s-sustain'); },
   beats: [
     i => { const tl = gsap.timeline(), P = $$('#pillars .pl'); tl.add(rise(['.su-eye', '.su-h'], { st: .12 }), 0);
-      [W(i, 'The models'), W(i, 'schools run'), W(i, 'and every street')].forEach((t, k) => { tl.fromTo(P[k], { autoAlpha: 0, y: 90, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 1, ease: E2 }, t); tl.fromTo($$('svg > *', P[k]), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: .15 }, t + .2); });
+      [W(i, 'The AI'), W(i, 'schools run'), W(i, 'and each')].forEach((t, k) => { tl.fromTo(P[k], { autoAlpha: 0, y: 90, rotation: k - 1 }, { autoAlpha: 1, y: 0, rotation: 0, duration: 1, ease: E2 }, t); tl.fromTo($$('svg > *', P[k]), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', stagger: .15 }, t + .2); });
       const t = W(i, 'keeps its own') + .6; tl.add(rise('#suBand', { y: 30 }), t); tl.add(count($('#suBand [data-n]'), 48000, 1.6), t + .2); return tl; }
   ]
 };
@@ -548,9 +548,9 @@ S.close = {
   chrome: false,
   reset() { F2 = F2 || Field($('#field2'), 43, 20, { keep: true, seed: 31 }); Object.assign(F2.st, { a: 0, g: 0, d: 0, ok: 0 }); F2.draw(); hide('#clMission', '#clImagine', '#clQuote', $$('#clQuote p'), '#clEnd', '#clNames', '#clThanks', '#clPandan'); gsap.set($$('#clPanSvg .blade'), { strokeDasharray: 1, strokeDashoffset: 1, fillOpacity: 0 }); gsap.set('#field2', { autoAlpha: 1 }); gsap.set($$('#clEnd .alive path'), { strokeDashoffset: 1 }); },
   beats: [
-    i => { const tl = gsap.timeline(); tl.add(F2.tween({ a: 1 }, 2.6), .1); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), W(i, 'Imagine')); tl.add(F2.tween({ g: 1 }, 3), W(i, 'Imagine') + .2); tl.add(F2.tween({ ok: 1 }, 2.4), W(i, 'actually see')); return tl; },
+    i => { const tl = gsap.timeline(); tl.add(F2.tween({ a: 1 }, 2.6), .1); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), W(i, 'Next time,')); tl.add(F2.tween({ g: 1 }, 3), W(i, 'Next time,') + .2); tl.add(F2.tween({ ok: 1 }, 2.4), W(i, 'actually know')); return tl; },
     i => { const tl = gsap.timeline(); tl.to(['#clImagine', '#field2'], { autoAlpha: 0, duration: .8 }, 0); tl.set('#clMission', { autoAlpha: 1 }, .3);
-      tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'a nation')); return tl; },
+      tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'how much')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#clMission', { autoAlpha: 0, y: -40, duration: .6 }, 0); const q = $$('#clQuote p'); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, .3);
       tl.fromTo(q[0], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, .4); tl.fromTo(q[1], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.1, ease: E }, W(i, 'It dies'));
       const t = W(i, "We're Rooted"); tl.fromTo('#clQuote p:nth-child(2) em', { color: '#0B5A32' }, { color: '#984421', duration: .6 }, W(i, "Singapore can't")); tl.to('#clQuote', { autoAlpha: 0, y: -40, duration: .6 }, W(i, "so we'll") - .1); tl.fromTo('#clEnd', { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1, ease: E }, W(i, "so we'll"));
@@ -691,9 +691,9 @@ function presenter() {
   list.onclick = e => { const d = e.target.closest('[data-i]'); if (d) send(+d.dataset.i); };
   function show(i) { cur = i; const L = LINES[i], N = LINES[i + 1];
     document.getElementById('who').innerHTML = L ? `<i>${SPEAKERS[L.who].short[0]}</i>${SPEAKERS[L.who].name} · <b>${L.crit}</b> · line ${i + 1}/${LINES.length}` : 'Ready · press Next to start';
-    document.getElementById('line').innerHTML = L ? fillTokens(L.text) : 'The cold open starts on the first click.';
+    document.getElementById('line').innerHTML = L ? `<span style="display:inline-block;font:500 16px 'DM Mono',monospace;letter-spacing:.1em;background:#0B5A32;color:#fff;border-radius:99px;padding:4px 12px;margin-bottom:10px">▶ CLICKED · ${L.click}</span><br>${fillTokens(L.text)}` : 'Press the clicker to start.';
     document.getElementById('nwho').innerHTML = N ? `Next · ${SPEAKERS[N.who].name}${N.who !== (L || {}).who ? ' <b>· handover</b>' : ''}` : 'End';
-    document.getElementById('nline').innerHTML = N ? fillTokens(N.text) : '';
+    document.getElementById('nline').innerHTML = N ? `<b style="color:#0B5A32">▶ CLICK for: ${N.click}</b><br>${fillTokens(N.text)}` : '';
     document.getElementById('plan').textContent = L ? m(L.at) : '0:00';
     [...list.children].forEach(d => d.classList.toggle('on', +d.dataset.i === i)); const on = list.children[i]; on && on.scrollIntoView({ block: 'center', behavior: 'smooth' });
     if (i >= 0 && t0 == null) t0 = performance.now(); }
