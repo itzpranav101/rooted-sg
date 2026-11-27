@@ -2,6 +2,10 @@
    One click = one script line. Each line fires its own GSAP timeline, timed to the words inside the line,
    so the motion lands on the phrase being spoken. ←/→ (or a clicker) move line by line. */
 (() => {
+/* every tween runs 10% faster; start positions stay tied to the spoken words, so sync is unchanged */
+(() => { const F = .9; const fix = v => { if (v && typeof v === 'object' && !v.__f) { v.duration = (v.duration == null ? .5 : v.duration) * F; } return v; };
+  [gsap, gsap.timeline().constructor.prototype].forEach(T => { ['to', 'from'].forEach(m => { const o = T[m]; if (o && !o.__w) { T[m] = function (t, v, ...r) { return o.call(this, t, fix(v), ...r); }; T[m].__w = 1; } });
+    const f = T.fromTo; if (f && !f.__w) { T.fromTo = function (t, a, b, ...r) { return f.call(this, t, a, fix(b), ...r); }; T.fromTo.__w = 1; } }); })();
 const Q = new URLSearchParams(location.search);
 if (Q.has('presenter')) return presenter();
 const MIRROR = Q.has('mirror');
