@@ -553,7 +553,7 @@ S.close = {
   beats: [
     i => { const tl = gsap.timeline(); tl.add(rise('#clPackets', { y: 50, d: 1 }), .1); tl.add(count($('#clPkN'), 860000, 2.6), .3); tl.add(F2.tween({ a: 1 }, 2.6), .3);
       const t = W(i, 'Imagine'); tl.to('#clPackets', { autoAlpha: 0, y: -50, duration: .6, ease: 'power2.in' }, t - .5); tl.add(rise('#clImagine', { y: 50, d: 1.1 }), t); tl.add(F2.tween({ g: 1 }, 3), t + .2);
-      const t2 = W(i, 'exactly how'); tl.add(pop('#clCount', { s: .7 }), t2 - .3); tl.add(F2.tween({ ok: 1 }, 2.4), t2); tl.add(count($('#clCnN'), 860000, 2.4), t2); return tl; },
+      const t2 = W(i, 'exactly how'); tl.add(pop('#clCount', { s: .7 }), t2 - .3); tl.add(F2.tween({ ok: 1 }, 1.8), t2 - .3); tl.add(count($('#clCnN'), 860000, 1.6), t2 - .3); return tl; },
     i => { const tl = gsap.timeline(); tl.to(['#clImagine', '#field2'], { autoAlpha: 0, duration: .8 }, 0); tl.set('#clMission', { autoAlpha: 1 }, .3);
       tl.fromTo($$('#clMission > .eyebrow, #clMission > .h1'), { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 1.2, ease: E, stagger: .2 }, .4); tl.fromTo('#clMission em', { color: '#0A0A0A' }, { color: '#0B5A32', duration: 1 }, W(i, 'a nation')); return tl; },
     i => { const tl = gsap.timeline(); tl.to('#clMission', { autoAlpha: 0, y: -40, duration: .6 }, 0); const q = $$('#clQuote p'); tl.set('#clQuote', { autoAlpha: 1, y: 0 }, .3);
