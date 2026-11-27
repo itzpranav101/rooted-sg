@@ -9,7 +9,7 @@ window.SPEAKERS = {
 
 /* who · scene · stage · text · pause (seconds of silence after the line) */
 window.SCRIPT = [
-  ['P', 'hook', 'The problem', 'Lao Tzu is said to have said: give a man a fish and you feed him for a day, teach him to fish and you feed him for a lifetime. Singapore can\'t feed itself. We are handed the fish. But what if part of the answer is already sitting on a million balconies?', 1.2],
+  ['P', 'hook', 'The problem', 'The philosopher Maimonides is said to have said: give a man a fish and you feed him for a day, teach him to fish and you feed him for a lifetime. Singapore can\'t feed itself. We are handed the fish. But what if part of the answer is already sitting on a million balconies?', 1.2],
   ['P', 'cold', 'The problem', 'Ninety percent of our food came from somewhere else, by ship, truck or plane.', 0.6],
   ['P', 'cold', 'The problem', 'I\'m Pranav, and with Anandita, Pranav and Jiya, we\'re Rooted SG, four students who decided this was our problem to solve.', 0.6],
   ['P', 'cold', 'The problem', 'It comes from over one hundred and eighty countries and regions. Every one is a point of failure, and none are in our hands.', 0.8],
